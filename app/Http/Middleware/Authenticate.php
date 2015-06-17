@@ -36,7 +36,7 @@ class Authenticate
     {
         if ($this->auth->guest()) {
             if ($request->ajax()) {
-                return response('Unauthorized.', 401);
+                return response('You have to log in to do that.', 401);
             } else {
                 return redirect()->guest('/login');
             }

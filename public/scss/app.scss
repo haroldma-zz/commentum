@@ -21,6 +21,13 @@ html, body {
 }
 
 /*
+* .padding
+*/
+.padding {
+	padding: 1em 0;
+}
+
+/*
 * .top-nav
 */
 .top-nav {
@@ -37,13 +44,24 @@ html, body {
 		font-size: 0.85em;
 		color: white;
 		font-weight: 500;
-		margin-left: 1em;
 		&.brand {
 			font-weight: 700;
 			text-transform: uppercase;
 			letter-spacing: 1px;
-			margin-left: 0;
-			margin-right: 1em;
+		}
+	}
+	.row {
+		div:first-of-type {
+			a {
+				margin-right: 1em;
+				margin-left: 0;
+			}
+		}
+		div:last-of-type {
+			a {
+				margin-left: 1em;
+				margin-right: 0;
+			}
 		}
 	}
 }
@@ -80,7 +98,7 @@ html, body {
 		color: $dark-primary-color;
 		font-weight: 700;
 	}
-	input {
+	input, textarea {
 		font-size: 1.25em;
 		color: white;
 		font-weight: 700;
@@ -88,6 +106,9 @@ html, body {
 		border: none;
 		border-bottom: 2px solid $dark-primary-color;
 		@include box-shadow(none);
+	}
+	textarea {
+		resize: none;
 	}
 	input[type="submit"] {
 		padding: 1em 1.5em;
@@ -110,4 +131,12 @@ html, body {
 	.text-alert {
 		color: $info-color;
 	}
+}
+
+/*
+* .checkbox-label
+*/
+.checkbox-label {
+	font-weight: normal;
+	margin-bottom: -10px;
 }

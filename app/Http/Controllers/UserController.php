@@ -70,6 +70,7 @@ class UserController extends Controller
 			return response('The username you chose is already registered.', 500);
 		}
 	}
+
 	/**
 	 * Login a user
 	 *

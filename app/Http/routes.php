@@ -7,6 +7,7 @@ Route::get('/login', 'PageController@login');
 
 Route::group(['middleware' => 'auth'], function()
 {
+	Route::get('/submit', 'PageController@submit');
 	Route::get('/logout', 'UserController@logout');
 });
 
@@ -15,3 +16,8 @@ Route::group(['middleware' => 'auth'], function()
 */
 Route::post('/register', 'UserController@register');
 Route::post('/login', 'UserController@login');
+
+Route::group(['middleware' => 'auth'], function()
+{
+	Route::post('/submit', 'QuestionController@submit');
+});

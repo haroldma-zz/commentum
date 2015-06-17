@@ -1,0 +1,3 @@
+<script>
+	autosize($('textarea'));
+</script>

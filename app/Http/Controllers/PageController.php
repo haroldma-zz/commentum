@@ -23,4 +23,14 @@ class PageController extends Controller
 	{
 		return view('pages.login');
 	}
+
+	/**
+	 * Submit page
+	 *
+	 * @return 	view
+	 */
+	public function submit()
+	{
+		return view('pages.submit');
+	}
 }
