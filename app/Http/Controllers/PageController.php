@@ -13,4 +13,14 @@ class PageController extends Controller
 	{
 		return view('pages.index');
 	}
+
+	/**
+	 * Login page
+	 *
+	 * @return 	view
+	 */
+	public function login()
+	{
+		return view('pages.login');
+	}
 }
