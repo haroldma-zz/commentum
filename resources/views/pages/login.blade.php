@@ -12,7 +12,7 @@
 			{!! Form::label('password', 'Password') !!}
 			{!! Form::password('password') !!}
 			<br>
-			<p class="text-alert"></p>
+			<p class="text-info"></p>
 			{!! Form::submit('Login') !!}
 			<img id="loginFormLoader" src="{{ url('/img/loader.svg') }}">
 			{!! Form::close() !!}

@@ -6,7 +6,7 @@
 		var loader = $('#registerFormLoader'),
 			form = $(this),
 			data = form.serialize(),
-			error = form.find('.text-alert').first();
+			error = form.find('.text-info').first();
 
 		error.text('');
 		loader.addClass('open');
@@ -29,7 +29,7 @@
 		var loader = $('#loginFormLoader'),
 			form = $(this),
 			data = form.serialize(),
-			error = form.find('.text-alert').first();
+			error = form.find('.text-info').first();
 
 		error.text('');
 		loader.addClass('open');

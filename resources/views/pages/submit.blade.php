@@ -17,6 +17,15 @@
 		<div class="medium-6 medium-offset-3 columns">
 			<div class="panel">
 				<h5>
+					Description
+				</h5>
+				<hr>
+				<p>
+					You can use <a href="{{ url('/') }}">Markdown</a>.
+				</p>
+				{!! Form::textarea('description', '', ['rows' => 5]) !!}
+				<br>
+				<h5>
 					More details
 				</h5>
 				<hr>

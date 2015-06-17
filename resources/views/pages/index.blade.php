@@ -22,7 +22,7 @@
 			{!! Form::label('password', 'Password') !!}
 			{!! Form::password('password') !!}
 			<br>
-			<p class="text-alert"></p>
+			<p class="text-info"></p>
 			{!! Form::submit('Register') !!}
 			<img id="registerFormLoader" src="{{ url('/img/loader.svg') }}">
 			{!! Form::close() !!}
