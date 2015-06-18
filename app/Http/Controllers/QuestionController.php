@@ -90,7 +90,7 @@ class QuestionController extends Controller
 		}
 
 		if ($new->save())
-			return response(url("/tag/{$tag->display_title}/" . Hashids::encode($new->id)), 200);
+			return response($new->permalink(), 200);
 		else
 			return response('Something went wrong on our side, try again.', 500);
 	}
