@@ -9,7 +9,7 @@
 	<div class="top-nav">
 		<div class="row">
 			<div class="medium-4 columns">
-				<a class="brand" href="{{ url('/') }}">ASK</a>
+				<a class="brand" href="{{ url('/') }}">COMMENTUM</a>
 				<a href="{{ url('/feed/trending') }}">Trending</a>
 			</div>
 			<div class="medium-8 columns text-right">

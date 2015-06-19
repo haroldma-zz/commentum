@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Question;
+
 class PageController extends Controller
 {
 	/**
@@ -11,7 +13,9 @@ class PageController extends Controller
 	 */
 	public function index()
 	{
-		return view('pages.index');
+		$questions = Question::orderBy('id', 'DESC')->take(25)->get();
+
+		return view('pages.index')->with(['questions' => $questions]);
 	}
 
 	/**

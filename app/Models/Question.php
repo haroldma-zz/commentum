@@ -33,4 +33,14 @@ class Question extends Model
     {
     	return $this->hasOne('App\Models\Tag', 'id', 'tag_id');
     }
+
+    /**
+     * Author relation
+     *
+     * @return  User
+     */
+    public function author()
+    {
+        return $this->hasOne('App\Models\User', 'id', 'user_id');
+    }
 }

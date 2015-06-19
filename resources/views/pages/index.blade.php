@@ -30,6 +30,36 @@
 	</div>
 </div>
 @endif
+<div class="padding">
+	<div class="row">
+		<div class="medium-10 medium-offset-1 columns">
+			<div class="panel">
+				<table class="questions-list">
+					@if (!count($questions) > 0)
+
+					@else
+					@foreach ($questions as $q)
+					<tr>
+						<td>
+							<a>2</a>
+						</td>
+						<td>
+							<a href="{{ $q->permalink() }}">{{ $q->question }} Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Maecenas sed diam eget risus varius blandit sit amet non magna.</a>
+							<br>
+							<span>
+								<a href="{{ url('/t/' . $q->tag->display_title) }}">#{{ $q->tag->display_title }}</a>
+								&middot;
+								<a href="{{ url('/u/' . $q->author->username) }}">{{ $q->author->username }}</a>
+							</span>
+						</td>
+					</tr>
+					@endforeach
+					@endif
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
 @stop
 
 @section('scripts')
