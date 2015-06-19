@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Auth;
 use App\Models\Tag;
 use App\Models\Question;
-use App\Helpers\Parsedown;
 use Cocur\Slugify\Slugify;
 use Vinkla\Hashids\Facades\Hashids;
 use Illuminate\Http\Request;
@@ -87,9 +86,7 @@ class QuestionController extends Controller
 
 		if (!empty($description))
 		{
-			$parsedown        = new Parsedown();
 			$new->markdown    = $description;
-			$new->description = $parsedown->text($description);
 		}
 
 		if ($new->save())

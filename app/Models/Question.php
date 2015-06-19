@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Question extends Model
 {
+    private $_commentCount = null;
 	/**
 	 * The database table used by this model.
 	 *
@@ -42,5 +43,29 @@ class Question extends Model
     public function author()
     {
         return $this->hasOne('App\Models\User', 'id', 'user_id');
+    }
+
+    /**
+     * Comments
+     *
+     * @return  Comment
+     */
+    public function comments()
+    {
+        return $this->hasMany('App\Models\Comment', 'question_id', 'id');
+    }
+
+    /**
+     * Return the comment count.
+     *
+     * @return  integer
+     */
+    public function commentCount()
+    {
+        if (!is_null($this->_commentCount))
+            return $this->_commentCount;
+
+        $this->_commentCount = $this->comments->count();
+        return $this->_commentCount;
     }
 }

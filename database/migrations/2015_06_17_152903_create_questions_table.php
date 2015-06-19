@@ -19,7 +19,6 @@ class CreateQuestionsTable extends Migration
             $table->string('question', 300);
             $table->string('slug');
             $table->mediumText('markdown')->nullable();
-            $table->mediumText('description')->nullable();
             $table->tinyInteger('nsfw');
             $table->tinyInteger('serious');
             $table->timestamps();
