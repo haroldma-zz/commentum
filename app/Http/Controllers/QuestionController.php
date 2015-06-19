@@ -35,6 +35,9 @@ class QuestionController extends Controller
 		if (strlen($question) < 10 || strlen($question) > 300)
 			return response('Your question can\'t be longer than 300 characters and must be at least 10 characters long.', 500);
 
+		if (!stringEndsWith($question, '?'))
+			return response('You have to end your question with a question mark.', 500);
+
 		if (empty($tag))
 		{
 			$tag = Tag::find(1);

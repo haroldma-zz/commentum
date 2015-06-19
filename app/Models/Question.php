@@ -21,7 +21,7 @@ class Question extends Model
      */
     public function permalink()
     {
-		return url("/t/{$this->tag->display_title}/" . Hashids::encode($this->id));
+		return url("/t/{$this->tag->display_title}/" . Hashids::encode($this->id) . "/{$this->slug}");
     }
 
     /**
