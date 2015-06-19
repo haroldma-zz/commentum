@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Question;
+use App\Models\Thread;
 
 class PageController extends Controller
 {
@@ -13,9 +13,9 @@ class PageController extends Controller
 	 */
 	public function index()
 	{
-		$questions = Question::orderBy('id', 'DESC')->take(25)->get();
+		$threads = Thread::orderBy('id', 'DESC')->take(25)->get();
 
-		return view('pages.index')->with(['questions' => $questions]);
+		return view('pages.index')->with(['threads' => $threads]);
 	}
 
 	/**

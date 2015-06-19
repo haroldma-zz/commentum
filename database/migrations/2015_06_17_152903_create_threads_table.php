@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateQuestionsTable extends Migration
+class CreateThreadsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,12 @@ class CreateQuestionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('questions', function(Blueprint $table) {
+        Schema::create('threads', function(Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
             $table->integer('tag_id');
-            $table->string('question', 300);
+            $table->string('title', 300);
+            $table->string('link', 500)->nullable();
             $table->string('slug');
             $table->mediumText('markdown')->nullable();
             $table->tinyInteger('nsfw');
@@ -32,6 +33,6 @@ class CreateQuestionsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('questions');
+        Schema::drop('threads');
     }
 }

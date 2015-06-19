@@ -13,7 +13,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 {
     use Authenticatable, CanResetPassword;
 
-    private $_questions = null;
+    private $_threads = null;
     private $_permalink = null;
 
     /**
@@ -52,28 +52,18 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     /**
-     * Questions relation
+     * Thread relation
      *
-     * @return  Question    collection
+     * @return  Thread    collection
      */
-    public function questions()
+    public function threads()
     {
-        if (!is_null($this->_questions))
-            return $this->_questions;
+        if (!is_null($this->_threads))
+            return $this->_threads;
 
-        $cache = Cache::get("{$this->username}:questions");
+        $threads = $this->hasMany('App\Models\Thread', 'user_id', 'id')->get();
+        $this->_threads = $threads;
 
-        if (!is_null($cache))
-        {
-            $this->_questions = $cache;
-            return $this->_questions;
-        }
-
-        $questions = $this->hasMany('App\Models\Question', 'user_id', 'id')->get();
-
-        $this->_questions = $questions;
-        Cache::put("{$this->username}:questions", $this->_questions, 5);
-
-        return $this->_questions;
+        return $this->_threads;
     }
 }

@@ -5,6 +5,8 @@
 Route::get('/', 'PageController@index');
 Route::get('/login', 'PageController@login');
 
+Route::get('/t/{tag}/{hash}/{slug}', 'PageController@thread');
+
 Route::group(['middleware' => 'auth'], function()
 {
 	Route::get('/submit', 'PageController@submit');
@@ -19,5 +21,5 @@ Route::post('/login', 'UserController@login');
 
 Route::group(['middleware' => 'auth'], function()
 {
-	Route::post('/submit', 'QuestionController@submit');
+	Route::post('/submit', 'ThreadController@submit');
 });

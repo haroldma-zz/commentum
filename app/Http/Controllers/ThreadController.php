@@ -4,15 +4,15 @@ namespace App\Http\Controllers;
 
 use Auth;
 use App\Models\Tag;
-use App\Models\Question;
+use App\Models\Thread;
 use Cocur\Slugify\Slugify;
 use Vinkla\Hashids\Facades\Hashids;
 use Illuminate\Http\Request;
 
-class QuestionController extends Controller
+class ThreadController extends Controller
 {
 	/**
-	 * Submit a question
+	 * Submit a thread
 	 *
 	 * @param  	Request $request
 	 * @return 	response
@@ -22,20 +22,24 @@ class QuestionController extends Controller
 		if (!$request->ajax())
 			abort(404);
 
-		$question    = trim($request->get('question'));
+		$title    	 = trim($request->get('title'));
+		$link 		 = trim($request->get('link'));
 		$tag         = preg_replace("/[^a-z0-9]+/i", "", $request->get('tag'));
 		$nsfw        = $request->get('nsfw');
 		$serious     = $request->get('serious');
 		$description = $request->get('description');
 
-		if (empty($question))
-			return response('You can\'t leave the question field empty.', 500);
+		if (empty($title))
+			return response('You can\'t leave the title field empty.', 500);
 
-		if (strlen($question) < 10 || strlen($question) > 300)
-			return response('Your question can\'t be longer than 300 characters and must be at least 10 characters long.', 500);
+		if (strlen($title) < 10 || strlen($title) > 300)
+			return response('Your title can\'t be longer than 300 characters and must be at least 10 characters long.', 500);
 
-		if (!stringEndsWith($question, '?'))
-			return response('You have to end your question with a question mark.', 500);
+		if (!empty($link) && !filter_var($link, FILTER_VALIDATE_URL))
+			return response('The link you submitted is not a valid URL.', 500);
+
+		if (!empty($link) && strlen($link) > 350)
+			return response('The link you submitted is too long.', 500);
 
 		if (empty($tag))
 		{
@@ -76,18 +80,19 @@ class QuestionController extends Controller
 		$slugify   = new Slugify();
         $slugify->addRule('+', 'plus');
 
-		$new = new Question;
+		$new = new Thread;
 		$new->user_id  = Auth::id();
 		$new->tag_id   = $tag->id;
-		$new->question = $question;
-		$new->slug     = $slugify->slugify($question, "-");
+		$new->title    = $title;
+		$new->slug     = $slugify->slugify($title, "-");
 		$new->nsfw     = $nsfw;
 		$new->serious  = $serious;
 
+		if (!empty($link))
+			$new->link = $link;
+
 		if (!empty($description))
-		{
 			$new->markdown    = $description;
-		}
 
 		if ($new->save())
 			return response($new->permalink(), 200);

@@ -6,26 +6,28 @@ use Cache;
 use Vinkla\Hashids\Facades\Hashids;
 use Illuminate\Database\Eloquent\Model;
 
-class Question extends Model
+class Thread extends Model
 {
-    private $_tag          = null;
-    private $_author       = null;
-    private $_comments     = null;
-    private $_commentCount = null;
+    private $_tag            = null;
+    private $_author         = null;
+    private $_comments       = null;
+    private $_commentCount   = null;
+    private $_permalink      = null;
+    private $_titlePermalink = null;
 
 	/**
 	 * The database table used by this model.
 	 *
 	 * @var string
 	 */
-    protected $table = 'questions';
+    protected $table = 'threads';
 
     /**
-     * Return the permalink to a question.
+     * Return the permalink to a thread.
      *
      * Uses "lazy" loading.
      *
-     * @return 	string
+     * @return  string
      */
     public function permalink()
     {
@@ -34,7 +36,27 @@ class Question extends Model
 
         $this->_permalink = url("/t/{$this->tag()->display_title}/" . Hashids::encode($this->id) . "/{$this->slug}");
 
-		return $this->_permalink;
+        return $this->_permalink;
+    }
+
+    /**
+     * Returns the submitted link or a permalink.
+     *
+     * Uses "lazy" loading.
+     *
+     * @return  string
+     */
+    public function titlePermalink()
+    {
+        if (!is_null($this->_titlePermalink))
+            return $this->_titlePermalink;
+
+        if (!empty($this->link))
+            $this->_titlePermalink = $this->link;
+        else
+            $this->_titlePermalink = $this->permalink();
+
+        return $this->_titlePermalink;
     }
 
     /**
@@ -50,7 +72,7 @@ class Question extends Model
         if (!is_null($this->_tag))
             return $this->_tag;
 
-        $cache = Cache::get("question:{$this->id}:tag");
+        $cache = Cache::get("thread:{$this->id}:tag");
 
         if (!is_null($cache))
         {
@@ -59,7 +81,7 @@ class Question extends Model
         }
 
         $this->_tag = $this->hasOne('App\Models\Tag', 'id', 'tag_id')->first();
-        Cache::put("question:{$this->id}:tag", $this->_tag, 120);
+        Cache::put("thread:{$this->id}:tag", $this->_tag, 120);
 
     	return $this->_tag;
     }
@@ -77,7 +99,7 @@ class Question extends Model
         if (!is_null($this->_author))
             return $this->_author;
 
-        $cache = Cache::get("question:{$this->id}:author");
+        $cache = Cache::get("thread:{$this->id}:author");
 
         if (!is_null($cache))
         {
@@ -86,7 +108,7 @@ class Question extends Model
         }
 
         $this->_author = $this->hasOne('App\Models\User', 'id', 'user_id')->first();
-        Cache::put("question:{$this->id}:author", $this->_author, 120);
+        Cache::put("thread:{$this->id}:author", $this->_author, 120);
 
         return $this->_author;
     }
@@ -103,7 +125,7 @@ class Question extends Model
         if (!is_null($this->_comments))
             return $this->_comments;
 
-        $this->_comments = $this->hasMany('App\Models\Comment', 'question_id', 'id')->get();
+        $this->_comments = $this->hasMany('App\Models\Comment', 'thread_id', 'id')->get();
 
         return $this->_comments;
     }

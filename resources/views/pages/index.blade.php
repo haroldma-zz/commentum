@@ -47,26 +47,30 @@
 		<div class="medium-9 columns">
 			<div class="panel small">
 				<table class="questions-list">
-					@if (!count($questions) > 0)
-
+					@if (!count($threads) > 0)
+					<tr>
+						<td>
+							Nothing here...
+						</td>
+					</tr>
 					@else
-					@foreach ($questions as $q)
+					@foreach ($threads as $t)
 					<tr>
 						<td>
 							<a>2</a>
 						</td>
 						<td>
-							<a href="{{ $q->permalink() }}">{{ $q->question }}</a>
+							<a href="{{ $t->titlePermalink() }}">{{ $t->title }}</a>
 							<br>
 							<span>
-								<a href="{{ $q->tag()->permalink() }}">
-									<span data-livestamp="{{ strtotime($q->created_at) }}"></span> in
-									#{{ $q->tag()->display_title }}
+								<a href="{{ $t->tag()->permalink() }}">
+									<span data-livestamp="{{ strtotime($t->created_at) }}"></span> in
+									#{{ $t->tag()->display_title }}
 								</a>
 								&middot;
-								<a href="{{ url('/u/' . $q->author()->username) }}">{{ $q->author()->username }}</a>
+								<a href="{{ url('/u/' . $t->author()->username) }}">{{ $t->author()->username }}</a>
 								&middot;
-								<a href="{{ $q->permalink() }}">{{ $q->commentCount() }} comment{{ ($q->commentCount() > 1 || $q->commentCount() === 0 ? 's' : '') }}</a>
+								<a href="{{ $t->permalink() }}">{{ $t->commentCount() }} comment{{ ($t->commentCount() > 1 || $t->commentCount() === 0 ? 's' : '') }}</a>
 							</span>
 						</td>
 					</tr>
@@ -104,6 +108,7 @@
 					<li><a href="">#FiftyFifty</a></li>
 					<li><a href="">#CharlestonMassacre</a></li>
 					<li><a href="">#movies</a></li>
+					<li><a href="">#ayylmao</a></li>
 				</ul>
 			</div>
 		</div>

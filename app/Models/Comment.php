@@ -14,13 +14,13 @@ class Comment extends Model
     protected $table = 'comments';
 
     /**
-     * Question relation
+     * Thread relation
      *
-     * @return 	Question
+     * @return 	Thread
      */
-    public function question()
+    public function thread()
     {
-    	return $this->hasOne('App\Models\Question', 'id', 'question_id');
+    	return $this->hasOne('App\Models\Thread', 'id', 'thread_id');
     }
 
     /**
