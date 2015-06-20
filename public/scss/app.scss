@@ -1,6 +1,7 @@
 @import "compass";
 @import "settings";
 @import "foundation";
+@import "ionicons";
 @import "typography";
 
 /*
@@ -72,11 +73,36 @@ html, body {
 .hero {
 	width: 100%;
 	padding: 1.5em 0;
-	padding-top: 3em;
 	background: $primary-color;
-	h1 {
+	h1, h2, h3, h4, h5, h6 {
 		font-weight: 900;
 		color: $dark-primary-color;
+		a.menu-item {
+			color: rgba(#ffffff, 0.5);
+			margin-right: 1em;
+			&:hover {
+				color: white;
+				.inbox-counter {
+					background: $alert-color;
+				}
+			}
+			&.active {
+				color: white;
+			}
+			.inbox-counter {
+				padding: 3px;
+				color: white;
+				font-size: 0.85em;
+				font-weight: 700;
+				background: rgba($alert-color, 0.65);
+				@include border-radius(3px);
+			}
+		}
+		a.menu-middot {
+			color: rgba(#ffffff, 0.5);
+			margin-right: 1em;
+			cursor: default;
+		}
 	}
 }
 
@@ -187,5 +213,23 @@ html, body {
 				}
 			}
 		}
+	}
+}
+
+/**
+ * .sidebar
+ */
+.sidebar {
+	.super-header {
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 2px;
+		color: $primary-color;
+		font-size: 0.85em;
+	}
+	hr {
+		width: 50px;
+		border-width: 2px;
+		border-color: rgba($primary-color, 0.25);
 	}
 }

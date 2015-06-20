@@ -14,6 +14,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     use Authenticatable, CanResetPassword;
 
     private $_questions = null;
+    private $_permalink = null;
 
     /**
      * The database table used by the model.
@@ -35,6 +36,20 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+
+    /**
+     * Return a permalink to a user's profile.
+     *
+     * @return  string
+     */
+    public function permalink()
+    {
+        if (!is_null($this->_permalink))
+            return $this->_permalink;
+
+        $this->_permalink = url("/u/{$this->username}");
+        return $this->_permalink;
+    }
 
     /**
      * Questions relation

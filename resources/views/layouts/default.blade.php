@@ -11,7 +11,6 @@
 		<div class="row">
 			<div class="medium-4 columns">
 				<a class="brand" href="{{ url('/') }}">COMMENTUM</a>
-				<a href="{{ url('/f/trending') }}">Trending</a>
 			</div>
 			<div class="medium-8 columns text-right">
 				@if(!Auth::check())
@@ -19,7 +18,6 @@
 				<a href="{{ url('/login') }}">Login</a>
 				@else
 				<a href="{{ url('/submit') }}">Submit</a>
-				<a href="{{ url('/u/' . Auth::user()->username) }}">{{ Auth::user()->username }}</a>
 				<a href="{{ url('/logout') }}">Logout</a>
 				@endif
 			</div>
