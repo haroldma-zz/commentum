@@ -72,6 +72,9 @@ html, body {
 	width: 100%;
 	padding: 1.5em 0;
 	background: $primary-color;
+	hr {
+		border-color: rgba($dark-primary-color, 0.5);
+	}
 	h1, h2, h3, h4, h5, h6 {
 		font-weight: 900;
 		color: $dark-primary-color;
@@ -101,6 +104,21 @@ html, body {
 			margin-right: 1em;
 			cursor: default;
 		}
+	}
+	.thread-title {
+		color: white;
+		font-size: 1.5em;
+		font-weight: 700;
+		a {
+			color: white;
+			&:hover {
+				color: lighten(blue, 45);
+			}
+		}
+	}
+	.thread-description {
+		color: white;
+		font-size: 1em;
 	}
 }
 
@@ -218,16 +236,75 @@ html, body {
  * .sidebar
  */
 .sidebar {
-	.super-header {
-		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 2px;
-		color: $primary-color;
-		font-size: 0.85em;
-	}
 	hr {
 		width: 50px;
 		border-width: 2px;
 		border-color: rgba($primary-color, 0.25);
+	}
+}
+
+/**
+ * .markdown
+ */
+.markdown {
+	&.thread-description {
+		h1,h2,h3,h4,h5,h6,p,ul,li {
+			color: white;
+		}
+	}
+	h1,h2,h3,h4,h5,h6 {
+		color: #313131;
+		font-weight: 500;
+	}
+	p, ul, li {
+		color: #212121;
+	}
+	h1, h2, h3 {
+		font-size: 1.25em;
+	}
+}
+
+/**
+ * .comments-list
+ */
+.comments-list {
+	article {
+		padding: 10px;
+		border: 1px solid $silver;
+		border-bottom: none;
+		@include border-radius($global-radius);
+		&:last-of-type {
+			border-bottom: 1px solid $silver;
+		}
+		&.parent {
+			padding-bottom: 0;
+			padding-right: 0;
+		}
+		footer {
+			font-size: 0.8em;
+			color: #777;
+			a {
+				color: $primary-color;
+				font-weight: 500;
+				margin: 0 0.65em;
+				&:first-of-type {
+					margin-left: 0;
+				}
+			}
+		}
+		.children {
+			padding-left: 1.5em;
+			padding-top: 5px;
+			article {
+				border-right: none;
+				border-bottom: none;
+				padding-bottom: 0;
+				padding-right: 0;
+				background: #f3f3f3;
+				&.parent {
+					background: white;
+				}
+			}
+		}
 	}
 }

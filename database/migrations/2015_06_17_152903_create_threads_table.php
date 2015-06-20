@@ -16,6 +16,7 @@ class CreateThreadsTable extends Migration
             $table->increments('id');
             $table->integer('user_id');
             $table->integer('tag_id');
+            $table->float('momentum')->default(0);
             $table->string('title', 300);
             $table->string('link', 500)->nullable();
             $table->string('slug');

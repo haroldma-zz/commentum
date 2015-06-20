@@ -47,3 +47,18 @@ input[type="submit"] {
 		opacity: 1;
 	}
 }
+
+.super-header {
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	color: $primary-color;
+	font-size: 0.85em;
+	&.light {
+		color: lighten($primary-color, 10);
+	}
+}
+
+.no-margin {
+	margin-bottom: 0;
+}

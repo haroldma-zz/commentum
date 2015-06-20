@@ -22,4 +22,5 @@ Route::post('/login', 'UserController@login');
 Route::group(['middleware' => 'auth'], function()
 {
 	Route::post('/submit', 'ThreadController@submit');
+	Route::post('/comment', 'CommentController@submit');
 });

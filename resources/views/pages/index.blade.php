@@ -30,16 +30,7 @@
 		</div>
 	</div>
 	@else
-	<div class="row">
-		<div class="medium-8 columns">
-			<h6>
-				<a class="menu-item active">subscribed <i class="ion-arrow-down-b"></i></a>
-				<a class="menu-item" href="{{ Auth::user()->permalink() }}">profile</a>
-				<a class="menu-item" href="{{ url('/inbox') }}">inbox <span class="inbox-counter">1</span></a>
-				<a class="menu-item" href="{{ url('/preferences') }}">preferences</a>
-			</h6>
-		</div>
-	</div>
+	@include('layouts.user-header')
 	@endif
 </div>
 <div class="padding">
@@ -57,9 +48,10 @@
 					@foreach ($threads as $t)
 					<tr>
 						<td>
-							<a>2</a>
+							<a>{{ floor($t->momentum) }}</a>
 						</td>
 						<td>
+							{!! (!empty($t->link) ? '<i class="ion-link"></i>' : '') !!}
 							<a href="{{ $t->titlePermalink() }}">{{ $t->title }}</a>
 							<br>
 							<span>
