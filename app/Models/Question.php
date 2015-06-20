@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
+use Cache;
 use Vinkla\Hashids\Facades\Hashids;
 use Illuminate\Database\Eloquent\Model;
 
 class Question extends Model
 {
     private $_commentCount = null;
+    private $_tag = null;
+
 	/**
 	 * The database table used by this model.
 	 *
@@ -22,7 +25,12 @@ class Question extends Model
      */
     public function permalink()
     {
-		return url("/t/{$this->tag->display_title}/" . Hashids::encode($this->id) . "/{$this->slug}");
+        if (!is_null($this->_permalink))
+            return $this->_permalink;
+
+        $this->_permalink = url("/t/{$this->tag()->display_title}/" . Hashids::encode($this->id) . "/{$this->slug}");
+
+		return $this->_permalink;
     }
 
     /**
@@ -32,7 +40,21 @@ class Question extends Model
      */
     public function tag()
     {
-    	return $this->hasOne('App\Models\Tag', 'id', 'tag_id');
+        if (!is_null($this->_tag))
+            return $this->_tag;
+
+        $cache = Cache::get("question:{$this->id}:tag");
+
+        if (!is_null($cache))
+        {
+            $this->_tag = $cache;
+            return $this->_tag;
+        }
+
+        $this->_tag = $this->hasOne('App\Models\Tag', 'id', 'tag_id')->first();
+        Cache::put("question:{$this->id}:tag", $this->_tag, 120);
+
+    	return $this->_tag;
     }
 
     /**

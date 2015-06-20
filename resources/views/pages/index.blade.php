@@ -48,9 +48,9 @@
 							<a href="{{ $q->permalink() }}">{{ $q->question }}</a>
 							<br>
 							<span>
-								<a href="{{ url('/t/' . $q->tag->display_title) }}">
+								<a href="{{ url('/t/' . $q->tag()->display_title) }}">
 									<span data-livestamp="{{ strtotime($q->created_at) }}"></span> in
-									#{{ $q->tag->display_title }}
+									#{{ $q->tag()->display_title }}
 								</a>
 								&middot;
 								<a href="{{ url('/u/' . $q->author->username) }}">{{ $q->author->username }}</a>
