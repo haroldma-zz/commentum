@@ -61,7 +61,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         if (!is_null($this->_threads))
             return $this->_threads;
 
-        $threads = $this->hasMany('App\Models\Thread', 'user_id', 'id')->get();
+        $threads = $this->hasMany('App\Models\Thread', 'user_id', 'id')->orderBy('id', 'DESC')->get();
         $this->_threads = $threads;
 
         return $this->_threads;

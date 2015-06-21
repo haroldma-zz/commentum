@@ -14,7 +14,7 @@
 				pr = new showdown.Converter(),
 				ht = pr.makeHtml(md);
 
-			var html = '<article class="parent">';
+			var html = '<article>';
 				html += '<section class="markdown">';
 				html += ht;
 				html += '</section>';

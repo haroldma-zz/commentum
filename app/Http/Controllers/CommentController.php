@@ -56,9 +56,32 @@ class CommentController extends Controller
 		$comment->author_id = Auth::id();
 		$comment->markdown  = $markdown;
 
+		// Check momentum
 		if ($comment->save())
-			return response("Your comment was submitted.", 200);
+		{
+			$lastComment = Comment::where('thread_id', $thread->id)->orderBy('id', 'DESC')->take(1)->skip(1)->first();
+
+			if (!$lastComment)
+				$momentumStart = 0;
+			else
+				$momentumStart = strtotime($lastComment->created_at);
+
+			$momentumEnd = strtotime("now");
+			$difference  = $momentumEnd - $momentumStart;
+
+			// Calculate momentum to be added
+			$momentumAdd = calculateMomentum($difference);
+
+			$thread->momentum = $thread->momentum + $momentumAdd;
+
+			if ($thread->save())
+				return response("Your comment was submitted.", 200);
+			else
+				return response("Something went wrong on our end, try again.", 500);
+		}
 		else
+		{
 			return response("Something went wrong on our end, try again.", 500);
+		}
 	}
 }

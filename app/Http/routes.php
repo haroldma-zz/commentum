@@ -6,6 +6,7 @@ Route::get('/', 'PageController@index');
 Route::get('/login', 'PageController@login');
 
 Route::get('/t/{tag}/{hash}/{slug}', 'PageController@thread');
+Route::get('/u/{username}', 'PageController@profile');
 
 Route::group(['middleware' => 'auth'], function()
 {

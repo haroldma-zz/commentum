@@ -120,6 +120,35 @@ html, body {
 		color: white;
 		font-size: 1em;
 	}
+	table {
+		background: none;
+		border: none;
+		tr {
+			td:first-of-type {
+				text-align: center;
+				color: #f1f1f1;
+				font-weight: 700;
+				font-size: 1.35em;
+				padding: 0 1em;
+				vertical-align: top;
+				padding-top: 0.8em;
+			}
+			td:last-of-type {
+				p, a {
+					color: white;
+				}
+				p {
+					font-size: 0.8em;
+				}
+				a {
+					font-weight: 500;
+					&:hover {
+						color: lighten($primary-color, 35);
+					}
+				}
+			}
+		}
+	}
 }
 
 /*
@@ -269,16 +298,16 @@ html, body {
  */
 .comments-list {
 	article {
-		padding: 10px;
 		border: 1px solid $silver;
 		border-bottom: none;
+		padding-top: 10px;
+		padding-left: 10px;
 		@include border-radius($global-radius);
+		&.parent {
+			background: white;
+		}
 		&:last-of-type {
 			border-bottom: 1px solid $silver;
-		}
-		&.parent {
-			padding-bottom: 0;
-			padding-right: 0;
 		}
 		footer {
 			font-size: 0.8em;
@@ -301,7 +330,7 @@ html, body {
 				padding-bottom: 0;
 				padding-right: 0;
 				background: #f3f3f3;
-				&.parent {
+				.parent {
 					background: white;
 				}
 			}

@@ -8,13 +8,25 @@
 	@endif
 	<div class="row">
 		<div class="medium-12 columns">
-			<h1 class="thread-title">
-				{!! (!empty($thread->link) ? '<i class="ion-link"></i>' : '') !!}
-				<a href="{{ $thread->titlePermalink() }}">{{ $thread->title }}</a>
-			</h1>
-			<div class="markdown thread-description">
-				{{ $thread->markdown }}
-			</div>
+			<table>
+				<tr>
+					<td>
+						{{ floor($thread->momentum) }}
+					</td>
+					<td>
+						<h1 class="thread-title">
+							{!! (!empty($thread->link) ? '<i class="ion-link"></i>' : '') !!}
+							<a href="{{ $thread->titlePermalink() }}">{{ $thread->title }}</a>
+						</h1>
+						<p>
+							<a href="{{ $thread->tag()->permalink() }}"><span data-livestamp="{{ strtotime($thread->created_at) }}"></span> in #{{ $thread->tag()->display_title }}</a> by <a href="{{ $thread->author()->permalink() }}">{{ $thread->author()->username }}</a>
+						</p>
+						<div class="markdown thread-description">
+							{{ $thread->markdown }}
+						</div>
+					</td>
+				</tr>
+			</table>
 		</div>
 	</div>
 </div>

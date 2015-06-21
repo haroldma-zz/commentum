@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Thread;
 use Vinkla\Hashids\Facades\Hashids;
 
@@ -14,7 +15,7 @@ class PageController extends Controller
 	 */
 	public function index()
 	{
-		$threads = Thread::orderBy('id', 'DESC')->take(25)->get();
+		$threads = Thread::orderBy('momentum', 'DESC')->take(25)->get();
 
 		return view('pages.index')->with(['threads' => $threads]);
 	}
@@ -57,11 +58,27 @@ class PageController extends Controller
 		$thread = Thread::find($threadId[0]);
 
 		if (!$thread)
-			// abort(404);
+			abort(404);
 
 		if ($thread->tag()->display_title != $tag)
 			return abort(404);
 
 		return view('threads.thread')->with(['thread' => $thread]);
+	}
+
+	/**
+	 * User profile page
+	 *
+	 * @param  	string $username
+	 * @return 	view
+	 */
+	public function profile($username)
+	{
+		$user = User::where('username', $username)->first();
+
+		if (!$user)
+			abort(404);
+
+		return view('users.user')->with(['user' => $user]);
 	}
 }
