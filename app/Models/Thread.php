@@ -145,4 +145,21 @@ class Thread extends Model
         $this->_commentCount = $this->comments()->count();
         return $this->_commentCount;
     }
+
+    /**
+     * Print thread's comments.
+     *
+     * @return  view
+     */
+    public function printComments()
+    {
+        $html = '';
+
+        foreach ($this->comments()->where('parent_id', null) as $c)
+        {
+            $html .= view('layouts.comment')->with(['c' => $c, 'threadId' => $this->id, 'indent' => 2])->render();
+        }
+
+        return $html;
+    }
 }

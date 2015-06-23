@@ -15,9 +15,7 @@ class PageController extends Controller
 	 */
 	public function index()
 	{
-		$threads = Thread::orderBy('momentum', 'DESC')->take(25)->get();
-
-		return view('pages.index')->with(['threads' => $threads]);
+		return view('pages.index');
 	}
 
 	/**

@@ -41,12 +41,10 @@ class CommentController extends Controller
 			return response("Thread not found. It might have been deleted while you were commenting.", 500);
 
 		// Check if parent is set
-		$parentId = $request->get('parent_id');
+		$parentId = Hashids::decode($request->get('parent_id'))[0];
 
 		if ($parentId == 0)
 			$parentId = null;
-		else
-			$parentId = Hashids::decode($parentId)[0];
 
 
 		// Create new comment

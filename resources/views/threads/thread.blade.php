@@ -35,32 +35,23 @@
 		<div class="medium-12 columns">
 			{!! Form::open(['url' => '/comment', 'class' => 'row comment-box']) !!}
 				{!! Form::hidden('thread_id', Hashids::encode($thread->id)) !!}
-				{!! Form::hidden('parent_id', 0) !!}
+				{!! Form::hidden('parent_id', Hashids::encode(0)) !!}
 				<div class="medium-5 columns">
 					{!! Form::label('markdown', 'Post a comment') !!}
 					<p class="no-margin">
 						You can use <a href="{{ url('/') }}">Markdown</a>.
 					</p>
 					{!! Form::textarea('markdown', '', ['rows' => 4]) !!}
+					<p class="text-alert"></p>
 					{!! Form::submit('Submit', ['class' => 'btn']) !!}
 				</div>
 			{!! Form::close() !!}
+		</div>
+		<div class="medium-12 columns">
 			<hr>
 			<p class="super-header light">{{ $thread->commentCount() }} comment{{ ($thread->commentCount() > 1 || $thread->commentCount() === 0 ? 's' : '') }}</p>
-			<div class="comments-list" id="commentsList">
-				@foreach($thread->comments() as $c)
-					<article class="parent">
-						<section class="markdown">
-							{{ $c->markdown }}
-						</section>
-						<footer>
-							<span data-livestamp="{{ strtotime($c->created_at) }}"></span> by <a href="{{ $c->author()->permalink() }}">{{ $c->author()->username }}</a>
-							&middot;
-							<a>reply</a>
-						</footer>
-						<div class="children"></div>
-					</article>
-				@endforeach
+			<div class="comments-list children" id="commentsList">
+				{!! $thread->printComments() !!}
 			</div>
 		</div>
 	</div>

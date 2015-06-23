@@ -138,7 +138,7 @@ html, body {
 					color: white;
 				}
 				p {
-					font-size: 0.8em;
+					font-size: 0.85em;
 				}
 				a {
 					font-weight: 500;
@@ -289,7 +289,10 @@ html, body {
 		color: #212121;
 	}
 	h1, h2, h3 {
-		font-size: 1.25em;
+		font-size: 1.5em;
+	}
+	p {
+		font-size: 1.2em !important;
 	}
 }
 
@@ -297,21 +300,39 @@ html, body {
  * .comments-list
  */
 .comments-list {
+	.comment {
+		&.parent {
+			background: white;
+		}
+		&.child {
+			background: #f1f1f1;
+		}
+	}
 	article {
 		border: 1px solid $silver;
 		border-bottom: none;
 		padding-top: 10px;
 		padding-left: 10px;
+		position: relative;
 		@include border-radius($global-radius);
-		&.parent {
-			background: white;
-		}
 		&:last-of-type {
 			border-bottom: 1px solid $silver;
+		}
+		section {
+			font-size: 0.85em;
 		}
 		footer {
 			font-size: 0.8em;
 			color: #777;
+			span {
+				margin: 0 0.65em;
+				&:first-of-type {
+					margin-left: 0;
+				}
+				&:last-of-type {
+					margin-right: 0;
+				}
+			}
 			a {
 				color: $primary-color;
 				font-weight: 500;
@@ -322,7 +343,7 @@ html, body {
 			}
 		}
 		.children {
-			padding-left: 1.5em;
+			padding-left: 2em;
 			padding-top: 5px;
 			article {
 				border-right: none;
@@ -330,9 +351,14 @@ html, body {
 				padding-bottom: 0;
 				padding-right: 0;
 				background: #f3f3f3;
-				.parent {
-					background: white;
-				}
+			}
+		}
+		.reply-box {
+			padding: 10px 0;
+			display: none;
+			p {
+				margin-bottom: 0;
+				font-size: 0.85em !important;
 			}
 		}
 	}

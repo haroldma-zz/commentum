@@ -10,7 +10,6 @@ class Comment extends Model
     private $_thread   = null;
     private $_author   = null;
     private $_parent   = null;
-    private $_children = null;
 
 	/**
 	 * The table used by this model.
@@ -101,17 +100,26 @@ class Comment extends Model
         if (!is_null($this->_children))
             return $this->_children;
 
-        $cache = Cache::get("comment:{$this->id}:children");
-
-        if (!is_null($cache))
-        {
-            $this->_children = $cache;
-            return $this->_children;
-        }
-
         $this->_children = $this->hasMany('App\Models\Comment', 'parent_id', 'id')->get();
-        Cache::put("comment:{$this->id}:children", $this->_children, 60);
 
         return $this->_children;
+    }
+
+
+    /**
+     * Print comment's children.
+     *
+     * @return  view
+     */
+    public function printChildren($i)
+    {
+        $html = '';
+
+        foreach ($this->children()->where('parent_id', $this->id) as $c)
+        {
+            $html .= view('layouts.comment')->with(['c' => $c, 'threadId' => $this->thread()->id, 'indent' => $i])->render();
+        }
+
+        return $html;
     }
 }
