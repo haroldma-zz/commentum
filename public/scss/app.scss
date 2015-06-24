@@ -325,10 +325,10 @@ html, body {
 	padding-bottom: 8.5em;
 	.comment {
 		&.parent {
-			background: white;
+			background: white !important;
 		}
 		&.child {
-			background: $snow;
+			background: $snow !important;
 		}
 	}
 	article {
@@ -359,6 +359,7 @@ html, body {
 			a {
 				color: $primary-color;
 				font-weight: 500;
+				margin: 0 0.5em;
 				&:first-of-type {
 					margin-left: 0;
 				}
@@ -366,7 +367,7 @@ html, body {
 		}
 		.children {
 			padding-left: 1em;
-			padding-top: 5px;
+			padding-top: 10px;
 			article {
 				border-right: none;
 				border-bottom: none;

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\Models\Tag;
 use App\Models\User;
 use App\Models\Thread;
@@ -105,4 +106,30 @@ class PageController extends Controller
 
 		return view('tags.tag')->with(['tag' => $tag]);
 	}
+
+	/**
+	 * Tag settings page
+	 *
+	 * @param  	string 	$tag
+	 * @return 	view
+	 */
+	public function tagSettings($tag)
+	{
+		$tag = Tag::where('title', strtolower($tag))->first();
+
+		if (!$tag)
+			abort(404);
+
+		if ($tag->owner_id !== Auth::id())
+			abort(403);
+
+		return view('tags.settings')->with(['tag' => $tag]);
+	}
 }
+
+
+
+
+
+
+

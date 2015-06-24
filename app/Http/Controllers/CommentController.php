@@ -61,7 +61,8 @@ class CommentController extends Controller
 			else
 				$toId = $comment->parent()->author()->id;
 
-			sendMessage($toId, Auth::id(), $thread->id, $parentId, null, $markdown, ($parentId == null ? 1 : 2));
+			if ($toId != Auth::id())
+				sendMessage($toId, Auth::id(), $thread->id, $parentId, null, $markdown, ($parentId == null ? 1 : 2));
 
 			$lastComment = Comment::where('thread_id', $thread->id)->orderBy('id', 'DESC')->take(1)->skip(1)->first();
 

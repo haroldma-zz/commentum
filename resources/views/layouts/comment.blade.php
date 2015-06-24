@@ -11,6 +11,9 @@
 	</section>
 	<footer>
 		<a onclick="toggleReplyBox(this)" data-thread="{{ Hashids::encode($threadId) }}" data-comment="{{ Hashids::encode($c->id) }}" {{ (Auth::check() == false ? 'href=/login' : '') }}>reply</a>
+		@if (Auth::check() && Auth::id() === $c->author_id)
+		<a>edit</a>
+		@endif
 	</footer>
 	<div class="reply-box">
 		{!! Form::open(['url' => '/comment', 'class' => 'row comment-box', 'data-hierarchy' => ($indent % 2 == 0 ? 'child' : 'parent'), 'onsubmit' => 'submitComment(event, this)']) !!}

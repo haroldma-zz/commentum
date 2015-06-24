@@ -15,6 +15,8 @@ Route::group(['middleware' => 'auth'], function()
 	Route::get('/logout', 'UserController@logout');
 	Route::get('/inbox', 'PageController@inbox');
 
+	Route::get('/t/{tag}/settings', 'PageController@tagSettings');
+
 	Route::post('/t/{tag}/subscribe', 'TagController@subscribe');
 });
 
