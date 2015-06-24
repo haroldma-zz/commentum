@@ -20,7 +20,7 @@
 	<ul class="no-bullet">
 		@if (count($user->subscriptions()) > 0)
 		@foreach($user->subscriptions() as $sub)
-		<li><a href="{{ $sub->permalink() }}">/t/{{ $sub->display_title }}</a></li>
+		<li><a href="{{ $sub->tag()->permalink() }}">/t/{{ $sub->display_title }}</a></li>
 		@endforeach
 		@else
 		<li>-</li>

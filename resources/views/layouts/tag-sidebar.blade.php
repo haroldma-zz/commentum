@@ -13,7 +13,7 @@
 		<a href="{{ $tag->permalink() }}/settings"><b>Tag settings</b></a>
 	</p>
 	@endif
-	@if(!Auth::user()->isSubscribedToTag($tag->id))
+	@if(Auth::check() && !Auth::user()->isSubscribedToTag($tag->id))
 	{!! Form::open(['url' => '/t/' . $tag->display_title . '/subscribe', 'id' => 'subscribeForm']) !!}
 	{!! Form::hidden('tag-id', Hashids::encode($tag->id)) !!}
 	<button id="subscribeButton" type="submit">Subscribe</button>
