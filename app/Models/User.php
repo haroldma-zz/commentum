@@ -128,18 +128,18 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         if (!is_null($this->_subscriptions))
             return $this->_subscriptions;
 
-        $cache = Cache::get("user:{$this->id}:subscriptions");
+        // $cache = Cache::get("user:{$this->id}:subscriptions");
 
-        if (!is_null($cache))
-        {
-            $this->_subscriptions = $cache;
-            return $this->_subscriptions;
-        }
+        // if (!is_null($cache))
+        // {
+        //     $this->_subscriptions = $cache;
+        //     return $this->_subscriptions;
+        // }
 
         $subscriptions        = $this->hasMany('App\Models\TagSubscriber', 'user_id', 'id')->get();
         $this->_subscriptions = $subscriptions;
 
-        Cache::put("user:{$this->id}:subscriptions", $this->_subscriptions, 60);
+        // Cache::put("user:{$this->id}:subscriptions", $this->_subscriptions, 60);
 
         return $this->_subscriptions;
     }
