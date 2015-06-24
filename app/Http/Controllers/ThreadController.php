@@ -61,7 +61,12 @@ class ThreadController extends Controller
 				$newTag->owner_id      = Auth::id();
 
 				if ($newTag->save())
+				{
+					sendMessage(Auth::id(), null, null, null, $newTag->id, null, 5);
+					makeModOfTag($newTag->id, Auth::id());
+
 					$tag = $newTag;
+				}
 				else
 					return response('We couldn\'t claim that tag for you right now, try again.', 500);
 			}

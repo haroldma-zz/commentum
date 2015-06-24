@@ -1,10 +1,15 @@
 <div class="row">
 	<div class="medium-8 columns">
 		<h6>
-			<a class="menu-item active">subscribed <i class="ion-arrow-down-b"></i></a>
-			<a class="menu-item" href="{{ Auth::user()->permalink() }}">profile</a>
-			<a class="menu-item" href="{{ url('/inbox') }}">inbox <span class="inbox-counter">1</span></a>
-			<a class="menu-item" href="{{ url('/preferences') }}">preferences</a>
+			<a class="menu-item {{ (Request::segment(1) == '' ? 'active' : '') }}">subscribed <i class="ion-arrow-down-b"></i></a>
+			<a class="menu-item {{ (Request::segment(1) == 'u' && Request::segment(2) == Auth::user()->username ? 'active' : '') }}" href="{{ Auth::user()->permalink() }}">profile</a>
+			<a class="menu-item {{ (Request::segment(1) == 'inbox' ? 'active' : '') }}" href="{{ url('/inbox') }}">
+				inbox
+				@if (Auth::user()->messageCount() > 0)
+				<span class="inbox-counter">{{ Auth::user()->messageCount() }}</span>
+				@endif
+			</a>
+			<a class="menu-item {{ (Request::segment(1) == 'preferences' ? 'active' : '') }}" href="{{ url('/preferences') }}">preferences</a>
 		</h6>
 	</div>
 </div>

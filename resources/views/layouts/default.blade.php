@@ -15,6 +15,7 @@
 			<div class="medium-8 columns text-right">
 				@if(!Auth::check())
 				<a href="{{ url('/submit') }}">Submit</a>
+				<a href="{{ url('/') }}">Register</a>
 				<a href="{{ url('/login') }}">Login</a>
 				@else
 				<a href="{{ url('/submit') }}">Submit</a>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tag;
 use App\Models\User;
 use App\Models\Thread;
 use Vinkla\Hashids\Facades\Hashids;
@@ -78,5 +79,30 @@ class PageController extends Controller
 			abort(404);
 
 		return view('users.user')->with(['user' => $user]);
+	}
+
+	/**
+	 * Inbox page
+	 *
+	 * @return 	view
+	 */
+	public function inbox()
+	{
+		return view('users.inbox');
+	}
+
+	/**
+	 * Tag feed page
+	 *
+	 * @return 	view
+	 */
+	public function tag($tag)
+	{
+		$tag = Tag::where('title', strtolower($tag))->first();
+
+		if (!$tag)
+			abort(404);
+
+		return view('tags.tag')->with(['tag' => $tag]);
 	}
 }

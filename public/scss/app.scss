@@ -89,6 +89,9 @@ html, body {
 			}
 			&.active {
 				color: white;
+				.inbox-counter {
+					background: $alert-color;
+				}
 			}
 			.inbox-counter {
 				padding: 3px;
@@ -107,8 +110,8 @@ html, body {
 	}
 	.thread-title {
 		color: white;
-		font-size: 1.5em;
-		font-weight: 700;
+		font-size: 1.75em;
+		font-weight: 900;
 		a {
 			color: white;
 			&:hover {
@@ -119,6 +122,11 @@ html, body {
 	.thread-description {
 		color: white;
 		font-size: 1em;
+		padding: 1.5em;
+		background: lighten($primary-color, 5);
+		width: 100%;
+		max-width: 900px;
+		@include border-radius($global-radius);
 	}
 	table {
 		background: none;
@@ -131,19 +139,31 @@ html, body {
 				font-size: 1.35em;
 				padding: 0 1em;
 				vertical-align: top;
-				padding-top: 0.8em;
+				padding-top: 0.95em;
 			}
 			td:last-of-type {
+				width: 100%;
+				hr {
+					margin: 2.5em 0;
+					width: 50px;
+					border-width: 2px;
+					border-color: rgba(255,255,255,0.5);
+				}
 				p, a {
 					color: white;
 				}
 				p {
-					font-size: 0.85em;
+					font-size: 1em;
 				}
 				a {
 					font-weight: 500;
 					&:hover {
 						color: lighten($primary-color, 35);
+					}
+				}
+				.markdown {
+					p {
+						font-size: 0.85em;
 					}
 				}
 			}
@@ -221,6 +241,7 @@ html, body {
 	tr {
 		padding: 0.5em 0;
 		border-bottom: 1px solid $silver;
+		background: white !important;
 		&:last-of-type {
 			border-bottom: none;
 		}
@@ -283,7 +304,7 @@ html, body {
 	}
 	h1,h2,h3,h4,h5,h6 {
 		color: #313131;
-		font-weight: 500;
+		font-weight: 700;
 	}
 	p, ul, li {
 		color: #212121;
@@ -300,19 +321,20 @@ html, body {
  * .comments-list
  */
 .comments-list {
+	padding-bottom: 8.5em;
 	.comment {
 		&.parent {
 			background: white;
 		}
 		&.child {
-			background: #f1f1f1;
+			background: $snow;
 		}
 	}
 	article {
 		border: 1px solid $silver;
 		border-bottom: none;
-		padding-top: 10px;
-		padding-left: 10px;
+		padding-top: 1em;
+		padding-left: 1em;
 		position: relative;
 		@include border-radius($global-radius);
 		&:last-of-type {
@@ -321,7 +343,7 @@ html, body {
 		section {
 			font-size: 0.85em;
 		}
-		footer {
+		header, footer {
 			font-size: 0.8em;
 			color: #777;
 			span {
@@ -336,14 +358,13 @@ html, body {
 			a {
 				color: $primary-color;
 				font-weight: 500;
-				margin: 0 0.65em;
 				&:first-of-type {
 					margin-left: 0;
 				}
 			}
 		}
 		.children {
-			padding-left: 2em;
+			padding-left: 1em;
 			padding-top: 5px;
 			article {
 				border-right: none;
@@ -360,6 +381,61 @@ html, body {
 				margin-bottom: 0;
 				font-size: 0.85em !important;
 			}
+		}
+	}
+}
+
+/**
+ * .inbox
+ */
+.inbox {
+	.message {
+		hr {
+			margin: 2em 0;
+			border-color: rgba(0, 0, 0, 0.15);
+			width: 50px;
+		}
+	}
+	.markdown {
+		font-size: 0.85em;
+		background: $snow;
+		padding: 10px;
+	}
+}
+
+/**
+ * .tag-hero
+ */
+.tag-hero {
+	width: 100%;
+	padding: 3.5em 0;
+	background-color: #f1f1f1;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+	position: relative;
+	&:before {
+		content: " ";
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 0;
+		width: 100%;
+		height: 100%;
+		background: rgba(255, 255, 255, 0.85);
+	}
+	h1,h2,h3,h4,h5,h6 {
+		color: $jet;
+	}
+	h2 {
+		color: $primary-color;
+	}
+	.markdown {
+		font-size: 0.85em;
+	}
+	h4 {
+		span {
+			margin: 0 0.5em;
 		}
 	}
 }

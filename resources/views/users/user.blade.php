@@ -51,14 +51,13 @@
 			</div>
 		</div>
 		<div class="medium-3 columns">
-			<div class="panel small">
-				<h6 class="super-header">
-					{{ $user->username }}
-				</h6>
-				some details here...
-			</div>
-			@include('layouts.general-sidebar')
+			@include('layouts.user-sidebar', ['user' => $user])
 		</div>
 	</div>
 </div>
+@stop
+
+@section('scripts')
+{!! HTML::script('/bower_components/livestamp/moment.min.js') !!}
+{!! HTML::script('/bower_components/livestamp/livestamp.min.js') !!}
 @stop

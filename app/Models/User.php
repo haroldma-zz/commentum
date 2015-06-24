@@ -13,8 +13,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 {
     use Authenticatable, CanResetPassword;
 
-    private $_threads = null;
-    private $_permalink = null;
+    private $_threads       = null;
+    private $_permalink     = null;
+    private $_messages      = null;
+    private $_messageCount  = null;
+    private $_tags          = null;
+    private $_subscriptions = null;
 
     /**
      * The database table used by the model.
@@ -65,5 +69,77 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         $this->_threads = $threads;
 
         return $this->_threads;
+    }
+
+    /**
+     * Message (inbox) relation
+     *
+     * @return  Message
+     */
+    public function messages()
+    {
+        if (!is_null($this->_messages))
+            return $this->_messages;
+
+        $messages = $this->hasMany('App\Models\Message', 'to_id', 'id')->orderBy('id', 'DESC')->get();
+        $this->_messages = $messages;
+
+        return $this->_messages;
+    }
+
+    /**
+     * Retrieve the count of unread messages.
+     *
+     * @return  integer
+     */
+    public function messageCount()
+    {
+        if (!is_null($this->_messageCount))
+            return $this->_messageCount;
+
+        $this->_messageCount = $this->messages()->count();
+
+        return $this->_messageCount;
+    }
+
+    /**
+     * Retrieve tags claimed by user.
+     *
+     * @return  Tag
+     */
+    public function tags()
+    {
+        if (!is_null($this->_tags))
+            return $this->_tags;
+
+        $this->_tags = $this->hasMany('App\Models\Tag', 'owner_id', 'id')->get();
+
+        return $this->_tags;
+    }
+
+    /**
+     * Retrieve subscribed tags
+     *
+     * @return  Tag
+     */
+    public function subscriptions()
+    {
+        if (!is_null($this->_subscriptions))
+            return $this->_subscriptions;
+
+        $cache = Cache::get("user:{$this->id}:subscriptions");
+
+        if (!is_null($cache))
+        {
+            $this->_subscriptions = $cache;
+            return $this->_subscriptions;
+        }
+
+        $subscriptions        = $this->hasMany('App\Models\TagSubscriber', 'user_id', 'id')->get();
+        $this->_subscriptions = $subscriptions;
+
+        Cache::put("user:{$this->id}:subscriptions", $this->_subscriptions, 60);
+
+        return $this->_subscriptions;
     }
 }

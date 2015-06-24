@@ -21,6 +21,7 @@
 						<p>
 							<a href="{{ $thread->tag()->permalink() }}"><span data-livestamp="{{ strtotime($thread->created_at) }}"></span> in #{{ $thread->tag()->display_title }}</a> by <a href="{{ $thread->author()->permalink() }}">{{ $thread->author()->username }}</a>
 						</p>
+						<br>
 						<div class="markdown thread-description">
 							{{ $thread->markdown }}
 						</div>
@@ -33,7 +34,7 @@
 <div class="padding">
 	<div class="row">
 		<div class="medium-12 columns">
-			{!! Form::open(['url' => '/comment', 'class' => 'row comment-box']) !!}
+			{!! Form::open(['url' => '/comment', 'class' => 'row comment-box', 'data-hierarchy' => 'parent', 'onsubmit' => 'submitComment(event, this)']) !!}
 				{!! Form::hidden('thread_id', Hashids::encode($thread->id)) !!}
 				{!! Form::hidden('parent_id', Hashids::encode(0)) !!}
 				<div class="medium-5 columns">
@@ -49,7 +50,7 @@
 		</div>
 		<div class="medium-12 columns">
 			<hr>
-			<p class="super-header light">{{ $thread->commentCount() }} comment{{ ($thread->commentCount() > 1 || $thread->commentCount() === 0 ? 's' : '') }}</p>
+			<p class="super-header light"><span id="threadCommentCount">{{ $thread->commentCount() }}</span> comment<span id="threadCommentPlural">{{ ($thread->commentCount() > 1 || $thread->commentCount() === 0 ? 's' : '') }}</span></p>
 			<div class="comments-list children" id="commentsList">
 				{!! $thread->printComments() !!}
 			</div>
@@ -63,5 +64,7 @@
 {!! HTML::script('/bower_components/livestamp/moment.min.js') !!}
 {!! HTML::script('/bower_components/livestamp/livestamp.min.js') !!}
 @include('scripts.markdown-parser')
+@if (Auth::check())
 @include('scripts.commenter')
+@endif
 @stop

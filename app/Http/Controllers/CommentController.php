@@ -46,7 +46,6 @@ class CommentController extends Controller
 		if ($parentId == 0)
 			$parentId = null;
 
-
 		// Create new comment
 		$comment = new Comment;
 		$comment->thread_id = $thread->id;
@@ -57,6 +56,13 @@ class CommentController extends Controller
 		// Check momentum
 		if ($comment->save())
 		{
+			if ($parentId == null)
+				$toId = $thread->author()->id;
+			else
+				$toId = $comment->parent()->author()->id;
+
+			sendMessage($toId, Auth::id(), $thread->id, $parentId, null, $markdown, ($parentId == null ? 1 : 2));
+
 			$lastComment = Comment::where('thread_id', $thread->id)->orderBy('id', 'DESC')->take(1)->skip(1)->first();
 
 			if (!$lastComment)
@@ -73,7 +79,10 @@ class CommentController extends Controller
 			$thread->momentum = $thread->momentum + $momentumAdd;
 
 			if ($thread->save())
-				return response("Your comment was submitted.", 200);
+			{
+				$parentMomentum = (!$comment->parent() ?  'whoopie' : floor($comment->parent()->momentum));
+				return response(['threadId' => Hashids::encode($thread->id), 'commentId' => Hashids::encode($comment->id), 'parentMomentum' => $parentMomentum], 200);
+			}
 			else
 				return response("Something went wrong on our end, try again.", 500);
 		}

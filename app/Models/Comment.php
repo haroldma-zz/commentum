@@ -76,16 +76,7 @@ class Comment extends Model
         if (!is_null($this->_parent))
             return $this->_parent;
 
-        $cache = Cache::get("comment:{$this->id}:parent");
-
-        if (!is_null($cache))
-        {
-            $this->_parent = $cache;
-            return $this->_parent;
-        }
-
         $this->_parent = $this->hasOne('App\Models\Comment', 'id', 'parent_id')->first();
-        Cache::put("comment:{$this->id}:parent", $this->_parent, 60);
 
         return $this->_parent;
     }

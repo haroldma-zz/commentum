@@ -3,6 +3,8 @@
 @section('page')
 {!! Form::open(['url' => '/submit', 'id' => 'submitForm']) !!}
 <div class="hero">
+	@include('layouts.user-header')
+	<hr>
 	<div class="row">
 		<div class="medium-6 medium-offset-3 columns">
 			<div class="register-form">
@@ -43,6 +45,8 @@
 				<ul>
 					<li>Tags are claimed by users.</li>
 					<li>If the tag isn't claimed, it will be claimed by you.</li>
+					<li>You can only claim one tag per day.</li>
+					<li>You cannot claim more than 15 tags per year.</li>
 					<li>If you don't submit a tag, your submission will be submitted to <a href="{{ url('/tag/random') }}">#random</a>.</li>
 					<li>You can use one tag per submission.</li>
 				</ul>
