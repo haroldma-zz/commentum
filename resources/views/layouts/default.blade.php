@@ -18,6 +18,7 @@
 				<a href="{{ url('/') }}">Register</a>
 				<a href="{{ url('/login') }}">Login</a>
 				@else
+				<a href="{{ Auth::user()->permalink() }}">{{ Auth::user()->username }}</a>
 				<a href="{{ url('/submit') }}">Submit</a>
 				<a href="{{ url('/logout') }}">Logout</a>
 				@endif
@@ -27,5 +28,8 @@
 	@yield('page')
 	{!! HTML::script('/bower_components/jquery/dist/jquery.min.js') !!}
 	@yield('scripts')
+	@if(Auth::check())
+	@include('scripts.tags-nav-toggler')
+	@endif
 </body>
 </html>

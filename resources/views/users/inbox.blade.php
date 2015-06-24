@@ -4,6 +4,7 @@
 <div class="hero">
 	@include('layouts.user-header')
 </div>
+@include('layouts.tags-nav')
 <div class="padding">
 	<div class="row">
 		<div class="medium-9 columns inbox">

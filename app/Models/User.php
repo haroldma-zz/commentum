@@ -19,6 +19,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     private $_messageCount  = null;
     private $_tags          = null;
     private $_subscriptions = null;
+    private $_isSubscribed  = null;
 
     /**
      * The database table used by the model.
@@ -141,5 +142,36 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         Cache::put("user:{$this->id}:subscriptions", $this->_subscriptions, 60);
 
         return $this->_subscriptions;
+    }
+
+    /**
+     * Subscriptions relation without "lazy" loading or Caching.
+     *
+     * @return  TagSubscriber   Collection
+     */
+    public function subscriptionsAlt()
+    {
+        return $this->hasMany('App\Models\TagSubscriber', 'user_id', 'id');
+    }
+
+    /**
+     * Check if a user is subscribed to a tag.
+     *
+     * @param   integer  $tagId
+     * @return  boolean
+     */
+    public function isSubscribedToTag($tagId)
+    {
+        if (!is_null($this->_isSubscribed))
+            return $this->_isSubscribed;
+
+        $check = $this->subscriptionsAlt()->where('tag_id', $tagId)->first();
+
+        if (!$check)
+            $this->_isSubscribed = false;
+        else
+            $this->_isSubscribed = true;
+
+        return $this->_isSubscribed;
     }
 }

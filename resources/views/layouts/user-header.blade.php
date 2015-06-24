@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="medium-8 columns">
 		<h6>
-			<a class="menu-item {{ (Request::segment(1) == '' ? 'active' : '') }}">subscribed <i class="ion-arrow-down-b"></i></a>
+			<a id="tagsNavToggler" class="menu-item {{ (Request::segment(1) == '' ? 'active' : '') }}">subscriptions <i class="ion-arrow-down-b"></i></a>
 			<a class="menu-item {{ (Request::segment(1) == 'u' && Request::segment(2) == Auth::user()->username ? 'active' : '') }}" href="{{ Auth::user()->permalink() }}">profile</a>
 			<a class="menu-item {{ (Request::segment(1) == 'inbox' ? 'active' : '') }}" href="{{ url('/inbox') }}">
 				inbox

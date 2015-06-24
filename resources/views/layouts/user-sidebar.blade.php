@@ -1,7 +1,7 @@
 <div class="panel small sidebar">
 	<h6 class="super-header">Info</h6>
 	<h4>
-		<b>1384</b> points
+		<b>{{ floor($user->momentum) }}</b> point{{ (floor($user->momentum) != 1) ? 's' : '' }}
 	</h4>
 	<h4><small>Member since <span data-livestamp="{{ strtotime($user->created_at) }}"></span></small></h4>
 	<hr>

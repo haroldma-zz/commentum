@@ -14,6 +14,7 @@
 		</div>
 	</div>
 </div>
+@include('layouts.tags-nav')
 <div class="padding">
 	<div class="row">
 		<div class="medium-6 medium-offset-3 columns">

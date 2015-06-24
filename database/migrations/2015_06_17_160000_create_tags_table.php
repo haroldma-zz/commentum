@@ -15,6 +15,7 @@ class CreateTagsTable extends Migration
         Schema::create('tags', function(Blueprint $table) {
             $table->increments('id');
             $table->integer('owner_id');
+            $table->float('momentum')->default(0);
             $table->string('title', 35);
             $table->string('display_title', 35);
             $table->mediumText('description')->nullable();

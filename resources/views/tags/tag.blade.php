@@ -5,6 +5,7 @@
 <div class="hero">
 	@include('layouts.user-header')
 </div>
+@include('layouts.tags-nav')
 @endif
 @include('layouts.tag-hero', ['tag' => $tag])
 <div class="padding">
@@ -26,4 +27,7 @@
 {!! HTML::script('/bower_components/livestamp/moment.min.js') !!}
 {!! HTML::script('/bower_components/livestamp/livestamp.min.js') !!}
 @include('scripts.markdown-parser')
+@if (Auth::check())
+@include('scripts.subscriber', ['tag' => $tag])
+@endif
 @stop

@@ -1,7 +1,7 @@
 <div class="panel small sidebar">
 	<h6 class="super-header">Info</h6>
 	<h4>
-		<b>1384</b> points
+		<b>{{ floor($tag->momentum) }}</b> point{{ (floor($tag->momentum) != 1 ? 's' : '') }}
 	</h4>
 	<h5>
 		<b>{{ $tag->threadCount() }}</b> thread{{ ($tag->threadCount() != 1 ? 's' : '') }}
@@ -12,6 +12,14 @@
 	<p>
 		<a href="{{ $tag->permalink() }}/settings"><b>Tag settings</b></a>
 	</p>
+	@endif
+	@if(!Auth::user()->isSubscribedToTag($tag->id))
+	{!! Form::open(['url' => '/t/' . $tag->display_title . '/subscribe', 'id' => 'subscribeForm']) !!}
+	{!! Form::hidden('tag-id', Hashids::encode($tag->id)) !!}
+	<button id="subscribeButton" type="submit">Subscribe</button>
+	{!! Form::close() !!}
+	@else
+	<button id="subscribeButton" disabled="true" class="inactive" type="submit">Subscribed</button>
 	@endif
 	<hr>
 	<h6 class="super-header">Rules</h6>
