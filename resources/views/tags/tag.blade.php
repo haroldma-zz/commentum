@@ -4,8 +4,8 @@
 @if (Auth::check())
 <div class="hero">
 	@include('layouts.user-header')
+	@include('layouts.tags-nav')
 </div>
-@include('layouts.tags-nav')
 @endif
 @include('layouts.tag-hero', ['tag' => $tag])
 <div class="padding">

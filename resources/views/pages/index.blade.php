@@ -6,11 +6,9 @@
 	@include('layouts.hero')
 	@else
 	@include('layouts.user-header')
+	@include('layouts.tags-nav')
 	@endif
 </div>
-@if(Auth::check())
-@include('layouts.tags-nav')
-@endif
 <div class="padding">
 	<div class="row">
 		<div class="medium-9 columns">

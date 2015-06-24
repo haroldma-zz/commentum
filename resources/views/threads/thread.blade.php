@@ -4,6 +4,7 @@
 <div class="hero">
 	@if (Auth::check())
 	@include('layouts.user-header')
+	@include('layouts.tags-nav')
 	<hr>
 	@endif
 	<div class="row">
@@ -31,9 +32,6 @@
 		</div>
 	</div>
 </div>
-@if(Auth::check())
-@include('layouts.tags-nav')
-@endif
 <div class="padding">
 	<div class="row">
 		<div class="medium-12 columns">

@@ -4,6 +4,7 @@
 {!! Form::open(['url' => '/submit', 'id' => 'submitForm']) !!}
 <div class="hero">
 	@include('layouts.user-header')
+	@include('layouts.tags-nav')
 	<hr>
 	<div class="row">
 		<div class="medium-6 medium-offset-3 columns">
@@ -14,7 +15,6 @@
 		</div>
 	</div>
 </div>
-@include('layouts.tags-nav')
 <div class="padding">
 	<div class="row">
 		<div class="medium-6 medium-offset-3 columns">
