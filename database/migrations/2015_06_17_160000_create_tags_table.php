@@ -19,6 +19,7 @@ class CreateTagsTable extends Migration
             $table->string('title', 35);
             $table->string('display_title', 35);
             $table->mediumText('description')->nullable();
+            $table->mediumText('rules')->nullable();
             $table->string('hero_img')->nullable();
             $table->tinyInteger('privacy');
             $table->timestamps();

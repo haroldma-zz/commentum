@@ -56,10 +56,23 @@ class CommentController extends Controller
 		// Check momentum
 		if ($comment->save())
 		{
-			if ($parentId == null)
+			if (is_null($parentId))
+			{
 				$toId = $thread->author()->id;
+			}
 			else
+			{
 				$toId = $comment->parent()->author()->id;
+
+				// Calculate momentum for parent Comment
+				$momentumStart = strtotime($comment->parent()->created_at);
+				$momentumEnd   = strtotime("now");
+
+				$commentMomentum = calculateMomentum($momentumEnd - $momentumStart);
+
+				$comment->parent()->momentum = $comment->parent()->momentum + $commentMomentum;
+				$comment->parent()->save();
+			}
 
 			if ($toId != Auth::id())
 				sendMessage($toId, Auth::id(), $thread->id, $parentId, null, $markdown, ($parentId == null ? 1 : 2));

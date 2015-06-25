@@ -38,8 +38,8 @@ class Tag extends Model
     /**
      * The owner relation
      *
-     * If the model is cached return it, otherwise cache it
-     * Uses "lazy" loading
+     * If the model is cached return it, otherwise cache it.
+     * Uses "lazy" loading.
      *
      * @return 	User
      */

@@ -18,6 +18,7 @@ Route::group(['middleware' => 'auth'], function()
 	Route::get('/t/{tag}/settings', 'PageController@tagSettings');
 
 	Route::post('/t/{tag}/subscribe', 'TagController@subscribe');
+	Route::post('/t/{tag}/settings', 'TagController@settings');
 });
 
 /*
