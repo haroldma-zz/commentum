@@ -7,7 +7,7 @@
 		<b>{{ $tag->threadCount() }}</b> thread{{ ($tag->threadCount() != 1 ? 's' : '') }}
 	</h5>
 	<h4><small>Claimed by <a href="{{ $tag->owner()->permalink() }}">/u/{{ $tag->owner()->username }}</a></small></h4>
-	@if (Auth::check() && isModOfTag($tag->id))
+	@if (Auth::check() && Auth::id() === $tag->owner()->id)
 	<hr>
 	<p>
 		<a href="{{ $tag->permalink() }}/settings"><b>Tag settings</b></a>
@@ -16,10 +16,12 @@
 	@if(Auth::check() && !Auth::user()->isSubscribedToTag($tag->id))
 	{!! Form::open(['url' => '/t/' . $tag->display_title . '/subscribe', 'id' => 'subscribeForm']) !!}
 	{!! Form::hidden('tag-id', Hashids::encode($tag->id)) !!}
-	<button id="subscribeButton" type="submit">Subscribe</button>
+	<button id="subscribeButton" class="btn success" type="submit">Subscribe</button>
 	{!! Form::close() !!}
+	@elseif(Auth::check())
+	<button id="subscribeButton" disabled="true" class="btn small inactive" type="submit">Subscribed</button>
 	@else
-	<button id="subscribeButton" disabled="true" class="inactive" type="submit">Subscribed</button>
+	<a href="{{ url('/login') }}" class="btn success small">Subscribe</a>
 	@endif
 	<hr>
 	<h6 class="super-header">Rules</h6>
