@@ -91,7 +91,7 @@ class Comment extends Model
         if (!is_null($this->_children))
             return $this->_children;
 
-        $this->_children = $this->hasMany('App\Models\Comment', 'parent_id', 'id')->get();
+        $this->_children = $this->hasMany('App\Models\Comment', 'parent_id', 'id')->orderBy('momentum', 'DESC')->get();
 
         return $this->_children;
     }
@@ -113,4 +113,45 @@ class Comment extends Model
 
         return $html;
     }
+
+    /**
+     * Fetch all parents of a comment.
+     *
+     * @return  array
+     */
+    public function grandParents()
+    {
+        $grandParents = [];
+
+        if (!is_null($this->parent()))
+        {
+            $grandParents[] = $this->parent()->id;
+
+            $i       = true;
+            $current = $this->parent();
+
+            while ($i == true)
+            {
+                if (!is_null($current->parent()))
+                {
+                    $grandParents[] = $current->parent()->id;
+                    $current = $current->parent();
+                }
+                else
+                {
+                    $i = false;
+                }
+            }
+        }
+
+        return $grandParents;
+    }
 }
+
+
+
+
+
+
+
+

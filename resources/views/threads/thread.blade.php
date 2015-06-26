@@ -22,10 +22,12 @@
 						<p>
 							<a href="{{ $thread->tag()->permalink() }}"><span data-livestamp="{{ strtotime($thread->created_at) }}"></span> in #{{ $thread->tag()->display_title }}</a> by <a href="{{ $thread->author()->permalink() }}">{{ $thread->author()->username }}</a>
 						</p>
+						@if (!is_null($thread->markdown))
 						<br>
 						<div class="markdown thread-description">
 							{{ $thread->markdown }}
 						</div>
+						@endif
 					</td>
 				</tr>
 			</table>

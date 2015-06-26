@@ -64,14 +64,24 @@ class CommentController extends Controller
 			{
 				$toId = $comment->parent()->author()->id;
 
-				// Calculate momentum for parent Comment
-				$momentumStart = strtotime($comment->parent()->created_at);
-				$momentumEnd   = strtotime("now");
+				$i = 1;
 
-				$commentMomentum = calculateMomentum($momentumEnd - $momentumStart);
+				foreach($comment->grandParents() as $parentComment)
+				{
+					// Calculate momentum for parent Comment
+					$momentumStart = strtotime($comment->parent()->created_at);
+					$momentumEnd   = strtotime("now");
 
-				$comment->parent()->momentum = $comment->parent()->momentum + $commentMomentum;
-				$comment->parent()->save();
+					$commentMomentum = calculateCommentMomentum($momentumEnd - $momentumStart) / $i;
+
+					$parentComment = Comment::find($parentComment);
+
+					$parentComment->momentum = $parentComment->momentum + $commentMomentum;
+					$parentComment->save();
+
+					if ($i > 0.1)
+						$i - 0.1;
+				}
 			}
 
 			if ($toId != Auth::id())

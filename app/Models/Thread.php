@@ -125,7 +125,7 @@ class Thread extends Model
         if (!is_null($this->_comments))
             return $this->_comments;
 
-        $this->_comments = $this->hasMany('App\Models\Comment', 'thread_id', 'id')->get();
+        $this->_comments = $this->hasMany('App\Models\Comment', 'thread_id', 'id')->orderBy('momentum', 'DESC')->get();
 
         return $this->_comments;
     }
