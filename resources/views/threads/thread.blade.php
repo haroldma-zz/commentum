@@ -20,7 +20,7 @@
 							<a href="{{ $thread->titlePermalink() }}">{{ $thread->title }}</a>
 						</h1>
 						<p>
-							<a href="{{ $thread->tag()->permalink() }}"><span data-livestamp="{{ strtotime($thread->created_at) }}"></span> in #{{ $thread->tag()->display_title }}</a> by <a href="{{ $thread->author()->permalink() }}">{{ $thread->author()->username }}</a>
+							<a href="{{ $thread->tag()->permalink() }}"><span data-livestamp="{{ strtotime($thread->created_at) }}"></span> in #{{ $thread->tag()->display_title }}</a> by <a href="{{ $thread->author()->permalink() }}">/u/{{ $thread->author()->username }}</a>
 						</p>
 						@if (!is_null($thread->markdown))
 						<br>

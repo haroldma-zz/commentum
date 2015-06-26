@@ -76,6 +76,9 @@ class ThreadController extends Controller
 			}
 		}
 
+		if (in_array($tag->id, [2, 3]) && !isModOfTag($tag->id))
+			return response("This is an official Commentum tag. You can't submit entries in it.", 500);
+
 		if ($tag->privacy == 1 || $tag->privacy == 2) 	// Tag is semi-private or private
 		{
 			if (!Auth::user()->isSubscribedToTag($tag->id))
