@@ -3,7 +3,7 @@
 		<h1>
 			No votes,
 			<br>
-			just comments
+			just comments.
 		</h1>
 	</div>
 	<div class="medium-5 columns">

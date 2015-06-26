@@ -85,3 +85,8 @@ input[type="submit"] {
 		border-color: lighten($primary-color, 5);
 	}
 }
+
+#hideHero {
+	cursor: pointer;
+	color: white;
+}

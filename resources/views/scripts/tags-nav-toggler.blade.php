@@ -15,4 +15,16 @@
 		if ($('#tagsNav').hasClass('open'))
 			$('#tagsNav').removeClass('open');
 	});
+
+	$('#hideHero').click(function()
+	{
+		$('.hero').addClass('closed');
+		$('#showHero').removeClass('hide');
+	});
+
+	$('#showHero').click(function()
+	{
+		$(this).addClass('hide');
+		$('.hero').removeClass('closed');
+	});
 </script>

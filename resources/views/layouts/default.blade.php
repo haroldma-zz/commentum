@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
 	<title>Commentum</title>
 	{!! HTML::style('/stylesheets/app.css') !!}
 </head>
@@ -18,6 +17,7 @@
 				<a href="{{ url('/') }}">Register</a>
 				<a href="{{ url('/login') }}">Login</a>
 				@else
+				<a id="showHero" class="hide"><i class="ion-chevron-down"></i></a>
 				<a href="{{ Auth::user()->permalink() }}">{{ Auth::user()->username }}</a>
 				<a href="{{ url('/submit') }}">Submit</a>
 				<a href="{{ url('/logout') }}">Logout</a>
