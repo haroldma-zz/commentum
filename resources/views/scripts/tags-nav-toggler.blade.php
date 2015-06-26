@@ -10,12 +10,6 @@
 		window.location.href = $(this).find('a').attr('href');
 	});
 
-	$('body').click(function()
-	{
-		if ($('#tagsNav').hasClass('open'))
-			$('#tagsNav').removeClass('open');
-	});
-
 	$('#hideHero').click(function()
 	{
 		$('.hero').addClass('closed');

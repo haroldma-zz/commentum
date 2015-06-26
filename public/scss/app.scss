@@ -2,6 +2,7 @@
 @import "settings";
 @import "foundation";
 @import "ionicons";
+@import "animate";
 @import "typography";
 
 /*
@@ -327,7 +328,7 @@ html, body {
  * .comments-list
  */
 .comments-list {
-	padding-bottom: 8.5em;
+	padding-bottom: 12.5em;
 	.comment {
 		&.parent {
 			background: white !important;
@@ -495,6 +496,51 @@ html, body {
 				}
 			}
 		}
+	}
+}
+
+/**
+ * .explore-list
+ */
+.explore-list {
+	position: absolute;
+	width: 200px;
+	max-height: 0px;
+	overflow: hidden;
+	z-index: 98;
+	background: $primary-color;
+	border: 1px solid $dark-primary-color;
+	border-top: none;
+	opacity: 0;
+	top: 42px;
+	@include border-radius(0 0 $global-radius $global-radius);
+	@include transition(all .3s ease);
+	hr {
+		border-color: $dark-primary-color;
+		margin: 0;
+	}
+	li {
+		padding: 10px;
+		cursor: pointer;
+		width: 100%;
+		background: $primary-color;
+		display: none;
+		&:hover {
+			background: lighten($primary-color, 5);
+		}
+		a {
+			color: white;
+			font-weight: 500;
+			font-size: 1em;
+			&.active {
+				font-weight: 700;
+			}
+		}
+	}
+	&.open {
+		max-height: 90vh;
+		opacity: 1;
+		overflow: auto;
 	}
 }
 

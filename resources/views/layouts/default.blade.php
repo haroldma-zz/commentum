@@ -10,6 +10,15 @@
 		<div class="row">
 			<div class="medium-4 columns">
 				<a class="brand" href="{{ url('/') }}">Commentum</a>
+				<a id="exploreListButton">Explore <i class="ion-arrow-down-b"></i></a>
+				<ul class="no-bullet explore-list" id="exploreList">
+					<li class="animated fadeInUp">
+						<a href="{{ url('/t/all') }}">All</a>
+					</li>
+					@foreach(App\Models\Tag::getExploreList() as $tag)
+					<li class="animated fadeInUp"><a href="{{ $tag->permalink() }}">#{{ $tag->display_title }}</a></li>
+					@endforeach
+				</ul>
 			</div>
 			<div class="medium-8 columns text-right">
 				@if(!Auth::check())
@@ -28,6 +37,10 @@
 	@yield('page')
 	{!! HTML::script('/bower_components/jquery/dist/jquery.min.js') !!}
 	{!! HTML::script('/bower_components/jquery.cookie/jquery.cookie.js') !!}
+	{!! HTML::script('/bower_components/nicescroll/jquery.nicescroll.js') !!}
+	{!! HTML::script('/bower_components/wow/wow.min.js') !!}
+	{!! HTML::script('/js/app.js') !!}
+	@include('scripts.explore-list')
 	@yield('scripts')
 	@if(Auth::check())
 	@include('scripts.tags-nav-toggler')

@@ -13,6 +13,7 @@ class Tag extends Model
     private $_threadCount     = null;
     private $_mods            = null;
     private $_subscriberCount = null;
+    private static $_exploreList     = null;
 
 	/**
 	 * The database table used by this model.
@@ -121,6 +122,32 @@ class Tag extends Model
         $this->_subscriberCount = $this->hasMany('App\Models\TagSubscriber', 'tag_id', 'id')->count();
 
         return $this->_subscriberCount;
+    }
+
+    /**
+     * Get tags for the explore list.
+     *
+     * @return  Tag
+     */
+    static function getExploreList()
+    {
+        if (!is_null(self::$_exploreList))
+            return self::$_exploreList;
+
+        $cache = Cache::get("explorelist");
+
+        if (!is_null($cache))
+        {
+            self::$_exploreList = $cache;
+            return self::$_exploreList;
+        }
+
+        $list               = self::where('nsfw', false)->orderBy('momentum', 'DESC')->take(100)->get();
+        self::$_exploreList = $list;
+
+        Cache::put("explorelist", self::$_exploreList, 60);
+
+        return self::$_exploreList;
     }
 }
 
