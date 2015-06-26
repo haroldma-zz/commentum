@@ -21,8 +21,8 @@ class CreateTagsTable extends Migration
             $table->mediumText('description')->nullable();
             $table->mediumText('rules')->nullable();
             $table->string('hero_img')->nullable();
-            $table->tinyInteger('privacy', 1)->default('0');
-            $table->tinyInteger('nsfw', 1)->default('0');
+            $table->tinyInteger('privacy')->default(0);
+            $table->tinyInteger('nsfw')->default(0);
             $table->timestamps();
         });
     }
