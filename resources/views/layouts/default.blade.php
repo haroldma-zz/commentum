@@ -3,14 +3,14 @@
 <head>
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-	<title>---</title>
+	<title>Commentum</title>
 	{!! HTML::style('/stylesheets/app.css') !!}
 </head>
 <body>
 	<div class="top-nav">
 		<div class="row">
 			<div class="medium-4 columns">
-				<a class="brand" href="{{ url('/') }}">---</a>
+				<a class="brand" href="{{ url('/') }}">Commentum</a>
 			</div>
 			<div class="medium-8 columns text-right">
 				@if(!Auth::check())

@@ -1,7 +1,9 @@
 <div class="row">
 	<div class="medium-7 columns" style="padding-top:7.5em;">
 		<h1>
-			...
+			No votes,
+			<br>
+			just comments
 		</h1>
 	</div>
 	<div class="medium-5 columns">
