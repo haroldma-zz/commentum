@@ -1,7 +1,12 @@
 <script>
+	var hideExploreListItems;
+
 	$('#exploreListButton').click(function(e)
 	{
 		e.stopPropagation();
+
+		clearTimeout(hideExploreListItems);
+
 		$('#exploreList').toggleClass('open');
 		$('#exploreList').find('li').show();
 		$('#exploreList').niceScroll({zindex:-99});
@@ -15,7 +20,9 @@
 		if ($('#exploreList').hasClass('open'))
 			$('#exploreList').removeClass('open');
 
-		$('#tagsNav').find('li').hide();
-		$('#exploreList').find('li').hide();
+		hideExploreListItems = setTimeout(function()
+		{
+			$('#exploreList').find('li').hide();
+		}, 300);
 	});
 </script>
