@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Auth;
 use Hash;
 use App\Models\User;
+use App\Models\TagSubscriber;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -58,6 +59,20 @@ class UserController extends Controller
 			if ($user->save())
 			{
 				Auth::loginUsingId($user->id);
+
+				$i = 1;
+
+				while ($i < 4)
+				{
+					$tagSub          = new TagSubscriber;
+					$tagSub->user_id = $user->id;
+					$tagSub->tag_id  = $i;
+
+					$tagSub->save();
+
+					$i++;
+				}
+
 				return response('Registered!', 200);
 			}
 			else
