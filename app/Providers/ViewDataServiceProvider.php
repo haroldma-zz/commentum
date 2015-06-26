@@ -2,8 +2,11 @@
 
 namespace App\Providers;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\ServiceProvider;
 use App\Models\Thread;
+use App\Models\User;
+use Auth;
 
 class ViewDataServiceProvider extends ServiceProvider {
 
@@ -14,16 +17,7 @@ class ViewDataServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		/**
-		 * Bind data to index page.
-		 */
-		view()->composer('pages.index', function($view)
-		{
-			$threads = Thread::orderBy('momentum', 'DESC')->take(25)->get();
-			$data    = ['threads' => $threads];
-
-			$view->with($data);
-		});
+		//
 	}
 
 	/**

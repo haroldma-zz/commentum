@@ -17,7 +17,14 @@ class PageController extends Controller
 	 */
 	public function index()
 	{
-		return view('pages.index');
+		// if (!Auth::check())
+			$threads = Thread::where('nsfw', false)->orderBy('momentum', 'DESC')->take(25)->get();
+		// else
+			// $threads = User::getSubscribedTagsThreads();
+
+		$data = ['threads' => $threads];
+
+		return view('pages.index')->with($data);
 	}
 
 	/**

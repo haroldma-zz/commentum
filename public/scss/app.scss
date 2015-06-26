@@ -498,7 +498,34 @@ html, body {
 	}
 }
 
+/**
+ * .nsfw-notice
+ */
+.nsfw-notice {
+	width: 100%;
+	height: 100%;
+	position: relative;
+	.content {
+		position: absolute;
+		width: 100%;
+		top: 50%;
+		@include transform(translateY(-50%));
 
+		h1 {
+			font-weight: 300;
+		}
+
+		hr {
+			width: 50px;
+			margin: 2.5em auto;
+			border: 2px solid $silver;
+		}
+
+		p {
+			font-size: 1em;
+		}
+	}
+}
 
 
 

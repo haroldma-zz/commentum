@@ -28,6 +28,9 @@ input[type="submit"] {
 	&:focus {
 		background: darken($primary-color, 10);
 	}
+	&:hover {
+		color: white !important;
+	}
 	&.blue {
 		background: #59ABE3;
 		border-color: darken(#59ABE3, 10);
@@ -37,6 +40,25 @@ input[type="submit"] {
 		&:focus {
 			background: #59ABE3;
 		}
+	}
+	&.small {
+		padding: 5px;
+		font-size: 0.7em;
+		&:hover {
+			color: white;
+		}
+	}
+	&.medium {
+		padding: 0.75em 1em;
+		font-size: 0.85em;
+	}
+	&.success {
+		background: $success-color;
+		border-color: darken($success-color, 10);
+	}
+	&.alert {
+		background: $alert-color;
+		border-color: darken($alert-color, 10);
 	}
 }
 

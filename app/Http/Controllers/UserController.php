@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Auth;
 use Hash;
+use Session;
 use App\Models\User;
 use App\Models\TagSubscriber;
 use Illuminate\Http\Request;
@@ -129,6 +130,10 @@ class UserController extends Controller
 	public function logout()
 	{
 		Auth::logout();
+
+		if (Session::has('accepted_nsfw'))
+			Session::forget('accepted_nsfw');
+
 		return redirect('/');
 	}
 }

@@ -54,15 +54,19 @@ class TagController extends Controller
 		if ($tag->owner()->id !== Auth::id())
 			return response('You can\'t change the settings of this tag.', 500);
 
-		$cover = $request->get('cover');
-		$rules = $request->get('rules');
-		$mods  = $request->get('mods');
+		$cover   = $request->get('cover');
+		$rules   = $request->get('rules');
+		$mods    = $request->get('mods');
+		$nsfw    = $request->get('nsfw');
+		$privacy = $request->get('privacy');
 
 		if (!empty($cover) && !filter_var($cover, FILTER_VALIDATE_URL))
 			return response('Submit a valid URL to an image for the cover.', 500);
 
 		$tag->hero_img = trim($cover);
-		$tag->rules = $request->get('rules');
+		$tag->rules    = $request->get('rules');
+		$tag->nsfw     = $request->get('nsfw');
+		$tag->privacy  = $privacy;
 
 		foreach($mods as $mod)
 		{

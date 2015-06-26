@@ -17,6 +17,38 @@
 				{!! Form::text('cover', $tag->hero_img) !!}
 				{!! Form::label('rules', 'Rules') !!}
 				{!! Form::textarea('rules', $tag->rules, ['rows' => 4]) !!}
+				<label for="nsfw">
+					{!! Form::checkbox('nsfw', true, $tag->nsfw,['id' => 'nsfw']) !!}
+					This tag is Not Safe For Work.
+				</label>
+				<br>
+				<h5>Privacy</h5>
+				<hr>
+				<div class="panel small">
+					<p>
+						You can set the following privacy types:
+						<ul>
+							<li>
+								<b>Public:</b>
+								<br>
+								Anyone can view and submit submissions to this tag.
+							</li>
+							<li>
+								<b>Semi-private</b>
+								<br>
+								Anyone can view submissions of this tag, but only subscribed users can submit submissions.
+							</li>
+							<li>
+								<b>Private</b>
+								<br>
+								Only invited people can view and submit submission to this tag.
+							</li>
+						</ul>
+					</p>
+				</div>
+				<label>{!! Form::radio('privacy', 0, ($tag->privacy == 0 ? true : false)) !!} Public</label>
+				<label>{!! Form::radio('privacy', 1, ($tag->privacy == 1 ? true : false)) !!} Semi-private</label>
+				<label>{!! Form::radio('privacy', 2, ($tag->privacy == 2 ? true : false)) !!} Private</label>
 				<br>
 				<h5>Moderators</h5>
 				<hr>
@@ -30,7 +62,14 @@
 					@endforeach
 				</ul>
 				{!! Form::label('mods[]', 'Add mods') !!}
-				{!! Form::text('mods[]') !!}
+				<p>
+					Enter only the username of the user you want to add as mod.
+				</p>
+				<div id="modFields">
+					{!! Form::text('mods[]') !!}
+				</div>
+				<a class="btn small" id="addModField"><i class="ion-plus"></i> Add another mod</a>
+				<br>
 				<br>
 				<p class="text-alert" id="submitFormError"></p>
 				{!! Form::submit('Save settings', ['class' => 'btn blue']) !!}

@@ -165,16 +165,18 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->_isSubscribed;
     }
 
+    /**
+     * Get threads of tags that the user is subscribed to.
+     *
+     * @return  thread    collection
+     */
+    static function getSubscribedTagsThreads()
+    {
+        $threads = [];
+
+        // Custom SQL function
+
+        return $threads;
+    }
 
 }
-
-
-
-
-
-
-
-
-
-
-
