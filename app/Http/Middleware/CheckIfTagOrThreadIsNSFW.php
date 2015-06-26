@@ -5,6 +5,8 @@ namespace App\Http\Middleware;
 use Session;
 use Closure;
 use App\Models\Tag;
+use App\Models\Thread;
+use Vinkla\Hashids\Facades\Hashids;
 
 class CheckIfTagOrThreadIsNSFW
 {
