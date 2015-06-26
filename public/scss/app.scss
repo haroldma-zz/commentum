@@ -72,7 +72,6 @@ html, body {
 	width: 100%;
 	padding: 1.5em 0;
 	background: $primary-color;
-	@include transition(all .2s ease);
 	&.closed {
 		height: 0;
 		padding: 0;
@@ -421,6 +420,7 @@ html, body {
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center center;
+	background-attachment: fixed;
 	position: relative;
 	&:before {
 		content: " ";

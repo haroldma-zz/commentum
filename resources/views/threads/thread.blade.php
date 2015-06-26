@@ -66,6 +66,7 @@
 {!! HTML::script('/bower_components/marked/marked.min.js') !!}
 {!! HTML::script('/bower_components/livestamp/moment.min.js') !!}
 {!! HTML::script('/bower_components/livestamp/livestamp.min.js') !!}
+@include('scripts.threads-user-header')
 @include('scripts.markdown-parser')
 @if (Auth::check())
 @include('scripts.commenter')

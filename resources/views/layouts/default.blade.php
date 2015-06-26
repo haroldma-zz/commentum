@@ -27,6 +27,7 @@
 	</div>
 	@yield('page')
 	{!! HTML::script('/bower_components/jquery/dist/jquery.min.js') !!}
+	{!! HTML::script('/bower_components/jquery.cookie/jquery.cookie.js') !!}
 	@yield('scripts')
 	@if(Auth::check())
 	@include('scripts.tags-nav-toggler')
