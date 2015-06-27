@@ -7,8 +7,8 @@
 	</ul>
 	<hr>
 	<h6 class="super-header">Announcements</h6>
-	<ul class="no-bullet">
-		@foreach(App\Models\Thread::where('tag_id', 3)->get() as $thread)
+	<ul>
+		@foreach(App\Models\Thread::where('tag_id', 3)->orderBy('id', 'DESC')->get() as $thread)
 		<li><a href="{{ $thread->permalink() }}">{{ $thread->title }}</a></li>
 		@endforeach
 	</ul>
