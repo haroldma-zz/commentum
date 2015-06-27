@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use Session;
 use App\Models\Tag;
 use App\Models\User;
 use App\Models\Thread;
@@ -18,7 +19,10 @@ class PageController extends Controller
 	public function index()
 	{
 		// if (!Auth::check())
-			$threads = Thread::where('nsfw', false)->orderBy('momentum', 'DESC')->take(25)->get();
+			$threads = Thread::orderBy('momentum', 'DESC')->take(25)->get();
+
+			$moreSubmissionsCount = Thread::orderBy('momentum', 'DESC')->count();
+			Session::flash('moreSubmissionsCount', $moreSubmissionsCount);
 		// else
 			// $threads = User::getSubscribedTagsThreads();
 

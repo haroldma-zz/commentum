@@ -26,6 +26,7 @@
 @section('scripts')
 {!! HTML::script('/bower_components/livestamp/moment.min.js') !!}
 {!! HTML::script('/bower_components/livestamp/livestamp.min.js') !!}
+@include('scripts.load-more-submissions')
 @if (!Auth::check())
 @include('scripts.register')
 @endif

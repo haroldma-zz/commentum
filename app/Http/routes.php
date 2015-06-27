@@ -9,6 +9,8 @@ Route::get('/t/{tag}', ['middleware' => ['privacy', 'nsfw'], 'uses' => 'PageCont
 Route::get('/t/{tag}/{hash}/{slug}', ['middleware' => ['privacy', 'nsfw'], 'uses' => 'PageController@thread']);
 Route::get('/u/{username}', 'PageController@profile');
 
+Route::get('/more/{tag}', 'ThreadController@moreSubmissions');
+
 Route::group(['middleware' => 'auth'], function()
 {
 	Route::get('/submit', 'PageController@submit');

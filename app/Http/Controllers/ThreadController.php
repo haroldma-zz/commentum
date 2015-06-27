@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use Session;
 use App\Models\Tag;
 use App\Models\Thread;
 use Cocur\Slugify\Slugify;
@@ -47,6 +48,9 @@ class ThreadController extends Controller
 		}
 		else
 		{
+			if (in_array($tag, ['all', 'front']))
+				return response("You can't claim this tag.", 500);
+
 			if (strlen($tag) < 2 || strlen($tag) > 30)
 				return response('A tag can\'t be longer than 30 characters and must be at least 2 characters long.' , 500);
 
@@ -118,4 +122,56 @@ class ThreadController extends Controller
 		else
 			return response('Something went wrong on our side, try again.', 500);
 	}
+
+	/**
+	 * Get more submissions for a tag.
+	 *
+	 * @param  string $tag
+	 * @return array
+	 */
+	public function moreSubmissions($tag)
+	{
+		$markup = '';
+
+		if (Session::get('moreSubmissionsCount') > 0)
+		{
+			if (in_array($tag, ['all', 'front']))
+			{
+				if ($tag == 'front')
+				{
+					if (Session::has('currentPage'))
+						$page = Session::get('currentPage');
+					else
+						$page = 1;
+
+					$threads = Thread::orderBy('momentum', 'DESC')->skip(25 * $page)->take(25)->get();
+					Session::flash('currentPage', $page + 1);
+					Session::flash('moreSubmissionsCount', Session::get('moreSubmissionsCount') - 25);
+
+					if (count($threads) > 0)
+					{
+						foreach ($threads as $thread)
+						{
+							$markup .= view('threads.thread-in-list', ['t' => $thread])->render();
+						}
+					}
+				}
+			}
+			else
+			{
+				// get more threads for a specific tag.
+			}
+		}
+
+		return $markup;
+	}
 }
+
+
+
+
+
+
+
+
+
