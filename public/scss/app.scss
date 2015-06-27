@@ -407,11 +407,25 @@ html, body {
 			border-color: rgba(0, 0, 0, 0.15);
 			width: 50px;
 		}
+		h6 {
+			font-size: 0.9em;
+			line-height: 1.6;
+			div {
+				font-size: 0.9em;
+			}
+		}
+		&.read {
+			.markdown {
+				background: none;
+				padding: 0;
+			}
+		}
 	}
 	.markdown {
 		font-size: 0.85em;
-		background: $snow;
-		padding: 10px;
+		background: $ghost;
+		padding: 5px;
+		margin-top: -5px;
 	}
 }
 

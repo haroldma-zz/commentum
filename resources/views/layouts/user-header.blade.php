@@ -7,7 +7,7 @@
 				<a class="menu-item {{ (Request::segment(1) == 'inbox' ? 'active' : '') }}" href="{{ url('/inbox') }}">
 					inbox
 					@if (Auth::user()->messageCount() > 0)
-					<span class="inbox-counter">{{ Auth::user()->messageCount() }}</span>
+					<span class="inbox-counter" id="inboxCounter">{{ Auth::user()->messageCount() }}</span>
 					@endif
 				</a>
 				<a class="menu-item {{ (Request::segment(1) == 'preferences' ? 'active' : '') }}" href="{{ url('/preferences') }}">preferences</a>
