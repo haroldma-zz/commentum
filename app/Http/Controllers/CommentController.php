@@ -68,47 +68,57 @@ class CommentController extends Controller
 
 				foreach($comment->grandParents() as $parentComment)
 				{
-					// Calculate momentum for parent Comment
-					$momentumStart = strtotime($comment->parent()->created_at);
-					$momentumEnd   = strtotime("now");
-
-					$commentMomentum = calculateCommentMomentum($momentumEnd - $momentumStart) / $i;
-
 					$parentComment = Comment::find($parentComment);
 
-					$parentComment->momentum = $parentComment->momentum + $commentMomentum;
-					$parentComment->save();
+					if ($parentComment->author()->id != Auth::id())
+					{
+						// Calculate momentum for parent Comment
+						$momentumStart = strtotime($comment->parent()->created_at);
+						$momentumEnd   = strtotime("now");
 
-					if ($i > 0.1)
-						$i - 0.1;
+						$commentMomentum = calculateCommentMomentum($momentumEnd - $momentumStart) / $i;
+
+						$parentComment->momentum = $parentComment->momentum + $commentMomentum;
+						$parentComment->save();
+
+						if ($i > 0.1)
+							$i - 0.1;
+					}
 				}
 			}
 
 			if ($toId != Auth::id())
+			{
 				sendMessage($toId, Auth::id(), $thread->id, $parentId, null, $markdown, ($parentId == null ? 1 : 2));
 
-			$lastComment = Comment::where('thread_id', $thread->id)->orderBy('id', 'DESC')->take(1)->skip(1)->first();
+				$lastComment = Comment::where('thread_id', $thread->id)->orderBy('id', 'DESC')->take(1)->skip(1)->first();
 
-			if (!$lastComment)
-				$momentumStart = 0;
+				if (!$lastComment)
+					$momentumStart = 0;
+				else
+					$momentumStart = strtotime($lastComment->created_at);
+
+				$momentumEnd = strtotime("now");
+				$difference  = $momentumEnd - $momentumStart;
+
+				// Calculate momentum to be added
+				$momentumAdd = calculateMomentum($difference);
+
+				$thread->momentum = $thread->momentum + $momentumAdd;
+
+				if ($thread->save())
+				{
+					$parentMomentum = (!$comment->parent() ?  'whoopie' : floor($comment->parent()->momentum));
+					return response(['threadId' => Hashids::encode($thread->id), 'commentId' => Hashids::encode($comment->id), 'parentMomentum' => $parentMomentum], 200);
+				}
+				else
+					return response("Something went wrong on our end, try again.", 500);
+			}
 			else
-				$momentumStart = strtotime($lastComment->created_at);
-
-			$momentumEnd = strtotime("now");
-			$difference  = $momentumEnd - $momentumStart;
-
-			// Calculate momentum to be added
-			$momentumAdd = calculateMomentum($difference);
-
-			$thread->momentum = $thread->momentum + $momentumAdd;
-
-			if ($thread->save())
 			{
 				$parentMomentum = (!$comment->parent() ?  'whoopie' : floor($comment->parent()->momentum));
 				return response(['threadId' => Hashids::encode($thread->id), 'commentId' => Hashids::encode($comment->id), 'parentMomentum' => $parentMomentum], 200);
 			}
-			else
-				return response("Something went wrong on our end, try again.", 500);
 		}
 		else
 		{
