@@ -25,4 +25,9 @@
 			$('#exploreList').find('li').hide();
 		}, 300);
 	});
+
+	$('#exploreList > li').click(function()
+	{
+		window.location.href = $(this).find('a').first().attr('href');
+	});
 </script>

@@ -9,7 +9,7 @@
 	<div class="row">
 		<div class="medium-6 medium-offset-3 columns">
 			<div class="register-form">
-				{!! Form::label('title', 'Choose a title') !!}
+				{!! Form::label('title', 'Choose a title', ['class' => 'white-font']) !!}
 				{!! Form::textarea('title', '', ['rows' => 1]) !!}
 			</div>
 		</div>
@@ -81,4 +81,5 @@
 {!! HTML::script('/bower_components/autosize/autosize.min.js') !!}
 @include('scripts.autosizer')
 @include('scripts.submit')
+@include('scripts.threads-user-header')
 @stop

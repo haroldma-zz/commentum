@@ -45,9 +45,43 @@ html, body {
 		font-size: 0.85em;
 		color: white;
 		font-weight: 700;
+		height: 42px;
 		&.brand {
 			text-transform: uppercase;
-			letter-spacing: 1px;
+			letter-spacing: 5px;
+			font-size: 1em;
+			margin-right: 1em;
+		}
+	}
+	ul {
+		margin: 0;
+		padding: 0;
+		line-height: 42px;
+		font-size: 1em;
+		li {
+			margin: 0;
+			&:last-of-type {
+				margin: 0;
+				padding-left: 1em;
+				height: 42px;
+				cursor: pointer;
+				background: lighten($primary-color, 5);
+			}
+			ul {
+				margin: 0;
+				padding: 0;
+				li {
+					border: none !important;
+					padding-left: 1em;
+				}
+			}
+		}
+		&.right {
+			li:last-of-type {
+				border: none;
+				padding: 0;
+				background: $primary-color;
+			}
 		}
 	}
 	.row {
@@ -63,6 +97,9 @@ html, body {
 				margin-right: 0;
 			}
 		}
+	}
+	.hide {
+		display: none !important;
 	}
 }
 
@@ -86,7 +123,7 @@ html, body {
 		font-weight: 900;
 		color: $dark-primary-color;
 		a.menu-item {
-			color: rgba(#ffffff, 0.5);
+			color: rgba(#ffffff, 0.85);
 			margin-right: 1em;
 			&:hover {
 				color: white;
@@ -204,6 +241,9 @@ html, body {
 		border: none;
 		border-bottom: 2px solid $dark-primary-color;
 		@include box-shadow(none);
+		&:focus {
+			border-color: white !important;
+		}
 	}
 	textarea {
 		resize: none;
@@ -528,9 +568,9 @@ html, body {
 	z-index: 98;
 	background: $primary-color;
 	border: 1px solid $dark-primary-color;
-	border-top: none;
 	opacity: 0;
 	top: 42px;
+	margin-left: -1.05em !important;
 	@include border-radius(0 0 $global-radius $global-radius);
 	@include transition(all .3s ease);
 	hr {
@@ -538,13 +578,13 @@ html, body {
 		margin: 0;
 	}
 	li {
-		padding: 10px;
 		cursor: pointer;
 		width: 100%;
-		background: $primary-color;
+		background: $primary-color !important;
 		display: none;
+		font-size: 0.9em;
 		&:hover {
-			background: lighten($primary-color, 5);
+			background: lighten($primary-color, 5) !important;
 		}
 		a {
 			color: white;

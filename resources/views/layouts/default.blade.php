@@ -9,28 +9,31 @@
 	<div class="top-nav">
 		<div class="row">
 			<div class="medium-4 columns">
-				<a class="brand" href="{{ url('/') }}">Commentum</a>
-				<a id="exploreListButton">Explore <i class="ion-arrow-down-b"></i></a>
-				<ul class="no-bullet explore-list" id="exploreList">
-					<li class="animated fadeInUp">
-						<a href="{{ url('/t/all') }}">All</a>
+				<ul class="inline-list">
+					<li><a class="brand" href="{{ url('/') }}">Commentum</a></li>
+					<li id="exploreListButton">
+						<a>Explore <i class="ion-arrow-down-b"></i></a>
+						<ul class="no-bullet explore-list" id="exploreList">
+							@foreach(App\Models\Tag::getExploreList() as $tag)
+							<li><a href="{{ $tag->permalink() }}">#{{ $tag->display_title }}</a></li>
+							@endforeach
+						</ul>
 					</li>
-					@foreach(App\Models\Tag::getExploreList() as $tag)
-					<li class="animated fadeInUp"><a href="{{ $tag->permalink() }}">#{{ $tag->display_title }}</a></li>
-					@endforeach
 				</ul>
 			</div>
 			<div class="medium-8 columns text-right">
-				@if(!Auth::check())
-				<a href="{{ url('/submit') }}">Submit</a>
-				<a href="{{ url('/') }}">Register</a>
-				<a href="{{ url('/login') }}">Login</a>
-				@else
-				<a id="showHero" class="hide"><i class="ion-chevron-down"></i></a>
-				<a href="{{ Auth::user()->permalink() }}">{{ Auth::user()->username }}</a>
-				<a href="{{ url('/submit') }}">Submit</a>
-				<a href="{{ url('/logout') }}">Logout</a>
-				@endif
+				<ul class="inline-list right">
+					@if(!Auth::check())
+					<li><a href="{{ url('/submit') }}">Submit</a></li>
+					<li><a href="{{ url('/') }}">Register</a></li>
+					<li><a href="{{ url('/login') }}">Login</a></li>
+					@else
+					<li id="showHero" class="hide"><a><i class="ion-chevron-down"></i></a></li>
+					<li><a href="{{ Auth::user()->permalink() }}">{{ Auth::user()->username }}</a></li>
+					<li><a href="{{ url('/submit') }}">Submit</a></li>
+					<li><a href="{{ url('/logout') }}">Logout</a></li>
+					@endif
+				</ul>
 			</div>
 		</div>
 	</div>

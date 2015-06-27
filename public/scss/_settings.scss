@@ -117,8 +117,8 @@ $jet         : #212121;
 $black       : #000000;
 
 // We use these as default colors throughout
-$primary-color: #607D8B;
-$dark-primary-color: #455A64;
+$primary-color: lighten(#3498DB, 5);
+$dark-primary-color: darken($primary-color, 15);
 $secondary-color: lighten(#009688, 5);
 $alert-color: red;
 $success-color: #4CAF50;
