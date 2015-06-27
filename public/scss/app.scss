@@ -545,9 +545,9 @@ html, body {
 }
 
 /**
- * .nsfw-notice
+ * .nsfw-notice, .error-page
  */
-.nsfw-notice {
+.nsfw-notice, .error-page {
 	width: 100%;
 	height: 100%;
 	position: relative;
@@ -572,11 +572,6 @@ html, body {
 		}
 	}
 }
-
-
-
-
-
 
 
 
