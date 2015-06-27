@@ -41,12 +41,14 @@
 
 			var html = '<article class="comment ' + form.data('hierarchy') + '">';
 				html += '<header>';
+				html += '<span class="collapser"><i class="ion-chevron-up"></i></span>';
 				html += '<span><a href="{{ Auth::user()->permalink() }}">{{ Auth::user()->username }}</a></span>';
 				html += '&middot;';
 				html += '<span>0 points</span>';
 				html += '&middot;';
 				html += '<span class="livestamp"></span>';
 				html += '</header>';
+				html += '<div class="body">';
 				html += '<section class="markdown">';
 				html += ht;
 				html += '</section>';
@@ -69,6 +71,7 @@
 				html += '</form>'
 				html += '</div>';
 				html += '<div class="children"></div>';
+				html += '</div>';
 				html += '</article>';
 
 			form.parent().parent().find('.children').first().prepend(html);
