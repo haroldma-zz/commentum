@@ -7,13 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tag extends Model
 {
-    private $_owner           = null;
-    private $_permalink       = null;
-    private $_threads         = null;
-    private $_threadCount     = null;
-    private $_mods            = null;
-    private $_subscriberCount = null;
-    private static $_exploreList     = null;
+    private $_owner              = null;
+    private $_permalink          = null;
+    private $_threads            = null;
+    private $_threadCount        = null;
+    private $_mods               = null;
+    private $_subscriberCount    = null;
+    private static $_exploreList = null;
+    private static $_newTags     = null;
 
 	/**
 	 * The database table used by this model.
@@ -148,6 +149,32 @@ class Tag extends Model
         Cache::put("explorelist", self::$_exploreList, 60);
 
         return self::$_exploreList;
+    }
+
+    /**
+     * Get newest tags list.
+     *
+     * @return  Tag
+     */
+    static function getNewTags()
+    {
+        if (!is_null(self::$_newTags))
+            return self::$_newTags;
+
+        // $cache = Cache::get("newtags");
+
+        // if (!is_null($cache))
+        // {
+        //     self::$_newTags = $cache;
+        //     return self::$_newTags;
+        // }
+
+        $list = self::where('nsfw', false)->orderBy('id', 'DESC')->take(7)->get();
+        self::$_newTags = $list;
+
+        // Cache::put("newtags", self::$_newTags, 10);
+
+        return self::$_newTags;
     }
 }
 
