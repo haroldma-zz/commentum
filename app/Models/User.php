@@ -98,7 +98,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         if (!is_null($this->_messageCount))
             return $this->_messageCount;
 
-        $this->_messageCount = $this->messages()->where('read', false)->count();
+        $this->_messageCount = $this->hasMany('App\Models\Message', 'to_id', 'id')->where('read', false)->orderBy('id', 'DESC')->count();
 
         return $this->_messageCount;
     }
