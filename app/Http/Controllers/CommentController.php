@@ -91,28 +91,38 @@ class CommentController extends Controller
 			{
 				sendMessage($toId, Auth::id(), $thread->id, $parentId, null, $markdown, ($parentId == null ? 1 : 2));
 
-				$lastComment = Comment::where('thread_id', $thread->id)->orderBy('id', 'DESC')->take(1)->skip(1)->first();
+				$lastCommentOfCurrentUser = Comment::where('author_id', Auth::id())->where('thread_id', $thread->id)->orderBy('id', 'DESC')->skip(1)->first();
 
-				if (!$lastComment)
-					$momentumStart = 0;
+				if (!$lastCommentOfCurrentUser || strtotime($lastCommentOfCurrentUser->created_at) < strtotime("now") - 60 * 60)
+				{
+					$lastComment = Comment::where('thread_id', $thread->id)->orderBy('id', 'DESC')->take(1)->skip(1)->first();
+
+					if (!$lastComment)
+						$momentumStart = 0;
+					else
+						$momentumStart = strtotime($lastComment->created_at);
+
+					$momentumEnd = strtotime("now");
+					$difference  = $momentumEnd - $momentumStart;
+
+					// Calculate momentum to be added
+					$momentumAdd = calculateMomentum($difference);
+
+					$thread->momentum = $thread->momentum + $momentumAdd;
+
+					if ($thread->save())
+					{
+						$parentMomentum = (!$comment->parent() ?  'whoopie' : floor($comment->parent()->momentum));
+						return response(['threadId' => Hashids::encode($thread->id), 'commentId' => Hashids::encode($comment->id), 'parentMomentum' => $parentMomentum], 200);
+					}
+					else
+						return response("Something went wrong on our end, try again.", 500);
+				}
 				else
-					$momentumStart = strtotime($lastComment->created_at);
-
-				$momentumEnd = strtotime("now");
-				$difference  = $momentumEnd - $momentumStart;
-
-				// Calculate momentum to be added
-				$momentumAdd = calculateMomentum($difference);
-
-				$thread->momentum = $thread->momentum + $momentumAdd;
-
-				if ($thread->save())
 				{
 					$parentMomentum = (!$comment->parent() ?  'whoopie' : floor($comment->parent()->momentum));
 					return response(['threadId' => Hashids::encode($thread->id), 'commentId' => Hashids::encode($comment->id), 'parentMomentum' => $parentMomentum], 200);
 				}
-				else
-					return response("Something went wrong on our end, try again.", 500);
 			}
 			else
 			{
