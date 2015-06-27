@@ -321,6 +321,9 @@ html, body {
 	}
 	p {
 		font-size: 1.2em !important;
+		&:last-of-type {
+			margin-bottom: 0;
+		}
 	}
 }
 
@@ -398,6 +401,7 @@ html, body {
  */
 .inbox {
 	.message {
+		margin-bottom: 2.5em;
 		hr {
 			margin: 2em 0;
 			border-color: rgba(0, 0, 0, 0.15);

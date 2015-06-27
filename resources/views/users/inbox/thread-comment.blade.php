@@ -11,5 +11,4 @@
 	<div class="markdown">
 		{!! $message->message !!}
 	</div>
-	<hr>
 </div>
