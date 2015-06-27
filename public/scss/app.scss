@@ -415,7 +415,6 @@ html, body {
 			}
 		}
 		.children {
-			padding-left: 1em;
 			padding-top: 10px;
 			article {
 				border-right: none;
@@ -432,6 +431,19 @@ html, body {
 				margin-bottom: 0;
 				font-size: 0.85em !important;
 			}
+		}
+		.collapser {
+			font-size: 0.85em;
+			cursor: pointer;
+			margin: 0;
+		}
+		.body {
+			padding-left: 22px;
+		}
+		&.collapsed {
+			overflow: hidden;
+			height: 24px;
+			padding: 0 1em;
 		}
 	}
 }

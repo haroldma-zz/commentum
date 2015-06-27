@@ -2,4 +2,4 @@
 // Documentation can be found at: http://foundation.zurb.com/docs
 // $(document).foundation();
 
-new WOW().init();
+// new WOW().init();
