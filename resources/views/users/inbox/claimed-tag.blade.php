@@ -1,6 +1,6 @@
-<div class="message">
-	<h6>You claimed a tag</h6>
-	<p>
-		Nice! You claimed <a href="{{ $message->tag()->permalink() }}">#{{ $message->tag()->display_title }}</a>. You can change the tag's settings <a href="{{ url('/t/' . $message->tag()->display_title . '/settings') }}">here</a>.
-	</p>
+<div class="message {{ ($message->read == true ? 'read' : '') }}" data-id="{{ Hashids::encode($message->id) }}">
+	<h6><b>claimed a tag</b></h6>
+	<div class="markdown">
+		Nice! You claimed [\#{{ $message->tag()->display_title }}]({{ $message->tag()->permalink() }}). You can change the tag's settings [here]({{ url('/t/' . $message->tag()->display_title . '/settings') }}).
+	</div>
 </div>

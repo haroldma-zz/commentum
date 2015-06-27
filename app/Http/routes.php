@@ -19,6 +19,7 @@ Route::group(['middleware' => 'auth'], function()
 
 	Route::post('/t/{tag}/subscribe', 'TagController@subscribe');
 	Route::post('/t/{tag}/settings', 'TagController@settings');
+	Route::post('/me/unread/{hashid}', 'UserController@unreadMessage');
 });
 
 /*

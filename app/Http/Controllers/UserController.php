@@ -6,8 +6,10 @@ use Auth;
 use Hash;
 use Session;
 use App\Models\User;
+use App\Models\Message;
 use App\Models\TagSubscriber;
 use Illuminate\Http\Request;
+use Vinkla\Hashids\Facades\Hashids;
 
 class UserController extends Controller
 {
@@ -136,4 +138,45 @@ class UserController extends Controller
 
 		return redirect('/');
 	}
+
+	/**
+	 * Unread a message.
+	 *
+	 * @param  string 	$hashid
+	 * @return response
+	 */
+	public function unreadMessage($hashid, Request $request)
+	{
+		$pid = Hashids::decode($hashid)[0];
+		$iid = Hashids::decode($request->get('id'))[0];
+
+		if ($pid !== $iid)
+			abort(404);
+
+		$message = Message::find($pid);
+
+		if (!$message)
+			abort(404);
+
+		if ($message->to_id !== Auth::id())
+			abort(404);
+
+		$message->read = true;
+
+		if ($message->save())
+			return response('Success.', 200);
+
+		return response('Fail.', 500);
+	}
 }
+
+
+
+
+
+
+
+
+
+
+

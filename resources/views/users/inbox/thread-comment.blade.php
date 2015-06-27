@@ -1,4 +1,4 @@
-<div class="message">
+<div class="message {{ ($message->read == true ? 'read' : '') }}" data-id="{{ Hashids::encode($message->id) }}">
 	<h6>
 		<b>comment from <a href="{{ $message->from()->permalink() }}">/u/{{ $message->from()->username }}</a></b>
 		&nbsp;&nbsp;

@@ -8,7 +8,7 @@
 <div class="padding">
 	<div class="row">
 		<div class="medium-9 columns inbox">
-			@if(Auth::user()->messageCount() > 0)
+			@if(count(Auth::user()->messages()) > 0)
 			<div class="panel small">
 			@foreach(Auth::user()->messages() as $m)
 				@if ($m->type == 5) <!-- Claimed a tag -->
