@@ -4,7 +4,7 @@
 <div class="error-page">
     <div class="content text-center">
         <h1>
-            <b>403</b> Page not found
+            <b>404</b> Page not found
         </h1>
         <hr>
         <p>
