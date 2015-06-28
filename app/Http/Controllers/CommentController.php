@@ -58,19 +58,19 @@ class CommentController extends Controller
 		{
 			if (is_null($parentId))
 			{
-				$toId = $thread->author()->id;
+				$toId = $thread->author()->id;					// Set the id to who a notification should be sent to
 			}
 			else
 			{
-				$toId = $comment->parent()->author()->id;
+				$toId = $comment->parent()->author()->id;		// Set the id to who a notification should be sent to
 
 				$i = 1;
 
-				foreach($comment->grandParents() as $parentComment)
+				foreach($comment->grandParents() as $parentComment) 	// Give momentum too each parent
 				{
 					$parentComment = Comment::find($parentComment);
 
-					if ($parentComment->author()->id != Auth::id())
+					if ($parentComment->author()->id != Auth::id())		// Only if the comment is not from current user
 					{
 						// Calculate momentum for parent Comment
 						$momentumStart = strtotime($comment->parent()->created_at);
@@ -81,7 +81,7 @@ class CommentController extends Controller
 						$parentComment->momentum = $parentComment->momentum + $commentMomentum;
 						$parentComment->save();
 
-						if ($i > 0.1)
+						if ($i > 0.1)		// Decrement the momentum divider
 							$i - 0.1;
 					}
 				}
@@ -89,10 +89,13 @@ class CommentController extends Controller
 
 			if ($toId != Auth::id())
 			{
+				// Notify author of replied-to comment
 				sendMessage($toId, Auth::id(), $thread->id, $parentId, null, $markdown, ($parentId == null ? 1 : 2));
 
+				// Get last comment of current user, before this one.
 				$lastCommentOfCurrentUser = Comment::where('author_id', Auth::id())->where('thread_id', $thread->id)->orderBy('id', 'DESC')->skip(1)->first();
 
+				// If there's non, or it was longer than an hour ago, give the thread momentum.
 				if (!$lastCommentOfCurrentUser || strtotime($lastCommentOfCurrentUser->created_at) < strtotime("now") - 60 * 60)
 				{
 					$lastComment = Comment::where('thread_id', $thread->id)->orderBy('id', 'DESC')->take(1)->skip(1)->first();

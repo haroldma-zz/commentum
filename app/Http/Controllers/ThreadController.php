@@ -58,6 +58,15 @@ class ThreadController extends Controller
 
 			if (!$check)
 			{
+				$usersLatestTag = Tag::where('owner_id', Auth::id())->orderBy('id', 'DESC')->first();
+
+				if ($usersLatestTag)
+				{
+					// Check if last tag of current user was claimed less than 1 hour ago.
+					if (strtotime($usersLatestTag->created_at) > strtotime("now") - 60 * 60)
+						return response("You can only claim one tag per hour.", 500);
+				}
+
 				$newTag = new Tag;
 
 				$newTag->title         = strtolower($tag);
