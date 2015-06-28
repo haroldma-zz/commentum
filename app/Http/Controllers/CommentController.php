@@ -96,7 +96,7 @@ class CommentController extends Controller
 				$lastCommentOfCurrentUser = Comment::where('author_id', Auth::id())->where('thread_id', $thread->id)->orderBy('id', 'DESC')->skip(1)->first();
 
 				// If there's non, or it was longer than an hour ago, give the thread momentum.
-				if (!$lastCommentOfCurrentUser || strtotime($lastCommentOfCurrentUser->created_at) < strtotime("now") - 60)
+				if (!$lastCommentOfCurrentUser || strtotime($lastCommentOfCurrentUser->created_at) < strtotime("now") - 60 * 60)
 				{
 					$lastComment = Comment::where('thread_id', $thread->id)->orderBy('id', 'DESC')->take(1)->skip(1)->first();
 

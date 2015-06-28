@@ -50,7 +50,8 @@ class PageController extends Controller
 	 */
 	public function preferences()
 	{
-		return view('users.preferences');
+		abort(404);
+		// return view('users.preferences');
 	}
 
 	/**
