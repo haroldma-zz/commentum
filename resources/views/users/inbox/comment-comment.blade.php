@@ -11,7 +11,36 @@
 			<span data-livestamp="{{ strtotime($message->created_at) }}"></span>
 		</div>
 	</h6>
-	<div class="markdown">
-		{!! $message->message !!}
+	<section class="markdown">
+		{!! $message->comment()->markdown !!}
+	</section>
+	<footer>
+		<a onclick="toggleReplyBox(this)">reply</a>
+		<a href="{{ $message->comment()->context() }}">context</a>
+		<a href="{{ $message->comment()->permalink() }}">permalink</a>
+	</footer>
+	<div class="reply-box">
+		{!! Form::open(['url' => '/comment', 'class' => 'row comment-box', 'data-hierarchy' => 'child', 'onsubmit' => 'submitComment(event, this)']) !!}
+			{!! Form::hidden('thread_id', Hashids::encode($message->thread()->id)) !!}
+			{!! Form::hidden('parent_id', Hashids::encode($message->comment()->id)) !!}
+			<div class="medium-5 columns">
+				<p class="no-margin">
+					You can use <a href="{{ url('/') }}">Markdown</a>.
+				</p>
+				{!! Form::textarea('markdown', '', ['rows' => 4]) !!}
+				<p class="text-alert"></p>
+				{!! Form::submit('Reply', ['class' => 'btn']) !!}
+			</div>
+		{!! Form::close() !!}
 	</div>
 </div>
+
+
+
+
+
+
+
+
+
+

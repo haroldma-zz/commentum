@@ -55,7 +55,15 @@
 			<hr>
 			<p class="super-header light"><span id="threadCommentCount">{{ $thread->commentCount() }}</span> comment<span id="threadCommentPlural">{{ ($thread->commentCount() > 1 || $thread->commentCount() === 0 ? 's' : '') }}</span></p>
 			<div class="comments-list children" id="commentsList">
+				@if(isset($singleComment))
+					@if ($context == true)
+					@include('layouts.comment', ['c' => $singleComment->parent(), 'indent' => 2, 'threadId' => $thread->id])
+					@else
+					@include('layouts.comment', ['c' => $singleComment, 'indent' => 2, 'threadId' => $thread->id])
+					@endif
+				@else
 				{!! $thread->printComments() !!}
+				@endif
 			</div>
 		</div>
 	</div>

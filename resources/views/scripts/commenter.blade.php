@@ -54,6 +54,8 @@
 				html += '</section>';
 				html += '<footer>';
 				html += '<a onclick="toggleReplyBox(this)">reply</a>';
+				html += '<a href="'+res['permalink']+'">permalink</a>';
+				html += '<a href="'+res['context']+'">context</a>';
 				html += '</footer>';
 				html += '<div class="reply-box r-b">';
 				html +=	'<form method="POST" action="http://ask.dev/comment" accept-charset="UTF-8" class="row comment-box" data-hierarchy="'+hier+'" onsubmit="submitComment(event, this)">';
@@ -80,6 +82,8 @@
 			var livestamp = $('.livestamp').first();
 			livestamp.livestamp(new Date());
 			livestamp.removeClass('livestamp');
+
+			form.parent().hide();
 		})
 		.fail(function(res)
 		{

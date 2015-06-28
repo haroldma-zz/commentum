@@ -13,6 +13,10 @@
 		</section>
 		<footer>
 			<a onclick="toggleReplyBox(this)" data-thread="{{ Hashids::encode($threadId) }}" data-comment="{{ Hashids::encode($c->id) }}" {{ (Auth::check() == false ? 'href=/login' : '') }}>reply</a>
+			<a href="{{ $c->permalink() }}">permalink</a>
+			@if (!is_null($c->parent()))
+			<a href="{{ $c->context() }}">context</a>
+			@endif
 			@if (Auth::check() && Auth::id() === $c->author_id)
 			<a>edit</a>
 			@endif

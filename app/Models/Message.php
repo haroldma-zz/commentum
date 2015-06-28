@@ -10,7 +10,8 @@ class Message extends Model
 	private $_from    = null;
 	private $_to      = null;
 	private $_thread  = null;
-	private $_comment = null;
+    private $_comment = null;
+	private $_parent  = null;
 	private $_tag     = null;
 
 	/**
@@ -101,27 +102,53 @@ class Message extends Model
     /**
      * Get the Comment associated with this message.
      *
-     * @return 	Comment
+     * @return  Comment
      */
     public function comment()
     {
-    	if (!is_null($this->_comment))
-    		return $this->_comment;
+        if (!is_null($this->_comment))
+            return $this->_comment;
 
-    	$cache = Cache::get("message:{$this->id}:comment");
+        $cache = Cache::get("message:{$this->id}:comment");
 
-    	if (!is_null($cache))
-    	{
-    		$this->_comment = $cache;
-    		return $this->_comment;
-    	}
+        if (!is_null($cache))
+        {
+            $this->_comment = $cache;
+            return $this->_comment;
+        }
 
-		$comment        = $this->hasOne('App\Models\Comment', 'id', 'comment_id')->first();
-		$this->_comment = $comment;
+        $comment        = $this->hasOne('App\Models\Comment', 'id', 'comment_id')->first();
+        $this->_comment = $comment;
 
-		Cache::put("message:{$this->id}:comment", $this->_comment, 180);
+        Cache::put("message:{$this->id}:comment", $this->_comment, 180);
 
-		return $this->_comment;
+        return $this->_comment;
+    }
+
+    /**
+     * Get the parent Comment associated with this message.
+     *
+     * @return  Comment
+     */
+    public function parent()
+    {
+        if (!is_null($this->_parent))
+            return $this->_parent;
+
+        $cache = Cache::get("message:{$this->id}:parent");
+
+        if (!is_null($cache))
+        {
+            $this->_parent = $cache;
+            return $this->_parent;
+        }
+
+        $parent        = $this->hasOne('App\Models\Comment', 'id', 'parent_id')->first();
+        $this->_parent = $parent;
+
+        Cache::put("message:{$this->id}:parent", $this->_parent, 180);
+
+        return $this->_parent;
     }
 
     /**

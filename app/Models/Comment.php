@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Cache;
+use Vinkla\Hashids\Facades\Hashids;
 use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
@@ -145,6 +146,26 @@ class Comment extends Model
         }
 
         return $grandParents;
+    }
+
+    /**
+     * Return permalink of a comment.
+     *
+     * @return  string
+     */
+    public function permalink()
+    {
+        return url("/t/{$this->thread()->tag()->display_title}/" . Hashids::encode($this->thread()->id) . "/{$this->thread()->slug}/" . Hashids::encode($this->id));
+    }
+
+    /**
+     * Return context link of a comment.
+     *
+     * @return  string
+     */
+    public function context()
+    {
+        return url("/t/{$this->thread()->tag()->display_title}/" . Hashids::encode($this->thread()->id) . "/{$this->thread()->slug}/" . Hashids::encode($this->id)) . "?context=true";
     }
 }
 

@@ -90,7 +90,7 @@ class CommentController extends Controller
 			if ($toId != Auth::id())
 			{
 				// Notify author of replied-to comment
-				sendMessage($toId, Auth::id(), $thread->id, $parentId, null, $markdown, ($parentId == null ? 1 : 2));
+				sendMessage($toId, Auth::id(), $thread->id, $comment->id, $parentId, null, $markdown, ($parentId == null ? 1 : 2));
 
 				// Get last comment of current user, before this one.
 				$lastCommentOfCurrentUser = Comment::where('author_id', Auth::id())->where('thread_id', $thread->id)->orderBy('id', 'DESC')->skip(1)->first();
@@ -116,7 +116,7 @@ class CommentController extends Controller
 					if ($thread->save())
 					{
 						$parentMomentum = (!$comment->parent() ?  'whoopie' : floor($comment->parent()->momentum));
-						return response(['threadId' => Hashids::encode($thread->id), 'commentId' => Hashids::encode($comment->id), 'parentMomentum' => $parentMomentum], 200);
+						return response(['threadId' => Hashids::encode($thread->id), 'commentId' => Hashids::encode($comment->id), 'parentMomentum' => $parentMomentum, 'permalink' => $comment->permalink(), 'context' => $comment->context()], 200);
 					}
 					else
 						return response("Something went wrong on our end, try again.", 500);
@@ -124,13 +124,13 @@ class CommentController extends Controller
 				else
 				{
 					$parentMomentum = (!$comment->parent() ?  'whoopie' : floor($comment->parent()->momentum));
-					return response(['threadId' => Hashids::encode($thread->id), 'commentId' => Hashids::encode($comment->id), 'parentMomentum' => $parentMomentum], 200);
+					return response(['threadId' => Hashids::encode($thread->id), 'commentId' => Hashids::encode($comment->id), 'parentMomentum' => $parentMomentum, 'permalink' => $comment->permalink(), 'context' => $comment->context()], 200);
 				}
 			}
 			else
 			{
 				$parentMomentum = (!$comment->parent() ?  'whoopie' : floor($comment->parent()->momentum));
-				return response(['threadId' => Hashids::encode($thread->id), 'commentId' => Hashids::encode($comment->id), 'parentMomentum' => $parentMomentum], 200);
+				return response(['threadId' => Hashids::encode($thread->id), 'commentId' => Hashids::encode($comment->id), 'parentMomentum' => $parentMomentum, 'permalink' => $comment->permalink(), 'context' => $comment->context()], 200);
 			}
 		}
 		else

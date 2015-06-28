@@ -75,7 +75,7 @@ class ThreadController extends Controller
 
 				if ($newTag->save())
 				{
-					sendMessage(Auth::id(), null, null, null, $newTag->id, null, 5);
+					sendMessage(Auth::id(), null, null, null, null, $newTag->id, null, 5);
 					makeModOfTag($newTag->id, Auth::id());
 
 					$tag = $newTag;

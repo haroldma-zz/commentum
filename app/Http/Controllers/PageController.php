@@ -7,6 +7,8 @@ use Session;
 use App\Models\Tag;
 use App\Models\User;
 use App\Models\Thread;
+use App\Models\Comment;
+use Illuminate\Http\Request;
 use Vinkla\Hashids\Facades\Hashids;
 
 class PageController extends Controller
@@ -135,6 +137,55 @@ class PageController extends Controller
 			abort(403);
 
 		return view('tags.settings')->with(['tag' => $tag]);
+	}
+
+	/**
+	 * Comment permalink page
+	 *
+	 * @param  	string $tag
+	 * @param  	string $hash
+	 * @param  	string $slug
+	 * @param  	string $chash
+	 * @return 	view
+	 */
+	public function threadComment($tag, $hash, $slug, $chash, Request $request)
+	{
+		$threadId = Hashids::decode($hash);
+
+		if (!count($threadId) > 0)
+			abort(404);
+
+		$thread = Thread::find($threadId[0]);
+
+		if (!$thread)
+			abort(404);
+
+		if ($thread->tag()->display_title != $tag)
+			return abort(404);
+
+		$commentId = Hashids::decode($chash);
+
+		if (!count($commentId) > 0)
+			abort(404);
+
+		$comment = Comment::find($commentId[0]);
+
+		if (!$comment)
+			abort(404);
+
+		if ($request->input('context') != '')
+		{
+			if (!is_null($comment->parent()))
+				$context = true;
+			else
+				$context = false;
+		}
+		else
+		{
+			$context = false;
+		}
+
+		return view('threads.thread')->with(['thread' => $thread, 'singleComment' => $comment, 'context' => $context]);
 	}
 }
 

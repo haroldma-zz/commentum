@@ -121,13 +121,14 @@ function calculateCommentMomentum($difference)
  * @param  	string 		$message
  * @return 	boolean
  */
-function sendMessage($to, $from, $threadId, $commentId, $tagId, $message, $type)
+function sendMessage($to, $from, $threadId, $commentId, $parent_id, $tagId, $message, $type)
 {
 	$m             = new App\Models\Message;
 	$m->to_id      = $to;
 	$m->from_id    = $from;
 	$m->thread_id  = $threadId;
 	$m->comment_id = $commentId;
+	$m->parent_id  = $parent_id;
 	$m->tag_id     = $tagId;
 	$m->message    = $message;
 	$m->type       = $type;

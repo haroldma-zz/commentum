@@ -7,6 +7,7 @@ Route::get('/login', 'PageController@login');
 
 Route::get('/t/{tag}', ['middleware' => ['privacy', 'nsfw'], 'uses' => 'PageController@tag']);
 Route::get('/t/{tag}/{hash}/{slug}', ['middleware' => ['privacy', 'nsfw'], 'uses' => 'PageController@thread']);
+Route::get('/t/{tag}/{hash}/{slug}/{chash}', ['middleware' => ['privacy', 'nsfw'], 'uses' => 'PageController@threadComment']);
 Route::get('/u/{username}', 'PageController@profile');
 
 Route::get('/more/{tag}', 'ThreadController@moreSubmissions');
