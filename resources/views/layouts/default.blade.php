@@ -39,6 +39,11 @@
 						<li id="hamburgerIcon"><a><i class="ion-navicon"></i></a></li>
 					</ul>
 				</div>
+				@if (Auth::check())
+				<div class="notification-box">
+					yo.
+				</div>
+				@endif
 			</div>
 		</div>
 	</div>
@@ -52,6 +57,7 @@
 	@yield('scripts')
 	@if(Auth::check())
 	@include('scripts.tags-nav-toggler')
+	@include('scripts.notifications')
 	@endif
 </body>
 </html>

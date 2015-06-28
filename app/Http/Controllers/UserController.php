@@ -147,6 +147,9 @@ class UserController extends Controller
 	 */
 	public function unreadMessage($hashid, Request $request)
 	{
+		if (!$request->ajax())
+			abort(404);
+
 		$pid = Hashids::decode($hashid)[0];
 		$iid = Hashids::decode($request->get('id'))[0];
 
@@ -167,6 +170,63 @@ class UserController extends Controller
 			return response('Success.', 200);
 
 		return response('Fail.', 500);
+	}
+
+	/**
+	 * Check if there are any notifications.
+	 *
+	 * @return 	mixed
+	 */
+	public function checkNotifications(Request $request)
+	{
+		if (!$request->ajax())
+			abort(404);
+
+		$start = time();
+		$end   = $start + 30;
+
+		$uMessages = Auth::user()->altMessages()->where('notified', false)->get();
+		$count     = count($uMessages);
+		$check     = $count > 0;
+
+
+		while ($check == false && $start < $end)
+		{
+			sleep(5);
+
+			$uMessages = Auth::user()->altMessages()->where('notified', false)->get();
+			$count     = count($uMessages);
+			$check     = $count > 0;
+
+			$start = time();
+		}
+
+		if ($check)
+		{
+			foreach($uMessages as $m)
+			{
+				$m->notified = true;
+				$m->save();
+			}
+
+			if ($count > 1)
+				return response(["multiple" => true, "count" => $count]);
+
+			$message = $uMessages[0];
+
+			if ($message->type == 1)
+				$message = $message->from()->username . ' commented on your submission.';
+			else if ($message->type == 2)
+				$message = $message->from()->username . ' replied to your comment.';
+			else if ($message->type == 5)
+				$message = 'Nice! You claimed #' . $comment->tag()->display_title . '.';
+
+			return response(["multiple" => false, "message" => $message]);
+		}
+		else
+		{
+			return response("none", 500);
+		}
 	}
 }
 

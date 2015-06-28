@@ -89,6 +89,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     /**
+     * Alt message relation
+     *
+     * @return  Message
+     */
+    public function altMessages()
+    {
+        return $this->hasMany('App\Models\Message', 'to_id', 'id');
+    }
+
+    /**
      * Retrieve the count of unread messages.
      *
      * @return  integer

@@ -88,13 +88,13 @@ html, body {
 		}
 	}
 	.row {
-		.left:first-of-type {
+		.left {
 			a {
 				margin-right: 1em;
 				margin-left: 0;
 			}
 		}
-		.right:last-of-type {
+		.right {
 			a {
 				margin-left: 1em;
 				margin-right: 0;
@@ -694,6 +694,36 @@ html, body {
 		color: $alert-color;
 	}
 }
+
+/**
+ * .notification-box
+ */
+.notification-box {
+	width: 300px;
+	height: 85px;
+	background: $white;
+	position: absolute;
+	right: 1em;
+	top: 45px;
+	padding: 1em;
+	line-height: 1.2;
+	border: 1px solid $primary-color;
+	color: $primary-color;
+	display: none;
+	font-size: 0.9em;
+	z-index: 100;
+	@include border-radius($global-radius);
+	span {
+		line-height: 55px;
+		text-align: center;
+	}
+	a {
+		color: $dark-primary-color;
+		font-weight: 500;
+	}
+}
+
+
 
 
 
