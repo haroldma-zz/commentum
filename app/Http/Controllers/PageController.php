@@ -44,6 +44,16 @@ class PageController extends Controller
 	}
 
 	/**
+	 * Preferences page
+	 *
+	 * @return 	view
+	 */
+	public function preferences()
+	{
+		return view('users.preferences');
+	}
+
+	/**
 	 * Submit page
 	 *
 	 * @return 	view

@@ -17,6 +17,7 @@ Route::group(['middleware' => 'auth'], function()
 	Route::get('/submit', 'PageController@submit');
 	Route::get('/logout', 'UserController@logout');
 	Route::get('/inbox', 'PageController@inbox');
+	Route::get('/preferences', 'PageController@preferences');
 
 	Route::get('/t/{tag}/settings', 'PageController@tagSettings');
 
