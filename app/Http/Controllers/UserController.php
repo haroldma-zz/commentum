@@ -37,14 +37,14 @@ class UserController extends Controller
 		if (!empty($request->get('email')))
 			$email = $request->get('email');
 
-		if (strlen($username) < 3 || strlen($username) > 15)
-			return response('Your username must be between 3 and 15 characters long.', 500);
+		if (strlen($username) < 3 || strlen($username) > 21)
+			return response('Your username must be between 3 and 21 characters long.', 500);
 
 		if (!preg_match('/^[A-Za-z][A-Za-z0-9_]+$/', $username))
 			return response('Your username may only contain the characters A-Z (case-insensitive), 0-9 and _, but may not start with an underscore.', 500);
 
-		if (strlen($password) < 6 || strlen($password) > 21)
-			return response('Your password must be between 6 and 21 characters long.', 500);
+		if (strlen($password) < 6 || strlen($password) > 100)
+			return response('Your password must be between 6 and 100 characters long.', 500);
 
 		if (!is_null($email) && !preg_match('/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/', $email))
 			return response('Make sure your e-mail address is in the format name@example.com.', 500);
