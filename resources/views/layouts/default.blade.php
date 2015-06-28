@@ -8,32 +8,37 @@
 <body>
 	<div class="top-nav">
 		<div class="row">
-			<div class="medium-4 columns">
-				<ul class="inline-list">
-					<li><a class="brand" href="{{ url('/') }}">Commentum</a></li>
-					<li id="exploreListButton">
-						<a>Explore <i class="ion-arrow-down-b"></i></a>
-						<ul class="no-bullet explore-list" id="exploreList">
-							@foreach(App\Models\Tag::getExploreList() as $tag)
-							<li><a href="{{ $tag->permalink() }}">#{{ $tag->display_title }}</a></li>
-							@endforeach
-						</ul>
-					</li>
-				</ul>
-			</div>
-			<div class="medium-8 columns text-right">
-				<ul class="inline-list right">
-					@if(!Auth::check())
-					<li><a href="{{ url('/submit') }}">Submit</a></li>
-					<li><a href="{{ url('/') }}">Register</a></li>
-					<li><a href="{{ url('/login') }}">Login</a></li>
-					@else
-					<li id="showHero" class="hide"><a><i class="ion-chevron-down"></i></a></li>
-					<li><a href="{{ Auth::user()->permalink() }}">{{ Auth::user()->username }}</a></li>
-					<li><a href="{{ url('/submit') }}">Submit</a></li>
-					<li><a href="{{ url('/logout') }}">Logout</a></li>
-					@endif
-				</ul>
+			<div class="medium-12 columns">
+				<div class="left">
+					<ul class="inline-list">
+						<li><a class="brand" href="{{ url('/') }}">Commentum</a></li>
+						<li id="exploreListButton" class="hide-for-small-only">
+							<a>Explore <i class="ion-arrow-down-b"></i></a>
+							<ul class="no-bullet explore-list" id="exploreList">
+								@foreach(App\Models\Tag::getExploreList() as $tag)
+								<li><a href="{{ $tag->permalink() }}">#{{ $tag->display_title }}</a></li>
+								@endforeach
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<div class="right text-right">
+					<ul class="inline-list right hide-for-small-only">
+						@if(!Auth::check())
+						<li><a href="{{ url('/submit') }}">Submit</a></li>
+						<li><a href="{{ url('/') }}">Register</a></li>
+						<li><a href="{{ url('/login') }}">Login</a></li>
+						@else
+						<li id="showHero" class="hide"><a><i class="ion-chevron-down"></i></a></li>
+						<li><a href="{{ Auth::user()->permalink() }}">{{ Auth::user()->username }}</a></li>
+						<li><a href="{{ url('/submit') }}">Submit</a></li>
+						<li><a href="{{ url('/logout') }}">Logout</a></li>
+						@endif
+					</ul>
+					<ul class="inline-list right show-for-small-only">
+						<li id="hamburgerIcon"><a><i class="ion-navicon"></i></a></li>
+					</ul>
+				</div>
 			</div>
 		</div>
 	</div>

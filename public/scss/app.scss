@@ -52,6 +52,9 @@ html, body {
 			font-size: 1em;
 			margin-right: 1em;
 		}
+		.ion-navicon {
+			font-size: 2em;
+		}
 	}
 	ul {
 		margin: 0;
@@ -85,13 +88,13 @@ html, body {
 		}
 	}
 	.row {
-		div:first-of-type {
+		.left:first-of-type {
 			a {
 				margin-right: 1em;
 				margin-left: 0;
 			}
 		}
-		div:last-of-type {
+		.right:last-of-type {
 			a {
 				margin-left: 1em;
 				margin-right: 0;
