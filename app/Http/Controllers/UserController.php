@@ -210,7 +210,7 @@ class UserController extends Controller
 			}
 
 			if ($count > 1)
-				return response(["multiple" => true, "count" => $count]);
+				return response(["multiple" => true, "count" => Auth::user()->altMessages()->where('read', false)->count()]);
 
 			$message = $uMessages[0];
 
