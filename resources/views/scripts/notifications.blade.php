@@ -24,11 +24,6 @@
 
 			setTimeout(function()
 			{
-				box.fadeOut("fast")
-			}, 5000);
-
-			setTimeout(function()
-			{
 				checkNotifications();
 			}, 5500);
 		})
