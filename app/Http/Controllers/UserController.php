@@ -185,7 +185,7 @@ class UserController extends Controller
 		$start = time();
 		$end   = $start + 30;
 
-		$uMessages = Auth::user()->altMessages()->where('notified', false)->get();
+		$uMessages = Auth::user()->altMessages()->where('read', false)->where('notified', false)->get();
 		$count     = count($uMessages);
 		$check     = $count > 0;
 
