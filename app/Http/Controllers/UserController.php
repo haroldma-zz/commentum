@@ -46,7 +46,7 @@ class UserController extends Controller
 		if (strlen($password) < 6 || strlen($password) > 100)
 			return response('Your password must be between 6 and 100 characters long.', 500);
 
-		if (!is_null($email) && !preg_match('/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/', $email))
+		if (!is_null($email) && !preg_match('/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/i', $email))
 			return response('Make sure your e-mail address is in the format name@example.com.', 500);
 
 		$check = User::where('username', $username)->first();
