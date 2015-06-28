@@ -362,7 +362,7 @@ html, body {
 	h1, h2, h3 {
 		font-size: 1.5em;
 	}
-	p {
+	p, ul {
 		font-size: 1.2em !important;
 		&:last-of-type {
 			margin-bottom: 0;
