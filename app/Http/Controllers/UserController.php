@@ -189,7 +189,6 @@ class UserController extends Controller
 		$count     = count($uMessages);
 		$check     = $count > 0;
 
-
 		while ($check == false && $start < $end)
 		{
 			sleep(5);
@@ -225,7 +224,7 @@ class UserController extends Controller
 		}
 		else
 		{
-			return response("none", 500);
+			return response("none");
 		}
 	}
 }
