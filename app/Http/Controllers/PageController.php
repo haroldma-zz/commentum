@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use Cache;
 use Session;
 use App\Models\Tag;
 use App\Models\User;
@@ -72,7 +73,7 @@ class PageController extends Controller
 	 * @param  	string $slug
 	 * @return 	view
 	 */
-	public function thread($tag, $hash, $slug)
+	public function thread($tag, $hash, $slug, Request $request)
 	{
 		$threadId = Hashids::decode($hash);
 
@@ -87,7 +88,13 @@ class PageController extends Controller
 		if ($thread->tag()->display_title != $tag)
 			return abort(404);
 
-		$thread->increment('views');
+		$ip = $request->getClientIp();
+
+		if (is_null(Cache::get("{$ip}:thread:{$thread->id}")))
+		{
+			Cache::put("{$ip}:thread:{$thread->id}", true, 120);
+			$thread->increment('views');
+		}
 
 		return view('threads.thread')->with(['thread' => $thread]);
 	}
