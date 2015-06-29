@@ -29,7 +29,11 @@
 					<p class="no-margin">
 						You can use <a href="{{ url('/') }}">Markdown</a>.
 					</p>
-					{!! Form::textarea('markdown', '', ['rows' => 4]) !!}
+					{!! Form::textarea('markdown', '', ['rows' => 4, 'class' => 'comment-textarea']) !!}
+					<div class="preview hide">
+						<h6 class="super-header">Live Preview</h6>
+						<div class="markdown"></div>
+					</div>
 					<p class="text-alert"></p>
 					{!! Form::submit('Reply', ['class' => 'btn']) !!}
 				</div>

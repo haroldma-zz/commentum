@@ -371,6 +371,19 @@ html, body {
 }
 
 /**
+ * .preview
+ */
+.preview {
+	.markdown {
+		font-size: 0.8em;
+		padding: 1em;
+		border: 1px solid $silver;
+		background: white;
+		@include border-radius($global-radius);
+	}
+}
+
+/**
  * .comments-list
  */
 .comments-list {
@@ -433,6 +446,27 @@ html, body {
 			p {
 				margin-bottom: 0;
 				font-size: 0.85em !important;
+			}
+			.preview {
+				margin-bottom: 10px;
+			}
+			.markdown {
+				h1,h2,h3,h4,h5,h6 {
+					color: #313131;
+					font-weight: 700;
+				}
+				p, ul, li {
+					color: #212121;
+				}
+				h1, h2, h3 {
+					font-size: 1.5em !important;
+				}
+				p, ul {
+					font-size: 1.2em !important;
+					&:last-of-type {
+						margin-bottom: 0;
+					}
+				}
 			}
 		}
 		.collapser {

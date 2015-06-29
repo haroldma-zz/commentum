@@ -66,7 +66,11 @@
 				html += '<p class="no-margin">';
 				html += 'You can use <a href="http://ask.dev">Markdown</a>.';
 				html += '</p>';
-				html += '<textarea rows="4" name="markdown" cols="50"></textarea>';
+				html += '<textarea rows="4" name="markdown" cols="50" class="comment-textarea"></textarea>';
+				html += '<div class="preview hide">';
+				html += '<h6 class="super-header">Live Preview</h6>';
+				html += '<div class="markdown"></div>';
+				html += '</div>';
 				html += '<p class="text-alert"></p>';
 				html += '<input class="btn" type="submit" value="Reply">';
 				html += '</div>';
@@ -79,11 +83,15 @@
 			form.parent().parent().find('.children').first().prepend(html);
 			form.trigger('reset');
 
+			form.find('.preview').addClass('hide');
+			form.find('.markdown').html('');
+
 			var livestamp = $('.livestamp').first();
 			livestamp.livestamp(new Date());
 			livestamp.removeClass('livestamp');
 
-			form.parent().hide();
+			if (!form.hasClass('parent-commenter'))
+				form.parent().hide();
 		})
 		.fail(function(res)
 		{
@@ -105,6 +113,20 @@
 			$(this).find('i').removeClass('ion-chevron-up').addClass('ion-chevron-down');
 			comment.addClass('collapsed');
 		}
+	});
+
+	$(document).on('focus', '.comment-textarea', function()
+	{
+		$(this).parent().find('.preview').removeClass('hide');
+	});
+
+	$(document).on('keyup', '.comment-textarea', function()
+	{
+		var input = $.trim($(this).val()),
+			pr    = new showdown.Converter(),
+			ht    = pr.makeHtml(input);
+
+		$(this).parent().find('.markdown').html(ht);
 	});
 
 	var toggleReplyBox = function(el)

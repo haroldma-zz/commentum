@@ -43,7 +43,7 @@
 <div class="padding">
 	<div class="row">
 		<div class="medium-12 columns">
-			{!! Form::open(['url' => '/comment', 'class' => 'row comment-box', 'data-hierarchy' => 'parent', 'onsubmit' => 'submitComment(event, this)']) !!}
+			{!! Form::open(['url' => '/comment', 'class' => 'row comment-box parent-commenter', 'data-hierarchy' => 'parent', 'onsubmit' => 'submitComment(event, this)']) !!}
 				{!! Form::hidden('thread_id', Hashids::encode($thread->id)) !!}
 				{!! Form::hidden('parent_id', Hashids::encode(0)) !!}
 				<div class="medium-5 columns">
@@ -51,7 +51,11 @@
 					<p class="no-margin">
 						You can use <a href="{{ url('/') }}">Markdown</a>.
 					</p>
-					{!! Form::textarea('markdown', '', ['rows' => 4]) !!}
+					{!! Form::textarea('markdown', '', ['rows' => 4, 'class' => 'comment-textarea']) !!}
+					<div class="preview hide">
+						<h6 class="super-header">Live Preview</h6>
+						<div class="markdown"></div>
+					</div>
 					<p class="text-alert"></p>
 					{!! Form::submit('Submit', ['class' => 'btn']) !!}
 				</div>
