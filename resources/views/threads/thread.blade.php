@@ -21,6 +21,12 @@
 						</h1>
 						<p>
 							<a href="{{ $thread->tag()->permalink() }}"><span data-livestamp="{{ strtotime($thread->created_at) }}"></span> in #{{ $thread->tag()->display_title }}</a> by <a href="{{ $thread->author()->permalink() }}">{{ $thread->author()->username }}</a>
+							<br>
+							<span class="impressions-views">
+<!--								<span>{{ $thread->impressions }} impression{{ ($thread->impressions != 1 ? 's' : '') }}</span>
+								<span>&middot;</span>-->
+								<span>{{ $thread->views }} view{{ ($thread->views != 1 ? 's' : '') }}</span>
+							</span>
 						</p>
 						@if (!is_null($thread->markdown))
 						<br>

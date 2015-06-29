@@ -116,3 +116,11 @@ input[type="submit"] {
 .white-border {
 	border-color: white !important;
 }
+
+.impressions-views {
+	font-size: 0.9em;
+	font-weight: 500;
+	span:nth-child(2) {
+		margin: 0 5px;
+	}
+}

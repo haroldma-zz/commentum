@@ -87,6 +87,8 @@ class PageController extends Controller
 		if ($thread->tag()->display_title != $tag)
 			return abort(404);
 
+		$thread->increment('views');
+
 		return view('threads.thread')->with(['thread' => $thread]);
 	}
 
