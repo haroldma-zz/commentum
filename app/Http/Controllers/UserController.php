@@ -241,6 +241,8 @@ class UserController extends Controller
 		$id = Hashids::decode($request->get('hashid'))[0];
 
 		// Check if the thread is already saved and if it is, delete it. Otherwise save it.
+
+		return response('Testing git integration with Slack');
 	}
 }
 
