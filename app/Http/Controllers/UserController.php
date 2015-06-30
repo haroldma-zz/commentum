@@ -218,7 +218,9 @@ class UserController extends Controller
 			else if ($message->type == 2)
 				$message = $message->from()->username . ' replied to your comment.';
 			else if ($message->type == 5)
-				$message = 'Nice! You claimed #' . $comment->tag()->display_title . '.';
+				$message = 'Nice! You claimed #' . $message->tag()->display_title . '.';
+			else if ($message->type == 6)
+				$message = $message->from()->username . " subscribed to #" . $message->tag()->display_title;
 
 			return response(["multiple" => false, "message" => $message]);
 		}
