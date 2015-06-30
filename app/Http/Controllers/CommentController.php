@@ -58,19 +58,22 @@ class CommentController extends Controller
 		{
 			if (is_null($parentId))
 			{
-				$toId = $thread->author()->id;					// Set the id to who a notification should be sent to
+				// Set the id to who a notification should be sent to
+				$toId = $thread->author()->id;
 			}
 			else
 			{
-				$toId = $comment->parent()->author()->id;		// Set the id to who a notification should be sent to
+				$toId = $comment->parent()->author()->
 
 				$i = 1;
 
-				foreach($comment->grandParents() as $parentComment) 	// Give momentum too each parent
+				// Give momentum too each parent
+				foreach($comment->grandParents() as $parentComment)
 				{
 					$parentComment = Comment::find($parentComment);
 
-					if ($parentComment->author()->id != Auth::id())		// Only if the comment is not from current user
+					// Only if the comment is not from current user
+					if ($parentComment->author()->id != Auth::id())
 					{
 						// Calculate momentum for parent Comment
 						$momentumStart = strtotime($comment->parent()->created_at);

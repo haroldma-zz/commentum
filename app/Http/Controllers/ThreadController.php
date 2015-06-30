@@ -97,7 +97,7 @@ class ThreadController extends Controller
 			if (!Auth::user()->isSubscribedToTag($tag->id))
 			{
 				if ($tag->privacy == 1)
-					return response("This tag is semi-private. You have to subscribe to it before you can submit submissions to this tag.", 500);
+					return response("This tag is semi-private. You have to subscribe to it before you can submit entries to this tag.", 500);
 				else
 					return response("This tag is private.", 500);
 			}

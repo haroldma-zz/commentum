@@ -26,6 +26,8 @@
 <!--								<span>{{ $thread->impressions }} impression{{ ($thread->impressions != 1 ? 's' : '') }}</span>
 								<span>&middot;</span>-->
 								<span>{{ $thread->views }} view{{ ($thread->views != 1 ? 's' : '') }}</span>
+								<span>&middot;</span>
+								<span><a id="saveThread">save</a></span>
 							</span>
 						</p>
 						@if (!is_null($thread->markdown))
@@ -88,5 +90,6 @@
 @include('scripts.markdown-parser')
 @if (Auth::check())
 @include('scripts.commenter', ['threadUserId' => $thread->user_id])
+@include('scripts.threads-saver')
 @endif
 @stop

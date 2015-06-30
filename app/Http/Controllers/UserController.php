@@ -229,6 +229,19 @@ class UserController extends Controller
 			return response("none");
 		}
 	}
+
+	/**
+	 * Save a thread.
+	 *
+	 * @param  	Request 	$request
+	 * @return 	response
+	 */
+	public function saveThread(Request $request)
+	{
+		$id = Hashids::decode($request->get('hashid'))[0];
+
+		// Check if the thread is already saved and if it is, delete it. Otherwise save it.
+	}
 }
 
 
