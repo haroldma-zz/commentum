@@ -42,7 +42,11 @@
 			var html = '<article class="comment ' + form.data('hierarchy') + '">';
 				html += '<header>';
 				html += '<span class="collapser"><i class="ion-chevron-up"></i></span>';
-				html += '<span><a href="{{ Auth::user()->permalink() }}">{{ Auth::user()->username }}</a></span>';
+				html += '<span><a href="{{ Auth::user()->permalink() }}">';
+				@if ($threadUserId != null && Auth::id() == $threadUserId)
+				html += '<span class="username-tag op">OP</span> ';
+				@endif
+				html += '{{ Auth::user()->username }}</a></span>';
 				html += '&middot;';
 				html += '<span>0 points</span>';
 				html += '&middot;';

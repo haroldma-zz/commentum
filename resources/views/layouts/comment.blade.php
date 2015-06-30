@@ -1,7 +1,12 @@
 <article class="comment wow fadeInUp" data-wow-duration="0.25s" data-wow-delay="0.25s" data-hierarchy="{{ ($indent % 2 == 0 ? 'parent' : 'child') }}">
 	<header>
 		<span class="collapser"><i class="ion-chevron-up"></i></span>
-		<span><a href="{{ $c->author()->permalink() }}">{{ $c->author()->username }}</a></span>
+		<span>
+			<a href="{{ $c->author()->permalink() }}">
+				{!! ($c->author()->id == $c->thread()->user_id ? '<span class="username-tag op">OP</span> ' : '') !!}
+				{{ $c->author()->username }}
+			</a>
+		</span>
 		&middot;
 		<span class="comment-momentum">{{ floor($c->momentum) }} points</span>
 		&middot;

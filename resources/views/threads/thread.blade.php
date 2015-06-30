@@ -87,6 +87,6 @@
 @include('scripts.threads-user-header')
 @include('scripts.markdown-parser')
 @if (Auth::check())
-@include('scripts.commenter')
+@include('scripts.commenter', ['threadUserId' => $thread->user_id])
 @endif
 @stop

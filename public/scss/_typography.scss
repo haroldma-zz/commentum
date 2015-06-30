@@ -124,3 +124,20 @@ input[type="submit"] {
 		margin: 0 5px;
 	}
 }
+
+.username-tag {
+	color: #aaa;
+	font-weight: 700;
+	font-size: 0.7em;
+	// background: #aaa;
+	letter-spacing: 1px;
+	border: 1px solid darken(#aaa, 10);
+	padding: 0px 2px;
+	@include border-radius(3px);
+
+	&.op {
+		// background: $dark-primary-color;
+		border-color: $primary-color;
+		color: $primary-color;
+	}
+}

@@ -41,5 +41,5 @@
 {!! HTML::script('/bower_components/livestamp/livestamp.min.js') !!}
 @include('scripts.markdown-parser')
 @include('scripts.inbox')
-@include('scripts.commenter')
+@include('scripts.commenter', ['threadUserId' => null])
 @stop
