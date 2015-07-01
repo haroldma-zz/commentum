@@ -1,5 +1,6 @@
 <div class="panel small sidebar">
 	<h6 class="super-header">Info</h6>
+	<h6><a href="{{ $user->permalink() }}">{{ $user->username }}</a></h6>
 	<h4>
 		<b>{{ floor($user->momentum) }}</b> point{{ (floor($user->momentum) != 1) ? 's' : '' }}
 	</h4>

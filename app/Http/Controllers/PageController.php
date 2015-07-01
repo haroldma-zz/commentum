@@ -56,6 +56,20 @@ class PageController extends Controller
 	}
 
 	/**
+	 * Saved things page
+	 *
+	 * @param  	string 	$username
+	 * @return 	view
+	 */
+	public function saves($username)
+	{
+		if ($username != Auth::user()->username)
+			abort(404);
+
+		return view('users.saved');
+	}
+
+	/**
 	 * Submit page
 	 *
 	 * @return 	view

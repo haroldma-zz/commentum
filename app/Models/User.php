@@ -189,4 +189,47 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $threads;
     }
 
+    /**
+     * Check if a user saved a specific thread by id
+     *
+     * @param   integer  $id
+     * @return  boolean
+     */
+    public function savedThread($id)
+    {
+        $check = Save::where('user_id', $this->id)->where('thread_id', $id)->first();
+
+        if (!$check)
+            return false;
+
+        return true;
+    }
+
+    /**
+     * Get saved things
+     *
+     * @return  array
+     */
+    public function saves()
+    {
+        $saves = $this->hasMany('App\Models\Save', 'user_id', 'id')->get();
+
+        $threads  = [];
+        $comments = [];
+
+        foreach ($saves as $save)
+        {
+            if (!is_null($save->thread_id))
+                $threads[] = Thread::find($save->thread_id);
+            else
+                $comments[] = Comment::find($save->comment_id);
+        }
+
+        return ["threads" => $threads, "comments" => $comments];
+    }
 }
+
+
+
+
+

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Auth;
 use Hash;
 use Session;
+use App\Models\Save;
 use App\Models\User;
 use App\Models\Message;
 use App\Models\TagSubscriber;
@@ -241,8 +242,23 @@ class UserController extends Controller
 		$id = Hashids::decode($request->get('hashid'))[0];
 
 		// Check if the thread is already saved and if it is, delete it. Otherwise save it.
+		$check = Save::where('user_id', Auth::id())->where('thread_id', $id)->first();
 
-		return response('Testing git integration with Slack');
+		if (!$check)
+		{
+			$save            = new Save;
+			$save->user_id   = Auth::id();
+			$save->thread_id = $id;
+
+			if ($save->save())
+				return response("Success.", 200);
+			else
+				return response("Something went wrong, try again.", 500);
+		}
+
+		$check->delete();
+
+		return response("Deleted.", 200);
 	}
 }
 

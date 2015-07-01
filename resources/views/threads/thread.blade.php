@@ -27,7 +27,7 @@
 								<span>&middot;</span>-->
 								<span>{{ $thread->views }} view{{ ($thread->views != 1 ? 's' : '') }}</span>
 								<span>&middot;</span>
-								<span><a id="saveThread">save</a></span>
+								<span><a id="saveThread">{{ (Auth::user()->savedThread($thread->id) == true ? "un" : "") }}save</a></span>
 							</span>
 						</p>
 						@if (!is_null($thread->markdown))
