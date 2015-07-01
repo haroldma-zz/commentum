@@ -178,7 +178,11 @@ html, body {
 	table {
 		background: none;
 		border: none;
+		margin: 0;
 		tr {
+			td {
+				padding-bottom: 0;
+			}
 			td:first-of-type {
 				text-align: center;
 				color: #f1f1f1;
