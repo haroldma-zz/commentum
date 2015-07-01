@@ -26,8 +26,10 @@
 <!--								<span>{{ $thread->impressions }} impression{{ ($thread->impressions != 1 ? 's' : '') }}</span>
 								<span>&middot;</span>-->
 								<span>{{ $thread->views }} view{{ ($thread->views != 1 ? 's' : '') }}</span>
+								@if (Auth::check())
 								<span>&middot;</span>
 								<span><a id="saveThread">{{ (Auth::user()->savedThread($thread->id) == true ? "un" : "") }}save</a></span>
+								@endif
 							</span>
 						</p>
 						@if (!is_null($thread->markdown))
@@ -88,8 +90,8 @@
 {!! HTML::script('/bower_components/livestamp/livestamp.min.js') !!}
 @include('scripts.threads-user-header')
 @include('scripts.markdown-parser')
-@if (Auth::check())
 @include('scripts.commenter', ['threadUserId' => $thread->user_id])
+@if (Auth::check())
 @include('scripts.threads-saver')
 @endif
 @stop

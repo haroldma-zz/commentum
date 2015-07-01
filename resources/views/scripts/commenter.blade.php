@@ -1,4 +1,5 @@
 <script>
+	@if (Auth::check())
 	var submitComment = function(e, el)
 	{
 		e.preventDefault();
@@ -102,6 +103,7 @@
 			form.parent().find('.text-alert').first().text(res.responseText);
 		});
 	}
+	@endif
 
 	$('.collapser').click(function()
 	{
