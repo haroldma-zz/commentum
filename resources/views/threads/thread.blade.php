@@ -30,7 +30,7 @@
 								<span class="thread-tag serious">serious</span>
 								@endif
 								@if ($thread->nsfw || $thread->serious)
-								<span>&middot;</span>
+								<br>
 								@endif
 <!--								<span>{{ $thread->impressions }} impression{{ ($thread->impressions != 1 ? 's' : '') }}</span>
 								<span>&middot;</span>-->
@@ -38,10 +38,14 @@
 								@if (Auth::check())
 								<span>&middot;</span>
 								<span><a id="saveThread" data-hashid="{{ Hashids::encode($thread->id) }}">{{ (Auth::user()->savedThread($thread->id) == true ? "un" : "") }}save</a></span>
+								@if (Auth::id() == $thread->author()->id)
+								<span>&middot;</span>
+								<a href="{{ $thread->permalink() }}/edit">edit</a>
+								@endif
 								@endif
 							</span>
 						</p>
-						@if (!is_null($thread->markdown))
+						@if (!is_null($thread->markdown) && !empty($thread->markdown))
 						<br>
 						<div class="markdown thread-description">
 							{{ $thread->markdown }}

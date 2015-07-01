@@ -114,6 +114,27 @@ class PageController extends Controller
 	}
 
 	/**
+	 * Thread edit page.
+	 *
+	 * @param  	string $tag
+	 * @param  	string $hash
+	 * @param  	string $slug
+	 * @return 	view
+	 */
+	public function editThread($tag, $hash, $slug)
+	{
+		$thread = Thread::find(Hashids::decode($hash)[0]);
+
+		if (!$thread)
+			abort(404);
+
+		if ($thread->author()->id !== Auth::id())
+			abort(403);
+
+		return view('pages.submit')->with(['thread' => $thread]);
+	}
+
+	/**
 	 * User profile page
 	 *
 	 * @param  	string $username

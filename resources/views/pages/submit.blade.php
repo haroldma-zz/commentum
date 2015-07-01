@@ -10,7 +10,7 @@
 		<div class="medium-6 medium-offset-3 columns">
 			<div class="register-form">
 				{!! Form::label('title', 'Choose a title', ['class' => 'white-font']) !!}
-				{!! Form::textarea('title', '', ['rows' => 1]) !!}
+				{!! Form::textarea('title', (isset($thread) ? $thread->title : ''), ['rows' => 1]) !!}
 			</div>
 		</div>
 	</div>
@@ -26,7 +26,7 @@
 				<p>
 					If you provide a link, your submission will redirect to the link you provided. Users can still comment on your submission and build up momentum.
 				</p>
-				{!! Form::text('link', '', ['placeholder' => 'https://']) !!}
+				{!! Form::text('link', (isset($thread) ? $thread->link : ''), ['placeholder' => 'https://']) !!}
 				<br>
 				<h5>
 					Description
@@ -35,7 +35,7 @@
 				<p>
 					You can use <a href="{{ url('/') }}">Markdown</a>.
 				</p>
-				{!! Form::textarea('description', '', ['rows' => 5]) !!}
+				{!! Form::textarea('description', (isset($thread) ? $thread->markdown : ''), ['rows' => 5]) !!}
 				<br>
 				<h5>
 					More details
@@ -49,22 +49,25 @@
 					<li>If you don't enter a tag, your submission will be submitted to <a href="{{ url('/tag/random') }}">#random</a>.</li>
 					<li>You can use one tag per submission.</li>
 				</ul>
-				{!! Form::text('tag', '', ['placeholder' => '#ask']) !!}
+				{!! Form::text('tag', (isset($thread) ? '#' . $thread->tag()->display_title : ''), ['placeholder' => '#ask']) !!}
 				<br>
 				<h5>
 					Submission settings
 				</h5>
 				<hr>
 				<label for="nsfw" class="checkbox-label">
-					{!! Form::checkbox('nsfw', 1, null, ['id' => 'nsfw']) !!}
+					{!! Form::checkbox('nsfw', 1, (isset($thread) ? $thread->nsfw : ''), ['id' => 'nsfw']) !!}
 					This submission is <b>Not Safe For Work</b>
 				</label>
 				<label for="serious" class="checkbox-label">
-					{!! Form::checkbox('serious', 1, null, ['id' => 'serious']) !!}
+					{!! Form::checkbox('serious', 1, (isset($thread) ? $thread->serious : ''), ['id' => 'serious']) !!}
 					This is a <b>serious</b> submission.
 				</label>
 				<br>
 				<p class="text-alert" id="submitFormError"></p>
+				@if (isset($thread))
+				{!! Form::hidden('thread_id', Hashids::encode($thread->id)) !!}
+				@endif
 				{!! Form::submit('Submit', ['class' => 'btn blue']) !!}
 				&nbsp;&nbsp;&nbsp;
 				<img class="loader" id="submitFormLoader" src="{{ url('/img/dark-loader.svg') }}">

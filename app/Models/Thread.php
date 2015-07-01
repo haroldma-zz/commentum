@@ -72,16 +72,16 @@ class Thread extends Model
         if (!is_null($this->_tag))
             return $this->_tag;
 
-        $cache = Cache::get("thread:{$this->id}:tag");
+        // $cache = Cache::get("thread:{$this->id}:tag");
 
-        if (!is_null($cache))
-        {
-            $this->_tag = $cache;
-            return $this->_tag;
-        }
+        // if (!is_null($cache))
+        // {
+        //     $this->_tag = $cache;
+        //     return $this->_tag;
+        // }
 
         $this->_tag = $this->hasOne('App\Models\Tag', 'id', 'tag_id')->first();
-        Cache::put("thread:{$this->id}:tag", $this->_tag, 120);
+        // Cache::put("thread:{$this->id}:tag", $this->_tag, 120);
 
     	return $this->_tag;
     }

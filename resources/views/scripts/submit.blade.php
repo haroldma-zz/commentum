@@ -13,7 +13,7 @@
 		loader.addClass('open');
 		button.attr('disabled', true);
 
-		$.post('{{ url("/submit") }}', data)
+		$.post('{{ (isset($thread) ? url("/edit/thread") : url("/submit")) }}', data)
 		.done(function(res)
 		{
 			window.location.href = res;

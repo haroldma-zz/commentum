@@ -112,19 +112,19 @@ class ThreadController extends Controller
 		$slugify   = new Slugify();
         $slugify->addRule('+', 'plus');
 
-		$new = new Thread;
+        if ($request->get('thread_id') != "")
+        	$new = Thread::find(Hashids::decode($request->get('thread_id'))[0]);
+    	else
+			$new = new Thread;
+
 		$new->user_id  = Auth::id();
 		$new->tag_id   = $tag->id;
 		$new->title    = $title;
 		$new->slug     = $slugify->slugify($title, "-");
 		$new->nsfw     = $nsfw;
 		$new->serious  = $serious;
-
-		if (!empty($link))
-			$new->link = $link;
-
-		if (!empty($description))
-			$new->markdown    = $description;
+		$new->link     = $link;
+		$new->markdown = $description;
 
 		if ($new->save())
 			return response($new->permalink(), 200);
