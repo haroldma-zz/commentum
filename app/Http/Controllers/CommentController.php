@@ -63,7 +63,7 @@ class CommentController extends Controller
 			}
 			else
 			{
-				$toId = $comment->parent()->author()->
+				$toId = $comment->parent()->author()->id;
 
 				$i = 1;
 
