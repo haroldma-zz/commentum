@@ -28,7 +28,7 @@
 								<span>{{ $thread->views }} view{{ ($thread->views != 1 ? 's' : '') }}</span>
 								@if (Auth::check())
 								<span>&middot;</span>
-								<span><a id="saveThread">{{ (Auth::user()->savedThread($thread->id) == true ? "un" : "") }}save</a></span>
+								<span><a id="saveThread" data-hashid="{{ Hashids::encode($thread->id) }}">{{ (Auth::user()->savedThread($thread->id) == true ? "un" : "") }}save</a></span>
 								@endif
 							</span>
 						</p>

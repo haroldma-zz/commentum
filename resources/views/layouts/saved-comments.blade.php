@@ -22,7 +22,7 @@
 				@if (!is_null($c->parent()))
 				<a href="{{ $c->context() }}">context</a>
 				@endif
-				<a class="save-comment">{{ (Auth::user()->savedComment($c->id) == true ? "un" : "") }}save</a>
+				<a class="save-comment" data-hashid="{{ Hashids::encode($c->id) }}">{{ (Auth::user()->savedComment($c->id) == true ? "un" : "") }}save</a>
 			</footer>
 		</div>
 	</article>

@@ -42,6 +42,7 @@
 {!! HTML::script('/bower_components/livestamp/moment.min.js') !!}
 {!! HTML::script('/bower_components/livestamp/livestamp.min.js') !!}
 @include('scripts.markdown-parser')
+@include('scripts.threads-saver')
 <script>
 	$(document).foundation();
 </script>

@@ -402,6 +402,9 @@ html, body {
 		}
 		&.saved {
 			padding: 1em !important;
+			.body {
+				padding-left: 0 !important;
+			}
 		}
 	}
 	article {

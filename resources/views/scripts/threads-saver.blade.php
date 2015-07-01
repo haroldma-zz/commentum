@@ -1,22 +1,23 @@
 <script>
 	$('#saveThread').click(function()
 	{
-		var state;
+		var state,
+			thread = $(this);
 
-		if ($('#saveThread').text() == 'save')
+		if (thread.text() == 'save')
 			state = "save";
 		else
 			state = "unsave";
 
-		$('#saveThread').html('<img src="{{ url('/img/three-dots.svg') }}" width="30px">');
+		thread.html('<img src="{{ url('/img/three-dots.svg') }}" width="30px">');
 
-		$.post('{{ url("/me/save/thread") }}', {_token: "{{ csrf_token() }}", hashid: "{{ Hashids::encode($thread->id) }}"})
+		$.post('{{ url("/me/save/thread") }}', {_token: "{{ csrf_token() }}", hashid: thread.data('hashid')})
 		.done(function(res)
 		{
 			if (state == 'save')
-				$('#saveThread').text('unsave');
+				thread.text('unsave');
 			else
-				$('#saveThread').text('save');
+				thread.text('save');
 		})
 		.fail(function(res)
 		{
@@ -34,7 +35,7 @@
 		else
 			state = "unsave";
 
-		comment.html('<img src="{{ url('/img/three-dots.svg') }}" width="30px">');
+		comment.html('<img src="{{ url('/img/three-dots-blue.svg') }}" width="30px">');
 
 		$.post('{{ url("/me/save/comment") }}', {_token: "{{ csrf_token() }}", hashid: comment.data('hashid')})
 		.done(function(res)
