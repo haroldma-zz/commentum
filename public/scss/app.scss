@@ -400,6 +400,9 @@ html, body {
 		&.child {
 			background: $snow !important;
 		}
+		&.saved {
+			padding: 1em !important;
+		}
 	}
 	article {
 		border: 1px solid $silver;

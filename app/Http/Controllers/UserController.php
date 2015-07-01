@@ -260,6 +260,36 @@ class UserController extends Controller
 
 		return response("Deleted.", 200);
 	}
+
+	/**
+	 * Save a comment.
+	 *
+	 * @param  	Request 	$request
+	 * @return 	response
+	 */
+	public function saveComment(Request $request)
+	{
+		$id = Hashids::decode($request->get('hashid'))[0];
+
+		// Check if the comment is already saved and if it is, delete it. Otherwise save it.
+		$check = Save::where('user_id', Auth::id())->where('comment_id', $id)->first();
+
+		if (!$check)
+		{
+			$save             = new Save;
+			$save->user_id    = Auth::id();
+			$save->comment_id = $id;
+
+			if ($save->save())
+				return response("Success.", 200);
+			else
+				return response("Something went wrong, try again.", 500);
+		}
+
+		$check->delete();
+
+		return response("Deleted.", 200);
+	}
 }
 
 

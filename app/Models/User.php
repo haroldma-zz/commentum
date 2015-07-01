@@ -206,6 +206,22 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     /**
+     * Check if a user saved a specific comment by id
+     *
+     * @param   integer  $id
+     * @return  boolean
+     */
+    public function savedComment($id)
+    {
+        $check = Save::where('user_id', $this->id)->where('comment_id', $id)->first();
+
+        if (!$check)
+            return false;
+
+        return true;
+    }
+
+    /**
      * Get saved things
      *
      * @return  array

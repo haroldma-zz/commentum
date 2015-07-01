@@ -22,6 +22,9 @@
 			@if (!is_null($c->parent()))
 			<a href="{{ $c->context() }}">context</a>
 			@endif
+			@if (Auth::check())
+			<a class="save-comment" data-hashid="{{ Hashids::encode($c->id) }}">{{ (Auth::user()->savedComment($c->id) == true ? "un" : "") }}save</a>
+			@endif
 			@if (Auth::check() && Auth::id() === $c->author_id)
 			<a>edit</a>
 			@endif

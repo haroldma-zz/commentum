@@ -30,6 +30,7 @@ Route::group(['middleware' => 'auth'], function()
 
 	Route::post('/me/unread/{hashid}', 'UserController@unreadMessage');
 	Route::post('/me/save/thread', 'UserController@saveThread');
+	Route::post('/me/save/comment', 'UserController@saveComment');
 });
 
 /*

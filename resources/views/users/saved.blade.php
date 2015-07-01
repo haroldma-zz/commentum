@@ -21,7 +21,11 @@
 					@endif
 				</div>
 				<div class="content" id="comments">
-					<h6 class="no-data-warning">This section is not done yet.</h6>
+					@if (count(Auth::user()->saves()["comments"]) > 0)
+					@include('layouts.saved-comments', ['comments' => Auth::user()->saves()['comments']])
+					@else
+					<h6 class="no-data-warning">You haven't saved any comments yet.</h6>
+					@endif
 				</div>
 			</div>
 		</div>

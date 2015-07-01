@@ -103,23 +103,6 @@
 			form.parent().find('.text-alert').first().text(res.responseText);
 		});
 	}
-	@endif
-
-	$('.collapser').click(function()
-	{
-		var comment = $(this).parent().parent();
-
-		if (comment.hasClass('collapsed'))
-		{
-			$(this).find('i').removeClass('ion-chevron-down').addClass('ion-chevron-up');
-			comment.removeClass('collapsed');
-		}
-		else
-		{
-			$(this).find('i').removeClass('ion-chevron-up').addClass('ion-chevron-down');
-			comment.addClass('collapsed');
-		}
-	});
 
 	$(document).on('focus', '.comment-textarea', function()
 	{
@@ -139,4 +122,21 @@
 	{
 		$(el).parent().parent().find('.reply-box').first().toggle();
 	};
+	@endif
+
+	$('.collapser').click(function()
+	{
+		var comment = $(this).parent().parent();
+
+		if (comment.hasClass('collapsed'))
+		{
+			$(this).find('i').removeClass('ion-chevron-down').addClass('ion-chevron-up');
+			comment.removeClass('collapsed');
+		}
+		else
+		{
+			$(this).find('i').removeClass('ion-chevron-up').addClass('ion-chevron-down');
+			comment.addClass('collapsed');
+		}
+	});
 </script>
