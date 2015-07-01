@@ -15,6 +15,15 @@
 			{!! (!empty($t->link) ? '<i class="ion-link"></i>' : '') !!}
 			<a href="{{ $t->titlePermalink() }}">{{ $t->title }}</a>
 			<br>
+			@if ($t->nsfw)
+			<span class="thread-tag nsfw">nsfw</span>
+			@endif
+			@if ($t->serious)
+			<span class="thread-tag serious">serious</span>
+			@endif
+			@if ($t->nsfw || $t->serious)
+			<br>
+			@endif
 			<span>
 				<a href="{{ $t->tag()->permalink() }}">
 					<span data-livestamp="{{ strtotime($t->created_at) }}"></span> in

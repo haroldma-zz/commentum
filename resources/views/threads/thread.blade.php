@@ -23,6 +23,15 @@
 							<a href="{{ $thread->tag()->permalink() }}"><span data-livestamp="{{ strtotime($thread->created_at) }}"></span> in #{{ $thread->tag()->display_title }}</a> by <a href="{{ $thread->author()->permalink() }}">{{ $thread->author()->username }}</a>
 							<br>
 							<span class="impressions-views">
+								@if ($thread->nsfw)
+								<span class="thread-tag nsfw">nsfw</span>
+								@endif
+								@if ($thread->serious)
+								<span class="thread-tag serious">serious</span>
+								@endif
+								@if ($thread->nsfw || $thread->serious)
+								<span>&middot;</span>
+								@endif
 <!--								<span>{{ $thread->impressions }} impression{{ ($thread->impressions != 1 ? 's' : '') }}</span>
 								<span>&middot;</span>-->
 								<span>{{ $thread->views }} view{{ ($thread->views != 1 ? 's' : '') }}</span>

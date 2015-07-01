@@ -164,7 +164,7 @@ class ThreadController extends Controller
 							$markup .= view('threads.thread-in-list', ['t' => $thread])->render();
 						}
 					}
-				}
+				} // elseif (all)
 			}
 			else
 			{

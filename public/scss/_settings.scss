@@ -120,7 +120,7 @@ $black       : #000000;
 $primary-color: lighten(#3498DB, 5);
 $dark-primary-color: darken($primary-color, 15);
 $secondary-color: lighten(#009688, 5);
-$alert-color: red;
+$alert-color: lighten(red, 5);
 $success-color: #4CAF50;
 $warning-color: #FFC107;
 $info-color: #CFD8DC;

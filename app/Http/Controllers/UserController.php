@@ -239,6 +239,9 @@ class UserController extends Controller
 	 */
 	public function saveThread(Request $request)
 	{
+		if (!$request->ajax())
+			abort(404);
+
 		$id = Hashids::decode($request->get('hashid'))[0];
 
 		// Check if the thread is already saved and if it is, delete it. Otherwise save it.
@@ -269,6 +272,9 @@ class UserController extends Controller
 	 */
 	public function saveComment(Request $request)
 	{
+		if (!$request->ajax())
+			abort(404);
+
 		$id = Hashids::decode($request->get('hashid'))[0];
 
 		// Check if the comment is already saved and if it is, delete it. Otherwise save it.
