@@ -7,11 +7,20 @@
 		var form = $(el),
 			formData = form.serialize();
 
-		$.post('{{ url("/comment") }}', formData)
+		var input     = $.trim(form.find('textarea').first().val()),
+			threadId  = form.find('input[name="thread_id"]').first().val(),
+			parentId  = form.find('input[name="parent_id"]').first().val(),
+			token     = form.find('input[name="_token"]').first().val(),
+			usernameRegex = /(?:^|)(\/u\/\w+)(?!\w)/g,
+			tagRegex      = /(?:^|)#(\w+)(?!\w)/g;
+
+		// Create links of /u/usernames and #tags
+		var markdown = input.replace(usernameRegex, "[$1]($1)").replace(tagRegex, "[#$1](/t/$1)");
+
+		$.post('{{ url("/comment") }}', {_token:token, markdown:markdown, thread_id:threadId, parent_id:parentId})
 		.done(function(res)
 		{
-			var markdown = form.find('textarea').val(),
-				md = $.trim(markdown),
+			var md = markdown,
 				pr = new showdown.Converter(),
 				ht = pr.makeHtml(md)
 				hier = (form.data('hierarchy') == 'parent') ? 'child' : 'parent';
