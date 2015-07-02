@@ -60,6 +60,12 @@ input[type="submit"] {
 		background: $alert-color;
 		border-color: darken($alert-color, 10);
 	}
+	&.disabled {
+		cursor: not-allowed !important;
+		pointer-events: none;
+		background: #ddd;
+		border-color: #ccc;
+	}
 }
 
 .loader {

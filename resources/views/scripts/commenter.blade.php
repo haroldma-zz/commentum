@@ -7,6 +7,8 @@
 		var form = $(el),
 			formData = form.serialize();
 
+		form.find('input[type="submit"]').attr('disabled', true).addClass('disabled');
+
 		var input     = $.trim(form.find('textarea').first().val()),
 			threadId  = form.find('input[name="thread_id"]').first().val(),
 			parentId  = form.find('input[name="parent_id"]').first().val(),
@@ -46,7 +48,6 @@
 					var parentMomentum = res['parentMomentum'] + ' points';
 
 				form.parent().parent().find('.comment-momentum').first().text(parentMomentum);
-				console.log(parentMomentum);
 			}
 
 			var html = '<article class="comment ' + form.data('hierarchy') + '">';
@@ -99,6 +100,7 @@
 
 			form.find('.preview').addClass('hide');
 			form.find('.markdown').html('');
+			form.find('input[type="submit"]').attr('disabled', false).removeClass('disabled');
 
 			var livestamp = $('.livestamp').first();
 			livestamp.livestamp(new Date());
