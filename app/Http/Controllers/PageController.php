@@ -15,6 +15,48 @@ use Vinkla\Hashids\Facades\Hashids;
 class PageController extends Controller
 {
 	/**
+	 * Get thread by ID
+	 *
+	 * @param  	string $tag
+	 * @param  	string $hash
+	 * @return 	Thread
+	 */
+	private function getThreadById($tag, $hash)
+	{
+		$threadId = Hashids::decode($hash);
+
+		if (!count($threadId) > 0)
+			return null;
+
+		$thread = Thread::find($threadId[0]);
+
+		if (!$thread)
+			return null;
+
+		if ($thread->tag()->display_title != $tag)
+			return null;
+
+		return $thread;
+	}
+
+	/**
+	 * Get comment by ID
+	 *
+	 * @param  	string $chash
+	 * @return 	Comment
+	 */
+	private function getCommentById($chash)
+	{
+		$commentId = Hashids::decode($chash);
+
+		if (!count($commentId) > 0)
+			return null;
+
+		return Comment::find($commentId[0]);
+	}
+
+
+	/**
 	 * The index page
 	 *
 	 * @return 	view
@@ -89,18 +131,9 @@ class PageController extends Controller
 	 */
 	public function thread($tag, $hash, $slug, Request $request)
 	{
-		$threadId = Hashids::decode($hash);
-
-		if (!count($threadId) > 0)
-			abort(404);
-
-		$thread = Thread::find($threadId[0]);
-
+		$thread = $this->getThreadById($tag, $hash);
 		if (!$thread)
 			abort(404);
-
-		if ($thread->tag()->display_title != $tag)
-			return abort(404);
 
 		$ip = $request->getClientIp();
 
@@ -123,8 +156,7 @@ class PageController extends Controller
 	 */
 	public function editThread($tag, $hash, $slug)
 	{
-		$thread = Thread::find(Hashids::decode($hash)[0]);
-
+		$thread = $this->getThreadById($tag, $hash);
 		if (!$thread)
 			abort(404);
 
@@ -205,26 +237,11 @@ class PageController extends Controller
 	 */
 	public function threadComment($tag, $hash, $slug, $chash, Request $request)
 	{
-		$threadId = Hashids::decode($hash);
-
-		if (!count($threadId) > 0)
-			abort(404);
-
-		$thread = Thread::find($threadId[0]);
-
+		$thread = $this->getThreadById($tag, $hash);
 		if (!$thread)
 			abort(404);
 
-		if ($thread->tag()->display_title != $tag)
-			return abort(404);
-
-		$commentId = Hashids::decode($chash);
-
-		if (!count($commentId) > 0)
-			abort(404);
-
-		$comment = Comment::find($commentId[0]);
-
+		$comment = $this->getCommentById($chash);
 		if (!$comment)
 			abort(404);
 
