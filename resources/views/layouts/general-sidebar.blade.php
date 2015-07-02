@@ -12,11 +12,4 @@
 		<li><a href="{{ $thread->permalink() }}">{{ $thread->title }}</a></li>
 		@endforeach
 	</ul>
-	<hr>
-	<h6 class="super-header">From the blog</h6>
-	<ul>
-		@foreach(App\Models\Thread::where('tag_id', 2)->orderBy('id', 'DESC')->get() as $thread)
-		<li><a href="{{ $thread->permalink() }}">{{ $thread->title }}</a></li>
-		@endforeach
-	</ul>
 </div>
