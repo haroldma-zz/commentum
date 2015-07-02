@@ -168,7 +168,7 @@ class UserController extends Controller
 		$message->read = true;
 
 		if ($message->save())
-			return response('Success.', 200);
+			return response(Auth::user()->messageCount(), 200);
 
 		return response('Fail.', 500);
 	}
@@ -210,7 +210,7 @@ class UserController extends Controller
 			}
 
 			if ($count > 1)
-				return response(["multiple" => true, "count" => Auth::user()->altMessages()->where('read', false)->count()]);
+				return response(["multiple" => true, "count" => Auth::user()->altMessages()->where('read', false)->count(), "total" => Auth::user()->messageCount()]);
 
 			$message = $uMessages[0];
 
@@ -223,7 +223,7 @@ class UserController extends Controller
 			else if ($message->type == 6)
 				$message = $message->from()->username . " subscribed to #" . $message->tag()->display_title;
 
-			return response(["multiple" => false, "message" => $message]);
+			return response(["multiple" => false, "message" => $message, "total" => Auth::user()->messageCount()]);
 		}
 		else
 		{

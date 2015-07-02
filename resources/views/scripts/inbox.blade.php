@@ -14,6 +14,13 @@
 				inboxCounter.hide();
 
 			$.post('{{ url("/me/unread/") }}/' + $(this).data('id'), {_token: "{{ csrf_token() }}", id: $(this).data('id')})
+			.done(function(count)
+			{
+				if (count > 0)
+					document.title = "Commentum [" + count + "]";
+				else
+					document.title = "Commentum";
+			})
 			.fail(function(res)
 			{
 				alert('Something went wrong.');

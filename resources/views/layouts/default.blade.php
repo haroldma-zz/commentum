@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Commentum</title>
+	<title>Commentum {{ (Auth::check() && Auth::user()->messageCount() > 0 ? "[" . Auth::user()->messageCount() . "]" : "") }}</title>
 	{!! HTML::style('/stylesheets/app.css') !!}
 </head>
 <body>
