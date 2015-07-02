@@ -115,9 +115,7 @@
 
 	$(document).on('keyup', '.comment-textarea', function()
 	{
-		var input = $.trim($(this).val()),
-			pr    = new showdown.Converter(),
-			ht    = pr.makeHtml(input);
+		var input = $.trim($(this).val());
 
 		if (input == "")
 		{
@@ -125,6 +123,14 @@
 		}
 		else
 		{
+			// Create links of /u/usernames and #tags
+			var usernameRegex = /(?:^|)(\/u\/\w+)(?!\w)/g,
+				tagRegex      = /(?:^|)#(\w+)(?!\w)/g;
+
+			var markdown = input.replace(usernameRegex, "[$1]($1)").replace(tagRegex, "[#$1](/t/$1)"),
+				pr    	 = new showdown.Converter(),
+				ht    	 = pr.makeHtml(markdown);
+
 			$(this).parent().find('.markdown').html(ht);
 
 			if ($(this).parent().find('.preview').first().hasClass('hide'))
