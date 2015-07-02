@@ -104,18 +104,23 @@
 		});
 	}
 
-	$(document).on('focus', '.comment-textarea', function()
-	{
-		$(this).parent().find('.preview').removeClass('hide');
-	});
-
 	$(document).on('keyup', '.comment-textarea', function()
 	{
 		var input = $.trim($(this).val()),
 			pr    = new showdown.Converter(),
 			ht    = pr.makeHtml(input);
 
-		$(this).parent().find('.markdown').html(ht);
+		if (input == "")
+		{
+			$(this).parent().find('.preview').addClass('hide');
+		}
+		else
+		{
+			$(this).parent().find('.markdown').html(ht);
+
+			if ($(this).parent().find('.preview').first().hasClass('hide'))
+				$(this).parent().find('.preview').removeClass('hide');
+		}
 	});
 
 	var toggleReplyBox = function(el)
