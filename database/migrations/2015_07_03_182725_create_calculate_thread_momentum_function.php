@@ -25,7 +25,6 @@ CREATE FUNCTION calculateThreadMomentum(impressions INTEGER, views INTEGER, comm
 		RETURN ROUND(score + seconds / 45000, 7);
 	END
 SQL;
-	//DB::connection()->getPdo()->exec($sql);
 	DB::unprepared($sql);
     }
 
@@ -36,8 +35,6 @@ SQL;
      */
     public function down()
     {
-        //$sql = "DROP FUNCTION IF EXISTS calculateThreadMomentum;";
-	//DB::connection()->getPdo()->exec($sql);
 	DB::statement("DROP FUNCTION IF EXISTS calculateThreadMomentum;");
     }
 }
