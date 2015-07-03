@@ -164,13 +164,13 @@ class ThreadController extends Controller
 
 						foreach ($threads as $thread)
 						{
-							$markup .= view('threads.thread-in-list', ['t' => $thread])->render();
-
 							if (is_null(Cache::get("{$ip}:thread:{$thread->id}:impression")))
 							{
 								Cache::put("{$ip}:thread:{$thread->id}:impression", true, 120);
 								$thread->addImpression();
 							}
+
+							$markup .= view('threads.thread-in-list', ['t' => $thread])->render();
 						}
 					}
 				} // elseif (all)
