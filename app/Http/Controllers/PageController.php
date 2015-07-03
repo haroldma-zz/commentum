@@ -61,7 +61,7 @@ class PageController extends Controller
 	 *
 	 * @return 	view
 	 */
-	public function index()
+	public function index(Request $request)
 	{
 		// if (!Auth::check())
 			$threads = Thread::orderBy('momentum', 'DESC')->take(25)->get();
@@ -70,6 +70,18 @@ class PageController extends Controller
 			Session::flash('moreSubmissionsCount', $moreSubmissionsCount);
 		// else
 			// $threads = User::getSubscribedTagsThreads();
+
+		$ip = $request->getClientIp();
+
+		foreach($threads as $thread)
+		{
+			if (is_null(Cache::get("{$ip}:thread:{$thread->id}:impression")))
+			{
+				Cache::put("{$ip}:thread:{$thread->id}:impression", true, 120);
+				//$thread->increment('views');
+				$thread->addImpression();
+			}
+		}
 
 		$data = ['threads' => $threads];
 
@@ -137,10 +149,11 @@ class PageController extends Controller
 
 		$ip = $request->getClientIp();
 
-		if (is_null(Cache::get("{$ip}:thread:{$thread->id}")))
+		if (is_null(Cache::get("{$ip}:thread:{$thread->id}:view")))
 		{
-			Cache::put("{$ip}:thread:{$thread->id}", true, 120);
-			$thread->increment('views');
+			Cache::put("{$ip}:thread:{$thread->id}:view", true, 120);
+			//$thread->increment('views');
+			$thread->addView();
 		}
 
 		return view('threads.thread')->with(['thread' => $thread]);

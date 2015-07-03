@@ -114,9 +114,10 @@ class CommentController extends Controller
 					// Calculate momentum to be added
 					$momentumAdd = calculateMomentum($difference);
 
-					$thread->momentum = $thread->momentum + $momentumAdd;
+					//$thread->momentum = $thread->momentum + $momentumAdd;
 
-					if ($thread->save())
+					//if ($thread->save())
+					if($thread->calculateMomentum())
 					{
 						$parentMomentum = (!$comment->parent() ?  'whoopie' : floor($comment->parent()->momentum));
 						return response(['threadId' => Hashids::encode($thread->id), 'commentId' => Hashids::encode($comment->id), 'parentMomentum' => $parentMomentum, 'permalink' => $comment->permalink(), 'context' => $comment->context()], 200);
