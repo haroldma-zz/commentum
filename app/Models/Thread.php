@@ -178,12 +178,13 @@ class Thread extends Model
     public function calculateMomentum()
     {
         // once the algo is up and running, we'll work on shifting these calculations to MySQL with a stored procedure
-	$newMomentum = 0.0;
-	if($this->impressions > 0)
-		$newMomentum += $this->views * ($this->views / $this->impressions);
-	$newMomentum += $this->comments()->sum('momentum');
+    	$newMomentum = 0.0;
+    	if($this->impressions > 0)
+    		$newMomentum += $this->views * ($this->views / $this->impressions);
 
-	$this->momentum = $newMomentum;
+    	$newMomentum += $this->comments()->sum('momentum');
+
+    	$this->momentum = $newMomentum;
 
         return $this->save();
     }
