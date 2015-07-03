@@ -67,7 +67,6 @@
 	@yield('scripts')
 	@if(Auth::check())
 	@include('scripts.tags-nav-toggler')
-	@include('scripts.notifications')
 	@endif
 </body>
 </html>
