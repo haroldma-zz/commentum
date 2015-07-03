@@ -142,4 +142,28 @@ class CommentController extends Controller
 			return response("Something went wrong on our end, try again.", 500);
 		}
 	}
+
+	/**
+	 * Delete a comment
+	 *
+	 * @param  	Request 	$request
+	 * @return 	response
+	 */
+	public function delete(Request $request)
+	{
+		$id = Hashids::decode($request->get('hashid'));
+
+		if (!$id > 0)
+			return response('Can\'t find the comment you want to delete.', 500);
+
+		$comment = Comment::find($id[0]);
+
+		if ($comment->author_id != Auth::id())
+			return response("You're not the owner of this comment.", 500);
+
+		// Soft delete the model
+		$comment->delete();
+
+		return response("OK", 200);
+	}
 }

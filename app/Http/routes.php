@@ -24,6 +24,8 @@ Route::group(['middleware' => 'auth'], function()
 	Route::post('/me/unread/{hashid}', 'UserController@unreadMessage');
 	Route::post('/me/save/thread', 'UserController@saveThread');
 	Route::post('/me/save/comment', 'UserController@saveComment');
+	Route::post('/me/delete/thread', 'ThreadController@delete');
+	Route::post('/me/delete/comment', 'CommentController@delete');
 });
 
 

@@ -5,9 +5,12 @@ namespace App\Models;
 use Cache;
 use Vinkla\Hashids\Facades\Hashids;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Thread extends Model
 {
+    use SoftDeletes;
+
     private $_tag            = null;
     private $_author         = null;
     private $_comments       = null;
@@ -21,6 +24,8 @@ class Thread extends Model
 	 * @var string
 	 */
     protected $table = 'threads';
+
+    protected $dates = ['deleted_at'];
 
     /**
      * Return the permalink to a thread.

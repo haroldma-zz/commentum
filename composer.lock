@@ -1,42 +1,36 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3bb7d44d9a31b157e9985101cffb86db",
+    "hash": "fa3a9daabb0aba317768d91287f6687e",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
-            "version": "1.4.0",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ClassPreloader/ClassPreloader.git",
-                "reference": "b76f3f4f603ebbe7e64351a7ef973431ddaf7b27"
+                "reference": "8c3c14b10309e3b40bce833913a6c0c0b8c8f962"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ClassPreloader/ClassPreloader/zipball/b76f3f4f603ebbe7e64351a7ef973431ddaf7b27",
-                "reference": "b76f3f4f603ebbe7e64351a7ef973431ddaf7b27",
+                "url": "https://api.github.com/repos/ClassPreloader/ClassPreloader/zipball/8c3c14b10309e3b40bce833913a6c0c0b8c8f962",
+                "reference": "8c3c14b10309e3b40bce833913a6c0c0b8c8f962",
                 "shasum": ""
             },
             "require": {
                 "nikic/php-parser": "~1.3",
-                "php": ">=5.3.3",
-                "symfony/console": "~2.1",
-                "symfony/filesystem": "~2.1",
-                "symfony/finder": "~2.1"
+                "php": ">=5.5.9"
             },
             "require-dev": {
                 "phpunit/phpunit": "~4.0"
             },
-            "bin": [
-                "classpreloader.php"
-            ],
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.4-dev"
+                    "dev-master": "2.0-dev"
                 }
             },
             "autoload": {
@@ -55,7 +49,7 @@
                 },
                 {
                     "name": "Graham Campbell",
-                    "email": "graham@cachethq.io"
+                    "email": "graham@alt-three.com"
                 }
             ],
             "description": "Helps class loading performance by generating a single PHP file containing all of the autoloaded files for a specific use case",
@@ -64,20 +58,20 @@
                 "class",
                 "preload"
             ],
-            "time": "2015-05-26 10:57:51"
+            "time": "2015-06-28 21:39:13"
         },
         {
             "name": "cocur/slugify",
-            "version": "v1.1",
+            "version": "v1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cocur/slugify.git",
-                "reference": "2b67d4e2b75dbaed2ebefa9eb5683e8940513847"
+                "reference": "5d8e48f750e4ed6528f08fe560a5032a373c3550"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cocur/slugify/zipball/2b67d4e2b75dbaed2ebefa9eb5683e8940513847",
-                "reference": "2b67d4e2b75dbaed2ebefa9eb5683e8940513847",
+                "url": "https://api.github.com/repos/cocur/slugify/zipball/5d8e48f750e4ed6528f08fe560a5032a373c3550",
+                "reference": "5d8e48f750e4ed6528f08fe560a5032a373c3550",
                 "shasum": ""
             },
             "require": {
@@ -89,7 +83,8 @@
                 "latte/latte": "~2.2",
                 "mockery/mockery": "~0.9",
                 "nette/di": "~2.2",
-                "phpunit/phpunit": "~3.7",
+                "phpunit/phpunit": "~4.6",
+                "plumphp/plum": "~0.1",
                 "sami/sami": "~1.3",
                 "satooshi/php-coveralls": "0.6.*",
                 "silex/silex": "~1.2",
@@ -126,7 +121,7 @@
                 "slug",
                 "slugify"
             ],
-            "time": "2015-03-18 08:21:30"
+            "time": "2015-07-02 20:13:51"
         },
         {
             "name": "danielstjules/stringy",
@@ -286,16 +281,16 @@
         },
         {
             "name": "graham-campbell/manager",
-            "version": "v2.1.0",
+            "version": "v2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/GrahamCampbell/Laravel-Manager.git",
-                "reference": "1a99ed46590cac9c524ca5ab54bd8a80aa127c39"
+                "reference": "b386c08594a3e1ff7d0f3401d545460f609c6c1e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/GrahamCampbell/Laravel-Manager/zipball/1a99ed46590cac9c524ca5ab54bd8a80aa127c39",
-                "reference": "1a99ed46590cac9c524ca5ab54bd8a80aa127c39",
+                "url": "https://api.github.com/repos/GrahamCampbell/Laravel-Manager/zipball/b386c08594a3e1ff7d0f3401d545460f609c6c1e",
+                "reference": "b386c08594a3e1ff7d0f3401d545460f609c6c1e",
                 "shasum": ""
             },
             "require": {
@@ -304,12 +299,14 @@
                 "php": ">=5.5.9"
             },
             "require-dev": {
-                "graham-campbell/testbench": "~2.1"
+                "graham-campbell/testbench-core": "~1.0",
+                "mockery/mockery": "^0.9.4",
+                "phpunit/phpunit": "^4.7.6"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.1-dev"
+                    "dev-master": "2.2-dev"
                 }
             },
             "autoload": {
@@ -324,7 +321,7 @@
             "authors": [
                 {
                     "name": "Graham Campbell",
-                    "email": "graham@mineuk.com"
+                    "email": "graham@alt-three.com"
                 }
             ],
             "description": "Manager Provides Some Manager Functionality For Laravel 5",
@@ -339,7 +336,7 @@
                 "laravel",
                 "manager"
             ],
-            "time": "2015-05-07 12:37:59"
+            "time": "2015-06-26 17:39:20"
         },
         {
             "name": "hashids/hashids",
@@ -591,20 +588,20 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.1.2",
+            "version": "v5.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "65a3a4ca4b20083517a9e2effa6a86a49f3e9c96"
+                "reference": "356418f315e4f6bf55d2f4bd451606e45a7595df"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/65a3a4ca4b20083517a9e2effa6a86a49f3e9c96",
-                "reference": "65a3a4ca4b20083517a9e2effa6a86a49f3e9c96",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/356418f315e4f6bf55d2f4bd451606e45a7595df",
+                "reference": "356418f315e4f6bf55d2f4bd451606e45a7595df",
                 "shasum": ""
             },
             "require": {
-                "classpreloader/classpreloader": "~1.2",
+                "classpreloader/classpreloader": "~2.0",
                 "danielstjules/stringy": "~1.8",
                 "doctrine/inflector": "~1.0",
                 "ext-mbstring": "*",
@@ -715,7 +712,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2015-06-15 18:25:50"
+            "time": "2015-07-03 13:48:44"
         },
         {
             "name": "league/flysystem",
@@ -923,21 +920,21 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "1.19.0",
+            "version": "1.20.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "68868e0b02d2d803d0052a59d4e5003cccf87320"
+                "reference": "bfd3eaba109c9a2405c92174c8e17f20c2b9caf3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/68868e0b02d2d803d0052a59d4e5003cccf87320",
-                "reference": "68868e0b02d2d803d0052a59d4e5003cccf87320",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/bfd3eaba109c9a2405c92174c8e17f20c2b9caf3",
+                "reference": "bfd3eaba109c9a2405c92174c8e17f20c2b9caf3",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0",
-                "symfony/translation": "~2.6"
+                "symfony/translation": "~2.6|~3.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "~4.0"
@@ -966,7 +963,7 @@
                 "datetime",
                 "time"
             ],
-            "time": "2015-05-09 03:23:44"
+            "time": "2015-06-25 04:19:39"
         },
         {
             "name": "nikic/php-parser",
@@ -1507,55 +1504,6 @@
             "time": "2015-06-08 09:37:21"
         },
         {
-            "name": "symfony/filesystem",
-            "version": "v2.7.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/Filesystem.git",
-                "reference": "a0d43eb3e17d4f4c6990289805a488a0482a07f3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Filesystem/zipball/a0d43eb3e17d4f4c6990289805a488a0482a07f3",
-                "reference": "a0d43eb3e17d4f4c6990289805a488a0482a07f3",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.9"
-            },
-            "require-dev": {
-                "symfony/phpunit-bridge": "~2.7"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.7-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Component\\Filesystem\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony Filesystem Component",
-            "homepage": "https://symfony.com",
-            "time": "2015-06-08 09:37:21"
-        },
-        {
             "name": "symfony/finder",
             "version": "v2.7.1",
             "source": {
@@ -2082,6 +2030,73 @@
                 "environment"
             ],
             "time": "2015-05-30 15:59:26"
+        },
+        {
+            "name": "zizaco/entrust",
+            "version": "dev-laravel-5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Zizaco/entrust.git",
+                "reference": "804000c1c535221792b4e173ecdcc02b5681f5ec"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Zizaco/entrust/zipball/804000c1c535221792b4e173ecdcc02b5681f5ec",
+                "reference": "804000c1c535221792b4e173ecdcc02b5681f5ec",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/console": "~5.0",
+                "illuminate/support": "~5.0",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "illuminate/database": "~5.0",
+                "mockery/mockery": "dev-master",
+                "phpunit/phpunit": "~4.1",
+                "sami/sami": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/commands"
+                ],
+                "psr-4": {
+                    "Zizaco\\Entrust\\": "src/Entrust/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andrew Elkins",
+                    "homepage": "http://andrewelkins.com"
+                },
+                {
+                    "name": "Zizaco Zizuini",
+                    "email": "zizaco@gmail.com"
+                },
+                {
+                    "name": "Ben Batschelet",
+                    "homepage": "http://github.com/bbatsche"
+                },
+                {
+                    "name": "Michele Angioni",
+                    "email": "michele.angioni@gmail.com"
+                }
+            ],
+            "description": "This package provides a flexible way to add Role-based Permissions to Laravel",
+            "keywords": [
+                "acl",
+                "auth",
+                "illuminate",
+                "laravel",
+                "permission",
+                "roles"
+            ],
+            "time": "2015-05-25 00:17:51"
         }
     ],
     "packages-dev": [
@@ -2568,16 +2583,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "2.1.6",
+            "version": "2.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "631e365cf26bb2c078683e8d9bcf8bc631ac4d44"
+                "reference": "07e27765596d72c378a6103e80da5d84e802f1e4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/631e365cf26bb2c078683e8d9bcf8bc631ac4d44",
-                "reference": "631e365cf26bb2c078683e8d9bcf8bc631ac4d44",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/07e27765596d72c378a6103e80da5d84e802f1e4",
+                "reference": "07e27765596d72c378a6103e80da5d84e802f1e4",
                 "shasum": ""
             },
             "require": {
@@ -2626,7 +2641,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2015-06-19 07:11:55"
+            "time": "2015-06-30 06:52:35"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -2808,16 +2823,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "4.7.5",
+            "version": "4.7.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "f6701ef3faea759acd1910a7751d8d102a7fd5bc"
+                "reference": "0ebabb4cda7d066be8391dfdbaf57fe70ac9a99b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/f6701ef3faea759acd1910a7751d8d102a7fd5bc",
-                "reference": "f6701ef3faea759acd1910a7751d8d102a7fd5bc",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/0ebabb4cda7d066be8391dfdbaf57fe70ac9a99b",
+                "reference": "0ebabb4cda7d066be8391dfdbaf57fe70ac9a99b",
                 "shasum": ""
             },
             "require": {
@@ -2876,7 +2891,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2015-06-21 07:23:36"
+            "time": "2015-06-30 06:53:57"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -3356,7 +3371,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "zizaco/entrust": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

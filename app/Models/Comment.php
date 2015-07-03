@@ -5,9 +5,12 @@ namespace App\Models;
 use Cache;
 use Vinkla\Hashids\Facades\Hashids;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Comment extends Model
 {
+    use SoftDeletes;
+
     private $_thread   = null;
     private $_author   = null;
     private $_parent   = null;
