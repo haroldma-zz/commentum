@@ -138,7 +138,7 @@ class ThreadController extends Controller
 	 * @param  string $tag
 	 * @return array
 	 */
-	public function moreSubmissions($tag)
+	public function moreSubmissions($tag, Request $request)
 	{
 		$markup = '';
 
