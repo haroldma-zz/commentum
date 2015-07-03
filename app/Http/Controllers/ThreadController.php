@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use Cache;
 use Session;
 use App\Models\Tag;
 use App\Models\Thread;
