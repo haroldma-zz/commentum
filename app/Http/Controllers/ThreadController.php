@@ -156,7 +156,7 @@ class ThreadController extends Controller
 					else
 						$page = 1;
 
-					$offset = 10 * $page;
+					$offset = 20 * $page;
 					$threads = Thread::hydrateRaw("SELECT *, calculateThreadMomentum(impressions, views, total_momentum) as momentum,
 					calculateHotnessFromMomentum(impressions, views, total_momentum, created_at) as sort
 					FROM (SELECT t.*, sum(c.momentum) as total_momentum FROM threads t
