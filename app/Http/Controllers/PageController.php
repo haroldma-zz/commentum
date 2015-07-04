@@ -65,7 +65,7 @@ class PageController extends Controller
 	{
 		// if (!Auth::check())
 			$threads = Thread::hydrateRaw('SELECT *, calculateThreadMomentum(impressions, views, total_momentum) as momentum,
-            calculateHotnessFromMomentum(views, impressions, total_momentum, created_at) as sort
+            calculateHotnessFromMomentum(impressions, views, total_momentum, created_at) as sort
             FROM (SELECT t.*, sum(c.momentum) as total_momentum FROM threads t
             LEFT JOIN comments c ON c.thread_id = t.id
             GROUP BY t.id) as f
