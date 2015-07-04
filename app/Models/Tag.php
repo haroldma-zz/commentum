@@ -179,6 +179,26 @@ class Tag extends Model
 
         return self::$_newTags;
     }
+	
+	/**
+     * Get trending tags list.
+     *
+     * @return  Tag
+     */
+	static function getTrendingTags($start_time = null, $end_time = null, $max_results = null)
+	{
+		if(!is_null(self::$_trendingTags))
+			return self::$_trendingTags;
+		
+		if(is_null($start_time))
+			$start_time = Carbon::now()->subDay();
+		if(is_null($end_time))
+			$end_time = Carbon::now();
+		if(is_null($max_results))
+			$max_results = 10;
+		
+		return DB::statement("CALL calculateTrendingList ('" . $start_time . "', '" . $end_time . "', " . $max_result . ");");
+	}
 
     /**
      * Subscribes a user to a tag.
