@@ -1,4 +1,5 @@
 @extends('layouts.default')
+@section('title', 'preferences for '.Auth::user()->username)
 
 @section('page')
 <div class="hero">

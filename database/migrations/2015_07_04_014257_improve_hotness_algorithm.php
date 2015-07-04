@@ -23,7 +23,7 @@ BEGIN
     SET score = calculateThreadMomentum(impressions, views, comment_momentum);
     SET seconds = UNIX_TIMESTAMP(created) - 1435449600;
 
-    RETURN ROUND(score / 75 + seconds / 45000, 7);
+    RETURN ROUND(score / 125 + seconds / 45000, 7);
 END
 SQL;
         DB::unprepared($sql);

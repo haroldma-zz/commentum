@@ -1,4 +1,5 @@
 @extends('layouts.default')
+@section('title', 'inbox')
 
 @section('page')
 <div class="hero">

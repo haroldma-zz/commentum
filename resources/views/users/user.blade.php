@@ -1,4 +1,5 @@
 @extends('layouts.default')
+@section('title', 'overview for '.$user->username)
 
 @section('page')
 <div class="hero">

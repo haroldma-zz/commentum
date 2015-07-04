@@ -1,4 +1,5 @@
 @extends('layouts.default')
+@section('title', '#'.$tag->display_title)
 
 @section('page')
 @if (Auth::check())

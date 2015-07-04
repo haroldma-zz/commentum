@@ -1,6 +1,7 @@
 @extends('layouts.default')
-
 @section('page')
+@section('title', 'settings for #'.$tag->display_title)
+
 <div class="hero">
 	@include('layouts.user-header')
 	@include('layouts.tags-nav')

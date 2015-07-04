@@ -1,4 +1,5 @@
 @extends('layouts.default')
+@section('title', $thread->title.' | #'.$thread->tag()->display_title)
 
 @section('page')
 <div class="hero">
