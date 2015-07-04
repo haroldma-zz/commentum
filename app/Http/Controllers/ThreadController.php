@@ -63,9 +63,9 @@ class ThreadController extends Controller
 
 				if ($usersLatestTag)
 				{
-					// Check if last tag of current user was claimed less than 1 hour ago.
-					if (strtotime($usersLatestTag->created_at) > strtotime("now") - 60 * 60)
-						return response("You can only claim one tag per hour.", 500);
+					// Check if last tag of current user was claimed less than 15 mins ago.
+					if (strtotime($usersLatestTag->created_at) > strtotime("now") - 900)
+						return response("You can only claim one tag per 15 minutes.", 500);
 				}
 
 				$newTag = new Tag;
