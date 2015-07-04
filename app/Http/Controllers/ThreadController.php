@@ -76,6 +76,8 @@ class ThreadController extends Controller
 
 				if ($newTag->save())
 				{
+					// auto subscribe the owner
+					subscribeToTag($newTag->id, $newTag->owner_id);
 					sendMessage(Auth::id(), null, null, null, null, $newTag->id, null, 5);
 					makeModOfTag($newTag->id, Auth::id());
 
