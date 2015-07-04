@@ -132,7 +132,7 @@ input[type="submit"] {
 .impressions-views {
 	font-size: 0.9em;
 	font-weight: 500;
-	span:nth-child(2) {
+	span:nth-child(2), span:nth-child(4), span:nth-child(6) {
 		margin: 0 5px;
 	}
 }
