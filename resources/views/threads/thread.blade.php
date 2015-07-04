@@ -40,6 +40,8 @@
 								@if (Auth::id() == $thread->author()->id)
 								<span>&middot;</span>
 								<a href="{{ $thread->permalink() }}/edit">edit</a>
+								<span>&middot;</span>
+								<a id="deleteThread">delete</a>
 								@endif
 								@endif
 							</span>
@@ -104,6 +106,9 @@
 @include('scripts.markdown-parser')
 @include('scripts.commenter', ['threadUserId' => $thread->user_id])
 @if (Auth::check())
-@include('scripts.threads-saver')
+	@include('scripts.thread-actions')
+	@if (Auth::id() == $thread->author()->id)
+		@include('scripts.thread-deleter')
+	@endif
 @endif
 @stop

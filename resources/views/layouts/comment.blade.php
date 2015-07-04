@@ -47,6 +47,7 @@
 			@endif
 			@if (Auth::check() && Auth::id() === $c->author_id)
 			<a class="edit-comment">edit</a>
+			<a class="delete-comment" data-hashid="{{ Hashids::encode($c->id) }}">delete</a>
 			@endif
 		</footer>
 		<div class="reply-box">

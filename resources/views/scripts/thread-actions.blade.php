@@ -50,4 +50,22 @@
 			alert(res.responseText);
 		});
 	});
+
+	$('.delete-comment').click(function()
+	{
+		if (confirm("Are you sure you want to delete this comment?"))
+		{
+			var c = $(this);
+
+			$.post("{{ url('/me/delete/comment') }}", {_token: "{{ csrf_token() }}", hashid: c.data('hashid')})
+			.done(function()
+			{
+				c.parent().parent().parent().remove();
+			})
+			.fail(function(res)
+			{
+				alert(res.responseText);
+			});
+		}
+	});
 </script>
