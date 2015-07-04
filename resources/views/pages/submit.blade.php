@@ -36,6 +36,9 @@
 					You can use <a href="{{ url('/') }}">Markdown</a>.
 				</p>
 				{!! Form::textarea('description', (isset($thread) ? $thread->markdown : ''), ['rows' => 5]) !!}
+				<div class="preview">
+					<div class="markdown hide" id="preview"></div>
+				</div>
 				<br>
 				<h5>
 					More details
@@ -82,6 +85,7 @@
 
 @section('scripts')
 {!! HTML::script('/bower_components/autosize/autosize.min.js') !!}
+{!! HTML::script('/bower_components/marked/marked.min.js') !!}
 @include('scripts.autosizer')
 @include('scripts.submit')
 @include('scripts.threads-user-header')

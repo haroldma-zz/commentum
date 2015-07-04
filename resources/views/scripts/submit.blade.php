@@ -25,6 +25,14 @@
 		$('#submitReadyText').addClass('hide').text('');
 	});
 
+	$('#submitForm textarea').keyup(function()
+	{
+		var input = $(this).val();
+
+		$('#preview').removeClass('hide');
+		$('#preview').html(marked(input));
+	});
+
 	$('#submitForm').submit(function(e)
 	{
 		e.preventDefault();
