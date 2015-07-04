@@ -5,6 +5,7 @@ namespace App\Models;
 use Cache;
 use Vinkla\Hashids\Facades\Hashids;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Thread extends Model
 {
@@ -166,27 +167,19 @@ class Thread extends Model
     public function addView()
     {
         $this->increment('views');
-        $this->calculateMomentum();
     }
 
     public function addImpression()
     {
         $this->increment('impressions');
-        $this->calculateMomentum();
     }
 
     public function calculateMomentum()
     {
-        // once the algo is up and running, we'll work on shifting these calculations to MySQL with a stored procedure
-    	$newMomentum = 0.0;
-    	if($this->impressions > 0)
-    		$newMomentum += $this->views * ($this->views / $this->impressions);
-
-    	$newMomentum += $this->comments()->sum('momentum');
-
-    	$this->momentum = $newMomentum;
-
-        return $this->save();
+        return DB::SELECT(DB::RAW("SELECT calculateThreadMomentum(impressions, views, total_momentum) as momentum FROM (SELECT t.*, sum(c.momentum) as total_momentum
+        FROM threads t
+        LEFT JOIN comments c ON c.thread_id = t.id
+        WHERE t.id = ?
+        GROUP BY t.id) as v"), [$this->id])[0]->momentum;
     }
-
 }

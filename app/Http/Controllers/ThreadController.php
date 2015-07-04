@@ -154,7 +154,15 @@ class ThreadController extends Controller
 					else
 						$page = 1;
 
-					$threads = Thread::orderBy('momentum', 'DESC')->skip(25 * $page)->take(25)->get();
+					$offset = 10 * $page;
+					$threads = Thread::hydrateRaw("SELECT *, calculateThreadMomentum(impressions, views, total_momentum) as momentum,
+					calculateHotnessFromMomentum(views, impressions, total_momentum, created_at) as sort
+					FROM (SELECT t.*, sum(c.momentum) as total_momentum FROM threads t
+					LEFT JOIN comments c ON c.thread_id = t.id
+					GROUP BY t.id) as f
+					ORDER BY sort desc
+					LIMIT 10
+					OFFSET $offset");
 					Session::flash('currentPage', $page + 1);
 					Session::flash('moreSubmissionsCount', Session::get('moreSubmissionsCount') - 25);
 

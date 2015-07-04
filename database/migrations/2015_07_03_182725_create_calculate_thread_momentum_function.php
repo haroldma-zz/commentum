@@ -14,16 +14,11 @@ class CreateCalculateThreadMomentumFunction extends Migration
     {
         $sql = <<<SQL
 DROP FUNCTION IF EXISTS calculateThreadMomentum;
-CREATE FUNCTION calculateThreadMomentum(impressions INTEGER, views INTEGER, comment_momentum DOUBLE, created DATETIME) RETURNS DOUBLE
-	BEGIN
-		DECLARE score INTEGER;
-		DECLARE seconds FLOAT;
-    
-		SET score = (views * (views / impressions) + comment_momentum);
-		SET seconds = UNIX_TIMESTAMP(created) - 1430006400;
-    
-		RETURN ROUND(score + seconds / 45000, 7);
-	END
+CREATE FUNCTION calculateThreadMomentum(impressions INTEGER, views INTEGER, comment_momentum DOUBLE)
+RETURNS DOUBLE
+BEGIN
+    RETURN (views * (views / impressions) + comment_momentum) * 10;
+END
 SQL;
 	DB::unprepared($sql);
     }
