@@ -12,7 +12,7 @@
 			<table>
 				<tr>
 					<td>
-						{{ floor($thread->momentum) }}
+						{{ floor($thread->calculateMomentum()) }}
 					</td>
 					<td>
 						<h1 class="thread-title">
