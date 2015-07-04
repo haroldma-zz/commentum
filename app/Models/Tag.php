@@ -5,17 +5,19 @@ namespace App\Models;
 use Cache;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;`
 
 class Tag extends Model
 {
-    private $_owner              = null;
-    private $_permalink          = null;
-    private $_threads            = null;
-    private $_threadCount        = null;
-    private $_mods               = null;
-    private $_subscriberCount    = null;
-    private static $_exploreList = null;
-    private static $_newTags     = null;
+    private $_owner					= null;
+    private $_permalink				= null;
+    private $_threads				= null;
+    private $_threadCount			= null;
+    private $_mods					= null;
+    private $_subscriberCount		= null;
+    private static $_exploreList	= null;
+    private static $_newTags		= null;
+	private static $_trendingTags	= null;
 
 	/**
 	 * The database table used by this model.
