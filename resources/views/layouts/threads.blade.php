@@ -9,7 +9,7 @@
 	@foreach ($threads as $t)
 	<tr>
 		<td>
-			<a>{{ floor($t->momentum) }}</a>
+			<a>{{ floor($t->calculateMomentum()) }}</a>
 		</td>
 		<td>
 			{!! (!empty($t->link) ? '<i class="ion-link"></i>' : '') !!}
