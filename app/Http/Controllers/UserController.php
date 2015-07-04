@@ -294,6 +294,25 @@ class UserController extends Controller
 
 		return response("Deleted.", 200);
 	}
+
+
+	public function pm(Request $request)
+	{
+		if (!$request->ajax())
+			abort(404);
+
+		$message = $request->get('markdown');
+		$to      = $request->get('to');
+
+		$user = User::where('username', $to)->first();
+
+		if (!$user)
+			return response("Can't find that user.", 500);
+
+		//
+
+		return response("test", 500);
+	}
 }
 
 
