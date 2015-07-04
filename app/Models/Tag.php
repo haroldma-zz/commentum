@@ -5,7 +5,7 @@ namespace App\Models;
 use Cache;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
-use Carbon\Carbon;`
+use Carbon\Carbon;
 
 class Tag extends Model
 {
@@ -185,7 +185,7 @@ class Tag extends Model
      *
      * @return  Tag
      */
-	static function getTrendingTags($start_time = null, $end_time = null, $max_results = null)
+	public static function getTrendingTags($start_time = null, $end_time = null, $max_results = null)
 	{
 		//if(!is_null(self::$_trendingTags))
 		//	return self::$_trendingTags;
@@ -201,7 +201,7 @@ class Tag extends Model
 		if(is_null($max_results))
 			$max_results = 10;
 		
-		return DB::statement("CALL calculateTrendingList ('" . $start_time . "', '" . $end_time . "', " . $max_result . ");");
+		return \DB::select("CALL calculateTrendingTags ('" . $start_time . "', '" . $end_time . "', " . $max_results . ");");
 	}
 
     /**
