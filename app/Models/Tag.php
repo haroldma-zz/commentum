@@ -5,17 +5,19 @@ namespace App\Models;
 use Cache;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class Tag extends Model
 {
-    private $_owner              = null;
-    private $_permalink          = null;
-    private $_threads            = null;
-    private $_threadCount        = null;
-    private $_mods               = null;
-    private $_subscriberCount    = null;
-    private static $_exploreList = null;
-    private static $_newTags     = null;
+    private $_owner					= null;
+    private $_permalink				= null;
+    private $_threads				= null;
+    private $_threadCount			= null;
+    private $_mods					= null;
+    private $_subscriberCount		= null;
+    private static $_exploreList	= null;
+    private static $_newTags		= null;
+	private static $_trendingTags	= null;
 
 	/**
 	 * The database table used by this model.
@@ -170,13 +172,37 @@ class Tag extends Model
         //     return self::$_newTags;
         // }
 
-        $list = self::where('nsfw', false)->orderBy('id', 'DESC')->take(7)->get();
+        $list = self::where('nsfw', false)->orderBy('id', 'DESC')->take(10)->get();
         self::$_newTags = $list;
 
         // Cache::put("newtags", self::$_newTags, 10);
 
         return self::$_newTags;
     }
+	
+	/**
+     * Get trending tags list.
+     *
+     * @return  Tag
+     */
+	public static function getTrendingTags($start_time = null, $end_time = null, $max_results = null)
+	{
+		//if(!is_null(self::$_trendingTags))
+		//	return self::$_trendingTags;
+		
+		/*********************************************/
+		/***** YO YO YO IMPLEMENT CACHING MAN ********/
+		/*********************************************/
+		
+		if(is_null($start_time))
+			$start_time = Carbon::now()->subDay();
+		if(is_null($end_time))
+			$end_time = Carbon::now();
+		if(is_null($max_results))
+			$max_results = 10;
+		
+		return \DB::select("CALL calculateTrendingTags ('" . $start_time . "', '" . $end_time . "', " . $max_results . ");");
+	}
 
     /**
      * Subscribes a user to a tag.
