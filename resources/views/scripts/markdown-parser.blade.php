@@ -4,8 +4,7 @@
 	$.each(markdown, function(i, el)
 	{
 		var md = $.trim($(el).text()),
-			pr = new showdown.Converter(),
-			ht = pr.makeHtml(md);
+			ht = marked(md);
 
 		$(el).html(ht);
 	});

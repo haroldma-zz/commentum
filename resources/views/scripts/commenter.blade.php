@@ -23,8 +23,7 @@
 		.done(function(res)
 		{
 			var md = markdown,
-				pr = new showdown.Converter(),
-				ht = pr.makeHtml(md)
+				ht = marked(md)
 				hier = (form.data('hierarchy') == 'parent') ? 'child' : 'parent';
 
 			var commentCount = $('#threadCommentCount'),
@@ -130,8 +129,7 @@
 				tagRegex      = /(?:^|)#(\w+)(?!\w)/g;
 
 			var markdown = input.replace(usernameRegex, "[$1]($1)").replace(tagRegex, "[#$1](/t/$1)"),
-				pr    	 = new showdown.Converter(),
-				ht    	 = pr.makeHtml(markdown);
+				ht    	 = marked(markdown);
 
 			$(this).parent().find('.markdown').html(ht);
 

@@ -154,7 +154,7 @@ class Thread extends Model
      */
     public function printComments()
     {
-        $html = '';
+        $html      = '';
 
         foreach ($this->comments()->where('parent_id', null) as $c)
         {
