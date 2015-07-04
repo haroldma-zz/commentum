@@ -60,7 +60,14 @@
 			$.post("{{ url('/me/delete/comment') }}", {_token: "{{ csrf_token() }}", hashid: c.data('hashid')})
 			.done(function()
 			{
-				c.parent().parent().parent().remove();
+				var p = c.parent().parent().parent();
+
+				p.find('.markdown').first().html('<p>[deleted]</p>');
+				p.parent().find('a').first().parent().text('[deleted]');
+				p.parent().find('footer').first().find('a').last().remove();
+				p.parent().find('footer').first().find('a').last().remove();
+				p.parent().find('footer').first().find('a').last().remove();
+				p.parent().find('.comment-editor').first().remove()
 			})
 			.fail(function(res)
 			{

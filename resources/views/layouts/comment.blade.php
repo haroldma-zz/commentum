@@ -2,10 +2,14 @@
 	<header>
 		<span class="collapser"><i class="ion-chevron-up"></i></span>
 		<span>
+			@if(is_null($c->deleted_at))
 			<a href="{{ $c->author()->permalink() }}">
 				{!! ($c->author()->id == $c->thread()->user_id ? '<span class="username-tag op">OP</span> ' : '') !!}
 				{{ $c->author()->username }}
 			</a>
+			@else
+			[deleted]
+			@endif
 		</span>
 		&middot;
 		<span class="comment-momentum">{{ floor($c->momentum) }} points</span>
@@ -14,7 +18,7 @@
 	</header>
 	<div class="body">
 		<section class="markdown">
-			{{ $c->markdown }}
+			{{ (is_null($c->deleted_at) ? $c->markdown : "[deleted]") }}
 		</section>
 		@if (Auth::check() && Auth::id() === $c->author_id)
 		<section class="hide comment-editor">
@@ -42,10 +46,10 @@
 			@if (!is_null($c->parent()))
 			<a href="{{ $c->context() }}">context</a>
 			@endif
-			@if (Auth::check())
+			@if (Auth::check() && is_null($c->deleted_at))
 			<a class="save-comment" data-hashid="{{ Hashids::encode($c->id) }}">{{ (Auth::user()->savedComment($c->id) == true ? "un" : "") }}save</a>
 			@endif
-			@if (Auth::check() && Auth::id() === $c->author_id)
+			@if (Auth::check() && Auth::id() === $c->author_id && is_null($c->deleted_at))
 			<a class="edit-comment">edit</a>
 			<a class="delete-comment" data-hashid="{{ Hashids::encode($c->id) }}">delete</a>
 			@endif

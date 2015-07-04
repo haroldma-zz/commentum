@@ -95,7 +95,7 @@ class Comment extends Model
         if (!is_null($this->_children))
             return $this->_children;
 
-        $this->_children = $this->hasMany('App\Models\Comment', 'parent_id', 'id')->orderBy('momentum', 'DESC')->get();
+        $this->_children = $this->hasMany('App\Models\Comment', 'parent_id', 'id')->withTrashed()->orderBy('momentum', 'DESC')->get();
 
         return $this->_children;
     }

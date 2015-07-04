@@ -190,6 +190,9 @@ class CommentController extends Controller
 
 		$comment = Comment::find($id[0]);
 
+		if (!$comment)
+			return response("Can't find that comment.", 500);
+
 		if ($comment->author_id != Auth::id())
 			return response("You're not the owner of this comment.", 500);
 
