@@ -172,7 +172,7 @@ class Tag extends Model
         //     return self::$_newTags;
         // }
 
-        $list = self::where('nsfw', false)->orderBy('id', 'DESC')->take(7)->get();
+        $list = self::where('nsfw', false)->orderBy('id', 'DESC')->take(10)->get();
         self::$_newTags = $list;
 
         // Cache::put("newtags", self::$_newTags, 10);
