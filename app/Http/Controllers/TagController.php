@@ -33,11 +33,7 @@ class TagController extends Controller
 		if (!$tag)
 			return response("That tag doesn't exist (anymore).");
 
-		$subscription          = new TagSubscriber;
-		$subscription->tag_id  = $tag->id;
-		$subscription->user_id = Auth::id();
-
-		if ($subscription->save())
+		if ($tag->subscribe())
 		{
 			sendMessage($tag->owner()->id, Auth::id(), null, null, null, $tag->id, null, 6);
 			return response("Subscribed.", 200);

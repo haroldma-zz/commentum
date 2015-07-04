@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Cache;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Tag extends Model
 {
@@ -175,6 +176,21 @@ class Tag extends Model
         // Cache::put("newtags", self::$_newTags, 10);
 
         return self::$_newTags;
+    }
+
+    /**
+     * Subscribes a user to a tag.
+     *
+     * @param  integer 	$userId
+     * @return boolean
+     */
+    function subscribe($userId = null)
+    {
+        $subscription          = new TagSubscriber;
+        $subscription->tag_id  = $this->id;
+        $subscription->user_id = ($userId != null ? $userId : Auth::id());
+
+        return $subscription->save();
     }
 }
 

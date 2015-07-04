@@ -149,7 +149,7 @@ function makeModOfTag($tagId, $userId)
 	$tagmod->tag_id  = $tagId;
 	$tagmod->user_id = $userId;
 
-	$tagmod->save();
+	return $tagmod->save();
 }
 
 /**
