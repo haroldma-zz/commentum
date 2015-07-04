@@ -35,9 +35,6 @@ class UserController extends Controller
 		$email    = (!empty($request->get('email'))) ? $request->get('email') : null;
 		$password = $request->get('password');
 		$password_confirmation = $request->get('password_confirmation');
-		
-		//if (!empty($request->get('email')))
-		//	$email = $request->get('email');
 
 		if (strlen($username) < 3 || strlen($username) > 21)
 			return response('Your username must be between 3 and 21 characters long.', 500);
@@ -59,10 +56,6 @@ class UserController extends Controller
 		if($passwords_dont_match)
 			return response('The passwords you entered do not match.', 500);
 
-		//if (!$check)
-		//{
-			
-			
 		$user = new User;
 		$user->username = $username;
 		$user->password = Hash::make($password);
@@ -92,13 +85,6 @@ class UserController extends Controller
 		{
 			return response('Something went wrong on our side, please try again.', 500);
 		}
-			
-			
-		//}
-		//else
-		//{
-		//	return response('The username you chose is already registered.', 500);
-		//}
 	}
 
 	/**
