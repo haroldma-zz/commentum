@@ -31,7 +31,17 @@
 		<a href="{{ url('/login') }}" class="btn success small">Subscribe</a>
 	@endif
 	<!--//////// END INFO SECTION ////////-->
-	
+
+	<!--//////// BEGIN DESCRIPTION SECTION ////////-->
+		@if(isset($tag->description))
+			<hr>
+			<h6 class="super-header">Description</h6>
+			<div class="markdown">
+				{{ $tag->description }}
+			</div>
+			@endif
+	<!--//////// END RULES SECTION ////////-->
+
 	<!--//////// BEGIN RULES SECTION ////////-->
 	@if(isset($tag->rules))
 		<hr>

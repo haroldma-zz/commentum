@@ -15,6 +15,8 @@
 				{!! Form::text('title', '#' . $tag->display_title, ['disabled' => 'yes']) !!}
 				{!! Form::label('cover', 'Link to cover image') !!}
 				{!! Form::text('cover', $tag->hero_img) !!}
+                {!! Form::label('description', 'Description') !!}
+                {!! Form::textarea('description', $tag->description, ['rows' => 4]) !!}
 				{!! Form::label('rules', 'Rules') !!}
 				{!! Form::textarea('rules', $tag->rules, ['rows' => 4]) !!}
 				<label for="nsfw">
