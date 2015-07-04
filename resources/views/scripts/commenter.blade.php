@@ -191,7 +191,10 @@
 				fo = form.parent(),
 				eb = form.parent().parent().find('a.edit-comment').first();
 
-			oc.html(marked(markdown)).removeClass('hide');
+			var usernameRegex = /(?:^|)(\/u\/\w+)(?!\w)/g,
+				tagRegex      = /(?:^|)#(\w+)(?!\w)/g;
+
+			oc.html(marked(markdown.replace(usernameRegex, "[$1]($1)").replace(tagRegex, "[#$1](/t/$1)"))).removeClass('hide');
 			fo.addClass('hide');
 			form.trigger('reset');
 			submitBtn.attr('disabled', false).removeClass('disabled');
