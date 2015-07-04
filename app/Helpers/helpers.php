@@ -164,9 +164,20 @@ function isModOfTag($tagId)
 }
 
 
-
-
-
+/**
+ * Truncates the given slug at the specified length.
+ *
+ * @param string $slug The input string.
+ * @param int $length The number of chars at which the string will be truncated.
+ * @return string
+ */
+function truncateSlug($slug, $length = 45) {
+    if (preg_match("/^.{1,$length}\\b/s", $slug, $out))
+        $slug = $out[0];
+    else // really long word, substring.
+        $slug = substr($slug, 0, $length);
+    return rtrim($slug, '-');
+}
 
 
 

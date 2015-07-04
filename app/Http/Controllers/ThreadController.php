@@ -123,7 +123,7 @@ class ThreadController extends Controller
 		$new->user_id  = Auth::id();
 		$new->tag_id   = $tag->id;
 		$new->title    = $title;
-		$new->slug     = $slugify->slugify($title, "-");
+		$new->slug     = truncateSlug($slugify->slugify($title, "-"));
 		$new->nsfw     = $nsfw;
 		$new->serious  = $serious;
 		$new->link     = $link;
