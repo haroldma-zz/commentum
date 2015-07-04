@@ -17,6 +17,8 @@
 		{!! Form::email('email') !!}
 		{!! Form::label('password', 'Password') !!}
 		{!! Form::password('password') !!}
+		{!! Form::label('password_confirmation', 'Confirm password') !!}
+		{!! Form::password('password_confirmation') !!}
 		<br>
 		<p class="text-info"></p>
 		{!! Form::submit('Register') !!}
