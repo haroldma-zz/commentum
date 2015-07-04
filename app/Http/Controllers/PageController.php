@@ -70,7 +70,7 @@ class PageController extends Controller
             LEFT JOIN comments c ON c.thread_id = t.id
             GROUP BY t.id) as f
             ORDER BY sort desc
-            LIMIT 10');
+            LIMIT 20');
 
 			$moreSubmissionsCount = Thread::orderBy('id', 'DESC')->count();
 			Session::flash('moreSubmissionsCount', $moreSubmissionsCount);

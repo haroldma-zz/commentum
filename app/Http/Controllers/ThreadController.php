@@ -163,10 +163,10 @@ class ThreadController extends Controller
 					LEFT JOIN comments c ON c.thread_id = t.id
 					GROUP BY t.id) as f
 					ORDER BY sort desc
-					LIMIT 10
+					LIMIT 20
 					OFFSET $offset");
 					Session::flash('currentPage', $page + 1);
-					Session::flash('moreSubmissionsCount', Session::get('moreSubmissionsCount') - 25);
+					Session::flash('moreSubmissionsCount', Session::get('moreSubmissionsCount') - 20);
 
 					if (count($threads) > 0)
 					{
