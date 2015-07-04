@@ -5,13 +5,6 @@
 			<div class="markdown">
 				{{ $tag->description }}
 			</div>
-			<h4>
-				<small>
-					<span>{{ $tag->subscriberCount() }} subscriber{{ $tag->subscriberCount() != 1 ? 's' : '' }}</span>
-					&middot;
-					<span>{{ $tag->threadCount() }} submission{{ ($tag->threadCount() != 1 ? 's' : '') }}</span>
-				</small>
-			</h4>
 		</div>
 	</div>
 </div>
