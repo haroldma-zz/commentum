@@ -8,6 +8,7 @@ Route::group(['middleware' => 'auth'], function()
 	Route::get('/submit', 'PageController@submit');
 	Route::get('/logout', 'UserController@logout');
 	Route::get('/inbox', 'PageController@inbox');
+	Route::get('/inbox/new', 'PageController@inboxNew');
 	Route::get('/preferences', 'PageController@preferences');
 	Route::get('/u/{username}/saved', 'PageController@saves');
 	Route::get('/t/{tag}/settings', 'PageController@tagSettings');
@@ -24,6 +25,8 @@ Route::group(['middleware' => 'auth'], function()
 	Route::post('/me/unread/{hashid}', 'UserController@unreadMessage');
 	Route::post('/me/save/thread', 'UserController@saveThread');
 	Route::post('/me/save/comment', 'UserController@saveComment');
+	Route::post('/me/edit/comment', 'CommentController@edit');
+	Route::post('/me/pm', 'UserController@pm');
 });
 
 

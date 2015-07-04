@@ -51,7 +51,7 @@ class UserController extends Controller
 		$username_taken = User::where('username', $username)->first();
 		if($username_taken)
 			return response('The username you chose is already registered.', 500);
-		
+
 		$passwords_dont_match = ($password != $password_confirmation);
 		if($passwords_dont_match)
 			return response('The passwords you entered do not match.', 500);
@@ -59,6 +59,7 @@ class UserController extends Controller
 		$user = new User;
 		$user->username = $username;
 		$user->password = Hash::make($password);
+
 		if (!is_null($email))
 			$user->email = $email;
 
@@ -292,6 +293,25 @@ class UserController extends Controller
 		$check->delete();
 
 		return response("Deleted.", 200);
+	}
+
+
+	public function pm(Request $request)
+	{
+		if (!$request->ajax())
+			abort(404);
+
+		$message = $request->get('markdown');
+		$to      = $request->get('to');
+
+		$user = User::where('username', $to)->first();
+
+		if (!$user)
+			return response("Can't find that user.", 500);
+
+		//
+
+		return response("test", 500);
 	}
 }
 

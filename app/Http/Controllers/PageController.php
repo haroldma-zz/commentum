@@ -212,6 +212,17 @@ class PageController extends Controller
 	}
 
 	/**
+	 * PM view
+	 *
+	 * @return 	view
+	 */
+	public function inboxNew()
+	{
+		// return view('users.new-message');
+		abort(404);
+	}
+
+	/**
 	 * Tag feed page
 	 *
 	 * @return 	view

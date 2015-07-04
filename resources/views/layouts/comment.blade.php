@@ -16,6 +16,26 @@
 		<section class="markdown">
 			{{ $c->markdown }}
 		</section>
+		@if (Auth::check() && Auth::id() === $c->author_id)
+		<section class="hide comment-editor">
+			{!! Form::open(['url' => '/me/edit/comment', 'class' => 'edit-comment-form']) !!}
+			{!! Form::hidden('hashid', Hashids::encode($c->id)) !!}
+			<p class="no-margin">
+				You can use <a href="{{ url('/') }}">Markdown</a>.
+			</p>
+			{!! Form::textarea('markdown', $c->markdown, ['class' => 'comment-editor-textarea', 'rows' => 4]) !!}
+			<div class="preview">
+				<h6 class="super-header">Live Preview</h6>
+				<div class="markdown">{{ $c->markdown }}</div>
+			</div>
+			<p class="text-alert"></p>
+			{!! Form::submit('Save', ['class' => 'btn blue']) !!}
+			&nbsp;
+			<img src="{{ url('/img/three-dots-blue.svg') }}" width="35px" class="loader">
+			{!! Form::close() !!}
+			<hr>
+		</section>
+		@endif
 		<footer>
 			<a onclick="toggleReplyBox(this)" data-thread="{{ Hashids::encode($threadId) }}" data-comment="{{ Hashids::encode($c->id) }}" {{ (Auth::check() == false ? 'href=/login' : '') }}>reply</a>
 			<a href="{{ $c->permalink() }}">permalink</a>
@@ -26,7 +46,7 @@
 			<a class="save-comment" data-hashid="{{ Hashids::encode($c->id) }}">{{ (Auth::user()->savedComment($c->id) == true ? "un" : "") }}save</a>
 			@endif
 			@if (Auth::check() && Auth::id() === $c->author_id)
-			<a>edit</a>
+			<a class="edit-comment">edit</a>
 			@endif
 		</footer>
 		<div class="reply-box">

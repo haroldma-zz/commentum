@@ -3,6 +3,11 @@
 	font-weight: 700;
 }
 
+.text-dark-info {
+	color: darken($info-color, 20) !important;
+	font-weight: 700;
+}
+
 .text-alert {
 	color: $alert-color !important;
 	font-weight: 700;
@@ -17,13 +22,14 @@ input[type="submit"] {
 }
 
 .btn {
-	padding: 0.75em 2em;
+	padding: 0.75em 2em !important;
 	background: $primary-color;
 	border: 1px solid darken($primary-color, 10);
 	color: white;
 	font-weight: 700;
 	outline: none !important;
 	cursor: pointer;
+	font-size: 11px;
 	@include border-radius(2px);
 	&:focus {
 		background: darken($primary-color, 10);

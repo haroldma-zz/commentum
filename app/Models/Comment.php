@@ -105,7 +105,7 @@ class Comment extends Model
      */
     public function printChildren($i)
     {
-        $html = '';
+        $html      = '';
 
         foreach ($this->children()->where('parent_id', $this->id) as $c)
         {

@@ -198,6 +198,7 @@ return [
         'Form'      => Illuminate\Html\FormFacade::class,
         'HTML'      => Illuminate\Html\HtmlFacade::class,
         'Hashids'   => Vinkla\Hashids\Facades\Hashids::class,
+        'Parsedown' => App\Helpers\Parsedown::class,
     ],
 
 ];

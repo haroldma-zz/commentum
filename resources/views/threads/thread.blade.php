@@ -33,8 +33,6 @@
 								@if ($thread->nsfw || $thread->serious)
 								<br>
 								@endif
-<!--								<span>{{ $thread->impressions }} impression{{ ($thread->impressions != 1 ? 's' : '') }}</span>
-								<span>&middot;</span>-->
 								<span>{{ $thread->views }} view{{ ($thread->views != 1 ? 's' : '') }}</span>
 								@if (Auth::check())
 								<span>&middot;</span>
