@@ -419,6 +419,7 @@ html, body {
 		}
 		section {
 			font-size: 0.85em;
+			padding-right: 1em;
 		}
 		header, footer {
 			font-size: 0.8em;
@@ -487,6 +488,11 @@ html, body {
 		}
 		.body {
 			padding-left: 22px;
+		}
+		.comment-editor {
+			.preview {
+				font-size: 115%;
+			}
 		}
 		&.collapsed {
 			overflow: hidden;
