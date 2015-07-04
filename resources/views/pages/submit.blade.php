@@ -64,11 +64,13 @@
 					This is a <b>serious</b> submission.
 				</label>
 				<br>
-				<p class="text-alert" id="submitFormError"></p>
+				<p class="text-alert hide" id="submitFormError"></p>
+				<p class="text-dark-info hide" id="submitReadyText"></p>
 				@if (isset($thread))
 				{!! Form::hidden('thread_id', Hashids::encode($thread->id)) !!}
 				@endif
-				{!! Form::submit('Submit', ['class' => 'btn blue']) !!}
+				<a id="submitCheck" class="btn blue">Submit</a>
+				{!! Form::submit('Yes, I\'m sure', ['class' => 'btn blue hide', 'id' => 'submitButton']) !!}
 				&nbsp;&nbsp;&nbsp;
 				<img class="loader" id="submitFormLoader" src="{{ url('/img/dark-loader.svg') }}">
 			</div>

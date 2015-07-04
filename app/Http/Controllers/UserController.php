@@ -51,7 +51,7 @@ class UserController extends Controller
 		$username_taken = User::where('username', $username)->first();
 		if($username_taken)
 			return response('The username you chose is already registered.', 500);
-		
+
 		$passwords_dont_match = ($password != $password_confirmation);
 		if($passwords_dont_match)
 			return response('The passwords you entered do not match.', 500);
@@ -59,6 +59,7 @@ class UserController extends Controller
 		$user = new User;
 		$user->username = $username;
 		$user->password = Hash::make($password);
+
 		if (!is_null($email))
 			$user->email = $email;
 
