@@ -149,7 +149,23 @@ function makeModOfTag($tagId, $userId)
 	$tagmod->tag_id  = $tagId;
 	$tagmod->user_id = $userId;
 
-	$tagmod->save();
+	return $tagmod->save();
+}
+
+/**
+ * Subscribes a user to a tag.
+ *
+ * @param  integer 	$tagId
+ * @param  integer 	$userId
+ * @return boolean
+ */
+function subscribeToTag($tagId, $userId)
+{
+    $subscription          = new App\Models\TagSubscriber;
+    $subscription->tag_id  = $tagId;
+    $subscription->user_id = $userId;
+
+    return $subscription->save();
 }
 
 /**
