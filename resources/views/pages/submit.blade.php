@@ -37,7 +37,7 @@
 				</p>
 				{!! Form::textarea('description', (isset($thread) ? $thread->markdown : ''), ['rows' => 5]) !!}
 				<div class="preview">
-					<div class="markdown hide" id="preview"></div>
+					<div class="markdown {{ (isset($thread) ? '' : 'hide') }}" id="preview"></div>
 				</div>
 				<br>
 				<h5>

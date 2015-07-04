@@ -1,4 +1,9 @@
 <script>
+	@if(isset($thread))
+	$('#preview').html(marked($('#submitForm textarea').last().val()));
+	@endif
+
+
 	$('#submitCheck').click(function()
 	{
 		$(this).addClass('hide');
@@ -25,7 +30,7 @@
 		$('#submitReadyText').addClass('hide').text('');
 	});
 
-	$('#submitForm textarea').keyup(function()
+	$('#submitForm textarea').last().keyup(function()
 	{
 		var input = $(this).val();
 
