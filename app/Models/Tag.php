@@ -187,8 +187,12 @@ class Tag extends Model
      */
 	static function getTrendingTags($start_time = null, $end_time = null, $max_results = null)
 	{
-		if(!is_null(self::$_trendingTags))
-			return self::$_trendingTags;
+		//if(!is_null(self::$_trendingTags))
+		//	return self::$_trendingTags;
+		
+		/*********************************************/
+		/***** YO YO YO IMPLEMENT CACHING MAN ********/
+		/*********************************************/
 		
 		if(is_null($start_time))
 			$start_time = Carbon::now()->subDay();
