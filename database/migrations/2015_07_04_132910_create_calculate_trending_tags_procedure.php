@@ -16,7 +16,7 @@ class CreateCalculateTrendingTagsProcedure extends Migration
 DROP PROCEDURE IF EXISTS calculateTrendingTags;
 CREATE PROCEDURE calculateTrendingTags(start_time DATETIME, end_time DATETIME, max_results INTEGER)
 BEGIN
-    SELECT id, title, calculateThreadMomentum(views, impressions, comment_momentum) AS momentum
+    SELECT id, display_title, permalink, calculateThreadMomentum(views, impressions, comment_momentum) AS momentum
     FROM (SELECT 
             *,
             (SELECT SUM(c.momentum) FROM threads AS td 
