@@ -11,6 +11,7 @@ use App\Models\Thread;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 use Vinkla\Hashids\Facades\Hashids;
+use Illuminate\Support\Facades\Log;
 
 class PageController extends Controller
 {
@@ -63,6 +64,13 @@ class PageController extends Controller
 	 */
 	public function index(Request $request)
 	{
+        $real = $request->header('HTTP_CF_CONNECTING_IP');
+        $fake = $request->header('REMOTE_ADDR');
+
+
+        Log::info("$real $fake");
+
+
 		// if (!Auth::check())
 			$threads = Thread::hydrateRaw('SELECT *, calculateThreadMomentum(impressions, views, total_momentum) as momentum,
             calculateHotnessFromMomentum(impressions, views, total_momentum, created_at) as sort
