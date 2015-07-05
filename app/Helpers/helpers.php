@@ -179,5 +179,10 @@ function truncateSlug($slug, $length = 45) {
     return rtrim($slug, '-');
 }
 
-
+function getClientIp() {
+    if(isset($_SERVER['HTTP_CF_CONNECTING_IP'])) {
+        return $_SERVER['HTTP_CF_CONNECTING_IP'];
+    }
+    return $_SERVER['REMOTE_ADDR'];
+}
 

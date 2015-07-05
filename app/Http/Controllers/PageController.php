@@ -64,11 +64,8 @@ class PageController extends Controller
 	 */
 	public function index(Request $request)
 	{
-        $real = $request->header('HTTP_CF_CONNECTING_IP');
-        $fake = $request->header('REMOTE_ADDR');
-
-
-        Log::info("$real $fake");
+        $real = getClientIp();
+        Log::info("$real");
 
 
 		// if (!Auth::check())
