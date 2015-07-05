@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateThreadsTable extends Migration
+class Update2ThreadsTable extends Migration
 {
     /**
      * Run the migrations.
