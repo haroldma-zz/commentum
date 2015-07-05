@@ -161,6 +161,7 @@ class ThreadController extends Controller
 					calculateHotnessFromMomentum(impressions, views, total_momentum, created_at) as sort
 					FROM (SELECT t.*, sum(c.momentum) as total_momentum FROM threads t
 					LEFT JOIN comments c ON c.thread_id = t.id
+					WHERE nsfw = 0
 					GROUP BY t.id) as f
 					ORDER BY sort desc
 					LIMIT 20
