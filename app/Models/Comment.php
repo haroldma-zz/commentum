@@ -40,7 +40,7 @@ class Comment extends Model
             return $this->_thread;
         }
 
-        $this->_thread = $this->hasOne('App\Models\Thread', 'id', 'thread_id')->first();
+        $this->_thread = $this->hasOne('App\Models\Thread', 'id', 'thread_id')->withTrashed()->first();
         Cache::put("comment:{$this->id}:thread", $this->_thread, 60);
 
     	return $this->_thread;
