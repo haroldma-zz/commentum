@@ -6,9 +6,12 @@ use Cache;
 use Vinkla\Hashids\Facades\Hashids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Thread extends Model
 {
+    use SoftDeletes;
+
     private $_tag            = null;
     private $_author         = null;
     private $_comments       = null;
@@ -22,6 +25,8 @@ class Thread extends Model
 	 * @var string
 	 */
     protected $table = 'threads';
+
+    protected $dates = ['deleted_at'];
 
     /**
      * Return the permalink to a thread.
@@ -126,7 +131,7 @@ class Thread extends Model
         if (!is_null($this->_comments))
             return $this->_comments;
 
-        $this->_comments = $this->hasMany('App\Models\Comment', 'thread_id', 'id')->orderBy('momentum', 'DESC')->get();
+        $this->_comments = $this->hasMany('App\Models\Comment', 'thread_id', 'id')->withTrashed()->orderBy('momentum', 'DESC')->get();
 
         return $this->_comments;
     }
@@ -154,7 +159,7 @@ class Thread extends Model
      */
     public function printComments()
     {
-        $html = '';
+        $html      = '';
 
         foreach ($this->comments()->where('parent_id', null) as $c)
         {

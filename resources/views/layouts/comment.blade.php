@@ -2,10 +2,14 @@
 	<header>
 		<span class="collapser"><i class="ion-chevron-up"></i></span>
 		<span>
+			@if(is_null($c->deleted_at))
 			<a href="{{ $c->author()->permalink() }}">
 				{!! ($c->author()->id == $c->thread()->user_id ? '<span class="username-tag op">OP</span> ' : '') !!}
 				{{ $c->author()->username }}
 			</a>
+			@else
+			[deleted]
+			@endif
 		</span>
 		&middot;
 		<span class="comment-momentum">{{ floor($c->momentum) }} points</span>
@@ -14,19 +18,40 @@
 	</header>
 	<div class="body">
 		<section class="markdown">
-			{{ $c->markdown }}
+			{{ (is_null($c->deleted_at) ? $c->markdown : "[deleted]") }}
 		</section>
+		@if (Auth::check() && Auth::id() === $c->author_id)
+		<section class="hide comment-editor">
+			{!! Form::open(['url' => '/me/edit/comment', 'class' => 'edit-comment-form']) !!}
+			{!! Form::hidden('hashid', Hashids::encode($c->id)) !!}
+			<p class="no-margin">
+				You can use <a href="{{ url('/') }}">Markdown</a>.
+			</p>
+			{!! Form::textarea('markdown', $c->markdown, ['class' => 'comment-editor-textarea', 'rows' => 4]) !!}
+			<div class="preview">
+				<h6 class="super-header">Live Preview</h6>
+				<div class="markdown">{{ $c->markdown }}</div>
+			</div>
+			<p class="text-alert"></p>
+			{!! Form::submit('Save', ['class' => 'btn blue']) !!}
+			&nbsp;
+			<img src="{{ url('/img/three-dots-blue.svg') }}" width="35px" class="loader">
+			{!! Form::close() !!}
+			<hr>
+		</section>
+		@endif
 		<footer>
 			<a onclick="toggleReplyBox(this)" data-thread="{{ Hashids::encode($threadId) }}" data-comment="{{ Hashids::encode($c->id) }}" {{ (Auth::check() == false ? 'href=/login' : '') }}>reply</a>
 			<a href="{{ $c->permalink() }}">permalink</a>
 			@if (!is_null($c->parent()))
 			<a href="{{ $c->context() }}">context</a>
 			@endif
-			@if (Auth::check())
+			@if (Auth::check() && is_null($c->deleted_at))
 			<a class="save-comment" data-hashid="{{ Hashids::encode($c->id) }}">{{ (Auth::user()->savedComment($c->id) == true ? "un" : "") }}save</a>
 			@endif
-			@if (Auth::check() && Auth::id() === $c->author_id)
-			<a>edit</a>
+			@if (Auth::check() && Auth::id() === $c->author_id && is_null($c->deleted_at))
+			<a class="edit-comment">edit</a>
+			<a class="delete-comment" data-hashid="{{ Hashids::encode($c->id) }}">delete</a>
 			@endif
 		</footer>
 		<div class="reply-box">

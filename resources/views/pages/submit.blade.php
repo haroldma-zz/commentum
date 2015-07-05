@@ -36,6 +36,9 @@
 					You can use <a href="{{ url('/') }}">Markdown</a>.
 				</p>
 				{!! Form::textarea('description', (isset($thread) ? $thread->markdown : ''), ['rows' => 5]) !!}
+				<div class="preview">
+					<div class="markdown {{ (isset($thread) ? '' : 'hide') }}" id="preview"></div>
+				</div>
 				<br>
 				<h5>
 					More details
@@ -64,11 +67,13 @@
 					This is a <b>serious</b> submission.
 				</label>
 				<br>
-				<p class="text-alert" id="submitFormError"></p>
+				<p class="text-alert hide" id="submitFormError"></p>
+				<p class="text-dark-info hide" id="submitReadyText"></p>
 				@if (isset($thread))
 				{!! Form::hidden('thread_id', Hashids::encode($thread->id)) !!}
 				@endif
-				{!! Form::submit('Submit', ['class' => 'btn blue']) !!}
+				<a id="submitCheck" class="btn blue">Submit</a>
+				{!! Form::submit('Yes, I\'m sure', ['class' => 'btn blue hide', 'id' => 'submitButton']) !!}
 				&nbsp;&nbsp;&nbsp;
 				<img class="loader" id="submitFormLoader" src="{{ url('/img/dark-loader.svg') }}">
 			</div>
@@ -80,6 +85,7 @@
 
 @section('scripts')
 {!! HTML::script('/bower_components/autosize/autosize.min.js') !!}
+{!! HTML::script('/bower_components/marked/marked.min.js') !!}
 @include('scripts.autosizer')
 @include('scripts.submit')
 @include('scripts.threads-user-header')

@@ -50,4 +50,29 @@
 			alert(res.responseText);
 		});
 	});
+
+	$('.delete-comment').click(function()
+	{
+		if (confirm("Are you sure you want to delete this comment?"))
+		{
+			var c = $(this);
+
+			$.post("{{ url('/me/delete/comment') }}", {_token: "{{ csrf_token() }}", hashid: c.data('hashid')})
+			.done(function()
+			{
+				var p = c.parent().parent().parent();
+
+				p.find('.markdown').first().html('<p>[deleted]</p>');
+				p.parent().find('a').first().parent().text('[deleted]');
+				p.parent().find('footer').first().find('a').last().remove();
+				p.parent().find('footer').first().find('a').last().remove();
+				p.parent().find('footer').first().find('a').last().remove();
+				p.parent().find('.comment-editor').first().remove()
+			})
+			.fail(function(res)
+			{
+				alert(res.responseText);
+			});
+		}
+	});
 </script>

@@ -33,8 +33,6 @@
 								@if ($thread->nsfw || $thread->serious)
 								<br>
 								@endif
-<!--								<span>{{ $thread->impressions }} impression{{ ($thread->impressions != 1 ? 's' : '') }}</span>
-								<span>&middot;</span>-->
 								<span>{{ $thread->views }} view{{ ($thread->views != 1 ? 's' : '') }}</span>
 								@if (Auth::check())
 								<span>&middot;</span>
@@ -42,6 +40,8 @@
 								@if (Auth::id() == $thread->author()->id)
 								<span>&middot;</span>
 								<a href="{{ $thread->permalink() }}/edit">edit</a>
+								<span>&middot;</span>
+								<a id="deleteThread">delete</a>
 								@endif
 								@endif
 							</span>
@@ -106,6 +106,9 @@
 @include('scripts.markdown-parser')
 @include('scripts.commenter', ['threadUserId' => $thread->user_id])
 @if (Auth::check())
-@include('scripts.threads-saver')
+	@include('scripts.thread-actions')
+	@if (Auth::id() == $thread->author()->id)
+		@include('scripts.thread-deleter')
+	@endif
 @endif
 @stop

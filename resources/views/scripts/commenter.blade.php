@@ -23,8 +23,7 @@
 		.done(function(res)
 		{
 			var md = markdown,
-				pr = new showdown.Converter(),
-				ht = pr.makeHtml(md)
+				ht = marked(md)
 				hier = (form.data('hierarchy') == 'parent') ? 'child' : 'parent';
 
 			var commentCount = $('#threadCommentCount'),
@@ -115,7 +114,7 @@
 		});
 	}
 
-	$(document).on('keyup', '.comment-textarea', function()
+	$(document).on('keyup', '.comment-textarea, .comment-editor-textarea', function()
 	{
 		var input = $.trim($(this).val());
 
@@ -130,8 +129,7 @@
 				tagRegex      = /(?:^|)#(\w+)(?!\w)/g;
 
 			var markdown = input.replace(usernameRegex, "[$1]($1)").replace(tagRegex, "[#$1](/t/$1)"),
-				pr    	 = new showdown.Converter(),
-				ht    	 = pr.makeHtml(markdown);
+				ht    	 = marked(markdown);
 
 			$(this).parent().find('.markdown').html(ht);
 
@@ -144,6 +142,71 @@
 	{
 		$(el).parent().parent().find('.reply-box').first().toggle();
 	};
+
+	$('.edit-comment').click(function()
+	{
+		var input = $(this).parent().parent().find('section'),
+			i 	  = 0,
+			a     = $(this);
+
+		if (a.text() == 'edit')
+			a.text('cancel').addClass('text-alert');
+		else
+			a.text('edit').removeClass('text-alert');
+
+		$.each(input, function(i, el)
+		{
+			if (i < 2)
+			{
+				var element = $(el);
+
+				if (element.hasClass('hide'))
+					element.removeClass('hide');
+				else
+					element.addClass('hide');
+			}
+
+			i++;
+		});
+	});
+
+	$('.edit-comment-form').submit(function(e)
+	{
+		e.preventDefault();
+
+		var submitBtn = $(this).find('input[type="submit"]'),
+			error     = $(this).find('.text-alert'),
+			markdown  = $(this).find('textarea').first().val(),
+			loader    = $(this).find('.loader'),
+			form      = $(this),
+			data      = form.serialize();
+
+		submitBtn.attr('disabled', true).addClass('disabled');
+		loader.addClass('open');
+
+		$.post("{{ url('/me/edit/comment') }}", data)
+		.done(function()
+		{
+			var oc = form.parent().parent().find('.markdown').first(),
+				fo = form.parent(),
+				eb = form.parent().parent().find('a.edit-comment').first();
+
+			var usernameRegex = /(?:^|)(\/u\/\w+)(?!\w)/g,
+				tagRegex      = /(?:^|)#(\w+)(?!\w)/g;
+
+			oc.html(marked(markdown.replace(usernameRegex, "[$1]($1)").replace(tagRegex, "[#$1](/t/$1)"))).removeClass('hide');
+			fo.addClass('hide');
+			form.trigger('reset');
+			submitBtn.attr('disabled', false).removeClass('disabled');
+			loader.removeClass('open');
+			form.find('textarea').val(markdown);
+			eb.text('edit').removeClass('text-alert');
+		})
+		.fail(function(res)
+		{
+			error.text(res.responseText);
+		});
+	});
 	@endif
 
 	$('.collapser').click(function()

@@ -5,9 +5,12 @@ namespace App\Models;
 use Cache;
 use Vinkla\Hashids\Facades\Hashids;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Comment extends Model
 {
+    use SoftDeletes;
+
     private $_thread   = null;
     private $_author   = null;
     private $_parent   = null;
@@ -37,7 +40,7 @@ class Comment extends Model
             return $this->_thread;
         }
 
-        $this->_thread = $this->hasOne('App\Models\Thread', 'id', 'thread_id')->first();
+        $this->_thread = $this->hasOne('App\Models\Thread', 'id', 'thread_id')->withTrashed()->first();
         Cache::put("comment:{$this->id}:thread", $this->_thread, 60);
 
     	return $this->_thread;
@@ -92,7 +95,7 @@ class Comment extends Model
         if (!is_null($this->_children))
             return $this->_children;
 
-        $this->_children = $this->hasMany('App\Models\Comment', 'parent_id', 'id')->orderBy('momentum', 'DESC')->get();
+        $this->_children = $this->hasMany('App\Models\Comment', 'parent_id', 'id')->withTrashed()->orderBy('momentum', 'DESC')->get();
 
         return $this->_children;
     }
@@ -105,7 +108,7 @@ class Comment extends Model
      */
     public function printChildren($i)
     {
-        $html = '';
+        $html      = '';
 
         foreach ($this->children()->where('parent_id', $this->id) as $c)
         {

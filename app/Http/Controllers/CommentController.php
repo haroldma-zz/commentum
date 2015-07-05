@@ -142,4 +142,73 @@ class CommentController extends Controller
 			return response("Something went wrong on our end, try again.", 500);
 		}
 	}
+
+	/**
+	 * Edit a comment
+	 * @param  	Request 	$request
+	 * @return 	response
+	 */
+	public function edit(Request $request)
+	{
+		if (!$request->ajax())
+			abort(404);
+
+		$hash = Hashids::decode($request->get('hashid'));
+
+		if (!count($hash) > 0)
+			return response("Can't find that comment.", 500);
+
+		$comment = Comment::find($hash[0]);
+
+		if (!$comment)
+			return response("Can't find that comment.", 500);
+
+		if ($comment->author_id !== Auth::id())
+			return response("You are not authorized to edit this comment.", 500);
+
+		// Update the comment
+		$comment->markdown = $request->get('markdown');
+
+		if ($comment->save())
+			return response("OK", 200);
+
+		return response("Couldn't update this comment, try again.", 500);
+	}
+
+	/**
+	 * Delete a comment
+	 *
+	 * @param  	Request 	$request
+	 * @return 	response
+	 */
+	public function delete(Request $request)
+	{
+		$id = Hashids::decode($request->get('hashid'));
+
+		if (!$id > 0)
+			return response('Can\'t find the comment you want to delete.', 500);
+
+		$comment = Comment::find($id[0]);
+
+		if (!$comment)
+			return response("Can't find that comment.", 500);
+
+		if ($comment->author_id != Auth::id())
+			return response("You're not the owner of this comment.", 500);
+
+		// Soft delete the model
+		$comment->delete();
+
+		return response("OK", 200);
+	}
 }
+
+
+
+
+
+
+
+
+
+

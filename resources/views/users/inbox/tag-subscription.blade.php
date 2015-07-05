@@ -7,6 +7,6 @@
 		</div>
 	</h6>
 	<div class="markdown">
-		[/u/{{ $message->from()->username }}]({{ $message->from()->permalink() }}) subscribed to your tag [\#{{ $message->tag()->display_title }}]({{ $message->tag()->permalink() }}).
+		/u/{{ $message->from()->username }} subscribed to your tag #{{ $message->tag()->display_title }}.
 	</div>
 </div>
