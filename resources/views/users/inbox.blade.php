@@ -42,6 +42,7 @@
 {!! HTML::script('/bower_components/marked/marked.min.js') !!}
 {!! HTML::script('/bower_components/livestamp/moment.min.js') !!}
 {!! HTML::script('/bower_components/livestamp/livestamp.min.js') !!}
+{!! HTML::script('/bower_components/embed-js/dist/jquery.embed.min.js') !!}
 @include('scripts.markdown-parser')
 @include('scripts.inbox')
 @include('scripts.commenter', ['threadUserId' => null])
