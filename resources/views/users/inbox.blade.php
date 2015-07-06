@@ -39,7 +39,8 @@
 @stop
 
 @section('stylesheets')
-{!! HTML::link('/bower_components/embed-js/dist/jquery.embed.min.css') !!}
+{!! HTML::style('/bower_components/embed-js/dist/jquery.embed.min.css') !!}
+{!! HTML::style('//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css') !!}
 @stop
 
 @section('scripts')
