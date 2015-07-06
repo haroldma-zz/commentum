@@ -13,7 +13,7 @@
 	<div class="row">
 		<div class="medium-9 columns">
 			<div class="panel small">
-				@include('layouts.threads', ['threads' => $tag->threads()])
+				@include('layouts.threads', ['threads' => $tag->threadsByHotness()])
 			</div>
 		</div>
 		<div class="medium-3 columns">
