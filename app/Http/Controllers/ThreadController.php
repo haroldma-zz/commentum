@@ -157,7 +157,7 @@ class ThreadController extends Controller
 						$page = 1;
 
 					$offset = 20 * $page;
-                    $threads = Tag::getThreadsByHotness(0, $offset, 20);
+                    $threads = Tag::getThreadsByHotness(-1, $offset, 20);
 					Session::flash('currentPage', $page + 1);
 					Session::flash('moreSubmissionsCount', Session::get('moreSubmissionsCount') - 20);
 

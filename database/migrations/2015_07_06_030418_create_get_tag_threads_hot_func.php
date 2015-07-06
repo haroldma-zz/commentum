@@ -20,9 +20,10 @@ BEGIN
     SELECT *,
     calculateHotnessFromMomentum(impressions, views, total_momentum, created_at) as sort
     FROM (SELECT t.*, sum(c.momentum) as total_momentum FROM threads t
-    LEFT JOIN comments c ON c.thread_id = t.id
-    WHERE (nsfw_mode = 0 or (nsfw = 0 and nsfw_mode = -1) or (nsfw = 1 and nsfw_mode = 1))
-    and (tag_id = tag OR tag = 0)
+    INNER JOIN comments c ON c.thread_id = t.id
+    INNER JOIN tags tt ON tt.id = t.tag_id
+    WHERE (nsfw_mode = 0 or (t.nsfw = 0 and nsfw_mode = -1) or (t.nsfw = 1 and nsfw_mode = 1))
+    and (tag_id = tag OR tag = 0 or (tag = -1 and tt.is_default = 1))
     GROUP BY t.id) as f
     ORDER BY sort desc
     LIMIT max_results OFFSET results_offset;

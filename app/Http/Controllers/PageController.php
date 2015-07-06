@@ -65,7 +65,7 @@ class PageController extends Controller
 	public function index(Request $request)
 	{
 		// if (!Auth::check())
-		$threads = Tag::getThreadsByHotness(0, 0, 20);
+		$threads = Tag::getThreadsByHotness(-1, 0, 20);
         $moreSubmissionsCount = Thread::orderBy('id', 'DESC')->count();
 		Session::flash('moreSubmissionsCount', $moreSubmissionsCount);
 
