@@ -1,10 +1,6 @@
 @extends('layouts.default')
 @section('title', 'inbox')
 
-@section('stylesheets')
-	{!! HTML::link(’bower_components/embed-js/dist/jquery.embed.min.css') !!}
-@stop
-
 @section('page')
 <div class="hero">
 	@include('layouts.user-header')
@@ -40,6 +36,10 @@
 		</div>
 	</div>
 </div>
+@stop
+
+@section('stylesheets')
+{!! HTML::link('/bower_components/embed-js/dist/jquery.embed.min.css') !!}
 @stop
 
 @section('scripts')

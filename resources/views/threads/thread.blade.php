@@ -1,10 +1,6 @@
 @extends('layouts.default')
 @section('title', $thread->title.' | #'.$thread->tag()->display_title)
 
-@section('stylesheets')
-	{!! HTML::link(’bower_components/embed-js/dist/jquery.embed.min.css') !!}
-@stop
-
 @section('page')
 <div class="hero">
 	@if (Auth::check())
@@ -100,6 +96,10 @@
 		</div>
 	</div>
 </div>
+@stop
+
+@section('stylesheets')
+{!! HTML::style('/bower_components/embed-js/dist/jquery.embed.min.css') !!}
 @stop
 
 @section('scripts')

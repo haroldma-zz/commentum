@@ -3,7 +3,7 @@
       //The selector(id/class/tagName) inside #element that needs to be processed
       //embedSelector   :'div',
       //Instructs the library whether or not to embed urls
-      //link              : true,
+      link              : false,
       //same as the target attribute in html anchor tag . supports all html supported target values.
       //linkTarget        : '_blank',
       //Array of extensions to be excluded from converting into links
@@ -39,10 +39,10 @@
             mode: 'place'                   
       },
       //Instructs the library whether or not to highlight code syntax.
-      //highlightCode     : true,
+      highlightCode     : false,
       //Instructs the library whether or not embed the tweets
+      tweetsEmbed     : false,
       /*
-      tweetsEmbed     : true,
       tweetOptions:{
             //The maximum width of a rendered Tweet in whole pixels. Must be between 220 and 550 inclusive.
             maxWidth   : 550,
