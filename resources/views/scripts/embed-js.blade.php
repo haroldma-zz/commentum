@@ -97,7 +97,6 @@
       //afterEmbedJSLApply: function () {},
       //callback after the twitter widgets of a BLOCK are loaded.
       //onTwitterShow     : function () {}
-
 	});
 
   $('.ne-image-wrapper').each(function(i, el)
