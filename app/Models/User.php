@@ -9,6 +9,7 @@ use Zizaco\Entrust\Traits\EntrustUserTrait;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use App\Models\Thread;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
@@ -181,13 +182,15 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      *
      * @return  thread    collection
      */
-    static function getSubscribedTagsThreads()
+    function subscribedTagsThreads($offset = 0, $limit = 20, $nsfw_mode = 0)
     {
-        $threads = [];
+        return User::getSubscribedTagsThreads($this->id, $offset, $limit, $nsfw_mode);
+    }
 
-        // Custom SQL function
-
-        return $threads;
+    static function getSubscribedTagsThreads($userId, $offset = 0, $limit = 20, $nsfw_mode = 0)
+    {
+        return Thread::hydrateRaw('call getThreadsByHotnessForSubscription(?, ?, ?, ?)',
+            [$userId, $nsfw_mode, $offset, $limit]);
     }
 
     /**

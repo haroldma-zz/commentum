@@ -20,7 +20,7 @@ BEGIN
     DECLARE momentum DOUBLE;
     SET momentum = (views * (views / impressions) + comment_momentum) * 10;
 
-    IF (momentum > 0) then
+    IF (momentum >= 1) then
     	return momentum;
     END IF;
     return 1;
