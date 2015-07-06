@@ -11,7 +11,7 @@
 			<span data-livestamp="{{ strtotime($message->created_at) }}"></span>
 		</div>
 	</h6>
-	<section id="content-embeddable" class="markdown">
+	<section class="markdown content-embeddable">
 		{!! $message->comment()->markdown !!}
 	</section>
 	<footer>

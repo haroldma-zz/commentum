@@ -1,5 +1,5 @@
 <script>
-	$('#content-embeddable').embedBlock({
+	$('.content-embeddable').embedBlock({
       //The selector(id/class/tagName) inside #element that needs to be processed
       //embedSelector   :'div',
       //Instructs the library whether or not to embed urls
