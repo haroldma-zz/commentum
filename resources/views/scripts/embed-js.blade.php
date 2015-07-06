@@ -36,7 +36,7 @@
       locationEmbed       :true,
       mapOptions        : {
             //'place' or 'streetview' or 'view'
-            mode: 'place'                   
+            mode: 'place'
       },
       //Instructs the library whether or not to highlight code syntax.
       highlightCode     : false,
@@ -99,4 +99,11 @@
       //onTwitterShow     : function () {}
 
 	});
+
+  $('.ne-image-wrapper').each(function(i, el)
+  {
+    var img = $(el).children('img').detach();
+
+    $(el).empty().append(img);
+  });
 </script>
