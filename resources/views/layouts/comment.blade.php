@@ -17,7 +17,7 @@
 		<span data-livestamp="{{ strtotime($c->created_at) }}"></span>
 	</header>
 	<div class="body">
-		<section class="markdown">
+		<section id="content-embeddable" class="markdown">
 			{{ (is_null($c->deleted_at) ? $c->markdown : "[deleted]") }}
 		</section>
 		@if (Auth::check() && Auth::id() === $c->author_id)

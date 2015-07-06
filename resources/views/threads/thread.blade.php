@@ -48,7 +48,7 @@
 						</p>
 						@if (!is_null($thread->markdown) && !empty($thread->markdown))
 						<br>
-						<div class="markdown thread-description">
+						<div id="content-embeddable" class="markdown thread-description">
 							{{ $thread->markdown }}
 						</div>
 						@endif
