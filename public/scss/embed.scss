@@ -1,10 +1,10 @@
 @font-face {
     font-family : 'emoticons';
-    src         : url('../resources/fonts/emoticons.eot?5zh0vu');
-    src         : url('../resources/fonts/emoticons.eot?#iefix5zh0vu') format('embedded-opentype'),
-    url('../resources/fonts/emoticons.woff?5zh0vu') format('woff'),
-    url('../resources/fonts/emoticons.ttf?5zh0vu') format('truetype'),
-    url('../resources/fonts/emoticons.svg?5zh0vu#icomoon') format('svg');
+    src         : url('../bower_components/embed-js/resources/fonts/emoticons.eot?5zh0vu');
+    src         : url('../bower_components/embed-js/resources/fonts/emoticons.eot?#iefix5zh0vu') format('embedded-opentype'),
+    url('../bower_components/embed-js/resources/fonts/emoticons.woff?5zh0vu') format('woff'),
+    url('../bower_components/embed-js/resources/fonts/emoticons.ttf?5zh0vu') format('truetype'),
+    url('../bower_components/embed-js/resources/fonts/emoticons.svg?5zh0vu#icomoon') format('svg');
     font-weight : normal;
     font-style  : normal;
 }
@@ -16,6 +16,7 @@
     left: 0;
     top: 0;
     background-color: rgba(0, 0, 0, 0.90);
+    z-index: 99999;
 }
 
 .ejs-lightbox i{
@@ -25,7 +26,6 @@
     color: #fff;
     font-size: 20px;
     cursor:pointer;
-    z-index:99999;
 }
 
 .ejs-lightbox-wrapper{
@@ -37,7 +37,6 @@
 .ejs-lightbox-wrapper img{
     max-width: 90%;
     border: 5px solid #ffffff;
-    border-radius: 3px;
     display: block;
     margin: 60px auto;
     position: relative;
@@ -53,13 +52,15 @@
 .ejs-embed {
     width          : 100%;
     margin         : 20px 0;
+    border-bottom  : 0;
+    padding-bottom : 1px;
     box-sizing     : border-box;
 }
 
 .ejs-embed iframe {
     border              : 0;
     background-color    : #3498DB;
-    background-image    : url('../resources/images/loader.svg');
+    background-image    : url('../bower_components/embed-js/resources/images/loader.svg');
     background-repeat   : no-repeat;
     background-position : center;
     width               : 100%;
@@ -81,7 +82,6 @@
 pre {
     position      : relative;
     margin-bottom : 24px;
-    border-radius : 2px;
     overflow      : hidden;
     white-space   : pre-wrap;
 }
@@ -107,7 +107,6 @@ code.has-numbering {
     width            : 35px;
     padding          : 1.1em 5px 12px 0;
     border-right     : 1px solid #E8E8E8;
-    border-radius    : 3px 0 0 3px;
     background-color : #EEE;
     text-align       : right;
     font-family      : Consolas, Menlo, Monaco, monospace;
@@ -147,10 +146,8 @@ code.has-numbering {
     background-color   : transparent;
     border             : 1px solid #CCC;
     padding            : 6px 15px;
-    border-radius      : 2px;
     color              : #333;
     cursor             : pointer;
-    box-shadow         : 0px 1px 1px 0 rgba(0, 0, 0, 0.26);
     outline            : 0;
     border-bottom      : 0;
     float              : right;
@@ -164,7 +161,6 @@ code.has-numbering {
 }
 
 .ejs-doc-view button:hover {
-    box-shadow : 0 2px 2px 0 rgba(0, 0, 0, 0.26);
 }
 
 .ejs-doc-view button i {
@@ -195,6 +191,7 @@ code.has-numbering {
 
 .ejs-audio {
     background-color : #1D1D1D;
+    padding-top      : 6px;
     margin           : 10px 0;
 }
 
@@ -203,7 +200,10 @@ code.has-numbering {
 }
 
 .ejs-video, .ejs-doc {
+    padding            : 5px;
+    border             : 1px solid #E4E4E4;
     margin             : 20px 0;
+    border-bottom      : 0;
     overflow           : auto;
     -webkit-transition : all 0.5s linear;
     -o-transition      : all 0.5s linear;
@@ -223,7 +223,6 @@ code.has-numbering {
 }
 
 .ejs-video:hover {
-    box-shadow : 0px 2px 2px 0 rgba(0, 0, 0, 0.26);
 }
 
 .ejs-video-preview, .ejs-doc-preview {
@@ -293,7 +292,7 @@ code.has-numbering {
 
 .ejs-video-player {
     background-color    : #3498DB;
-    background-image    : url('../resources/images/loader.svg');
+    background-image    : url('../bower_components/embed-js/resources/images/loader.svg');
     background-repeat   : no-repeat;
     background-position : center;
 }
@@ -319,7 +318,7 @@ code.has-numbering {
     margin              : 5px;
     margin-bottom       : 0;
     background-color    : #3498DB;
-    background-image    : url('../resources/images/loader.svg');
+    background-image    : url('../bower_components/embed-js/resources/images/loader.svg');
     background-repeat   : no-repeat;
     background-position : center;
     height              : 100%;
@@ -327,15 +326,11 @@ code.has-numbering {
 }
 
 .emoticons-image {
-    padding       : 5px;
-    border-radius : 2px;
-    border        : 1px solid #F2F2F2;
     display       : block;
     margin        : 20px 0;
 }
 
 .noembed-embed-inner {
-    padding: 5px;
     overflow: hidden;
     background: #fff;
     color: #000;
@@ -399,7 +394,6 @@ code.has-numbering {
 
 .noembed-gist h3 {
     margin: 0;
-    padding: 5px;
     font-size: 1.5em;
     font-weight: normal;
     text-align: center;
@@ -428,7 +422,6 @@ code.has-numbering {
     color: #FFF;
     overflow: hidden;
     display: block;
-    border-radius: 3px;
     text-align: center;
 }
 
@@ -466,7 +459,6 @@ code.has-numbering {
 }
 
 .noembed-gist .gist-file td.code {
-    padding: 5px;
 }
 
 .hll { background-color: #ffffcc }
@@ -555,20 +547,20 @@ code.has-numbering {
 
 @media all and (-webkit-min-device-pixel-ratio : 1), all and (min--moz-device-pixel-ratio : 1), all and (-o-min-device-pixel-ratio : 1), all and (min-device-pixel-ratio : 1), all and (min-resolution : 96dpi) {
     .emoticon {
-        background : transparent url(../resources/images/emojis.png) 0 0 no-repeat;
+        background : transparent url(../bower_components/embed-js/resources/images/emojis.png) 0 0 no-repeat;
     }
 }
 
 @media all and (-webkit-min-device-pixel-ratio : 1.5), all and (-o-min-device-pixel-ratio : 3/2), all and (min-device-pixel-ratio : 1.5), all and (min-resolution : 144dpi) {
     .emoticon {
-        background      : transparent url(../resources/images/emojis@2x.png) 0 0 no-repeat;
+        background      : transparent url(../bower_components/embed-js/resources/images/emojis@2x.png) 0 0 no-repeat;
         background-size : 27776px 22px;
     }
 }
 
 @-moz-document url-prefix() {
     .emoticon {
-        background : transparent url(../resources/images/emojis.png) 0 0 no-repeat;
+        background : transparent url(../bower_components/embed-js/resources/images/emojis.png) 0 0 no-repeat;
     }
 }
 
@@ -4200,8 +4192,7 @@ code.has-numbering {
     }
 
     .ejs-video-title {
-        display;
-        none;
+        display: none;
     }
 
     .ejs-video-desc {
