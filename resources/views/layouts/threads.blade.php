@@ -39,6 +39,6 @@
 	@endforeach
 	@endif
 </table>
-@if (Session::get('moreSubmissionsCount') > 25)
+@if (Session::get('moreSubmissionsCount') > 20)
 <div id="loadMoreSubmissions">Load more submissions</div>
 @endif

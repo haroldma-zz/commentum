@@ -11,6 +11,7 @@ use App\Models\Thread;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 use Vinkla\Hashids\Facades\Hashids;
+use Illuminate\Support\Facades\Log;
 
 class PageController extends Controller
 {
@@ -64,20 +65,14 @@ class PageController extends Controller
 	public function index(Request $request)
 	{
 		// if (!Auth::check())
-			$threads = Thread::hydrateRaw('SELECT *, calculateThreadMomentum(impressions, views, total_momentum) as momentum,
-            calculateHotnessFromMomentum(impressions, views, total_momentum, created_at) as sort
-            FROM (SELECT t.*, sum(c.momentum) as total_momentum FROM threads t
-            LEFT JOIN comments c ON c.thread_id = t.id
-            GROUP BY t.id) as f
-            ORDER BY sort desc
-            LIMIT 20');
+		$threads = Tag::getThreadsByHotness(-1, 0, 20);
+        $moreSubmissionsCount = Thread::orderBy('id', 'DESC')->count();
+		Session::flash('moreSubmissionsCount', $moreSubmissionsCount);
 
-			$moreSubmissionsCount = Thread::orderBy('id', 'DESC')->count();
-			Session::flash('moreSubmissionsCount', $moreSubmissionsCount);
 		// else
 			// $threads = User::getSubscribedTagsThreads();
 
-		$ip = $request->getClientIp();
+		$ip = getClientIp();
 
 		foreach($threads as $thread)
 		{

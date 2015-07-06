@@ -6,6 +6,7 @@ use Cache;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use App\Models\Thread;
 
 class Tag extends Model
 {
@@ -217,6 +218,33 @@ class Tag extends Model
         $subscription->user_id = ($userId != null ? $userId : Auth::id());
 
         return $subscription->save();
+    }
+
+    /**
+     * Gets tag's threads, sort by hotness.
+     *
+     * @param  integer  $offset
+     * @param  integer  $limit
+     * @param  integer  $nsfw_mode
+     * @return Thread[]
+     */
+    function threadsByHotness($offset = 0, $limit = 20, $nsfw_mode = 0)
+    {
+        return Tag::getThreadsByHotness($this->id, $offset, $limit, $nsfw_mode);
+    }
+
+    /**
+     * Gets threads for a tag, sort by hotness.
+     *
+     * @param  integer  $tagId
+     * @param  integer  $offset
+     * @param  integer  $limit
+     * @param  integer  $nsfw_mode
+     * @return Thread[]
+     */
+    static function getThreadsByHotness($tagId, $offset, $limit = 20, $nsfw_mode = 0)
+    {
+        return Thread::hydrateRaw('call getThreadsByHotness(?, ?, ?, ?)', [$tagId, $nsfw_mode, $offset, $limit]);
     }
 }
 
