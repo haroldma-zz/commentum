@@ -33,8 +33,8 @@ BEGIN
                 AND created_at >= start_time 
                 AND created_at <= end_time) AS impressions 
         FROM tags AS t
-            WHERE t.privacy IS NULL OR t.privacy = FALSE
-            AND t.nsfw IS NULL OR t.nsfw = FALSE) AS v
+            WHERE t.privacy != 1
+            AND t.nsfw != 1) AS v
 	ORDER BY momentum DESC
 	LIMIT max_results;
 END

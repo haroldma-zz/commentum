@@ -10,6 +10,7 @@ use App\Models\Thread;
 use Cocur\Slugify\Slugify;
 use Vinkla\Hashids\Facades\Hashids;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class ThreadController extends Controller
 {
@@ -157,7 +158,12 @@ class ThreadController extends Controller
 						$page = 1;
 
 					$offset = 20 * $page;
-                    $threads = Tag::getThreadsByHotness(-1, $offset, 20);
+
+                    if (!Auth::check())
+                        $threads = Tag::getThreadsByHotness(-1, $offset);
+                    else
+                        $threads = User::getSubscribedTagsThreads(Auth::id(), $offset);
+
 					Session::flash('currentPage', $page + 1);
 					Session::flash('moreSubmissionsCount', Session::get('moreSubmissionsCount') - 20);
 
