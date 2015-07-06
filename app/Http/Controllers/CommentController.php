@@ -6,6 +6,7 @@ use Vinkla\Hashids\Facades\Hashids;
 use Illuminate\Http\Request;
 use App\Models\Comment;
 use App\Models\Thread;
+use App\Models\Message;
 use Auth;
 
 class CommentController extends Controller
@@ -195,6 +196,10 @@ class CommentController extends Controller
 
 		if ($comment->author_id != Auth::id())
 			return response("You're not the owner of this comment.", 500);
+
+		// we need to delete corresponding notification.
+        $notification = Message::where('comment_id', $id);
+        $notification->delete();
 
 		// Soft delete the model
 		$comment->delete();

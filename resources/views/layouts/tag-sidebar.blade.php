@@ -8,10 +8,12 @@
 		<b>{{ floor($tag->momentum) }}</b> point{{ (floor($tag->momentum) != 1 ? 's' : '') }}
 	</h5>
 	-->
-		
+
+    @if($tag->id > 0)
 	<h6>
 		<b>{{ $tag->subscriberCount() }}</b> subscriber{{ $tag->subscriberCount() != 1 ? 's' : '' }}
 	</h6>
+    @endif
 	
 	@if (Auth::check() && Auth::id() === $tag->owner()->id)
 		<hr>
@@ -19,8 +21,10 @@
 			<a href="{{ $tag->permalink() }}/settings"><b>Tag settings</b></a>
 		</p>
 	@endif
-	
-	@if(Auth::check() && !Auth::user()->isSubscribedToTag($tag->id))
+
+    @if($tag->id == 0)
+            <!-- Can't sub to all -->
+	@elseif(Auth::check() && !Auth::user()->isSubscribedToTag($tag->id))
 		{!! Form::open(['url' => '/t/' . $tag->display_title . '/subscribe', 'id' => 'subscribeForm']) !!}
 		{!! Form::hidden('tag-id', Hashids::encode($tag->id)) !!}
 		<button id="subscribeButton" class="btn success" type="submit">Subscribe</button>

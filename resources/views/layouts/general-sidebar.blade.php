@@ -19,4 +19,5 @@
 		<li><a href="{{ $thread->permalink() }}">{{ $thread->title }}</a></li>
 		@endforeach
 	</ul>
+	<p>© 2015 Commentum. <br /> All Rights Reserved.</p>
 </div>
