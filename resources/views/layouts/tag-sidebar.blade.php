@@ -24,7 +24,6 @@
 
     @if($tag->id == 0)
             <!-- Can't sub to all -->
-    @endif
 	@elseif(Auth::check() && !Auth::user()->isSubscribedToTag($tag->id))
 		{!! Form::open(['url' => '/t/' . $tag->display_title . '/subscribe', 'id' => 'subscribeForm']) !!}
 		{!! Form::hidden('tag-id', Hashids::encode($tag->id)) !!}
