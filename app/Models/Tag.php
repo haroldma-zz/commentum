@@ -221,16 +221,30 @@ class Tag extends Model
     }
 
     /**
+     * Gets tag's threads, sort by hotness.
+     *
+     * @param  integer  $offset
+     * @param  integer  $limit
+     * @param  integer  $nsfw_mode
+     * @return Thread[]
+     */
+    function threadsByHotness($offset = 0, $limit = 20, $nsfw_mode = 0)
+    {
+        return Tag::getThreadsByHotness($this->id, $offset, $limit, $nsfw_mode);
+    }
+
+    /**
      * Gets threads for a tag, sort by hotness.
      *
      * @param  integer  $tagId
      * @param  integer  $offset
      * @param  integer  $limit
+     * @param  integer  $nsfw_mode
      * @return Thread[]
      */
-    static function getThreadsByHotness($tagId, $offset, $limit = 20)
+    static function getThreadsByHotness($tagId, $offset, $limit = 20, $nsfw_mode = 0)
     {
-        return Thread::hydrateRaw('call getThreadsByHotness(?, ?, ?)', [$tagId, $offset, $limit]);
+        return Thread::hydrateRaw('call getThreadsByHotness(?, ?, ?, ?)', [$tagId, $nsfw_mode, $offset, $limit]);
     }
 }
 

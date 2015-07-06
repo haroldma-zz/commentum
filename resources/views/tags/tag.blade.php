@@ -13,7 +13,7 @@
 	<div class="row">
 		<div class="medium-9 columns">
 			<div class="panel small">
-				@include('layouts.threads', ['threads' => \App\Models\Tag::getThreadsByHotness($tag->id, 0, 20)])
+				@include('layouts.threads', ['threads' => $tag->threadsByHotness()])
 			</div>
 		</div>
 		<div class="medium-3 columns">
