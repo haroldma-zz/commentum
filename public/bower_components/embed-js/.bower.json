@@ -1,0 +1,40 @@
+{
+  "name": "embed-js",
+  "version": "2.0.6",
+  "homepage": "http://rkritesh.in/embed-js",
+  "ignore": [
+    ".jshintrc",
+    "**/*.txt"
+  ],
+  "authors": [
+    "Ritesh Kumar <rkritesh078@gmail.com>",
+    "Jagannadh <shanmuk.mir@gmail.com>"
+  ],
+  "description": "A jQuery plugin that analyses the string and automatically embeds emojis, media, maps, tweets, code and services.",
+  "main": [
+    "./src/jquery.embed.js",
+    "./src/jquery.embed.css"
+  ],
+  "keywords": [
+    "jquery",
+    "plugin",
+    "embed",
+    "embed-js",
+    "jquery-embed",
+    "smiley"
+  ],
+  "dependencies": {
+    "jquery": ">=1.2.x"
+  },
+  "license": "MIT",
+  "_release": "2.0.6",
+  "_resolution": {
+    "type": "version",
+    "tag": "v2.0.6",
+    "commit": "1d000c4f8fc9717998b909c0e270aa8c24839b3e"
+  },
+  "_source": "git://github.com/ritz078/embed-js.git",
+  "_target": "~2.0.6",
+  "_originalSource": "embed-js",
+  "_direct": true
+}

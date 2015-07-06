@@ -3,6 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>{{ (Auth::check() && Auth::user()->messageCount() > 0 ? "[" . Auth::user()->messageCount() . "] " : "") }}@yield('title', 'Commentum')</title>
+	@yield('stylesheets')
 	{!! HTML::style('/stylesheets/app.css') !!}
 </head>
 <body>

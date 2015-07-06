@@ -17,9 +17,9 @@
 		<span data-livestamp="{{ strtotime($c->created_at) }}"></span>
 	</header>
 	<div class="body">
-		<section class="markdown">
+		<div class="markdown content-embeddable">
 			{{ (is_null($c->deleted_at) ? $c->markdown : "[deleted]") }}
-		</section>
+		</div>
 		@if (Auth::check() && Auth::id() === $c->author_id)
 		<section class="hide comment-editor">
 			{!! Form::open(['url' => '/me/edit/comment', 'class' => 'edit-comment-form']) !!}
