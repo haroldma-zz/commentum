@@ -44,6 +44,7 @@
 {!! HTML::script('/bower_components/livestamp/livestamp.min.js') !!}
 {!! HTML::script('/bower_components/embed-js/dist/jquery.embed.min.js') !!}
 @include('scripts.markdown-parser')
+@include('scripts.embed-js')
 @include('scripts.inbox')
 @include('scripts.commenter', ['threadUserId' => null])
 @stop
