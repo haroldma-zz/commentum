@@ -19,7 +19,10 @@
 			<a href="{{ $tag->permalink() }}/settings"><b>Tag settings</b></a>
 		</p>
 	@endif
-	
+
+    @if($tag->id == 0)
+            <!-- Can't sub to all -->
+    @endif
 	@if(Auth::check() && !Auth::user()->isSubscribedToTag($tag->id))
 		{!! Form::open(['url' => '/t/' . $tag->display_title . '/subscribe', 'id' => 'subscribeForm']) !!}
 		{!! Form::hidden('tag-id', Hashids::encode($tag->id)) !!}
