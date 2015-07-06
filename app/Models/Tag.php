@@ -242,7 +242,7 @@ class Tag extends Model
      * @param  integer  $nsfw_mode
      * @return Thread[]
      */
-    static function getThreadsByHotness($tagId, $offset, $limit = 20, $nsfw_mode = 0)
+    static function getThreadsByHotness($tagId, $offset = 0, $limit = 20, $nsfw_mode = 0)
     {
         return Thread::hydrateRaw('call getThreadsByHotness(?, ?, ?, ?)', [$tagId, $nsfw_mode, $offset, $limit]);
     }

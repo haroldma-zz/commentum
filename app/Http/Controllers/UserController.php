@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tag;
 use Auth;
 use Hash;
 use Session;
@@ -69,11 +70,12 @@ class UserController extends Controller
 
 			$i = 1;
 
-			while ($i < 4)
+			$defaults = Tag::where('is_default', 1)->get();
+            foreach ($defaults as $tag)
 			{
 				$tagSub          = new TagSubscriber;
 				$tagSub->user_id = $user->id;
-				$tagSub->tag_id  = $i;
+				$tagSub->tag_id  = $tag->id;
 
 				$tagSub->save();
 
