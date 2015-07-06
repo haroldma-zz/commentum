@@ -124,7 +124,7 @@ class ThreadController extends Controller
 		$new->tag_id   = $tag->id;
 		$new->title    = $title;
 		$new->slug     = truncateSlug($slugify->slugify($title, "-"));
-		$new->nsfw     = $nsfw;
+		$new->nsfw     = $nsfw || $tag->nsfw;
 		$new->serious  = $serious;
 		$new->link     = $link;
 		$new->markdown = $description;
