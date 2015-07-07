@@ -1,0 +1,42 @@
+.expando {
+  clear: left;
+  margin: 5px 0 5px 0;
+}
+
+.expando-content {
+  display: none;
+}
+
+.link-expando {
+  overflow-x: auto;
+}
+
+.link-expando img {
+  display: block !important;
+  cursor: nwse-resize;
+  width: 100%;
+  height: auto;
+}
+.link-expando span {
+  display: block !important;
+}
+
+.link-expando-type {
+  background: white;
+  color: #aaa;
+  font-weight: 500;
+  display: inline-block;
+  font-size: 0.6em;
+  margin-left: 5px;
+  vertical-align: top;
+  text-align: center;
+  padding: 1px 2px;
+  border: 1px solid #eee;
+  line-height: 1.2;
+  @include border-radius($global-radius);
+}
+
+.tagline {
+  color: #777;
+  font-size: x-small;
+}

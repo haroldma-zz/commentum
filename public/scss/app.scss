@@ -4,52 +4,7 @@
 @import "ionicons";
 @import "animate";
 @import "typography";
-
-.expando {
-  clear: left;
-  margin: 5px 0 5px 0;
-}
-
-.expando-content {
-  display: none;
-}
-
-.link-expando {
-  overflow-x: auto;
-}
-
-.link-expando img {
-  display: block !important;
-  cursor: nwse-resize;
-  width: 100%;
-  height: auto;
-}
-.link-expando span {
-  display: block !important;
-}
-
-.link-expando-type {
-  background: #f2f2f2;
-  border: 1px solid #e4e4e4;
-  color: #828282;
-
-  border-radius: 2px;
-  display: inline-block;
-  font-family: inherit;
-  font-size: 8px;
-  line-height: 11px;
-  margin-left: 3px;
-  padding: 1px;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align:text-top;
-  align-content:center;
-}
-
-.tagline {
-  color: #888;
-  font-size: x-small;
-}
+@import "expando";
 
 /*
 * html, body
