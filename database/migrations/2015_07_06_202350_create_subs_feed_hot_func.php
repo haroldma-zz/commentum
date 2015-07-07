@@ -17,7 +17,7 @@ DROP PROCEDURE IF EXISTS getThreadsByHotnessForSubscription;
 
 CREATE PROCEDURE getThreadsByHotnessForSubscription(results_user_id INTEGER, nsfw_mode INTEGER, results_offset INTEGER, max_results INTEGER)
 BEGIN
-    SELECT *,
+    SELECT *, calculateThreadMomentum(impressions, views, total_momentum) as momentum,
     calculateHotnessFromMomentum(impressions, views, total_momentum, created_at) as sort
     FROM (SELECT t.*, sum(c.momentum) as total_momentum FROM (SELECT th.* FROM
             (SELECT tag_id as tag_id FROM tag_subscribers s

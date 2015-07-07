@@ -244,7 +244,15 @@ class Tag extends Model
      */
     static function getThreadsByHotness($tagId, $offset = 0, $limit = 20, $nsfw_mode = 0)
     {
-        return Thread::hydrateRaw('call getThreadsByHotness(?, ?, ?, ?)', [$tagId, $nsfw_mode, $offset, $limit]);
+        $key = generateCacheKeyWithId('Tag', "getThreadsByHotness_{$offset}_{$limit}_{$nsfw_mode}", $tagId);
+
+        if (hasCache($key, $cache)){
+            return $cache;
+        }
+
+        $threads = Thread::hydrateRaw('call getThreadsByHotness(?, ?, ?, ?)', [$tagId, $nsfw_mode, $offset, $limit]);
+
+        return setCacheWithSeconds($key, $threads, \CACHE_SECONDS::FRONT_PAGE);
     }
 }
 
