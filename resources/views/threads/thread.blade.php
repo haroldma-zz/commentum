@@ -110,7 +110,7 @@
 {!! HTML::script('/bower_components/embed-js/dist/jquery.embed.min.js') !!}
 @include('scripts.threads-user-header')
 @include('scripts.markdown-parser')
-@include('scripts.embed-js')
+@include('scripts.expando')
 @include('scripts.commenter', ['threadUserId' => $thread->user_id])
 @if (Auth::check())
 	@include('scripts.thread-actions')

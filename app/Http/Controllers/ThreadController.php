@@ -137,63 +137,6 @@ class ThreadController extends Controller
 	}
 
 	/**
-	 * Get more submissions for a tag.
-	 *
-	 * @param  string $tag
-	 * @return array
-	 */
-	public function moreSubmissions($tag, Request $request)
-	{
-		$markup = '';
-
-		if (Session::get('moreSubmissionsCount') > 0)
-		{
-			if (in_array($tag, ['all', 'front']))
-			{
-				if ($tag == 'front')
-				{
-					if (Session::has('currentPage'))
-						$page = Session::get('currentPage');
-					else
-						$page = 1;
-
-					$offset = 20 * $page;
-
-                    if (!Auth::check())
-                        $threads = Tag::getThreadsByHotness(-1, $offset);
-                    else
-                        $threads = User::getSubscribedTagsThreads(Auth::id(), $offset);
-
-					Session::flash('currentPage', $page + 1);
-					Session::flash('moreSubmissionsCount', Session::get('moreSubmissionsCount') - 20);
-
-					if (count($threads) > 0)
-					{
-						$ip = $request->getClientIp();
-
-						foreach ($threads as $thread)
-						{
-							if (is_null(Cache::get("{$ip}:thread:{$thread->id}:impression")))
-							{
-								Cache::put("{$ip}:thread:{$thread->id}:impression", true, 120);
-								$thread->addImpression();
-							}
-
-							$markup .= view('threads.thread-in-list', ['t' => $thread])->render();
-						}
-					}
-				} // elseif (all)
-			}
-			else
-			{
-				// get more threads for a specific tag.
-			}
-		}
-
-		return $markup;
-	}
-
-	/**
 	 * Delete a submission
 	 *
 	 * @param  	Request 	$request

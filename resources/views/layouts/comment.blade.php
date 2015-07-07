@@ -16,7 +16,7 @@
 		&middot;
 		<span data-livestamp="{{ strtotime($c->created_at) }}"></span>
 	</header>
-	<div class="body">
+	<div class="body usertext-body">
 		<section class="markdown content-embeddable">
 			{{ (is_null($c->deleted_at) ? $c->markdown : "[deleted]") }}
 		</section>

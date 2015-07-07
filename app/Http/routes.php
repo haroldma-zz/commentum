@@ -45,8 +45,6 @@ Route::get('/u/{username}', 'PageController@profile');
 Route::get('/p/{page}', ['uses' => 'PageController@page']);
 Route::post('/p/donate', ['uses' => 'PageController@donation']);
 
-Route::get('/more/{tag}', 'ThreadController@moreSubmissions');
-
 /*
 * POST routes
 */
