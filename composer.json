@@ -11,7 +11,8 @@
         "cocur/slugify": "~1.1",
         "vinkla/hashids": "~1.0",
         "predis/predis": "~1.0",
-        "zizaco/entrust": "dev-laravel-5"
+        "zizaco/entrust": "dev-laravel-5",
+	"cartalyst/stripe-laravel": "2.0.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
