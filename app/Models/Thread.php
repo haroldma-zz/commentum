@@ -181,6 +181,9 @@ class Thread extends Model
 
     public function calculateMomentum()
     {
+        // see if it was claculated with the query
+        if (isset($this->momentum))
+            return $this->momentum;
         return DB::SELECT(DB::RAW("SELECT calculateThreadMomentum(impressions, views, total_momentum) as momentum FROM (SELECT t.*, sum(c.momentum) as total_momentum
         FROM threads t
         LEFT JOIN comments c ON c.thread_id = t.id

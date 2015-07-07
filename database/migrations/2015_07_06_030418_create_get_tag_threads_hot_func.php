@@ -17,7 +17,7 @@ DROP PROCEDURE IF EXISTS getThreadsByHotness;
 
 CREATE PROCEDURE getThreadsByHotness(tag INTEGER, nsfw_mode INTEGER, results_offset INTEGER, max_results INTEGER)
 BEGIN
-    SELECT *,
+    SELECT *, calculateThreadMomentum(impressions, views, total_momentum) as momentum,
     calculateHotnessFromMomentum(impressions, views, total_momentum, created_at) as sort
     FROM (SELECT t.*, sum(c.momentum) as total_momentum FROM threads t
     LEFT JOIN comments c ON c.thread_id = t.id
