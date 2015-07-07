@@ -149,6 +149,9 @@ return [
         App\Providers\HelperServiceProvider::class,
         App\Providers\ViewDataServiceProvider::class,
 
+	//Stripe Provider
+	Cartalyst\Stripe\Laravel\StripeServiceProvider::class
+
     ],
 
     /*
@@ -200,6 +203,7 @@ return [
         'HTML'      => Illuminate\Html\HtmlFacade::class,
         'Hashids'   => Vinkla\Hashids\Facades\Hashids::class,
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
+	'Stripe'    => Cartalyst\Stripe\Laravel\Facades\Stripe::class
     ],
 
 ];

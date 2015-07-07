@@ -19,5 +19,10 @@
 		<li><a href="{{ $thread->permalink() }}">{{ $thread->title }}</a></li>
 		@endforeach
 	</ul>
+    <h6 class="super-header">Links</h6>
+    <ul>
+        <li><a href="/p/policy">Privacy Policy</a></li>
+        <li><a href="/p/donate">Donate</a></li>
+    </ul>
 	<p>© 2015 Commentum. <br /> All Rights Reserved.</p>
 </div>
