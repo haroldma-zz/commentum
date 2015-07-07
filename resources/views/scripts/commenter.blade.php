@@ -12,12 +12,13 @@
 		var input     = $.trim(form.find('textarea').first().val()),
 			threadId  = form.find('input[name="thread_id"]').first().val(),
 			parentId  = form.find('input[name="parent_id"]').first().val(),
-			token     = form.find('input[name="_token"]').first().val(),
-			usernameRegex = /(?:^|)(\/u\/\w+)(?!\w)/g,
-			tagRegex      = /(?:^|)#(\w+)(?!\w)/g;
+			token     = form.find('input[name="_token"]').first().val();//,
+			//usernameRegex = /(?:^|)(\/u\/\w+)(?!\w)/g,
+			//tagRegex      = /(?:^|)#(\w+)(?!\w)/g;
 
 		// Create links of /u/usernames and #tags
-		var markdown = input.replace(usernameRegex, "[$1]($1)").replace(tagRegex, "[#$1](/t/$1)");
+		//var markdown = input.replace({{ \REGEXES::USERNAMES }}, "[$1]($1)").replace({{ REGEXES::TAGS }}, "[#$1](/t/$1)");
+		var markdown = input;
 
 		$.post('{{ url("/comment") }}', {_token:token, markdown:markdown, thread_id:threadId, parent_id:parentId})
 		.done(function(res)
@@ -108,6 +109,7 @@
 			if (!form.hasClass('parent-commenter'))
 				form.parent().hide();
 
+/*
 			form.parent().parent().find('.children .content-embeddable').first().embedBlock({
 		      //The selector(id/class/tagName) inside #element that needs to be processed
 		      //embedSelector   :'div',
@@ -175,7 +177,7 @@
 		      //Can exclude all options by setting it to 'all'
 		      //excludeEmbed     :['twitchTv'],
 		      //Height of jsfiddle/codepen/jsbin/ideone/plunker
-		      codeEmbedHeight : 300,
+/*		      codeEmbedHeight : 300,
 		      soundCloudOptions: {
 		          height      : 160,
 		          themeColor  : 'f50000',    //Hex Code of the player theme color
@@ -208,6 +210,7 @@
 		      //onTwitterShow     : function () {}
 			});
 
+*/
 		  $('span.emoticon').each(function(i, el)
 		  {
 		  	var parent = $(el).parent();
@@ -240,10 +243,12 @@
 		else
 		{
 			// Create links of /u/usernames and #tags
+/*
 			var usernameRegex = /(?:^|)(\/u\/\w+)(?!\w)/g,
 				tagRegex      = /(?:^|)#(\w+)(?!\w)/g;
+*/
 
-			var markdown = input.replace(usernameRegex, "[$1]($1)").replace(tagRegex, "[#$1](/t/$1)"),
+			var markdown = input.replace({{ \REGEXES::PAGES }}, "{{ \REGEXES::PAGES_RP }}").replace({{ \REGEXES::USERNAMES }}, "{{ \REGEXES::USERNAMES_RP }}").replace({{ \REGEXES::TAGS }}, "{{ \REGEXES::TAGS_RP }}"),
 				ht    	 = marked(markdown);
 
 			$(this).parent().find('.markdown').html(ht);
@@ -306,10 +311,12 @@
 				fo = form.parent(),
 				eb = form.parent().parent().find('a.edit-comment').first();
 
-			var usernameRegex = /(?:^|)(\/u\/\w+)(?!\w)/g,
-				tagRegex      = /(?:^|)#(\w+)(?!\w)/g;
+//			var usernameRegex = /(?:^|)(\/u\/\w+)(?!\w)/g,
+//				tagRegex      = /(?:^|)#(\w+)(?!\w)/g;
 
-			oc.html(marked(markdown.replace(usernameRegex, "[$1]($1)").replace(tagRegex, "[#$1](/t/$1)"))).removeClass('hide');
+			
+
+			oc.html(marked(markdown.replace({{ \REGEXES::PAGES }}, "{{ \REGEXES::PAGES_RP }}").replace({{ \REGEXES::USERNAMES }}, "{{ \REGEXES::USERNAMES_RP }}").replace({{ \REGEXES::TAGS }}, "{{ \REGEXES::TAGS_RP }}"))).removeClass('hide');
 			fo.addClass('hide');
 			form.trigger('reset');
 			submitBtn.attr('disabled', false).removeClass('disabled');
