@@ -48,7 +48,7 @@ function setCache($key, $value, $expire)
 
 function setCacheWithSeconds($key, $value, $expire)
 {
-    $prefix = env('cache_prefix', 'thesocialnetwork');
+    $prefix = env('CACHE_PREFIX', 'thesocialnetwork');
     Redis::setex("$prefix:" . $key, $expire, serialize($value));
     return $value;
 }
