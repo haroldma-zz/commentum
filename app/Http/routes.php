@@ -33,10 +33,11 @@ Route::group(['middleware' => 'auth'], function()
 });
 
 
-Route::get('/', 'PageController@index');
+Route::get('/{extension?}', 'PageController@index')->where('extension', REGEXES::API_EXTENSIONS);
 Route::get('/login', 'PageController@login');
 
-Route::get('/t/{tag}', ['middleware' => ['privacy', 'nsfw'], 'uses' => 'PageController@tag']);
+Route::get('/t/{tag}{extension?}', ['middleware' => ['privacy', 'nsfw'], 'uses' => 'PageController@tag'])
+	->where('tag', '[A-Za-z]+')->where('extension', REGEXES::API_EXTENSIONS);
 Route::get('/t/{tag}/{hash}/{slug}', ['middleware' => ['privacy', 'nsfw'], 'uses' => 'PageController@thread']);
 Route::get('/t/{tag}/{hash}/{slug}/{chash}', ['middleware' => ['privacy', 'nsfw'], 'uses' => 'PageController@threadComment']);
 Route::get('/u/{username}', 'PageController@profile');
