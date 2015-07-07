@@ -39,6 +39,6 @@
 	@endforeach
 	@endif
 </table>
-@if (Session::get('moreSubmissionsCount') > 20)
+@if (count($threads) == $limit)
 <div id="loadMoreSubmissions">Load more submissions</div>
 @endif

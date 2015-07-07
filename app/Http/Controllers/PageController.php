@@ -62,21 +62,17 @@ class PageController extends Controller
 	 *
 	 * @return 	view
 	 */
-	public function index(Request $request)
+	public function index(Request $request, $extension = null)
 	{
+        $offset = max((int)$request->get('offset', 0), 0);
+        $limit = min((int)$request->get('limit', 20), 100);
+
 		if (!Auth::check())
-		    $threads = Tag::getThreadsByHotness(-1);
+		    $threads = Tag::getThreadsByHotness(-1, $offset, $limit);
         else
-            $threads = User::getSubscribedTagsThreads(Auth::id());
-
-        $moreSubmissionsCount = Thread::orderBy('id', 'DESC')->count();
-		Session::flash('moreSubmissionsCount', $moreSubmissionsCount);
-
-		// else
-			// $threads = User::getSubscribedTagsThreads();
+            $threads = User::getSubscribedTagsThreads(Auth::id(), $offset, $limit);
 
 		$ip = getClientIp();
-
 		foreach($threads as $thread)
 		{
 			if (is_null(Cache::get("{$ip}:thread:{$thread->id}:impression")))
@@ -87,9 +83,26 @@ class PageController extends Controller
 			}
 		}
 
-		$data = ['threads' => $threads];
+        if ($extension == '.json')
+            return $threads;
+        else if ($request->ajax()){
+            $markup = '';
+            $ip = getClientIp();
 
-		return view('pages.index')->with($data);
+            foreach ($threads as $thread)
+            {
+                if (is_null(Cache::get("{$ip}:thread:{$thread->id}:impression")))
+                {
+                    Cache::put("{$ip}:thread:{$thread->id}:impression", true, 120);
+                    $thread->addImpression();
+                }
+
+                $markup .= view('threads.thread-in-list', ['t' => $thread])->render();
+            }
+            return $markup;
+        }
+        else
+            return view('pages.index')->with(['threads' => $threads, 'limit' => $limit]);
 	}
 
 	/**
@@ -225,14 +238,49 @@ class PageController extends Controller
 	 *
 	 * @return 	view
 	 */
-	public function tag($tag)
+	public function tag(Request $request, $tag, $extension = null)
 	{
 		$tag = Tag::where('title', strtolower($tag))->first();
 
 		if (!$tag)
 			abort(404);
 
-		return view('tags.tag')->with(['tag' => $tag]);
+        $offset = max((int)$request->get('offset', 0), 0);
+        $limit = min((int)$request->get('limit', 20), 100);
+
+        $threads = $tag->threadsByHotness($offset, $limit);
+
+        $ip = getClientIp();
+        foreach($threads as $thread)
+        {
+            if (is_null(Cache::get("{$ip}:thread:{$thread->id}:impression")))
+            {
+                Cache::put("{$ip}:thread:{$thread->id}:impression", true, 120);
+                //$thread->increment('views');
+                $thread->addImpression();
+            }
+        }
+
+        if ($extension == '.json')
+            return $threads;
+        else if ($request->ajax()){
+            $markup = '';
+            $ip = getClientIp();
+
+            foreach ($threads as $thread)
+            {
+                if (is_null(Cache::get("{$ip}:thread:{$thread->id}:impression")))
+                {
+                    Cache::put("{$ip}:thread:{$thread->id}:impression", true, 120);
+                    $thread->addImpression();
+                }
+
+                $markup .= view('threads.thread-in-list', ['t' => $thread])->render();
+            }
+            return $markup;
+        }
+        else
+            return view('tags.tag')->with(['tag' => $tag, 'threads' => $threads, 'limit' => $limit]);
 	}
 
 	/**

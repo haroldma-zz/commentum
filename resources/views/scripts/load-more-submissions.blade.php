@@ -1,5 +1,7 @@
 <script>
 	var canLoadMore = true;
+	var limit = {{ $limit }};
+	var page = 0;
 
 	$('#loadMoreSubmissions').click(function()
 	{
@@ -10,7 +12,10 @@
 			button.removeClass('error').addClass('loading');
 			button.html('<img src="{{ url("/img/dark-loader.svg") }}" width="25">');
 
-			$.get('{{ url("/more/front") }}')
+            page++;
+            var offset = limit * page;;
+
+			$.get('?offset=' + offset)
 			.done(function(data)
 			{
 				button.removeClass('loading');

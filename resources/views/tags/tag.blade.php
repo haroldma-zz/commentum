@@ -13,7 +13,7 @@
 	<div class="row">
 		<div class="medium-9 columns">
 			<div class="panel small">
-				@include('layouts.threads', ['threads' => $tag->threadsByHotness()])
+				@include('layouts.threads', ['threads' => $threads, 'limit' => $limit])
 			</div>
 		</div>
 		<div class="medium-3 columns">
@@ -28,6 +28,7 @@
 {!! HTML::script('/bower_components/livestamp/moment.min.js') !!}
 {!! HTML::script('/bower_components/livestamp/livestamp.min.js') !!}
 @include('scripts.markdown-parser')
+@include('scripts.load-more-submissions')
 @if (Auth::check())
 @include('scripts.subscriber', ['tag' => $tag])
 @endif
