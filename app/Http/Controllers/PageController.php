@@ -287,6 +287,44 @@ class PageController extends Controller
 
 		return view('threads.thread')->with(['thread' => $thread, 'singleComment' => $comment, 'context' => $context]);
 	}
+
+	/**
+	 * Polymorphic pages
+	 *
+	 * @param  	string $page
+	 * @return 	view
+	 */	
+	public function page($page, Request $request)
+	{
+		try {
+			return view("pages." . $page);
+		} catch(Exception $e) {
+			abort(404);
+		}
+	}
+
+	/**
+	 * Donation POST from STRIPE
+	 *
+	 * @return 	view
+	 */	
+	public function donation(Request $request)
+	{
+		try {
+			\Stripe::charges()->create([
+				'source' => $request->input('stripeToken'),
+				'currency' => 'USD',
+				'amount'   => $request->input('stripeAmount'),
+			]);
+
+			Session::flash('donation_message', 'Your donation has been received. Thank you!');
+
+			return view('pages.donate');
+		} catch(Exception $e) {
+			abort(500);
+		}
+	}
+
 }
 
 
