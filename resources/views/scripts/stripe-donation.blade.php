@@ -1,6 +1,6 @@
 <script>
   var handler = StripeCheckout.configure({
-    key: {{ getenv('STRIPE_PUBLIC_KEY') }},
+    key: '{{ getenv('STRIPE_PUBLIC_KEY') }}',
     image: '/img/documentation/checkout/marketplace.png',
     token: function(token) {
       // Use the token to create the charge with a server-side script.
