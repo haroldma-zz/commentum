@@ -864,6 +864,36 @@ html, body {
   margin-bottom: 1em;
   margin-left: 0;
   margin-right: 0;
-  padding-left: 40px;  
+  padding-left: 40px;
 }
 
+
+.hero-page {
+	p, ul, ol {
+		color: white;
+		font-size: 1em;
+	}
+	#stripeAmount {
+		border: none;
+		color: white;
+		background: none;
+		font-size: 5em;
+		font-weight: 100;
+		height: auto;
+		max-height: 1000px;
+		line-height: 1;
+		border-bottom: 2px solid $dark-primary-color;
+		padding-bottom: 0.25em;
+		text-align: center;
+	}
+	#stripeDonate {
+		border: 1px solid white;
+		padding: 0.75em 1.5em;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		font-size: 0.85em;
+		margin-top: 10px;
+		@include border-radius($global-radius);
+	}
+}
