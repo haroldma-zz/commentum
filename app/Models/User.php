@@ -189,8 +189,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     static function getSubscribedTagsThreads($userId, $offset = 0, $limit = 20, $nsfw_mode = 0)
     {
-        return Thread::hydrateRaw('call getThreadsByHotnessForSubscription(?, ?, ?, ?)',
+        $key = generateCacheKeyWithId('User', "getSubscribedTagsThreads_{$offset}_{$limit}_{$nsfw_mode}", $userId);
+
+        if (hasCache($key, $cache)){
+            return $cache;
+        }
+
+        $threads = Thread::hydrateRaw('call getThreadsByHotnessForSubscription(?, ?, ?, ?)',
             [$userId, $nsfw_mode, $offset, $limit]);
+
+        return setCacheWithSeconds($key, $threads, \CACHE_SECONDS::FRONT_PAGE);
     }
 
     /**
