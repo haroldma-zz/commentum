@@ -3,7 +3,7 @@
 @section('page')
 <div class="hero">
 	<div class="row">
-		<div class="medium-4 medium-offset-4 columns donate-page text-justify">
+		<div class="medium-4 medium-offset-4 columns hero-page text-justify">
 			<h3>Donate</h3>
 			<br>
 			<p>
