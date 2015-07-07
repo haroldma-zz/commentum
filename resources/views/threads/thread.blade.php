@@ -48,7 +48,7 @@
 						</p>
 						@if (!is_null($thread->markdown) && !empty($thread->markdown))
 						<br>
-						<div class="markdown thread-description content-embeddable">
+						<div class="markdown thread-description">
 							{{ $thread->markdown }}
 						</div>
 						@endif
@@ -98,19 +98,12 @@
 </div>
 @stop
 
-@section('stylesheets')
-{!! HTML::style('/stylesheets/embed.css') !!}
-{!! HTML::style('//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css') !!}
-@stop
-
 @section('scripts')
 {!! HTML::script('/bower_components/marked/marked.min.js') !!}
 {!! HTML::script('/bower_components/livestamp/moment.min.js') !!}
 {!! HTML::script('/bower_components/livestamp/livestamp.min.js') !!}
-{!! HTML::script('/bower_components/embed-js/dist/jquery.embed.min.js') !!}
 @include('scripts.threads-user-header')
 @include('scripts.markdown-parser')
-@include('scripts.embed-js')
 @include('scripts.commenter', ['threadUserId' => $thread->user_id])
 @if (Auth::check())
 	@include('scripts.thread-actions')
