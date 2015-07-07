@@ -48,13 +48,15 @@ function setCache($key, $value, $expire)
 
 function setCacheWithSeconds($key, $value, $expire)
 {
-    Redis::setex("thesocialnetwork:" . $key, $expire, serialize($value));
+    $prefix = env('cache_prefix', 'thesocialnetwork');
+    Redis::setex("$prefix:" . $key, $expire, serialize($value));
     return $value;
 }
 
 function setCacheCount($key, $value)
 {
-    Redis::setex("thesocialnetwork:" . $key, calculateExpiry($value), $value);
+    $prefix = env('CACHE_PREFIX', 'thesocialnetwork');
+    Redis::setex("$prefix:" . $key, calculateExpiry($value), $value);
     return $value;
 }
 

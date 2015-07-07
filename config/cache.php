@@ -74,6 +74,6 @@ return [
     |
     */
 
-    'prefix' => 'thesocialnetwork',
+    'prefix' => env('CACHE_PREFIX', 'thesocialnetwork'),
 
 ];
