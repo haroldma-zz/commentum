@@ -5,7 +5,7 @@
 			<span>&middot;</span>
 			<a href="/p/donate">Donate</a>
 			<span>&middot;</span>
-			<a href="/p/policy">Privacy Policy</a>
+			<a href="/p/rules_and_policies">Rules & Policies</a>
 			<span>&middot;</span>
 			<a href="/p/contact">Contact</a>
 		</div>

@@ -4,7 +4,7 @@
 <div class="hero">
 	<div class="row">
 		<div class="medium-4 medium-offset-4 columns hero-page text-justify">
-			<h3>Policy</h3>
+			<h3>Rules & Policies</h3>
 			<br>
 			<p>
 				At Commentum, we respect and harbor freedom of speech. Freedom of speech means that you can share your opinion on anything. Freedom of speech, in our opinion, and by our policies, does not include:
