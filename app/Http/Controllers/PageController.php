@@ -190,7 +190,7 @@ class PageController extends Controller
 		if (!$thread)
 			abort(404);
 
-		if ($thread->author()->id !== Auth::id())
+		if ($thread->author()->id !== Auth::id() && !Auth::user()->can('edit-thread'))
 			abort(403);
 
 		return view('pages.submit')->with(['thread' => $thread]);
