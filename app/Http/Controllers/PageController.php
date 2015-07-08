@@ -341,7 +341,7 @@ class PageController extends Controller
 	 *
 	 * @param  	string $page
 	 * @return 	view
-	 */	
+	 */
 	public function page($page, Request $request)
 	{
 		try {
@@ -355,7 +355,7 @@ class PageController extends Controller
 	 * Donation POST from STRIPE
 	 *
 	 * @return 	view
-	 */	
+	 */
 	public function donation(Request $request)
 	{
 		try {

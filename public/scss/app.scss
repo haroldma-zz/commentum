@@ -824,9 +824,13 @@ html, body {
 
 
 .hero-page {
-	p, ul, ol {
+	p, ul, ol, a {
 		color: white;
 		font-size: 1em;
+	}
+	a {
+		font-weight: 700;
+		text-decoration: underline;
 	}
 	#stripeAmount {
 		border: none;
@@ -850,5 +854,22 @@ html, body {
 		font-size: 0.85em;
 		margin-top: 10px;
 		@include border-radius($global-radius);
+	}
+}
+
+.footer {
+	width: 100%;
+	padding: 5em;
+	font-size: 0.85em;
+	color: #aaa;
+	a {
+		color: #aaa;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		margin: 0 10px;
+		&:hover {
+			color: #333;
+		}
 	}
 }
