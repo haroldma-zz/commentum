@@ -6,20 +6,27 @@
       // Use the token to create the charge with a server-side script.
       // You can access the token ID with `token.id`
 
+      var amountString = $('#stripeAmount').val().replace(/.+?([0-9\.]+).+/, "$1");
+      var amount = parseFloat(amountString);
+
       $('<form action="/p/donate" method="POST">' + 
 	    '<input type="hidden" name="_token" value="{{ csrf_token() }}">' + 
 	    '<input type="hidden" name="stripeToken" value="' + token.id + '">' +
-	    '<input type="hidden" name="stripeAmount" value="' + parseFloat($('#stripeAmount').val()) + '">' + 
+	    '<input type="hidden" name="stripeAmount" value="' + amount + '">' + 
 	    '</form>').submit();
     }
   });
 
   $('#stripeDonate').click(function(e) {
     // Open Checkout with further options
+
+    var amountString = $('#stripeAmount').val().replace(/.+?([0-9\.]+).+/, "$1");
+    var amount = ~~(parseFloat(amountString) * 100);
+
     handler.open({
       name: 'Commentum',
       description: 'Donation',
-      amount: ~~(parseFloat($('#stripeAmount').val()) * 100)
+      amount: amount
     });
     e.preventDefault();
   });
