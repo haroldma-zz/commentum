@@ -62,6 +62,8 @@
 		</div>
 	</div>
 	@yield('page')
+	@include('layouts.footer')
+	
 {{-- 	@if (Auth::check())
 	@include('chat.chat-bar')
 	@endif --}}
