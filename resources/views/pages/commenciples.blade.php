@@ -5,7 +5,7 @@
 	<div class="row">
 		<div class="medium-4 medium-offset-4 columns hero-page text-justify">
 			<h3>Commenciples</h3>
-			<strong>Thank you, <a href="/u/Curtis">/u/Curtis</a>, for the original set of Commenciples!</strong>
+			<strong class="text-info">Thank you, <a href="/u/Curtis">/u/Curtis</a>, for the original set of Commenciples!</strong>
 
 			<hr>
 
