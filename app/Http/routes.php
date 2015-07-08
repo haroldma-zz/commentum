@@ -46,7 +46,7 @@ Route::get('/u/{username}', 'PageController@profile');
 Route::get('/p/{page}', 'PageController@page');
 Route::post('/p/donate', 'PageController@donation');
 
-Route::get('/out/{thread_id}', 'ThreadController@out');
+Route::get('/out/{hashid}', 'ThreadController@out');
 
 /*
 * POST routes
