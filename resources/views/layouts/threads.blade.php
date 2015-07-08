@@ -13,7 +13,7 @@
 		</td>
 		<td>
 			{!! (!empty($t->link) ? '<i class="ion-link"></i>' : '') !!}
-			<a href="{{ $t->titlePermalink() }}">{{ $t->title }}</a>
+			<a href="{{ $t->titlePermalink() }}"{{ $t->isDirectLink() ? " target=\"_blank\"" : '' }}>{{ $t->title }}</a>
 			<br>
 			@if ($t->nsfw)
 			<span class="thread-tag nsfw">nsfw</span>
