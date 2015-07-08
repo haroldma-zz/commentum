@@ -1,28 +1,11 @@
 <div class="row small-collapse trending-list">
-	<div class="medium-8 columns">
+	<div class="medium-12 columns">
 		<ul class="inline-list">
 			<li><a href="{{ url('/t/all') }}">#all</a></li>
 			<li><i class="ion-ios-pulse-strong"></i></li>
-			<li><a href="{{ url('/t/random') }}">#random</a></li>
-			<li><a href="{{ url('/t/random') }}">#gonewild</a></li>
-			<li><a href="{{ url('/t/random') }}">#nsfw</a></li>
-			<li><a href="{{ url('/t/random') }}">#random</a></li>
-			<li><a href="{{ url('/t/random') }}">#gonewild</a></li>
-			<li><a href="{{ url('/t/random') }}">#nsfw</a></li>
-			<li><a href="{{ url('/t/random') }}">#random</a></li>
-			<li><a href="{{ url('/t/random') }}">#gonewild</a></li>
-			<li><a href="{{ url('/t/random') }}">#nsfw</a></li>
-			<li><a href="{{ url('/t/random') }}">#random</a></li>
-			<li><a href="{{ url('/t/random') }}">#gonewild</a></li>
-			<li><a href="{{ url('/t/random') }}">#nsfw</a></li>
-			<li><a href="{{ url('/t/random') }}">#random</a></li>
-			<li><a href="{{ url('/t/random') }}">#gonewild</a></li>
-			<li><a href="{{ url('/t/random') }}">#nsfw</a></li>
+            @foreach(App\Models\Tag::getTrendingTags() as $tag)
+			<li><a href="{{ url("/t/{$tag->display_title}") }}">#{{ $tag->display_title }}</a></li>
+			@endforeach
 		</ul>
-	</div>
-	<div class="medium-4 columns text-right">
-		<p>
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi, accusamus.
-		</p>
 	</div>
 </div>
