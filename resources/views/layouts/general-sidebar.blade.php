@@ -21,6 +21,7 @@
 	</ul>
     <h6 class="super-header">Links</h6>
     <ul>
+    	<li><a href="/p/commenciples">Commenciples</a></li>
         <li><a href="/p/policy">Privacy Policy</a></li>
         <li><a href="/p/donate">Donate</a></li>
         <li><a href="/p/contact">Contact</a></li>
