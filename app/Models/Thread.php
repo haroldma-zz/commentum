@@ -57,8 +57,8 @@ class Thread extends Model
         if (!is_null($this->_titlePermalink))
             return $this->_titlePermalink;
 
-        if (!empty($this->link))
-            $this->_titlePermalink = $this->link;
+        if ($this->isDirectLink())
+            $this->_titlePermalink = url("/out/" . $this->id);
         else
             $this->_titlePermalink = $this->permalink();
 
@@ -189,5 +189,10 @@ class Thread extends Model
         LEFT JOIN comments c ON c.thread_id = t.id
         WHERE t.id = ?
         GROUP BY t.id) as v"), [$this->id])[0]->momentum;
+    }
+
+    public function isDirectLink()
+    {
+        return !empty($this->link);
     }
 }

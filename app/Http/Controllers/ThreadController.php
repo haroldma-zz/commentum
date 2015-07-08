@@ -159,6 +159,34 @@ class ThreadController extends Controller
 
 		return response("OK", 200);
 	}
+
+	/**
+	 * Direct link redirection
+	 */
+	public function out($id, Request $request)
+	{
+		if(!$id > 0)
+			abort(404);
+
+		$thread = Thread::find($id);
+
+		if(!$thread)
+			abort(404);
+
+		if(empty($thread->link))
+			return redirect($thread->permalink());
+
+		$ip = $request->getClientIp();
+
+		if (is_null(Cache::get("{$ip}:thread:{$thread->id}:view")))
+		{
+			Cache::put("{$ip}:thread:{$thread->id}:view", true, 120);
+			//$thread->increment('views');
+			$thread->addView();
+		}
+
+		return \Redirect::to($thread->link);
+	}
 }
 
 
