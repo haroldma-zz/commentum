@@ -58,7 +58,7 @@ class Thread extends Model
             return $this->_titlePermalink;
 
         if ($this->isDirectLink())
-            $this->_titlePermalink = url("/out/" . $this->id);
+            $this->_titlePermalink = url("/out/" . Hashids::encode($this->id));
         else
             $this->_titlePermalink = $this->permalink();
 
