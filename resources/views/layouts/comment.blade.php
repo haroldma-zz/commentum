@@ -4,7 +4,8 @@
 		<span>
 			@if(is_null($c->deleted_at))
 			<a href="{{ $c->author()->permalink() }}">
-				{!! ($c->author()->id == $c->thread()->user_id ? '<span class="username-tag op">OP</span> ' : '') !!}
+				{!! ($c->author()->hasRole('admin') ? '<span class="username-tag admin">ADMIN</span> ' : '') !!}
+				{!! ($c->author_id == $c->thread()->user_id ? '<span class="username-tag op">OP</span> ' : '') !!}
 				{{ $c->author()->username }}
 			</a>
 			@else

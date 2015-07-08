@@ -152,6 +152,10 @@ input[type="submit"] {
 		border-color: $success-color;
 		color: $success-color;
 	}
+	&.admin {
+	  border-color: #FF0000;
+	  color: #FF0000;
+	}
 }
 
 .thread-tag {
