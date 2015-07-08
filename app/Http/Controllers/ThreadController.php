@@ -163,12 +163,14 @@ class ThreadController extends Controller
 	/**
 	 * Direct link redirection
 	 */
-	public function out($id, Request $request)
+	public function out($hashid, Request $request)
 	{
-		if(!$id > 0)
+		$hashed = Hashids::decode($hashid);
+
+		if(!count($hashed) > 0)
 			abort(404);
 
-		$thread = Thread::find($id);
+		$thread = Thread::find($hashed[0]);
 
 		if(!$thread)
 			abort(404);
@@ -185,7 +187,7 @@ class ThreadController extends Controller
 			$thread->addView();
 		}
 
-		return \Redirect::to($thread->link);
+		return redirect($thread->link);
 	}
 }
 
