@@ -63,6 +63,9 @@ class ThreadController extends Controller
 
 			if (!$check)
 			{
+                if (!EntrustFacade::can('create-commune'))
+                    return response('You don\'t have permission to create new tags.', 400);
+
 				$usersLatestTag = Tag::where('owner_id', Auth::id())->orderBy('id', 'DESC')->first();
 
 				if ($usersLatestTag)
