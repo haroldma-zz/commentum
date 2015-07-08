@@ -35,8 +35,41 @@ class TagController extends Controller
 
 		if ($tag->subscribe())
 		{
-			sendMessage($tag->owner()->id, Auth::id(), null, null, null, $tag->id, null, 6);
+			sendMessage($tag->owner_id, Auth::id(), null, null, null, $tag->id, null, 6);
 			return response("Subscribed.", 200);
+		}
+
+		return response("Something went wrong, try again.", 500);
+	}
+
+	/**
+	 * Unsubscribe a user from a tag.
+	 *
+	 * @param  	Request 	$request
+	 * @return 	response
+	 */
+	public function unsubscribe(Request $request)
+	{
+		if (!$request->ajax())
+			abort(404);
+
+		$tagId = Hashids::decode($request->get('tag-id'))[0];
+
+		if (Auth::user()->isSubscribedToTag($tagId) == false)
+			return response("You're already unsubscribed from this tag.", 200);
+
+		$tag = Tag::find($tagId);
+
+		if (!$tag)
+			return response("That tag doesn't exist (anymore).");
+
+		$owner_id = $tag->owner_id;
+		$tag_id = $tag->id;
+
+		if ($tag->unsubscribe())
+		{
+			//sendMessage($owner_id, Auth::id(), null, null, null, $tag_id, null, 6);
+			return response("Unsubscribed.", 200);
 		}
 
 		return response("Something went wrong, try again.", 500);
