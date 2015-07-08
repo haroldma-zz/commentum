@@ -5,6 +5,7 @@
 @import "animate";
 @import "typography";
 @import "expando";
+@import "chat";
 
 /*
 * html, body
@@ -878,96 +879,6 @@ html, body {
 		margin: 0 10px;
 		&:hover {
 			color: #333;
-		}
-	}
-}
-
-/**
- * .chat-bar
- */
-.chat-bar {
-	width: 250px;
-	height: 40px;
-	line-height: 40px;
-	color: $white;
-	position: fixed;
-	z-index: 99;
-	bottom: 0;
-	right: 0;
-	background: $primary-color;
-	border: 1px solid darken($primary-color, 10);
-	border-bottom: none;
-	border-right: none;
-	@include border-radius($global-radius 0 0 0);
-	@include transition(all .2s ease);
-	&.open {
-		height: 100%;
-	}
-	.header {
-		height: 41px;
-		width: 100%;
-		border-bottom: 1px solid darken($primary-color, 10);
-		cursor: pointer;
-		&:hover {
-			background: lighten($primary-color, 5);
-		}
-		.icon-box {
-			width: 40px;
-			text-align: center;
-			font-size: 1.5em;
-			float: left;
-			position: relative;
-			#chatCount {
-				width: auto;
-				height: auto;
-				max-height: 15px;
-				background: red;
-				color: white;
-				font-size: 10px;
-				font-weight: 700;
-				text-align: center;
-				padding: 1px 2px;
-				position: absolute;
-				top: 2.5px;
-				right: 2.5px;
-				line-height: 10px;
-				@include border-radius($global-radius);
-			}
-		}
-		.text-box {
-			width: auto;
-			padding-right: 1em;
-			font-weight: 700;
-			text-transform: uppercase;
-			letter-spacing: 2px;
-			font-size: 0.85em;
-			text-align: right;
-		}
-	}
-	.chat-list {
-		width: 100%;
-		@include transition(all .2s ease .6s);
-		li {
-			width: 100%;
-			height: 40px;
-			padding: 0 1em;
-			line-height: 40px;
-			color: white;
-			background: $primary-color;
-			font-weight: 500;
-			cursor: pointer;
-			@include transition(all .2s ease);
-			&:hover {
-				background: lighten($primary-color, 5);
-				padding-left: 1.5em;
-			}
-			.indicator {
-				font-size: 0.85em;
-				color: rgba(255, 255, 255, 0.35);
-				&.online {
-					color: #36D7B7;
-				}
-			}
 		}
 	}
 }

@@ -63,10 +63,9 @@
 	</div>
 	@yield('page')
 	@include('layouts.footer')
-	
-{{-- 	@if (Auth::check())
+	@if (Auth::check())
 	@include('chat.chat-bar')
-	@endif --}}
+	@endif
 	{!! HTML::script('/bower_components/jquery/dist/jquery.min.js') !!}
 	{!! HTML::script('/bower_components/jquery.cookie/jquery.cookie.js') !!}
 	{!! HTML::script('/bower_components/nicescroll/jquery.nicescroll.js') !!}
@@ -76,7 +75,7 @@
 	@yield('scripts')
 	@if(Auth::check())
 	@include('scripts.tags-nav-toggler')
-	{{-- @include('scripts.chat') --}}
+	@include('scripts.chat')
 	@endif
 </body>
 </html>
