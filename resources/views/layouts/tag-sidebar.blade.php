@@ -22,17 +22,22 @@
 		</p>
 	@endif
 
-    @if($tag->id == 0)
-            <!-- Can't sub to all -->
-	@elseif(Auth::check() && !Auth::user()->isSubscribedToTag($tag->id))
-		{!! Form::open(['url' => '/t/' . $tag->display_title . '/subscribe', 'id' => 'subscribeForm']) !!}
-		{!! Form::hidden('tag-id', Hashids::encode($tag->id)) !!}
-		<button id="subscribeButton" class="btn success" type="submit">Subscribe</button>
-		{!! Form::close() !!}
-	@elseif(Auth::check())
-		<button id="subscribeButton" disabled="true" class="btn small inactive" type="submit">Subscribed</button>
-	@else
-		<a href="{{ url('/login') }}" class="btn success small">Subscribe</a>
+	@if($tag->id != 0)
+		@if(Auth::check())
+			@if(!Auth::user()->isSubscribedToTag($tag->id))
+				{!! Form::open(['url' => '/t/' . $tag->display_title . '/subscribe', 'id' => 'subscribeForm']) !!}
+				{!! Form::hidden('tag-id', Hashids::encode($tag->id)) !!}
+				<button id="subscribeButton" class="btn success" type="submit">Subscribe</button>
+				{!! Form::close() !!}
+			@else
+				{!! Form::open(['url' => '/t/' . $tag->display_title . '/unsubscribe', 'id' => 'unsubscribeForm']) !!}
+				{!! Form::hidden('tag-id', Hashids::encode($tag->id)) !!}
+				<button id="unsubscribeButton" class="btn warning" type="submit">Unsubscribe</button>
+				{!! Form::close() !!}
+			@endif
+		@else
+			<a href="{{ url('/login') }}" class="btn success small">Subscribe</a>
+		@endif
 	@endif
 	<!--//////// END INFO SECTION ////////-->
 
