@@ -21,7 +21,7 @@
 		<section class="markdown content-embeddable">
 			{{ (is_null($c->deleted_at) ? $c->markdown : "[deleted]") }}
 		</section>
-		@if (Auth::check() && Auth::id() === $c->author_id)
+		@if (Auth::check() && Auth::id() === $c->author_id || Auth::user()->can('edit-thread'))
 		<section class="hide comment-editor">
 			{!! Form::open(['url' => '/me/edit/comment', 'class' => 'edit-comment-form']) !!}
 			{!! Form::hidden('hashid', Hashids::encode($c->id)) !!}
@@ -50,8 +50,10 @@
 			@if (Auth::check() && is_null($c->deleted_at))
 			<a class="save-comment" data-hashid="{{ Hashids::encode($c->id) }}">{{ (Auth::user()->savedComment($c->id) == true ? "un" : "") }}save</a>
 			@endif
-			@if (Auth::check() && Auth::id() === $c->author_id && is_null($c->deleted_at))
+			@if ((Auth::check() && Auth::id() === $c->author_id || \Auth::user()->can('edit-comment')) && is_null($c->deleted_at))
 			<a class="edit-comment">edit</a>
+			@endif
+			@if ((Auth::check() && Auth::id() === $c->author_id || \Auth::user()->can('remove-comment')) && is_null($c->deleted_at))
 			<a class="delete-comment" data-hashid="{{ Hashids::encode($c->id) }}">delete</a>
 			@endif
 		</footer>

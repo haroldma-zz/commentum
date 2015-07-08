@@ -79,11 +79,23 @@ class AddRoles extends Migration
         $removeThreads->description  = 'remove any thread';
         $removeThreads->save();
 
+        $editThreads = new Permission();
+        $editThreads->name         = 'edit-thread';
+        $editThreads->display_name = 'Edit Threads';
+        $editThreads->description  = 'edit any thread';
+        $editThreads->save();
+
         $removeComments = new Permission();
         $removeComments->name         = 'remove-comment';
         $removeComments->display_name = 'Remove Comments';
         $removeComments->description  = 'remove any comment';
         $removeComments->save();
+
+        $editComments = new Permission();
+        $editComments->name         = 'edit-comment';
+        $editComments->display_name = 'Edit Comments';
+        $editComments->description  = 'edit any comment';
+        $editComments->save();
 
         $banUserFromCommune = new Permission();
         $banUserFromCommune->name         = 'ban-user-from-commune';
@@ -115,7 +127,9 @@ class AddRoles extends Migration
         }
 
         $permissions[] = $removeThreads;
+        $permissions[] = $editThreads;
         $permissions[] = $removeComments;
+        $permissions[] = $editComments;
         $permissions[] = $banUserFromCommune;
         foreach ($permissions as $permission) {
             $supermod->attachPermission($permission);

@@ -8,6 +8,7 @@ use App\Models\Comment;
 use App\Models\Thread;
 use App\Models\Message;
 use Auth;
+use Zizaco\Entrust\EntrustFacade;
 
 class CommentController extends Controller
 {
@@ -167,7 +168,7 @@ class CommentController extends Controller
 		if (!$comment)
 			return response("Can't find that comment.", 500);
 
-		if ($comment->author_id !== Auth::id())
+		if ($comment->author_id !== Auth::id() && !EntrustFacade::can('edit-comment'))
 			return response("You are not authorized to edit this comment.", 500);
 
 		// Update the comment
@@ -197,7 +198,7 @@ class CommentController extends Controller
 		if (!$comment)
 			return response("Can't find that comment.", 500);
 
-		if ($comment->author_id != Auth::id())
+		if ($comment->author_id != Auth::id() && !EntrustFacade::can('remove-comment'))
 			return response("You're not the owner of this comment.", 500);
 
 		// we need to delete corresponding notification.
