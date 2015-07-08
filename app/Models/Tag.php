@@ -208,7 +208,7 @@ class Tag extends Model
     /**
      * Subscribes a user to a tag.
      *
-     * @param  integer 	$userId
+     * @param  integer  $userId
      * @return boolean
      */
     function subscribe($userId = null)
@@ -218,6 +218,25 @@ class Tag extends Model
         $subscription->user_id = ($userId != null ? $userId : Auth::id());
 
         return $subscription->save();
+    }
+
+    /**
+     * Unubscribes a user from a tag.
+     *
+     * @param  integer  $userId
+     * @return boolean
+     */
+    function unsubscribe($userId = null)
+    {
+        $user = User::find($userId != null ? $userId : Auth::id());
+        if(!$user)
+            return null;
+
+        $subscription = $user->subscriptionsAlt->where('tag_id', $this->id)->first();
+        if(!$subscription)
+            return null;
+
+        return $subscription->delete();
     }
 
     /**
