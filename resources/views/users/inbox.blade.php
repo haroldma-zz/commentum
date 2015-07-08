@@ -7,8 +7,8 @@
 	@include('layouts.tags-nav')
 </div>
 <div class="padding">
-	<div class="row">
-		<div class="medium-9 columns inbox">
+	<div class="row small-collapse">
+		<div class="medium-9 large-10 columns inbox">
 			@if(count(Auth::user()->messages()) > 0)
 			<div class="panel small">
 			@foreach(Auth::user()->messages() as $m)
@@ -31,7 +31,7 @@
 			</div>
 			@endif
 		</div>
-		<div class="medium-3 columns">
+		<div class="medium-3 large-2 columns">
 			@include('layouts.general-sidebar')
 		</div>
 	</div>

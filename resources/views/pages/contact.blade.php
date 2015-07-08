@@ -7,7 +7,7 @@
 			<h3>Contact</h3>
 			<br>
 			<p>
-				If you are interested in contacting us regarding a business inquiry, please contact us at <a href="mailto:info@commentum.io">info@commentum.io</a>, or contact a particular individual at Commentum:
+				If you are interested in contacting us regarding a business inquiry, please contact us at <a href="mailto:hello@commentum.io">hello@commentum.io</a>, or contact a particular individual at Commentum:
 			</p>
 			<ul class="no-bullet">
 				<li><a href="mailto:sharif@commentum.io">sharif@commentum.io</a> - (founder, developer)</li>
