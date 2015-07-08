@@ -10,6 +10,7 @@
 	@endif
 </div>
 <div class="padding">
+	@include('layouts.trending-bar')
 	<div class="row small-collapse">
 		<div class="medium-9 large-10 columns">
 			<div class="panel small">

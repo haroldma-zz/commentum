@@ -1,11 +1,4 @@
 <div class="panel small sidebar">
-	<h6 class="super-header">Trending tags</h6>
-	<ul class="no-bullet">
-		@foreach(App\Models\Tag::getTrendingTags() as $tag)
-			<li><a href='{{ url("/t/{$tag->display_title}") }}'>#{{ $tag->display_title }}</a></li>
-		@endforeach
-	</ul>
-	<hr>
 	<h6 class="super-header">New tags</h6>
 	<ul class="no-bullet">
 		@foreach(App\Models\Tag::getNewTags() as $tag)
