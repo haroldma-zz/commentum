@@ -16,6 +16,7 @@ Route::group(['middleware' => 'auth'], function()
 	Route::get('/t/{tag}/{hash}/{slug}/edit', 'PageController@editThread');
 
 	Route::post('/t/{tag}/subscribe', 'TagController@subscribe');
+	Route::post('/t/{tag}/unsubscribe', 'TagController@unsubscribe');
 	Route::post('/t/{tag}/settings', 'TagController@settings');
 	Route::post('/edit/thread', 'ThreadController@submit');
 
