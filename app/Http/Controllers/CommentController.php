@@ -21,6 +21,9 @@ class CommentController extends Controller
 		if (!$request->ajax())
 			abort(404);
 
+        if (!EntrustFacade::can('create-comment'))
+            return response('You don\'t have permission to post comments.', 400);
+
 		// Check if message is empty first
 		$markdown = $request->markdown;
 
