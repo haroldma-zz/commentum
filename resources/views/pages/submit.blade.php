@@ -81,7 +81,6 @@
 	</div>
 </div>
 {!! Form::close() !!}
-@include('layouts.footer')
 @stop
 
 @section('scripts')
