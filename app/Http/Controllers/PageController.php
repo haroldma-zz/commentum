@@ -137,7 +137,7 @@ class PageController extends Controller
 		if ($username != Auth::user()->username)
 			abort(404);
 
-		return view('users.saved');
+		return view('users.saved')->with(['limit' => -1]);
 	}
 
 	/**

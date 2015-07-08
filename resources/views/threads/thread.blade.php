@@ -64,7 +64,7 @@
 			{!! Form::open(['url' => '/comment', 'class' => 'row comment-box parent-commenter', 'data-hierarchy' => 'parent', 'onsubmit' => 'submitComment(event, this)']) !!}
 				{!! Form::hidden('thread_id', Hashids::encode($thread->id)) !!}
 				{!! Form::hidden('parent_id', Hashids::encode(0)) !!}
-				<div class="medium-5 columns">
+				<div class="medium-5 large-3 columns">
 					{!! Form::label('markdown', 'Post a comment') !!}
 					<p class="no-margin">
 						You can use <a href="{{ url('/') }}">Markdown</a>.

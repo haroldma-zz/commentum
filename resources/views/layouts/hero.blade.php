@@ -1,12 +1,12 @@
 <div class="row">
-	<div class="medium-7 columns" style="padding-top:7.5em;">
+	<div class="medium-7 large-6 large-offset-1 columns" style="padding-top:7.5em;">
 		<h1>
 			No votes,
 			<br>
 			just comments.
 		</h1>
 	</div>
-	<div class="medium-5 columns">
+	<div class="medium-5  large-3 end columns">
 		{!! Form::open(['url' => '/register', 'class' => 'register-form', 'autocomplete' => 'off', 'id' => 'registerForm']) !!}
 		<h3>Register, it's free.</h3>
 		<hr>

@@ -15,8 +15,8 @@
 	</div>
 </div>
 <div class="padding">
-	<div class="row">
-		<div class="medium-9 columns">
+	<div class="row small-collapse">
+		<div class="medium-9 large-10 columns">
 			<div class="panel small">
 				<table class="questions-list">
 					@if (!count($user->threads()) > 0)
@@ -52,7 +52,7 @@
 				</table>
 			</div>
 		</div>
-		<div class="medium-3 columns">
+		<div class="medium-3 large-2 columns">
 			@include('layouts.user-sidebar', ['user' => $user])
 		</div>
 	</div>

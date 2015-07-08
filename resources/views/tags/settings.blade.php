@@ -7,7 +7,7 @@
 	@include('layouts.tags-nav')
 </div>
 <div class="padding">
-	<div class="row">
+	<div class="row small-collapse">
 		<div class="medium-6 medium-offset-3 columns">
 			{!! Form::open(['url' => $tag->permalink() . '/settings', 'class' => 'panel small', 'id' => 'settingsForm']) !!}
 				<h5>General settings</h5>

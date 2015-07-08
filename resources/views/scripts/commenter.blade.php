@@ -76,7 +76,7 @@
 				html += '<input name="_token" type="hidden" value="{{ csrf_token() }}">';
 				html += '<input name="thread_id" type="hidden" value="' + res['threadId'] + '">';
 				html += '<input name="parent_id" type="hidden" value="' + res['commentId'] + '">';
-				html += '<div class="medium-5 columns">';
+				html += '<div class="medium-5 large-3 columns">';
 				html += '<p class="no-margin">';
 				html += 'You can use <a href="{{ url("/") }}"</a>.';
 				html += '</p>';

@@ -10,13 +10,13 @@
 @endif
 @include('layouts.tag-hero', ['tag' => $tag])
 <div class="padding">
-	<div class="row">
-		<div class="medium-9 columns">
-			<div class="panel small">
+	<div class="row small-collapse">
+		<div class="medium-9 large-10 columns">
+			<div class="panel small min-height">
 				@include('layouts.threads', ['threads' => $threads, 'limit' => $limit])
 			</div>
 		</div>
-		<div class="medium-3 columns">
+		<div class="medium-3 large-2 columns">
 			@include('layouts.tag-sidebar', ['tag' => $tag])
 		</div>
 	</div>
