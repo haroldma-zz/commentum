@@ -7,7 +7,7 @@
 	@include('layouts.tags-nav')
 	<hr>
 	<div class="row">
-		<div class="medium-6 medium-offset-3 columns">
+		<div class="medium-6 medium-offset-3 large-4 large-offset-4 columns">
 			<div class="register-form">
 				{!! Form::label('title', 'Choose a title', ['class' => 'white-font']) !!}
 				{!! Form::textarea('title', (isset($thread) ? $thread->title : ''), ['rows' => 1]) !!}
@@ -17,7 +17,7 @@
 </div>
 <div class="padding">
 	<div class="row">
-		<div class="medium-6 medium-offset-3 columns">
+		<div class="medium-6 medium-offset-3 large-4 large-offset-4 columns">
 			<div class="panel">
 				<h5>
 					Link
@@ -81,6 +81,7 @@
 	</div>
 </div>
 {!! Form::close() !!}
+@include('layouts.footer')
 @stop
 
 @section('scripts')

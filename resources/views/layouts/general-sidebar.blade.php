@@ -23,6 +23,7 @@
     <ul>
         <li><a href="/p/policy">Privacy Policy</a></li>
         <li><a href="/p/donate">Donate</a></li>
+        <li><a href="/p/contact">Contact</a></li>
     </ul>
 	<p>© 2015 Commentum. <br /> All Rights Reserved.</p>
 </div>

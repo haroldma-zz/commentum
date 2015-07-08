@@ -137,7 +137,7 @@ class PageController extends Controller
 		if ($username != Auth::user()->username)
 			abort(404);
 
-		return view('users.saved');
+		return view('users.saved')->with(['limit' => -1]);
 	}
 
 	/**
@@ -341,7 +341,7 @@ class PageController extends Controller
 	 *
 	 * @param  	string $page
 	 * @return 	view
-	 */	
+	 */
 	public function page($page, Request $request)
 	{
 		try {
@@ -355,7 +355,7 @@ class PageController extends Controller
 	 * Donation POST from STRIPE
 	 *
 	 * @return 	view
-	 */	
+	 */
 	public function donation(Request $request)
 	{
 		try {
