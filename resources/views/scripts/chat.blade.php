@@ -88,8 +88,8 @@
 	{
 		client = XMPP.createClient(
 		{
-		    jid: 'sharif@commentum.io',
-		    password: '_Commentum2734',
+		    jid: '{{ Auth::user()->username }}@commentum.io',
+		    password: '{{ Auth::user()->xmpp_password }}',
 		    transport: 'websocket',
 		    wsURL: 'ws://chat.commentum.io:5280/websocket'
 		});
@@ -160,7 +160,7 @@
 				client.sendMessage(
 				{
 					to: currentUser + "@commentum.io",
-					from: "sharif@commentum.io",
+					from: "{{ Auth::user()->username }}@commentum.io",
 					body: input
 				});
 

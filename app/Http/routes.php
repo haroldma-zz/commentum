@@ -16,6 +16,7 @@ Route::group(['middleware' => 'auth'], function()
 	Route::get('/t/{tag}/{hash}/{slug}/edit', 'PageController@editThread');
 
 	Route::post('/t/{tag}/subscribe', 'TagController@subscribe');
+	Route::post('/t/{tag}/unsubscribe', 'TagController@unsubscribe');
 	Route::post('/t/{tag}/settings', 'TagController@settings');
 	Route::post('/edit/thread', 'ThreadController@submit');
 
@@ -30,6 +31,8 @@ Route::group(['middleware' => 'auth'], function()
 	Route::post('/me/pm', 'UserController@pm');
 	Route::post('/me/delete/thread', 'ThreadController@delete');
 	Route::post('/me/delete/comment', 'CommentController@delete');
+
+	Route::get('/xmpp/test', 'UserController@xmppTest');
 });
 
 
