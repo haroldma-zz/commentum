@@ -121,30 +121,30 @@ class UserController extends Controller
 
 		if (Auth::attempt(['username' => $username, 'password' => $password]))
 		{
-			// $user     = Auth::user();
-			// $username = $user->username;
-			// $password = md5(str_random(11));
-			// $node     = 'commentum.io';
+			$user     = Auth::user();
+			$username = $user->username;
+			$password = md5(str_random(11));
+			$node     = 'commentum.io';
 
-			// $user->xmpp_password = $password;
+			$user->xmpp_password = $password;
 
-			// if ($user->save())
-			// {
-			// 	exec('sudo -u ejabberd /opt/ejabberd-15.06/bin/ejabberdctl register '.$username.' '.$node.' '.$password.' 2>&1',$output, $status);
+			if ($user->save())
+			{
+				exec('sudo /opt/ejabberd-15.06/bin/ejabberdctl register '.$username.' '.$node.' '.$password.' 2>&1',$output, $status);
 
-			// 	if ($output > 0)
-			// 	{
-			// 		Auth::logout();
-			// 		return response("Something went wrong, try again.", 500);
-			// 	}
+				if ($output > 0)
+				{
+					Auth::logout();
+					return response("Something went wrong, try again.", 500);
+				}
 
-			// 	return response("OK", 200);
-			// }
-			// else
-			// {
-			// 	Auth::logout();
-			// 	return response("Something went wrong, try again.", 500);
-			// }
+				return response("OK", 200);
+			}
+			else
+			{
+				Auth::logout();
+				return response("Something went wrong, try again.", 500);
+			}
 
 			return response("OK", 200);
 		}
@@ -348,34 +348,6 @@ class UserController extends Controller
 		//
 
 		return response("test", 500);
-	}
-
-
-	public function xmppTest()
-	{
-		$user     = Auth::user();
-		$username = $user->username;
-		$password = md5(str_random(11));
-		$node     = 'commentum.io';
-
-		$user->xmpp_password = $password;
-
-		if ($user->save())
-		{
-			exec('sudo /opt/ejabberd-15.06/bin/ejabberdctl register '.$username.' '.$node.' '.$password.' 2>&1',$output, $status);
-
-			if ($output > 0)
-			{
-		        echo '<pre>';
-		        foreach($output as $o)
-		        {
-		            echo $o."\n";
-		        }
-		        echo '</pre>';
-			}
-
-			return response("OK", 200);
-		}
 	}
 }
 
