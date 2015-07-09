@@ -13,6 +13,10 @@
 		<br>
 		<center><img src="{{ url('/img/loader.svg') }}" width="30px"></center>
 	</ul>
+	<div class="chat-actions">
+		<input type="text" class="inputter" id="addUserInput" placeholder="Add user...">
+		<div class="button" id="addUserBtn"><i class="ion-ios-personadd-outline"></i></div>
+	</div>
 </div>
 <div class="chat-box" id="chatbox">
 	<header id="chatHeader"></header>

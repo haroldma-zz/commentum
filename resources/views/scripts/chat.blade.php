@@ -83,13 +83,47 @@
 	});
 
 	/**
+	 * Try to connect to the server
+	 * if it failed.
+	 */
+	$('.chat-list').on('click', '.error-li', function()
+	{
+		$('#roster').html('<br><center><img src="{{ url('/img/loader.svg') }}" width="30px"></center>');
+		connectClient();
+	});
+
+	/**
+	 * Handle click on #addUserBtn
+	 */
+	$('#addUserBtn').click(function()
+	{
+		var userInput = $('#addUserInput').val();
+
+		if (userInput == "")
+		{
+			$('#addUserInput').focus();
+			return false;
+		}
+
+		if (loggedIn == false)
+		{
+			alert("Can't connect to the chat server.");
+			return false;
+		}
+
+		client.subscribe(userInput + '@commentum.io');
+		$('#addUserInput').val("");
+	});
+
+	/**
 	 * Connect with the XMPP server
 	 * using WebSockets.
 	 */
 	var client;
 	var roster;
+	var loggedIn = false;
 
-	(function()
+	var connectClient = function()
 	{
 		client = XMPP.createClient(
 		{
@@ -115,6 +149,8 @@
 		    		$('#roster').append('<li><span class="indicator"><i class="ion-record"></i></span> ' + user.jid.local + '</li>');
 		    	});
 		    });
+
+		    var loggedIn = true;
 		});
 
 		client.on('chat', function (msg)
@@ -134,10 +170,20 @@
 		client.on('auth:failed', function()
 		{
 			$('#roster').html("<li class='error-li'>Couldn't connect to the chat server.<br><br><a class='btn success medium' id='connectToChat'>Try again</a></li>");
-		})
+		});
+
+		client.on('subscribed', function(data)
+		{
+			console.log("Subscribed: " + data);
+		});
+
+		client.on('roster:update', function(data)
+		{
+			console.log("Roster update: " + data);
+		});
 
 		client.connect();
-	})();
+	}
 
 	/**
 	 * Disable new line insert
@@ -176,4 +222,9 @@
 			}
 		}
 	});
+
+	/**
+	 * Connect the fucking client.
+	 */
+	connectClient();
 </script>
