@@ -145,12 +145,17 @@ input[type="submit"] {
 	letter-spacing: 1px;
 	border: 1px solid darken(#aaa, 10);
 	padding: 0px 2px;
+	margin: 0 !important;
 	@include border-radius(3px);
 
 	&.op {
 		// background: $dark-primary-color;
 		border-color: $success-color;
 		color: $success-color;
+	}
+	&.admin {
+	  border-color: $alert-color;
+	  color: $alert-color;
 	}
 }
 
