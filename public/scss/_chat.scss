@@ -54,10 +54,18 @@
 			width: auto;
 			padding-right: 1em;
 			font-weight: 700;
-			text-transform: uppercase;
-			letter-spacing: 2px;
 			font-size: 0.85em;
 			text-align: right;
+			.indicator {
+				font-size: 0.85em;
+				color: rgba(255, 255, 255, 0.35);
+				&.online {
+					color: #36D7B7;
+				}
+				&.error {
+					color: $alert-color;
+				}
+			}
 		}
 	}
 	.chat-list {
@@ -107,16 +115,43 @@
 	}
 	header {
 		width: 100%;
+		height: 45px;
 		padding: 10px;
 		border-bottom: 1px solid $silver;
 		font-size: 0.85em;
 		font-weight: 500;
+		position: absolute;
+		top: 0;
 	}
 	section {
 		width: 100%;
-		height: 425px;
+		height: 412px;
 		background: #f9f9f9;
 		padding: 10px;
+		position: absolute;
+		top: 45px;
+		overflow: auto;
+		#chatMessages {
+			li {
+				padding: 5px;
+				background: $white;
+				display: inline-block;
+				clear: both;
+				float: left;
+				max-width: 75%;
+				margin-bottom: 5px;
+				@include border-radius($global-radius);
+				@include box-shadow(0 0 3px rgba(0, 0, 0, 0.05));
+				&:last-of-type {
+					margin-bottom: 0;
+				}
+			}
+			li.green {
+				background: #DADFE1;
+				float: right;
+				text-align: right;
+			}
+		}
 	}
 	textarea {
 		width: 100%;
@@ -125,5 +160,7 @@
 		border: none;
 		border-top: 1px solid $silver;
 		padding: 10px;
+		position: absolute;
+		bottom: 0;
 	}
 }

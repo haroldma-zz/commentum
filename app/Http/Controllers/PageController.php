@@ -11,7 +11,6 @@ use App\Models\Thread;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 use Vinkla\Hashids\Facades\Hashids;
-use Illuminate\Support\Facades\Log;
 
 class PageController extends Controller
 {
@@ -87,7 +86,6 @@ class PageController extends Controller
             return $threads;
         else if ($request->ajax()){
             $markup = '';
-            $ip = getClientIp();
 
             foreach ($threads as $thread)
             {
@@ -265,7 +263,6 @@ class PageController extends Controller
             return $threads;
         else if ($request->ajax()){
             $markup = '';
-            $ip = getClientIp();
 
             foreach ($threads as $thread)
             {
