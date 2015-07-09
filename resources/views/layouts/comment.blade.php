@@ -18,7 +18,7 @@
 		<span data-livestamp="{{ strtotime($c->created_at) }}"></span>
 	</header>
 	<div class="body usertext-body">
-		<section class="markdown content-embeddable">
+		<section class="markdown">
 			{{ (is_null($c->deleted_at) ? $c->markdown : "[deleted]") }}
 		</section>
 		@if (Auth::check() && Auth::id() === $c->author_id || Auth::user()->can('edit-thread'))

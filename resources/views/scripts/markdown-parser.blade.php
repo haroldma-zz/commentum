@@ -1,13 +1,10 @@
 <script>
 	var markdown = $('body').find('.markdown');
 
-	var usernameRegex = /(?:^|)(\/u\/\w+)(?!\w)/g,
-		tagRegex      = /(?:^|)#(\w+)(?!\w)/g;
-
 	$.each(markdown, function(i, el)
 	{
 		var md = $.trim($(el).text()),
-			ht = marked(md.replace(usernameRegex, "[$1]($1)").replace(tagRegex, "[#$1](/t/$1)"));
+			ht = marked(md.replace({{ \REGEXES::PAGES }}, "{{ \REGEXES::PAGES_RP }}").replace({{ \REGEXES::USERNAMES }}, "{{ \REGEXES::USERNAMES_RP }}").replace({{ \REGEXES::TAGS }}, "{{ \REGEXES::TAGS_RP }}"));
 
 		$(el).html(ht);
 	});
