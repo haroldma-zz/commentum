@@ -124,8 +124,8 @@ class UserController extends Controller
 		{
 			// $user     = Auth::user();
 			// $username = $user->username;
-			// $password = md5($username . str_random(7));
-			// $node     = 'chat.commentum.io';
+			// $password = md5(str_random(11));
+			// $node     = 'commentum.io';
 
 			// $user->xmpp_password = $password;
 
@@ -146,6 +146,7 @@ class UserController extends Controller
 			// 	Auth::logout();
 			// 	return response("Something went wrong, try again.", 500);
 			// }
+
 			return response("OK", 200);
 		}
 		else
@@ -348,6 +349,34 @@ class UserController extends Controller
 		//
 
 		return response("test", 500);
+	}
+
+
+	public function xmppTest()
+	{
+		$user     = Auth::user();
+		$username = $user->username;
+		$password = md5(str_random(11));
+		$node     = 'commentum.io';
+
+		$user->xmpp_password = $password;
+
+		if ($user->save())
+		{
+			exec('sudo -u ejabberd /opt/ejabberd-15.06/bin/ejabberdctl register '.$username.' '.$node.' '.$password.' 2>&1',$output, $status);
+
+			if ($output > 0)
+			{
+		        echo '<pre>';
+		        foreach($output as $o)
+		        {
+		            echo $o."\n";
+		        }
+		        echo '</pre>';
+			}
+
+			return response("OK", 200);
+		}
 	}
 }
 

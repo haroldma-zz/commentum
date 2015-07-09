@@ -31,6 +31,8 @@ Route::group(['middleware' => 'auth'], function()
 	Route::post('/me/pm', 'UserController@pm');
 	Route::post('/me/delete/thread', 'ThreadController@delete');
 	Route::post('/me/delete/comment', 'CommentController@delete');
+
+	Route::get('/xmpp/test', 'UserController@xmppTest');
 });
 
 
