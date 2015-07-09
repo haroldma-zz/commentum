@@ -135,6 +135,13 @@ class UserController extends Controller
 
 				if ($output > 0)
 				{
+			        echo '<pre>';
+			        foreach($output as $o)
+			        {
+			            echo $o."\n";
+			        }
+			        echo '</pre>';
+
 					Auth::logout();
 					return response("Something went wrong, try again.", 500);
 				}
@@ -146,8 +153,6 @@ class UserController extends Controller
 				Auth::logout();
 				return response("Something went wrong, try again.", 500);
 			}
-
-			return response("OK", 200);
 		}
 		else
 		{
