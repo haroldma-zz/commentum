@@ -1,5 +1,113 @@
 {!! HTML::script('/js/stanzaio.bundle.min.js') !!}
 <script>
+	/**
+	 * Connect with the XMPP server
+	 * using WebSockets.
+	 */
+	var client;
+	var roster;
+	var loggedIn = false;
+
+	var connectClient = function()
+	{
+		client = XMPP.createClient(
+		{
+		    jid: '{{ Auth::user()->username }}@commentum.io',
+		    password: '{{ Auth::user()->xmpp_password }}',
+		    transport: 'websocket',
+		    wsURL: 'wss://chat.commentum.io:8443/websocket'
+		});
+
+		client.on('session:started', function ()
+		{
+		    client.sendPresence();
+		    $('#userStatusIndicator').removeClass('error').addClass('online');
+
+		    client.getRoster().then(function(data)
+		    {
+		    	roster = data.roster;
+
+		    	$('#roster').html("");
+
+		    	$.each(roster.items, function(index, user)
+		    	{
+		    		$('#roster').append('<li><span class="indicator"><i class="ion-record"></i></span> ' + user.jid.local + '</li>');
+		    	});
+		    });
+
+		    loggedIn = true;
+		});
+
+		client.on('chat', function (msg)
+		{
+			$('#chatMessages').append('<li>' + msg.body + '</li>');
+			var cmb = $("#chatMessagesWindow");
+			cmb.animate({ scrollTop: cmb.prop("scrollHeight") - cmb.height() }, 1);
+		});
+
+		client.on('message:sent', function (msg)
+		{
+			$('#chatMessages').append('<li class="green">' + msg.body + '</li>');
+			var cmb = $("#chatMessagesWindow");
+			cmb.animate({ scrollTop: cmb.prop("scrollHeight") - cmb.height() }, 1);
+		});
+
+		client.on('auth:failed', function()
+		{
+			$('#roster').html("<li class='error-li'>Couldn't connect to the chat server.<br><br><a class='btn success medium' id='connectToChat'>Try again</a></li>");
+		});
+
+		client.on('subscribed', function(data)
+		{
+			console.log("Subscribed: " + data);
+		});
+
+		client.on('roster:update', function(data)
+		{
+			console.log("Roster update: " + data);
+		});
+
+		client.connect();
+	}
+
+	/**
+	 * Disable new line insert
+	 * on enter in the chat input
+	 * area.
+	 */
+	$('#chatInput').keydown(function(e)
+	{
+		if (e.keyCode === 13)
+			return false;
+	});
+
+	/**
+	 * Send message on enter,
+	 * if the chat input is not
+	 * empty.
+	 */
+	$('#chatInput').keyup(function(e)
+	{
+		var keyCode = e.keyCode;
+
+		if (keyCode === 13)
+		{
+			var input = $(this).val();
+
+			if (input != "")
+			{
+				client.sendMessage(
+				{
+					to: currentUser + "@commentum.io",
+					from: "{{ Auth::user()->username }}@commentum.io",
+					body: input
+				});
+
+				$(this).val("");
+			}
+		}
+	});
+
 	if ($.cookie('chatPadding') != undefined)
 	{
 		$('.chat-bar').toggleClass('open');
@@ -113,114 +221,6 @@
 
 		client.subscribe(userInput + '@commentum.io');
 		$('#addUserInput').val("");
-	});
-
-	/**
-	 * Connect with the XMPP server
-	 * using WebSockets.
-	 */
-	var client;
-	var roster;
-	var loggedIn = false;
-
-	var connectClient = function()
-	{
-		client = XMPP.createClient(
-		{
-		    jid: '{{ Auth::user()->username }}@commentum.io',
-		    password: '{{ Auth::user()->xmpp_password }}',
-		    transport: 'websocket',
-		    wsURL: 'wss://chat.commentum.io:8443/websocket'
-		});
-
-		client.on('session:started', function ()
-		{
-		    client.sendPresence();
-		    $('#userStatusIndicator').removeClass('error').addClass('online');
-
-		    client.getRoster().then(function(data)
-		    {
-		    	roster = data.roster;
-
-		    	$('#roster').html("");
-
-		    	$.each(roster.items, function(index, user)
-		    	{
-		    		$('#roster').append('<li><span class="indicator"><i class="ion-record"></i></span> ' + user.jid.local + '</li>');
-		    	});
-		    });
-
-		    var loggedIn = true;
-		});
-
-		client.on('chat', function (msg)
-		{
-			$('#chatMessages').append('<li>' + msg.body + '</li>');
-			var cmb = $("#chatMessagesWindow");
-			cmb.animate({ scrollTop: cmb.prop("scrollHeight") - cmb.height() }, 1);
-		});
-
-		client.on('message:sent', function (msg)
-		{
-			$('#chatMessages').append('<li class="green">' + msg.body + '</li>');
-			var cmb = $("#chatMessagesWindow");
-			cmb.animate({ scrollTop: cmb.prop("scrollHeight") - cmb.height() }, 1);
-		});
-
-		client.on('auth:failed', function()
-		{
-			$('#roster').html("<li class='error-li'>Couldn't connect to the chat server.<br><br><a class='btn success medium' id='connectToChat'>Try again</a></li>");
-		});
-
-		client.on('subscribed', function(data)
-		{
-			console.log("Subscribed: " + data);
-		});
-
-		client.on('roster:update', function(data)
-		{
-			console.log("Roster update: " + data);
-		});
-
-		client.connect();
-	}
-
-	/**
-	 * Disable new line insert
-	 * on enter in the chat input
-	 * area.
-	 */
-	$('#chatInput').keydown(function(e)
-	{
-		if (e.keyCode === 13)
-			return false;
-	});
-
-	/**
-	 * Send message on enter,
-	 * if the chat input is not
-	 * empty.
-	 */
-	$('#chatInput').keyup(function(e)
-	{
-		var keyCode = e.keyCode;
-
-		if (keyCode === 13)
-		{
-			var input = $(this).val();
-
-			if (input != "")
-			{
-				client.sendMessage(
-				{
-					to: currentUser + "@commentum.io",
-					from: "{{ Auth::user()->username }}@commentum.io",
-					body: input
-				});
-
-				$(this).val("");
-			}
-		}
 	});
 
 	/**
