@@ -57,10 +57,12 @@ class UserController extends Controller
 		if($passwords_dont_match)
 			return response('The passwords you entered do not match.', 500);
 
+		$xmppPassword = md5(str_random(11));
+
 		$user                = new User;
 		$user->username      = $username;
 		$user->password      = Hash::make($password);
-		$user->xmpp_password = md5(str_random(11));
+		$user->xmpp_password = $xmppPassword;
 
 		if (!is_null($email))
 			$user->email = $email;
@@ -84,7 +86,7 @@ class UserController extends Controller
 				$i++;
 			}
 
-			exec('sudo /opt/ejabberd-15.06/bin/ejabberdctl register '.$username.' '.$node.' '.$password.' 2>&1',$output, $status);
+			exec('sudo /opt/ejabberd-15.06/bin/ejabberdctl register '.$username.' commentum.io '.$xmppPassword.' 2>&1',$output, $status);
 
 			return response('Welcome to Commentum!', 200);
 		}
