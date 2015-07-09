@@ -122,7 +122,7 @@ class UserController extends Controller
 
 		if (Auth::attempt(['username' => $username, 'password' => $password]))
 		{
-			if (is_null(Auth::user()->xmpp_password))
+			if (Auth::user()->xmpp_password == "")
 			{
 				$user     = Auth::user();
 				$username = $user->username;
