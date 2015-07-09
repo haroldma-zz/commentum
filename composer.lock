@@ -142,16 +142,16 @@
         },
         {
             "name": "cartalyst/stripe-laravel",
-            "version": "v2.0.1",
+            "version": "v2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cartalyst/stripe-laravel.git",
-                "reference": "a33350068abfe51b16919c8bbf4c9994c6f1b0dd"
+                "reference": "71ce969f08ecb2f62d2ce4bb23b43da1279a997a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cartalyst/stripe-laravel/zipball/a33350068abfe51b16919c8bbf4c9994c6f1b0dd",
-                "reference": "a33350068abfe51b16919c8bbf4c9994c6f1b0dd",
+                "url": "https://api.github.com/repos/cartalyst/stripe-laravel/zipball/71ce969f08ecb2f62d2ce4bb23b43da1279a997a",
+                "reference": "71ce969f08ecb2f62d2ce4bb23b43da1279a997a",
                 "shasum": ""
             },
             "require": {
@@ -206,7 +206,7 @@
                 "php",
                 "stripe"
             ],
-            "time": "2015-06-09 16:19:26"
+            "time": "2015-07-09 11:08:55"
         },
         {
             "name": "classpreloader/classpreloader",
@@ -1077,16 +1077,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "1.0.5",
+            "version": "1.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "f70cf7d229b9f96a076b74b20c31f1762c8ef9dc"
+                "reference": "e87d33ecc3a9fe2b1931856dc9921628f8c18cd5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/f70cf7d229b9f96a076b74b20c31f1762c8ef9dc",
-                "reference": "f70cf7d229b9f96a076b74b20c31f1762c8ef9dc",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/e87d33ecc3a9fe2b1931856dc9921628f8c18cd5",
+                "reference": "e87d33ecc3a9fe2b1931856dc9921628f8c18cd5",
                 "shasum": ""
             },
             "require": {
@@ -1154,7 +1154,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2015-07-08 12:45:24"
+            "time": "2015-07-08 20:43:57"
         },
         {
             "name": "monolog/monolog",
@@ -2439,12 +2439,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Zizaco/entrust.git",
-                "reference": "804000c1c535221792b4e173ecdcc02b5681f5ec"
+                "reference": "3a768eb52300ec4efe9d6a6685b9bf0db6a50ffd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Zizaco/entrust/zipball/804000c1c535221792b4e173ecdcc02b5681f5ec",
-                "reference": "804000c1c535221792b4e173ecdcc02b5681f5ec",
+                "url": "https://api.github.com/repos/Zizaco/entrust/zipball/3a768eb52300ec4efe9d6a6685b9bf0db6a50ffd",
+                "reference": "3a768eb52300ec4efe9d6a6685b9bf0db6a50ffd",
                 "shasum": ""
             },
             "require": {
@@ -2498,7 +2498,7 @@
                 "permission",
                 "roles"
             ],
-            "time": "2015-05-25 00:17:51"
+            "time": "2015-07-09 16:32:53"
         }
     ],
     "packages-dev": [
