@@ -91,7 +91,7 @@
 		    jid: '{{ Auth::user()->username }}@commentum.io',
 		    password: '{{ Auth::user()->xmpp_password }}',
 		    transport: 'websocket',
-		    wsURL: 'ws://chat.commentum.io:5280/websocket'
+		    wsURL: 'wss://chat.commentum.io:8443/websocket'
 		});
 
 		client.on('session:started', function ()
