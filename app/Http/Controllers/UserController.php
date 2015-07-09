@@ -66,6 +66,7 @@ class UserController extends Controller
 
 		if ($user->save())
 		{
+            $user->attachRole(\ROLES::USER);
 			Auth::loginUsingId($user->id);
 
 			$i = 1;
@@ -121,32 +122,44 @@ class UserController extends Controller
 
 		if (Auth::attempt(['username' => $username, 'password' => $password]))
 		{
-			$user     = Auth::user();
-			$username = $user->username;
-			$password = md5(str_random(11));
-			$node     = 'commentum.io';
-
-			$user->xmpp_password = $password;
-
-			if ($user->save())
+			if (is_null(Auth::user()->xmpp_password))
 			{
-				exec('sudo /opt/ejabberd-15.06/bin/ejabberdctl register '.$username.' '.$node.' '.$password.' 2>&1',$output, $status);
+				$user     = Auth::user();
+				$username = $user->username;
+				$password = md5(str_random(11));
+				$node     = 'commentum.io';
 
-				if ($output > 0)
+				$user->xmpp_password = $password;
+
+				if ($user->save())
+				{
+					exec('sudo /opt/ejabberd-15.06/bin/ejabberdctl register '.$username.' '.$node.' '.$password.' 2>&1',$output, $status);
+
+					if ($output > 0)
+					{
+				        echo '<pre>';
+				        foreach($output as $o)
+				        {
+				            echo $o."\n";
+				        }
+				        echo '</pre>';
+
+						Auth::logout();
+						return response("Something went wrong, try again.", 500);
+					}
+
+					return response("OK", 200);
+				}
+				else
 				{
 					Auth::logout();
 					return response("Something went wrong, try again.", 500);
 				}
-
-				return response("OK", 200);
 			}
 			else
 			{
-				Auth::logout();
-				return response("Something went wrong, try again.", 500);
+				return response("OK", 200);
 			}
-
-			return response("OK", 200);
 		}
 		else
 		{

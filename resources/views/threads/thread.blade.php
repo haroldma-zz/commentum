@@ -37,9 +37,11 @@
 								@if (Auth::check())
 								<span>&middot;</span>
 								<span><a id="saveThread" data-hashid="{{ Hashids::encode($thread->id) }}">{{ (Auth::user()->savedThread($thread->id) == true ? "un" : "") }}save</a></span>
-								@if (Auth::id() == $thread->author()->id)
+								@if (Auth::id() == $thread->author()->id || Auth::user()->can('edit-thread'))
 								<span>&middot;</span>
 								<a href="{{ $thread->permalink() }}/edit">edit</a>
+								@endif
+								@if (Auth::id() == $thread->author()->id || Auth::user()->can('remove-thread') || $thread->tag()->isMod())
 								<span>&middot;</span>
 								<a id="deleteThread">delete</a>
 								@endif
@@ -48,7 +50,7 @@
 						</p>
 						@if (!is_null($thread->markdown) && !empty($thread->markdown))
 						<br>
-						<div class="markdown thread-description content-embeddable">
+						<div class="markdown thread-description">
 							{{ $thread->markdown }}
 						</div>
 						@endif
@@ -98,23 +100,17 @@
 </div>
 @stop
 
-@section('stylesheets')
-{!! HTML::style('/stylesheets/embed.css') !!}
-{!! HTML::style('//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css') !!}
-@stop
-
 @section('scripts')
 {!! HTML::script('/bower_components/marked/marked.min.js') !!}
 {!! HTML::script('/bower_components/livestamp/moment.min.js') !!}
 {!! HTML::script('/bower_components/livestamp/livestamp.min.js') !!}
-{!! HTML::script('/bower_components/embed-js/dist/jquery.embed.min.js') !!}
 @include('scripts.threads-user-header')
 @include('scripts.markdown-parser')
 @include('scripts.expando')
 @include('scripts.commenter', ['threadUserId' => $thread->user_id])
 @if (Auth::check())
 	@include('scripts.thread-actions')
-	@if (Auth::id() == $thread->author()->id)
+	@if (Auth::id() == $thread->author()->id || Auth::user()->can('remove-thread') || $thread->tag()->isMod())
 		@include('scripts.thread-deleter')
 	@endif
 @endif

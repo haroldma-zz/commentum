@@ -6,7 +6,6 @@ use Cache;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
-use App\Models\Thread;
 
 class Tag extends Model
 {
@@ -208,7 +207,7 @@ class Tag extends Model
     /**
      * Subscribes a user to a tag.
      *
-     * @param  integer 	$userId
+     * @param  integer  $userId
      * @return boolean
      */
     function subscribe($userId = null)
@@ -218,6 +217,25 @@ class Tag extends Model
         $subscription->user_id = ($userId != null ? $userId : Auth::id());
 
         return $subscription->save();
+    }
+
+    /**
+     * Unubscribes a user from a tag.
+     *
+     * @param  integer  $userId
+     * @return boolean
+     */
+    function unsubscribe($userId = null)
+    {
+        $user = User::find($userId != null ? $userId : Auth::id());
+        if(!$user)
+            return null;
+
+        $subscription = $user->subscriptionsAlt->where('tag_id', $this->id)->first();
+        if(!$subscription)
+            return null;
+
+        return $subscription->delete();
     }
 
     /**
@@ -253,6 +271,24 @@ class Tag extends Model
         $threads = Thread::hydrateRaw('call getThreadsByHotness(?, ?, ?, ?)', [$tagId, $nsfw_mode, $offset, $limit]);
 
         return setCacheWithSeconds($key, $threads, \CACHE_SECONDS::FRONT_PAGE);
+    }
+
+    /**
+     * Check if the logged in user is a mod of a tag.
+     *
+     * @param  	integer 	$userId
+     * @return 	boolean
+     */
+    public function isMod($userId = null)
+    {
+        return Tag::isModOfTag($this->id, $userId);
+    }
+
+    public static function isModOfTag($tagId, $userId = null)
+    {
+        if ($userId == null)
+            $userId = Auth::id();
+        return TagMod::where('tag_id', $tagId)->where('user_id', $userId)->exists();
     }
 }
 

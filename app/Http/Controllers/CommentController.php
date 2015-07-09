@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tag;
 use Vinkla\Hashids\Facades\Hashids;
 use Illuminate\Http\Request;
 use App\Models\Comment;
 use App\Models\Thread;
 use App\Models\Message;
 use Auth;
+use Zizaco\Entrust\EntrustFacade;
 
 class CommentController extends Controller
 {
@@ -20,6 +22,9 @@ class CommentController extends Controller
 	{
 		if (!$request->ajax())
 			abort(404);
+
+        if (!EntrustFacade::can('create-comment'))
+            return response('You don\'t have permission to post comments.', 400);
 
 		// Check if message is empty first
 		$markdown = $request->markdown;
@@ -164,7 +169,7 @@ class CommentController extends Controller
 		if (!$comment)
 			return response("Can't find that comment.", 500);
 
-		if ($comment->author_id !== Auth::id())
+		if ($comment->author_id !== Auth::id() && !EntrustFacade::can('edit-comment'))
 			return response("You are not authorized to edit this comment.", 500);
 
 		// Update the comment
@@ -194,12 +199,13 @@ class CommentController extends Controller
 		if (!$comment)
 			return response("Can't find that comment.", 500);
 
-		if ($comment->author_id != Auth::id())
+		if ($comment->author_id != Auth::id()
+            && !EntrustFacade::can('remove-comment')
+            && !Tag::isModOfTag($comment->thread()->tag_id))
 			return response("You're not the owner of this comment.", 500);
 
-		// we need to delete corresponding notification.
-        $notification = Message::where('comment_id', $id);
-        $notification->delete();
+		// we need to delete corresponding notifications.
+        Message::where('comment_id', $id)->delete();
 
 		// Soft delete the model
 		$comment->delete();
