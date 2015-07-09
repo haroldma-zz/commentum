@@ -128,6 +128,11 @@
 			cmb.animate({ scrollTop: cmb.prop("scrollHeight") - cmb.height() }, 1);
 		});
 
+		client.on('auth:failed', function()
+		{
+			console.log('Auth failed (chat)');
+		})
+
 		client.connect();
 	})();
 
