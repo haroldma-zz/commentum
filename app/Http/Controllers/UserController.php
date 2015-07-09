@@ -127,43 +127,42 @@ class UserController extends Controller
 
 		if (Auth::attempt(['username' => $username, 'password' => $password]))
 		{
-			// if (Auth::user()->xmpp_password == "")
-			// {
-			// 	$user     = Auth::user();
-			// 	$username = $user->username;
-			// 	$password = md5(str_random(11));
-			// 	$node     = 'commentum.io';
+			if (Auth::user()->xmpp_password == "")
+			{
+				$user     = Auth::user();
+				$username = $user->username;
+				$password = md5(str_random(11));
+				$node     = 'commentum.io';
 
-			// 	$user->xmpp_password = $password;
+				$user->xmpp_password = $password;
 
-			// 	if ($user->save())
-			// 	{
-			// 		exec('sudo /opt/ejabberd-15.06/bin/ejabberdctl register '.$username.' '.$node.' '.$password.' 2>&1',$output, $status);
+				if ($user->save())
+				{
+					exec('sudo /opt/ejabberd-15.06/bin/ejabberdctl register '.$username.' '.$node.' '.$password.' 2>&1',$output, $status);
 
-			// 		if (count($output) > 0)
-			// 		{
-			// 	        foreach($output as $o)
-			// 	        {
-			// 	            echo $o."\n";
-			// 	        }
+					if (count($output) > 1)
+					{
+				        foreach($output as $o)
+				        {
+				            echo $o."\n";
+				        }
 
-			// 			Auth::logout();
-			// 			return response("Something went wrong, try again.", 500);
-			// 		}
+						Auth::logout();
+						return response("Something went wrong, try again.", 500);
+					}
 
-			// 		return response("OK", 200);
-			// 	}
-			// 	else
-			// 	{
-			// 		Auth::logout();
-			// 		return response("Something went wrong, try again.", 500);
-			// 	}
-			// }
-			// else
-			// {
-			// 	return response("OK", 200);
-			// }
-			return response("OK", 200);
+					return response("OK", 200);
+				}
+				else
+				{
+					Auth::logout();
+					return response("Something went wrong, try again.", 500);
+				}
+			}
+			else
+			{
+				return response("OK", 200);
+			}
 		}
 		else
 		{
@@ -358,6 +357,27 @@ class UserController extends Controller
 		$to      = $request->get('to');
 
 		$user = User::where('username', $to)->first();
+
+		if (!$user)
+			return response("Can't find that user.", 500);
+
+		//
+
+		return response("test", 500);
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+();
 
 		if (!$user)
 			return response("Can't find that user.", 500);

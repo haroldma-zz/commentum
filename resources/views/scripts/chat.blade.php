@@ -59,12 +59,12 @@
 
 		client.on('subscribed', function(data)
 		{
-			console.log("Subscribed: " + data);
+			console.log(data);
 		});
 
 		client.on('roster:update', function(data)
 		{
-			console.log("Roster update: " + data);
+			console.log(data);
 		});
 
 		client.connect();
