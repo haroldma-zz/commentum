@@ -45,10 +45,10 @@
 	 */
 	var currentUser = null;
 
-	$('.chat-list > li').click(function()
+	$('.chat-list').on('click', 'li', function()
 	{
 		var item = $(this),
-			user = item.data('user'),
+			user = item.text(),
 			chbx = $('#chatbox');
 
 		if (user == currentUser)
@@ -82,12 +82,13 @@
 	 * using WebSockets.
 	 */
 	var client;
+	var roster;
 
 	(function()
 	{
 		client = XMPP.createClient(
 		{
-		    jid: 'inky@commentum.io',
+		    jid: 'sharif@commentum.io',
 		    password: '_Commentum2734',
 		    transport: 'websocket',
 		    wsURL: 'ws://chat.commentum.io:5280/websocket'
@@ -100,7 +101,17 @@
 
 		    var rosterObj = client.getRoster();
 
-		    console.log(rosterObj)
+		    rosterObj.then(function(data)
+		    {
+		    	roster = data.roster;
+
+		    	$('#roster').html("");
+
+		    	$.each(roster.items, function(index, user)
+		    	{
+		    		$('#roster').append('<li><span class="indicator"><i class="ion-record"></i></span> ' + user.jid.local + '</li>');
+		    	});
+		    });
 		});
 
 		client.on('chat', function (msg)
@@ -149,7 +160,7 @@
 				client.sendMessage(
 				{
 					to: currentUser + "@commentum.io",
-					from: "inky@commentum.io",
+					from: "sharif@commentum.io",
 					body: input
 				});
 

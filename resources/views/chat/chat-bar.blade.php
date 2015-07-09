@@ -9,10 +9,9 @@
 			<i class="ion-chevron-up" id="chatChevron"></i>
 		</div>
 	</div>
-	<ul class="chat-list no-bullet">
-		<li data-user="sharif"><span class="indicator online"><i class="ion-record"></i></span> noodles_ftw</li>
-		<li data-user="harry"><span class="indicator online"><i class="ion-record"></i></span> harry</li>
-		<li data-user="capn_krunk"><span class="indicator"><i class="ion-record"></i></span> capn_krunk</li>
+	<ul class="chat-list no-bullet" id="roster">
+		<br>
+		<center><img src="{{ url('/img/loader.svg') }}" width="30px"></center>
 	</ul>
 </div>
 <div class="chat-box" id="chatbox">
