@@ -362,7 +362,7 @@ class UserController extends Controller
 
 		if ($user->save())
 		{
-			exec('sudo -u ejabberd /opt/ejabberd-15.06/bin/ejabberdctl register '.$username.' '.$node.' '.$password.' 2>&1',$output, $status);
+			exec('sudo /opt/ejabberd-15.06/bin/ejabberdctl register '.$username.' '.$node.' '.$password.' 2>&1',$output, $status);
 
 			if ($output > 0)
 			{
