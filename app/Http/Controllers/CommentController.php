@@ -204,9 +204,8 @@ class CommentController extends Controller
             && !Tag::isModOfTag($comment->thread()->tag_id))
 			return response("You're not the owner of this comment.", 500);
 
-		// we need to delete corresponding notification.
-        $notification = Message::where('comment_id', $id);
-        $notification->delete();
+		// we need to delete corresponding notifications.
+        Message::where('comment_id', $id)->delete();
 
 		// Soft delete the model
 		$comment->delete();

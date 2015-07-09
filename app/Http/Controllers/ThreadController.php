@@ -11,6 +11,7 @@ use Cocur\Slugify\Slugify;
 use Vinkla\Hashids\Facades\Hashids;
 use Illuminate\Http\Request;
 use Zizaco\Entrust\EntrustFacade;
+use App\Models\Message;
 
 class ThreadController extends Controller
 {
@@ -162,6 +163,8 @@ class ThreadController extends Controller
             && !Tag::isModOfTag($thread->tag_id)) {
             return response("You're not the owner of this submission.", 500);
         }
+
+        Message::where('thread_id', $id)->delete();
 
 		// Soft delete the model
 		$thread->delete();
