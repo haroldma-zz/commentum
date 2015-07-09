@@ -99,9 +99,7 @@
 		    client.sendPresence();
 		    $('#userStatusIndicator').removeClass('error').addClass('online');
 
-		    var rosterObj = client.getRoster();
-
-		    rosterObj.then(function(data)
+		    client.getRoster().then(function(data)
 		    {
 		    	roster = data.roster;
 

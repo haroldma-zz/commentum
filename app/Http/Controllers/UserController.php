@@ -135,14 +135,12 @@ class UserController extends Controller
 				{
 					exec('sudo /opt/ejabberd-15.06/bin/ejabberdctl register '.$username.' '.$node.' '.$password.' 2>&1',$output, $status);
 
-					if ($output != 0)
+					if (count($output) > 0)
 					{
-				        echo '<pre>';
 				        foreach($output as $o)
 				        {
 				            echo $o."\n";
 				        }
-				        echo '</pre>';
 
 						Auth::logout();
 						return response("Something went wrong, try again.", 500);
