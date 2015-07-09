@@ -66,6 +66,7 @@ class UserController extends Controller
 
 		if ($user->save())
 		{
+            $user->attachRole(\ROLES::USER);
 			Auth::loginUsingId($user->id);
 
 			$i = 1;

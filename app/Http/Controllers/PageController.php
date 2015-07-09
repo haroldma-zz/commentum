@@ -164,7 +164,7 @@ class PageController extends Controller
 		if (!$thread)
 			abort(404);
 
-		$ip = $request->getClientIp();
+		$ip = getClientIp();
 
 		if (is_null(Cache::get("{$ip}:thread:{$thread->id}:view")))
 		{
@@ -190,7 +190,7 @@ class PageController extends Controller
 		if (!$thread)
 			abort(404);
 
-		if ($thread->author()->id !== Auth::id())
+		if ($thread->author()->id !== Auth::id() && !Auth::user()->can('edit-thread'))
 			abort(403);
 
 		return view('pages.submit')->with(['thread' => $thread]);

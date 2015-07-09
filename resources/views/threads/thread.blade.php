@@ -37,9 +37,11 @@
 								@if (Auth::check())
 								<span>&middot;</span>
 								<span><a id="saveThread" data-hashid="{{ Hashids::encode($thread->id) }}">{{ (Auth::user()->savedThread($thread->id) == true ? "un" : "") }}save</a></span>
-								@if (Auth::id() == $thread->author()->id)
+								@if (Auth::id() == $thread->author()->id || Auth::user()->can('edit-thread'))
 								<span>&middot;</span>
 								<a href="{{ $thread->permalink() }}/edit">edit</a>
+								@endif
+								@if (Auth::id() == $thread->author()->id || Auth::user()->can('remove-thread') || $thread->tag()->isMod())
 								<span>&middot;</span>
 								<a id="deleteThread">delete</a>
 								@endif
@@ -114,7 +116,7 @@
 @include('scripts.commenter', ['threadUserId' => $thread->user_id])
 @if (Auth::check())
 	@include('scripts.thread-actions')
-	@if (Auth::id() == $thread->author()->id)
+	@if (Auth::id() == $thread->author()->id || Auth::user()->can('remove-thread') || $thread->tag()->isMod())
 		@include('scripts.thread-deleter')
 	@endif
 @endif
