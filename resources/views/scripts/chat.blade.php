@@ -51,6 +51,11 @@
 			user = item.text(),
 			chbx = $('#chatbox');
 
+		if (item.hasClass('error-li'))
+		{
+			return false;
+		}
+
 		if (user == currentUser)
 		{
 			currentUser = null;
@@ -128,7 +133,7 @@
 
 		client.on('auth:failed', function()
 		{
-			console.log('Auth failed (chat)');
+			$('#roster').html("<li class='error-li'>Couldn't connect to the chat server.<br><br><a class='btn success medium' id='connectToChat'>Try again</a></li>");
 		})
 
 		client.connect();

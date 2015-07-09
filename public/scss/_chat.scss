@@ -85,6 +85,16 @@
 				background: lighten($primary-color, 5);
 				padding-left: 1.5em;
 			}
+			&.error-li {
+				line-height: 1.6;
+				height: auto;
+				padding: 1em;
+				text-align: center;
+				&:hover {
+					background: $primary-color;
+					padding: 1em;
+				}
+			}
 			.indicator {
 				font-size: 0.85em;
 				color: rgba(255, 255, 255, 0.35);
