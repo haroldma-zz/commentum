@@ -121,9 +121,37 @@ class UserController extends Controller
 			return response('Your password must be between 6 and 21 characters long.', 500);
 
 		if (Auth::attempt(['username' => $username, 'password' => $password]))
-			return response('Logged in!', 200);
+		{
+			// $user     = Auth::user();
+			// $username = $user->username;
+			// $password = md5($username . str_random(7));
+			// $node     = 'chat.commentum.io';
+
+			// $user->xmpp_password = $password;
+
+			// if ($user->save())
+			// {
+			// 	exec('sudo -u ejabberd /opt/ejabberd-15.06/bin/ejabberdctl register '.$username.' '.$node.' '.$password.' 2>&1',$output, $status);
+
+			// 	if ($output > 0)
+			// 	{
+			// 		Auth::logout();
+			// 		return response("Something went wrong, try again.", 500);
+			// 	}
+
+			// 	return response("OK", 200);
+			// }
+			// else
+			// {
+			// 	Auth::logout();
+			// 	return response("Something went wrong, try again.", 500);
+			// }
+			return response("OK", 200);
+		}
 		else
+		{
 			return response('Wrong username/password combination.', 500);
+		}
 	}
 
 	/**
@@ -298,7 +326,12 @@ class UserController extends Controller
 		return response("Deleted.", 200);
 	}
 
-
+	/**
+	 * Send a PM.
+	 *
+	 * @param  	Request $request
+	 * @return 	reponse
+	 */
 	public function pm(Request $request)
 	{
 		if (!$request->ajax())
