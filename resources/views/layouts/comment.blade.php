@@ -21,7 +21,7 @@
 		<section class="markdown">
 			{{ (is_null($c->deleted_at) ? $c->markdown : "[deleted]") }}
 		</section>
-		@if (Auth::check() && Auth::id() === $c->author_id || Auth::user()->can('edit-thread'))
+		@if (Auth::check() && (Auth::id() === $c->author_id || Auth::user()->can('edit-thread')))
 		<section class="hide comment-editor">
 			{!! Form::open(['url' => '/me/edit/comment', 'class' => 'edit-comment-form']) !!}
 			{!! Form::hidden('hashid', Hashids::encode($c->id)) !!}
