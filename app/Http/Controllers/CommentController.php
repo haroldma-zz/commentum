@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tag;
 use Vinkla\Hashids\Facades\Hashids;
 use Illuminate\Http\Request;
 use App\Models\Comment;
@@ -198,7 +199,9 @@ class CommentController extends Controller
 		if (!$comment)
 			return response("Can't find that comment.", 500);
 
-		if ($comment->author_id != Auth::id() && !EntrustFacade::can('remove-comment'))
+		if ($comment->author_id != Auth::id()
+            && !EntrustFacade::can('remove-comment')
+            && !Tag::isModOfTag($comment->thread()->tag_id))
 			return response("You're not the owner of this comment.", 500);
 
 		// we need to delete corresponding notification.

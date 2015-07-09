@@ -157,7 +157,9 @@ class ThreadController extends Controller
 
 		$thread = Thread::find($id[0]);
 
-		if ($thread->user_id != Auth::id() && !EntrustFacade::can('remove-thread')) {
+		if ($thread->user_id != Auth::id()
+            && !EntrustFacade::can('remove-thread')
+            && !Tag::isModOfTag($thread->tag_id)) {
             return response("You're not the owner of this submission.", 500);
         }
 

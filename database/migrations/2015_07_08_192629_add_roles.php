@@ -127,14 +127,14 @@ class AddRoles extends Migration
         }
 
         $permissions[] = $removeThreads;
-        $permissions[] = $editThreads;
         $permissions[] = $removeComments;
-        $permissions[] = $editComments;
         $permissions[] = $banUserFromCommune;
         foreach ($permissions as $permission) {
             $supermod->attachPermission($permission);
         }
 
+        $permissions[] = $editThreads;
+        $permissions[] = $editComments;
         $permissions[] = $banUser;
         $permissions[] = $makeDefault;
         $permissions[] = $removeCommune;
