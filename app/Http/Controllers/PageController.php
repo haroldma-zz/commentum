@@ -164,7 +164,7 @@ class PageController extends Controller
 		if (!$thread)
 			abort(404);
 
-		$ip = $request->getClientIp();
+		$ip = getClientIp();
 
 		if (is_null(Cache::get("{$ip}:thread:{$thread->id}:view")))
 		{

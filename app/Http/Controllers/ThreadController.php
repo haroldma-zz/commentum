@@ -190,7 +190,7 @@ class ThreadController extends Controller
 		if(empty($thread->link))
 			return redirect($thread->permalink());
 
-		$ip = $request->getClientIp();
+		$ip = getClientIp();
 
 		if (is_null(Cache::get("{$ip}:thread:{$thread->id}:view")))
 		{
