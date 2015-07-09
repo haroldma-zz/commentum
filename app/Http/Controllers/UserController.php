@@ -135,7 +135,7 @@ class UserController extends Controller
 				{
 					exec('sudo /opt/ejabberd-15.06/bin/ejabberdctl register '.$username.' '.$node.' '.$password.' 2>&1',$output, $status);
 
-					if ($output > 0)
+					if ($output != 0)
 					{
 				        echo '<pre>';
 				        foreach($output as $o)
