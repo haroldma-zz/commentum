@@ -13,6 +13,8 @@
 		<br>
 		<center><img src="{{ url('/img/loader.svg') }}" width="30px"></center>
 	</ul>
+	<ul class="chat-list no-bullet" id="outgoing_requests"></ul>
+	<ul class="chat-list no-bullet" id="incoming_requests"></ul>
 	<div class="chat-actions">
 		<input type="text" class="inputter" id="addUserInput" placeholder="Add user...">
 		<div class="button" id="addUserBtn"><i class="ion-ios-personadd-outline"></i></div>
