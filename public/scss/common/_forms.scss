@@ -10,3 +10,59 @@ input[type="submit"] {
 	font-weight: normal;
 	margin-bottom: -10px;
 }
+
+
+
+
+.register-form {
+	h3 {
+		color: white;
+		font-weight: 300;
+	}
+	hr {
+		width: 50px;
+		border-color: rgba(255, 255, 255, 0.25);
+		border-width: 2px;
+	}
+	label {
+		font-size: 1.25em;
+		color: $dark-primary-color;
+		font-weight: 700;
+	}
+	input, textarea {
+		font-size: 1.25em;
+		color: white;
+		font-weight: 700;
+		background: none !important;
+		border: none;
+		border-bottom: 2px solid $dark-primary-color;
+		@include box-shadow(none);
+		&:focus {
+			border-color: white !important;
+		}
+	}
+	textarea {
+		resize: none;
+	}
+	input[type="submit"] {
+		padding: 1em 1.5em;
+		background: $dark-primary-color !important;
+		border: 1px solid darken($dark-primary-color, 10);
+		font-weight: 700;
+		font-size: 0.85em;
+		cursor: pointer;
+		outline: none !important;
+		margin-right: 1em;
+		@include border-radius($global-radius);
+	}
+	img {
+		opacity: 0;
+		@include transition(all .3s ease);
+		&.open {
+			opacity: 1;
+		}
+	}
+	.text-alert {
+		color: $info-color;
+	}
+}
