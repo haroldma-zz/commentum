@@ -121,9 +121,10 @@
 
 		$('#roster').html('');
 		if(roster.length > 0) {
+			$('#roster').append('<li class="section-title"><strong>Friends</strong></li>');
 			$.each(roster, function(index, username)
 			{
-				$('#roster').append('<li><span class="indicator"><i class="ion-record"></i></span> ' + username + '</li>');
+				$('#roster').append('<li class="roster-item"><span class="indicator"><i class="ion-record"></i></span> ' + username + '</li>');
 			});
 		}
 
@@ -131,9 +132,10 @@
 		if(outgoing_requests.length > 0) {
 			if(roster.length > 0)
 				$('#outgoing_requests').append('<hr>');
+			$('#incoming_requests').append('<li class="section-title"><strong>Outgoing requests</strong></li>');
 			$.each(outgoing_requests, function(index, username)
 			{
-				$('#outgoing_requests').append('<li><span class="indicator"><i class="ion-record"></i></span> ' + username + ' (requested)</li>');
+				$('#outgoing_requests').append('<li class="outgoing-request-item"><span class="indicator"><i class="ion-record"></i></span> ' + username + ' (requested)</li>');
 			});
 		}
 
@@ -141,11 +143,12 @@
 		if(incoming_requests.length > 0) {
 			if(roster.length > 0 || outgoing_requests.length > 0)
 				$('#incoming_requests').append('<hr>');
+			$('#incoming_requests').append('<li class="section-title"><strong>Incoming requests</strong></li>');
 			$.each(incoming_requests, function(index, username)
 			{
 				var accept_link = "<a id='acceptSubscription' data-username='" + username + "' href='#'>accept</a>";
 				var deny_link = "<a id='denySubscription' data-username='" + username + "' href='#'>accept</a>";
-				$('#incoming_requests').append('<li><span class="indicator"><i class="ion-record"></i></span> ' + username + ' (' + accept_link + ' / ' + deny_link + ')</li>');
+				$('#incoming_requests').append('<li class="incoming-request-item"><span class="indicator"><i class="ion-record"></i></span> ' + username + ' (' + accept_link + ' / ' + deny_link + ')</li>');
 			});
 		}
 	}
