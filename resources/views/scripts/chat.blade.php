@@ -95,7 +95,9 @@
 	{
 		if(data.type == 'subscribe' && data.to.local != data.from.local) {
 			chatLog("Subscription requested by user " + data.from.local + "!", data);
-			$('#roster').append('<li><span class="indicator"><i class="ion-record"></i></span> ' + data.from.local + ' (accept / deny)</li>');
+			var accept_link = "<a id='acceptSubscription' data-username='" + data.from.local + "' href='#'>accept</a>";
+			var deny_link = "<a id='denySubscription' data-username='" + data.from.local + "' href='#'>accept</a>";
+			$('#roster').append('<li><span class="indicator"><i class="ion-record"></i></span> ' + data.from.local + ' (' + accept_link + ' / ' + deny_link + ')</li>');
 		}
 	}
 
@@ -108,12 +110,14 @@
 	var acceptSubscriptionRequest = function(username)
 	{
 		client.acceptSubscription(username.trim() + "@commentum.io");
+		sendSubscriptionRequest(username);
 		chatLog("Subscription accepted for user " + username.trim() + "!");
 	}
 
 	var denySubscriptionRequest = function(username)
 	{
 		client.denySubscription(username.trim() + "@commentum.io");
+		sendSubscriptionRemoval(username);
 		chatLog("Subscription denied for user " + username.trim() + "!");
 	}
 
@@ -555,6 +559,15 @@
 		client.subscribe(userInput + '@commentum.io');
 		$('#addUserInput').val("");
 	});
+
+	$('#acceptSubscription').click(function() {
+		acceptSubscriptionRequest($(this).attr('data-username'));
+	});
+
+	$('#denySubscription').click(function() {
+		denySubscriptionRequest($(this).attr('data-username'));
+	});
+
 
 	/**
 	 * Connect the fucking client.
