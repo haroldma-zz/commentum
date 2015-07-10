@@ -1,0 +1,40 @@
+.username-tag {
+	color: #aaa;
+	font-weight: 700;
+	font-size: 0.7em;
+	// background: #aaa;
+	letter-spacing: 1px;
+	border: 1px solid darken(#aaa, 10);
+	padding: 0px 2px;
+	margin: 0 !important;
+	@include border-radius(3px);
+
+	&.op {
+		// background: $dark-primary-color;
+		border-color: $success-color;
+		color: $success-color;
+	}
+	&.admin {
+	  border-color: $alert-color;
+	  color: $alert-color;
+	}
+}
+
+.thread-tag {
+	padding: 1px 2px;
+	background: #aaa;
+	color: white;
+	font-weight: 700;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	font-size: 0.6em;
+	@include border-radius(3px);
+
+	&.nsfw {
+		background: $alert-color;
+	}
+
+	&.serious {
+		background: $success-color;
+	}
+}
