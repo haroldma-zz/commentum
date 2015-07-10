@@ -7,16 +7,17 @@
 @import "typography";
 @import "forms";
 @import "buttons";
-@import "expando";
 @import "tags";
-@import "chat";
+
+@import "static_pages/donate";
 
 @import "pages/front_page";
 @import "pages/commune";
 @import "pages/thread";
 @import "pages/inbox";
 
-@import "static_pages/donate";
+@import "features/expando";
+@import "features/chat";
 
 
 
