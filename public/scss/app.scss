@@ -11,11 +11,12 @@
 @import "common/tags";
 
 @import "static_pages/donate";
+@import "static_pages/notices_and_errors";
 
 @import "pages/front_page";
 @import "pages/commune";
 @import "pages/thread";
-@import "pages/inbox";
+@import "pages/users";
 
 @import "features/expando";
 @import "features/chat";
@@ -450,32 +451,8 @@ html, body {
 
 /**
  * .nsfw-notice, .error-page
+ * THESE CLASSES HAVE MOVED TO static_pages/_notices_and_errors.scss
  */
-.nsfw-notice, .error-page {
-	width: 100%;
-	height: 100%;
-	position: relative;
-	.content {
-		position: absolute;
-		width: 100%;
-		top: 50%;
-		@include transform(translateY(-50%));
-
-		h1 {
-			font-weight: 300;
-		}
-
-		hr {
-			width: 50px;
-			margin: 2.5em auto;
-			border: 2px solid $silver;
-		}
-
-		p {
-			font-size: 1em;
-		}
-	}
-}
 
 /**
  * #loadMoreSubmissions
