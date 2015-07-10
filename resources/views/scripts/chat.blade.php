@@ -135,7 +135,7 @@
 			$('#incoming_requests').append('<li class="section-title"><strong>Outgoing requests</strong></li>');
 			$.each(outgoing_requests, function(index, username)
 			{
-				$('#outgoing_requests').append('<li class="outgoing-request-item"><span class="indicator"><i class="ion-record"></i></span> ' + username + ' (requested)</li>');
+				$('#outgoing_requests').append('<li class="outgoing-request-item">' + username + ' (requested)</li>');
 			});
 		}
 
@@ -148,7 +148,7 @@
 			{
 				var accept_link = "<a class='acceptSubscription' data-username='" + username + "' href='#'>accept</a>";
 				var deny_link = "<a class='denySubscription' data-username='" + username + "' href='#'>deny</a>";
-				$('#incoming_requests').append('<li class="incoming-request-item"><span class="indicator"><i class="ion-record"></i></span> ' + username + ' (' + accept_link + ' / ' + deny_link + ')</li>');
+				$('#incoming_requests').append('<li class="incoming-request-item">' + username + ' (' + accept_link + ' / ' + deny_link + ')</li>');
 			});
 		}
 	}
