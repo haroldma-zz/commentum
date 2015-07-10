@@ -91,22 +91,44 @@
 		chatLog("Received 'presence:error' event!", data);
 	}
 
-	var subscriptionRequest = function(data)
+	var receiveSubscriptionRequest = function(data)
 	{
-		if(data.type == 'subscribe') { // PROBABLY SHOULD ENSURE USER IS NOT ALREADY IN THE LIST
-			chatLog("Received subscription request!", data);
+		if(data.type == 'subscribe' && data.to.local != data.from.local) {
+			chatLog("Subscription requested by user " + data.from.local + "!", data);
 			$('#roster').append('<li><span class="indicator"><i class="ion-record"></i></span> ' + data.from.local + ' (accept / deny)</li>');
-		} else if(data.type == 'unsubscribe') { // PROBABLY SHOULD ENSURE USER IS ALREADY IN THE LIST
-			chatLog("Received unsubscription request!", data);
-			// dunno how to do this -- just remove username from list if present.
-		} else {
-			chatLog("Received UNKNOWN TYPE '" + data.type + "' subscription request", data);
 		}
 	}
 
-	var subscriptionRemoved = function(data)
+	var sendSubscriptionRequest = function(username)
 	{
-		chatLog("Subscription removed!", data);
+		client.subscribe(username.trim() + "@commentum.io");
+		chatLog("Subscription requested for user " + username.trim() + "!");
+	}
+
+	var acceptSubscriptionRequest = function(username)
+	{
+		client.acceptSubscription(username.trim() + "@commentum.io");
+		chatLog("Subscription accepted for user " + username.trim() + "!");
+	}
+
+	var denySubscriptionRequest = function(username)
+	{
+		client.denySubscription(username.trim() + "@commentum.io");
+		chatLog("Subscription denied for user " + username.trim() + "!");
+	}
+
+	var receiveSubscriptionRemoval = function(data)
+	{
+		if(data.type == 'unsubscribe' && data.to.local != data.from.local) {
+			chatLog("Subscription cancelled by user " + data.from.local + "!", data);
+			sendSubscriptionRemoval(data.from.local);
+		}
+	}
+
+	var sendSubscriptionRemoval = function(username)
+	{
+		client.unsubscribe(username.trim() + "@commentum.io");
+		chatLog("Subscription cancelled for user " + username.trim() + "!");
 	}
 
 	var sendMessage = function(data)
@@ -218,7 +240,7 @@
 		});
 		client.on('subscribe', function(data)
 		{
-			subscriptionRequest(data);
+			receiveSubscriptionRequest(data);
 		});
 		client.on('unsubscribed', function(data)
 		{
@@ -226,7 +248,7 @@
 		});
 		client.on('unsubscribe', function(data)
 		{
-			subscriptionRemoved(data);
+			receiveSubscriptionRemoval(data);
 		});
 
 		/*
