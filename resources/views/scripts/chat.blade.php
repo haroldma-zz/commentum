@@ -645,14 +645,16 @@
 		}
 	});
 
-	$('#incoming-requests').on('click', '> li.chat-list-item > a.acceptSubscriptionLink', function() {
-		chatLog("ACCEPT SUBSCRIPTION LINK CLICKED!", $(this));
-		acceptSubscriptionRequest($(this).attr('data-username'));
-	});
+	$(document).ready(function() {
+		$('#incoming-requests').on('click', '> li.chat-list-item > a.acceptSubscriptionLink', function() {
+			chatLog("ACCEPT SUBSCRIPTION LINK CLICKED!", $(this));
+			acceptSubscriptionRequest($(this).attr('data-username'));
+		});
 
-	$('#incoming-requests').on('click', '> li.chat-list-item > a.denySubscriptionLink', function() {
-		chatLog("DENY SUBSCRIPTION LINK CLICKED!", $(this));
-		denySubscriptionRequest($(this).attr('data-username'));
+		$('#incoming-requests').on('click', '> li.chat-list-item > a.denySubscriptionLink', function() {
+			chatLog("DENY SUBSCRIPTION LINK CLICKED!", $(this));
+			denySubscriptionRequest($(this).attr('data-username'));
+		});
 	});
 
 	/**
