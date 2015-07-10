@@ -608,7 +608,7 @@
 	var currentUser = null;
 
 	//$('#roster').on('click', 'li', function()
-	$('#roster > li.roster-item').click(function()
+	$('#roster').on('click', 'li.roster-item', function()
 	{
 		var item = $(this),
 			user = item.text().trim(),
@@ -645,12 +645,12 @@
 		}
 	});
 
-	$('#acceptSubscriptionLink').click(function() {
+	$('#incoming_requests').on('click', '#acceptSubscriptionLink', function() {
 		chatLog("ACCEPT SUBSCRIPTION LINK CLICKED!", $(this));
 		acceptSubscriptionRequest($(this).attr('data-username'));
 	});
 
-	$('#denySubscriptionLink').click(function() {
+	$('#incoming_requests').on('click', '#denySubscriptionLink', function() {
 		chatLog("DENY SUBSCRIPTION LINK CLICKED!", $(this));
 		denySubscriptionRequest($(this).attr('data-username'));
 	});
