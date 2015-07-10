@@ -20,6 +20,66 @@
 	var roster;
 	var loggedIn = false;
 
+	var authenticationResult = function(success)
+	{
+		if(success) {
+			chatLog('Authentication successful -- logged in!')
+			loggedIn = true;
+		} else {
+			chatLog('Authentcation failed!')
+			$('#roster').html("<li class='error-li'>Couldn't connect to the chat server.<br><br><a class='btn success medium' id='connectToChat'>Try again</a></li>");
+		}
+	}
+
+	var sessionStarted = function()
+	{
+		getRoster();
+		sendPresence();
+	}
+
+	var getRoster = function()
+	{
+		client.getRoster().then(function(data)
+	    {
+	    	roster = data.roster;
+
+	    	$('#roster').html("");
+
+	    	$.each(roster.items, function(index, user)
+	    	{
+	    		$('#roster').append('<li><span class="indicator"><i class="ion-record"></i></span> ' + user.jid.local + '</li>');
+	    	});
+
+	    	chatLog('Roster retrieved!', data);
+	    });
+	}
+
+	var sendPresence = function()
+	{
+		client.sendPresence();
+	    $('#userStatusIndicator').removeClass('error').addClass('online');
+
+	    chatLog('Presence sent!')
+	}
+
+	var receivedMessage = function(message)
+	{
+		chatLog('Received chat message!', message);
+
+		$('#chatMessages').append('<li>' + message.body + '</li>');
+		var cmb = $("#chatMessagesWindow");
+		cmb.animate({ scrollTop: cmb.prop("scrollHeight") - cmb.height() }, 1);
+	}
+
+	var sentMessage = function(message)
+	{
+		$('#chatMessages').append('<li class="green">' + message.body + '</li>');
+		var cmb = $("#chatMessagesWindow");
+		cmb.animate({ scrollTop: cmb.prop("scrollHeight") - cmb.height() }, 1);
+
+		chatLog('Sent chat message!', message);
+	}
+
 	var connectClient = function()
 	{
 		/*
@@ -32,15 +92,17 @@
 		    transport: 'websocket',
 		    wsURL: 'wss://chat.commentum.io:8443/websocket'
 		});
-		
 
 		/*
-		* On authentication failure, display error
+		* Handle authentication result
 		*/
+		client.on('auth:success'), function()
+		{
+			authenticationResult(true);
+		});
 		client.on('auth:failed', function()
 		{
-			chatLog('Authentcation failed!')
-			$('#roster').html("<li class='error-li'>Couldn't connect to the chat server.<br><br><a class='btn success medium' id='connectToChat'>Try again</a></li>");
+			authenticationResult(false);
 		});
 
 		/*
@@ -48,27 +110,8 @@
 		*/
 		client.on('session:started', function ()
 		{
-			chatLog('Session started -- getting roster & sending presence...');
-
-		    client.getRoster().then(function(data)
-		    {
-		    	roster = data.roster;
-
-		    	$('#roster').html("");
-
-		    	$.each(roster.items, function(index, user)
-		    	{
-		    		$('#roster').append('<li><span class="indicator"><i class="ion-record"></i></span> ' + user.jid.local + '</li>');
-		    	});
-
-		    	chatLog('Roster retrieved...')
-		    });
-
-		    client.sendPresence();
-		    $('#userStatusIndicator').removeClass('error').addClass('online');
-
-		    loggedIn = true;
-		    chatLog('Initial presence sent... logged in!');
+			chatLog("Received 'session:started' event!");
+			sessionStarted();
 		});
 
 		/*
@@ -77,6 +120,7 @@
 		client.on('roster:update', function(data)
 		{
 			chatLog("Received 'roster:update' event!", data);
+			getRoster();
 		});
 
 		/*
@@ -92,11 +136,7 @@
 		*/
 		client.on('chat', function (msg)
 		{
-			chatLog('Received chat message!', msg);
-
-			$('#chatMessages').append('<li>' + msg.body + '</li>');
-			var cmb = $("#chatMessagesWindow");
-			cmb.animate({ scrollTop: cmb.prop("scrollHeight") - cmb.height() }, 1);
+			receivedMessage(msg);
 		});
 
 		/*
@@ -104,19 +144,16 @@
 		*/
 		client.on('message:sent', function (msg)
 		{
-			$('#chatMessages').append('<li class="green">' + msg.body + '</li>');
-			var cmb = $("#chatMessagesWindow");
-			cmb.animate({ scrollTop: cmb.prop("scrollHeight") - cmb.height() }, 1);
-
-			chatLog('Sent chat message!', msg);
+			sentMessage(msg);
 		});
-
 		
 		/*
 		* Finally, connect the XMPP client
 		*/
 		client.connect();
 	}
+
+
 
 	/**
 	 * Disable new line insert
