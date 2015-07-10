@@ -47,10 +47,14 @@
 
 	    	$.each(roster.items, function(index, user)
 	    	{
-	    		if(user.subscription == 'both') {
+	    		if(user.subscription == 'both') {												// BOTH USERS ARE SUBSCRIBE TO EACH OTHER (they're friends)
 	    			$('#roster').append('<li><span class="indicator"><i class="ion-record"></i></span> ' + user.jid.local + '</li>');
-	    		} else if(user.subscription == 'none' && user.subscriptionRequested) {
+	    		} else if(user.subscription == 'none' && user.subscriptionRequested) {			// CURRENT USER HAS REQUESTED OTHER USER
     				$('#roster').append('<li><span class="indicator"><i class="ion-record"></i></span> ' + user.jid.local + ' (requested)</li>');
+    			} else if(user.subscription == 'to') {											// NOT SURE YET
+    				chatLog("DETECTED 'to' SUBSCRIPTION!", user);
+    			} else if(user.subscription == 'from') {										// NOT SURE YET
+    				chatLog("DETECTED 'from' SUBSCRIPTION!", user);
 	    		}
 	    	});
 
