@@ -5,7 +5,7 @@
 <div class="hero">
 	@if (Auth::check())
 	@include('layouts.user-header')
-	@include('layouts.tags-nav')
+	@include('layouts.subscriptions-list')
 	<hr>
 	@endif
 	<div class="row">
@@ -18,7 +18,7 @@
 	<div class="row small-collapse">
 		<div class="medium-9 large-10 columns">
 			<div class="panel small">
-				<table class="questions-list">
+				<table class="threads-list">
 					@if (!count($user->threads()) > 0)
 					<tr>
 						<td>

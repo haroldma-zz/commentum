@@ -74,7 +74,7 @@
 	@include('scripts.explore-list')
 	@yield('scripts')
 	@if(Auth::check())
-	@include('scripts.tags-nav-toggler')
+	@include('scripts.subscriptions-list-toggler')
 	@if(Auth::user()->hasRole('admin'))
 	@include('scripts.chat')
 	@endif

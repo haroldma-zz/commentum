@@ -5,7 +5,7 @@
 @if (Auth::check())
 <div class="hero">
 	@include('layouts.user-header')
-	@include('layouts.tags-nav')
+	@include('layouts.subscriptions-list')
 </div>
 @endif
 @include('layouts.tag-hero', ['tag' => $tag])

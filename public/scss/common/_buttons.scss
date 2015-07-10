@@ -1,0 +1,56 @@
+.btn {
+	padding: 0.75em 2em !important;
+	background: $primary-color;
+	border: 1px solid darken($primary-color, 10);
+	color: white;
+	font-weight: 700;
+	outline: none !important;
+	cursor: pointer;
+	font-size: 11px;
+	@include border-radius(2px);
+	&:focus {
+		background: darken($primary-color, 10);
+	}
+	&:hover {
+		color: white !important;
+	}
+	&.blue {
+		background: #59ABE3;
+		border-color: darken(#59ABE3, 10);
+		&:active {
+			background: darken(#59ABE3, 10);
+		}
+		&:focus {
+			background: #59ABE3;
+		}
+	}
+	&.small {
+		padding: 5px;
+		font-size: 0.7em;
+		&:hover {
+			color: white;
+		}
+	}
+	&.medium {
+		padding: 0.75em 1em;
+		font-size: 0.85em;
+	}
+	&.success {
+		background: $success-color;
+		border-color: darken($success-color, 10);
+	}
+	&.warning {
+		background: $warning-color;
+		border-color: darken($warning-color, 10);
+	}
+	&.alert {
+		background: $alert-color;
+		border-color: darken($alert-color, 10);
+	}
+	&.disabled {
+		cursor: not-allowed !important;
+		pointer-events: none;
+		background: #ddd;
+		border-color: #ccc;
+	}
+}

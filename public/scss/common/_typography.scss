@@ -1,0 +1,56 @@
+.text-info {
+	color: $info-color !important;
+	font-weight: 700;
+}
+
+.text-dark-info {
+	color: darken($info-color, 20) !important;
+	font-weight: 700;
+}
+
+.text-alert {
+	color: $alert-color !important;
+	font-weight: 700;
+}
+
+.no-margin {
+	margin-bottom: 0 !important;
+}
+
+.white-font {
+	color: white !important;
+}
+
+.white-border {
+	border-color: white !important;
+}
+
+.super-header {
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	color: $primary-color;
+	font-size: 0.85em;
+	&.light {
+		color: lighten($primary-color, 10);
+	}
+}
+
+.loader {
+	opacity: 0;
+	@include transition(all .2s ease);
+	&.open {
+		opacity: 1;
+	}
+}
+
+.no-data-warning {
+	color: #aaa;
+	font-weight: 500;
+	margin: 0;
+}
+
+#hideHero {
+	cursor: pointer;
+	color: white;
+}

@@ -6,7 +6,7 @@
 	@include('layouts.hero')
 	@else
 	@include('layouts.user-header')
-	@include('layouts.tags-nav')
+	@include('layouts.subscriptions-list')
 	@endif
 </div>
 <div class="padding">

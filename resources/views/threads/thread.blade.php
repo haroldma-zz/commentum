@@ -5,7 +5,7 @@
 <div class="hero">
 	@if (Auth::check())
 	@include('layouts.user-header')
-	@include('layouts.tags-nav')
+	@include('layouts.subscriptions-list')
 	<hr>
 	@endif
 	<div class="row">
@@ -23,7 +23,7 @@
 						<p>
 							<a href="{{ $thread->tag()->permalink() }}"><span data-livestamp="{{ strtotime($thread->created_at) }}"></span> in #{{ $thread->tag()->display_title }}</a> by <a href="{{ $thread->author()->permalink() }}">{{ $thread->author()->username }}</a>
 							<br>
-							<span class="impressions-views">
+							<span class="info-and-options">
 								@if ($thread->nsfw)
 								<span class="thread-tag nsfw">nsfw</span>
 								@endif
