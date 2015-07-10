@@ -645,12 +645,12 @@
 		}
 	});
 
-	$('#incoming-requests').on('click', '.acceptSubscriptionLink', function() {
+	$('#incoming-requests').on('click', 'a.acceptSubscriptionLink', function() {
 		chatLog("ACCEPT SUBSCRIPTION LINK CLICKED!", $(this));
 		acceptSubscriptionRequest($(this).attr('data-username'));
 	});
 
-	$('#incoming-requests').on('click', '.denySubscriptionLink', function() {
+	$('#incoming-requests').on('click', 'a.denySubscriptionLink', function() {
 		chatLog("DENY SUBSCRIPTION LINK CLICKED!", $(this));
 		denySubscriptionRequest($(this).attr('data-username'));
 	});
