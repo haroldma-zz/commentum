@@ -1,5 +1,5 @@
 <script>
-	$('#tagsNavToggler').click(function(e)
+	$('#subscriptionsListToggler').click(function(e)
 	{
 		e.stopPropagation();
 		$('#tagsNav').toggleClass('open');
