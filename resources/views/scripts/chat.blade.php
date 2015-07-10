@@ -47,7 +47,11 @@
 
 	    	$.each(roster.items, function(index, user)
 	    	{
-	    		$('#roster').append('<li><span class="indicator"><i class="ion-record"></i></span> ' + user.jid.local + '</li>');
+	    		if(user.subscription == 'both') {
+	    			$('#roster').append('<li><span class="indicator"><i class="ion-record"></i></span> ' + user.jid.local + '</li>');
+	    		} else if(user.subscription == 'none' && user.subscriptionRequested) {
+    				$('#roster').append('<li><span class="indicator"><i class="ion-record"></i></span> ' + user.jid.local + ' (requested)</li>');
+	    		}
 	    	});
 
 	    	chatLog('Roster retrieved!', data);
@@ -124,11 +128,23 @@
 		});
 
 		/*
-		* When subscribed .....
+		* Subscription/unsubscription events
 		*/
 		client.on('subscribed', function(data)
 		{
 			chatLog("Received 'subscribed' event!", data);
+		});
+		client.on('subscribe', function(data)
+		{
+			chatLog("Received 'subscribe' event!", data);
+		});
+		client.on('unsubscribed', function(data)
+		{
+			chatLog("Received 'unsubscribed' event!", data);
+		});
+		client.on('unsubscribe', function(data)
+		{
+			chatLog("Received 'unsubscribe' event!", data);
 		});
 
 		/*
