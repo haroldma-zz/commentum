@@ -96,7 +96,7 @@
 		/*
 		* Handle authentication result
 		*/
-		client.on('auth:success'), function()
+		client.on('auth:success', function()
 		{
 			authenticationResult(true);
 		});
