@@ -28,7 +28,7 @@
 				}
 				else
 				{
-					$('.questions-list').append(data);
+					$('.threads-list').append(data);
 				}
 			})
 			.fail(function(res)

@@ -1,6 +1,9 @@
-/**
- * .chat-bar
- */
+body.chat-fixed {
+	.row {
+		padding-right: 250px;
+	}
+}
+
 .chat-bar {
 	width: 250px;
 	height: 40px;
@@ -141,9 +144,6 @@
 	}
 }
 
-/**
- * .chat-box
- */
 .chat-box {
 	width: 350px;
 	height: 550px;

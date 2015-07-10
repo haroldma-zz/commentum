@@ -1,4 +1,4 @@
-<table class="questions-list">
+<table class="threads-list">
 	@if (!count($threads) > 0)
 	<tr>
 		<td>

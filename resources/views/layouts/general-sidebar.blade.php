@@ -17,5 +17,5 @@
 
 	<hr>
 
-	<a href="/p/donate" class="btn success text-center" style="display: block; width: 100%;">Make a Donation</a>
+	<a href="/p/donate" class="btn success fill-width text-center">Make a Donation</a>
 </div>
