@@ -219,7 +219,7 @@
 			var username = data.from.local.trim();
 
 			var index = incoming_requests.indexOf(username);
-			if(index > -1)
+			if(index > -1) {
 				// REMOVE THE USER FROM THE CHAT LIST
 				chatLog('USER FOUND IN incoming_requests LIST ON RECEIVE UNSUBSCRIBE: RMEOVE FROM LIST!');
 			}
@@ -236,7 +236,7 @@
 		client.unsubscribe(username.trim() + "@commentum.io");
 
 		var index = outgoing_requests.indexOf(username);
-		if(index > -1)
+		if(index > -1) {
 			// REMOVE THE USER FROM THE CHAT LIST
 			chatLog('USER FOUND IN outgoing_requests LIST ON RECEIVE UNSUBSCRIBE: RMEOVE FROM LIST!');
 		}
