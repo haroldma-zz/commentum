@@ -146,8 +146,8 @@
 			$('#incoming_requests').append('<li class="section-title"><strong>Incoming requests</strong></li>');
 			$.each(incoming_requests, function(index, username)
 			{
-				var accept_link = "<a id='acceptSubscription' data-username='" + username + "' href='#'>accept</a>";
-				var deny_link = "<a id='denySubscription' data-username='" + username + "' href='#'>deny</a>";
+				var accept_link = "<a class='acceptSubscription' data-username='" + username + "' href='#'>accept</a>";
+				var deny_link = "<a class='denySubscription' data-username='" + username + "' href='#'>deny</a>";
 				$('#incoming_requests').append('<li class="incoming-request-item"><span class="indicator"><i class="ion-record"></i></span> ' + username + ' (' + accept_link + ' / ' + deny_link + ')</li>');
 			});
 		}
@@ -677,12 +677,12 @@
 		$('#addUserInput').val("");
 	});
 
-	$('#acceptSubscription').click(function() {
+	$('.acceptSubscriptionLink').click(function() {
 		chatLog("ACCEPT SUBSCRIPTION LINK CLICKED!", $(this));
 		acceptSubscriptionRequest($(this).attr('data-username'));
 	});
 
-	$('#denySubscription').click(function() {
+	$('.denySubscriptionLink').click(function() {
 		chatLog("DENY SUBSCRIPTION LINK CLICKED!", $(this));
 		denySubscriptionRequest($(this).attr('data-username'));
 	});
