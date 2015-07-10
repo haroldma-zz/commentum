@@ -1,3 +1,48 @@
+.inbox {
+	.message {
+		margin-bottom: 2.5em;
+		hr {
+			margin: 2em 0;
+			border-color: rgba(0, 0, 0, 0.15);
+			width: 50px;
+		}
+		h6 {
+			font-size: 0.9em;
+			line-height: 1.6;
+			div {
+				font-size: 0.9em;
+			}
+		}
+		&.read {
+			.markdown {
+				background: none;
+				padding: 0;
+			}
+		}
+	}
+	.markdown {
+		font-size: 0.85em;
+		background: $ghost;
+		padding: 5px;
+		margin-top: -5px;
+	}
+	footer {
+		margin-top: 5px;
+		font-size: 0.9em;
+		font-weight: 500;
+		a {
+			color: #777;
+			margin-right: 1em;
+			&:hover {
+				color: #222;
+			}
+		}
+	}
+	.reply-box {
+		display: none;
+	}
+}
+
 .unread-message {
 	font-weight: 700;
 }
