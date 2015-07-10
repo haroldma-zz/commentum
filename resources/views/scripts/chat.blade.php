@@ -148,7 +148,7 @@
 			{
 				//var accept_link = "<a id='acceptSubscription' data-username='" + username + "' href='#'>accept</a>";
 				//var deny_link = "<a id='denySubscription' data-username='" + username + "' href='#'>deny</a>";
-				$('#incoming-requests').append("<li class='chat-list-item'>" + username + " (<a id='acceptSubscription' data-username='" + username + "' href='#'>accept</a> / <a id='denySubscription' data-username='" + username + "' href='#'>deny</a>)</li>");
+				$('#incoming-requests').append("<li class='chat-list-item'>" + username + " (<a class='acceptSubscription' data-username='" + username + "' href='#'>accept</a> / <a class='denySubscription' data-username='" + username + "' href='#'>deny</a>)</li>");
 			});
 		}
 	}
