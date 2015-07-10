@@ -607,7 +607,8 @@
 	 */
 	var currentUser = null;
 
-	$('#roster').on('click', 'li', function()
+	//$('#roster').on('click', 'li', function()
+	$('#roster > li.roster-item').click(function()
 	{
 		var item = $(this),
 			user = item.text().trim(),
@@ -644,6 +645,16 @@
 		}
 	});
 
+	$('#incoming_requests > li.incoming-request-item > a.acceptSubscriptionLink').click(function() {
+		chatLog("ACCEPT SUBSCRIPTION LINK CLICKED!", $(this));
+		acceptSubscriptionRequest($(this).attr('data-username'));
+	});
+
+	$('#incoming_requests > li.incoming-request-item > a.denySubscriptionLink').click(function() {
+		chatLog("DENY SUBSCRIPTION LINK CLICKED!", $(this));
+		denySubscriptionRequest($(this).attr('data-username'));
+	});
+
 	/**
 	 * Try to connect to the server
 	 * if it failed.
@@ -675,18 +686,6 @@
 
 		client.subscribe(userInput + '@commentum.io');
 		$('#addUserInput').val("");
-	});
-
-	$('.acceptSubscriptionLink').click(function(e) {
-		e.preventDefault();
-		chatLog("ACCEPT SUBSCRIPTION LINK CLICKED!", $(this));
-		acceptSubscriptionRequest($(this).attr('data-username'));
-	});
-
-	$('.denySubscriptionLink').click(function(e) {
-		e.preventDefault();
-		chatLog("DENY SUBSCRIPTION LINK CLICKED!", $(this));
-		denySubscriptionRequest($(this).attr('data-username'));
 	});
 
 
