@@ -90,9 +90,8 @@
 
 		client.getRoster().then(function(data)
 	    {
-	    	var retrieved_roster = data.roster;
-
-	    	$.each(retrieved_roster, function(index, user) {
+	    	chatLog("FULL ROSTER RETRIEVED!", data);
+	    	$.each(data.roster, function(index, user) {
 	    		if(user.jid && user.jid.local) {
 		    		var username = user.jid.local.trim();
 		    		if(user.subscription == 'both') {																		// USER AND OTHER USER ARE FRIENDS
