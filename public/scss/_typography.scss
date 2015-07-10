@@ -13,12 +13,16 @@
 	font-weight: 700;
 }
 
-.loader {
-	opacity: 0;
-	@include transition(all .2s ease);
-	&.open {
-		opacity: 1;
-	}
+.no-margin {
+	margin-bottom: 0 !important;
+}
+
+.white-font {
+	color: white !important;
+}
+
+.white-border {
+	border-color: white !important;
 }
 
 .super-header {
@@ -32,25 +36,21 @@
 	}
 }
 
-.no-margin {
-	margin-bottom: 0 !important;
-}
-
-.white-font {
-	color: white !important;
-}
-
-#hideHero {
-	cursor: pointer;
-	color: white;
-}
-
-.white-border {
-	border-color: white !important;
+.loader {
+	opacity: 0;
+	@include transition(all .2s ease);
+	&.open {
+		opacity: 1;
+	}
 }
 
 .no-data-warning {
 	color: #aaa;
 	font-weight: 500;
 	margin: 0;
+}
+
+#hideHero {
+	cursor: pointer;
+	color: white;
 }
