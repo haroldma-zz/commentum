@@ -54,7 +54,7 @@
     			} else if(user.subscription == 'to') {											// NOT SURE YET (maybe same as 'none' + user.subscriptionRequested???)
     				chatLog("DETECTED 'to' SUBSCRIPTION!", user);
     				$('#roster').append('<li><span class="indicator"><i class="ion-record"></i></span> ' + user.jid.local + ' (requested)</li>');
-    			} else if(user.subscription == 'from') {										// SEEMS TO BE THE INCOMING REQUEST
+    			} else if(user.subscription == 'from') {	// SEEMS TO BE THE INCOMING REQUEST
     				chatLog("DETECTED 'from' SUBSCRIPTION!", user);
     				$('#roster').append('<li><span class="indicator"><i class="ion-record"></i></span> ' + user.jid.local + ' (accept / deny)</li>');
 	    		}
@@ -74,7 +74,15 @@
 
 	var subscriptionRequest = function(data)
 	{
-		chatLog("Received subscription request!", data);
+		if(data.type == 'subscribe') { // PROBABLY SHOULD ENSURE USER IS NOT ALREADY IN THE LIST
+			chatLog("Received subscription request!", data);
+			$('#roster').append('<li><span class="indicator"><i class="ion-record"></i></span> ' + data.from.local + ' (accept / deny)</li>');
+		} else if(data.type == 'unsubscribe') { // PROBABLY SHOULD ENSURE USER IS ALREADY IN THE LIST
+			chatLog("Received unsubscription request!", data);
+			// dunno how to do this -- just remove username from list if present.
+		} else {
+			chatLog("Received UNKNOWN TYPE '" + data.type + "' subscription request", data);
+		}
 	}
 
 	var subscriptionRemoved = function(data)
