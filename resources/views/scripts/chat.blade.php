@@ -22,6 +22,9 @@
 
 	var connectClient = function()
 	{
+		/*
+		* Create the XMPP client
+		*/
 		client = XMPP.createClient(
 		{
 		    jid: '{{ Auth::user()->username }}@commentum.io',
@@ -29,7 +32,20 @@
 		    transport: 'websocket',
 		    wsURL: 'wss://chat.commentum.io:8443/websocket'
 		});
+		
 
+		/*
+		* On authentication failure, display error
+		*/
+		client.on('auth:failed', function()
+		{
+			chatLog('Authentcation failed!')
+			$('#roster').html("<li class='error-li'>Couldn't connect to the chat server.<br><br><a class='btn success medium' id='connectToChat'>Try again</a></li>");
+		});
+
+		/*
+		* When session has started, get the user's roster and send out a presence update
+		*/
 		client.on('session:started', function ()
 		{
 			chatLog('Session started -- getting roster & sending presence...');
@@ -55,6 +71,25 @@
 		    chatLog('Initial presence sent... logged in!');
 		});
 
+		/*
+		* When user's roster is updated .....
+		*/
+		client.on('roster:update', function(data)
+		{
+			chatLog("Received 'roster:update' event!", data);
+		});
+
+		/*
+		* When subscribed .....
+		*/
+		client.on('subscribed', function(data)
+		{
+			chatLog("Received 'subscribed' event!", data);
+		});
+
+		/*
+		* When user receives a message, display it
+		*/
 		client.on('chat', function (msg)
 		{
 			chatLog('Received chat message!', msg);
@@ -64,6 +99,9 @@
 			cmb.animate({ scrollTop: cmb.prop("scrollHeight") - cmb.height() }, 1);
 		});
 
+		/*
+		* When user's message is sent, display it
+		*/
 		client.on('message:sent', function (msg)
 		{
 			$('#chatMessages').append('<li class="green">' + msg.body + '</li>');
@@ -73,22 +111,10 @@
 			chatLog('Sent chat message!', msg);
 		});
 
-		client.on('auth:failed', function()
-		{
-			chatLog('Authentcation failed!')
-			$('#roster').html("<li class='error-li'>Couldn't connect to the chat server.<br><br><a class='btn success medium' id='connectToChat'>Try again</a></li>");
-		});
-
-		client.on('subscribed', function(data)
-		{
-			chatLog("Received 'subscribe' event!", data);
-		});
-
-		client.on('roster:update', function(data)
-		{
-			chatLog("Received 'roster:update' event!", data);
-		});
-
+		
+		/*
+		* Finally, connect the XMPP client
+		*/
 		client.connect();
 	}
 
