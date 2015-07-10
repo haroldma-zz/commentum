@@ -46,6 +46,30 @@
 	}
 }
 
+.hero {
+	.thread-title {
+		color: white;
+		font-size: 1.75em;
+		font-weight: 900;
+		a {
+			color: white;
+			&:hover {
+				color: lighten(blue, 45);
+			}
+		}
+	}
+	.thread-description {
+		color: white;
+		font-size: 1em;
+		padding: 1.5em;
+		padding-right: 3em;
+		background: lighten($primary-color, 5);
+		width: 100%;
+		max-width: 1100px;
+		@include border-radius($global-radius);
+	}
+}
+
 .info-and-options {
 	font-size: 0.9em;
 	font-weight: 500;
