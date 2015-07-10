@@ -75,6 +75,22 @@
 	    chatLog('Presence sent!')
 	}
 
+	var presenceUpdate = function(data)
+	{
+		if(data.type == 'available') {
+			chatLog("Pesence update: " + data.from.local + " now available!");
+		} else if(data.type == 'unavailable') {
+			chatLog("Pesence update: " + data.from.local + " now unavailable!");
+		} else {
+			chatLog("Received 'presence' event with UNKNOWN TYPE '" + data.type + "'!", data);
+		}
+	}
+
+	var presenceError = function(data)
+	{
+		chatLog("Received 'presence:error' event!", data);
+	}
+
 	var subscriptionRequest = function(data)
 	{
 		if(data.type == 'subscribe') { // PROBABLY SHOULD ENSURE USER IS NOT ALREADY IN THE LIST
@@ -93,22 +109,31 @@
 		chatLog("Subscription removed!", data);
 	}
 
-	var receivedMessage = function(message)
+	var sendMessage = function(data)
 	{
-		chatLog('Received chat message!', message);
-
-		$('#chatMessages').append('<li>' + message.body + '</li>');
+		$('#chatMessages').append('<li class="green">' + data.body + '</li>');
 		var cmb = $("#chatMessagesWindow");
 		cmb.animate({ scrollTop: cmb.prop("scrollHeight") - cmb.height() }, 1);
+
+		chatLog('Sent chat message!', data);
 	}
 
-	var sentMessage = function(message)
+	var receiveMessage = function(data)
 	{
-		$('#chatMessages').append('<li class="green">' + message.body + '</li>');
-		var cmb = $("#chatMessagesWindow");
-		cmb.animate({ scrollTop: cmb.prop("scrollHeight") - cmb.height() }, 1);
+		if(data.type == 'message') {
+			chatLog('Received chat message!', message);
 
-		chatLog('Sent chat message!', message);
+			$('#chatMessages').append('<li>' + message.body + '</li>');
+			var cmb = $("#chatMessagesWindow");
+			cmb.animate({ scrollTop: cmb.prop("scrollHeight") - cmb.height() }, 1);
+		} else {
+			chatLog("Received 'message' event with UNKNOWN TYPE '" + data.type + "'!", data);
+		}
+	}
+
+	var messageError = function(data)
+	{
+		chatLog("Received 'message:error' event!", data);
 	}
 
 	var connectClient = function()
@@ -209,14 +234,20 @@
 		*/
 		client.on('presence', function(data) 
 		{
-			if(data.to.local != data.from.local) // ignore if the user is itself
-				chatLog("Received 'presence' event!", data);
+			if(data.type == 'error') {
+				presenceError(data);
+			} else {
+				if(data.to.local != data.from.local) // ignore if the user is itself
+					presenceUpdate(data);
+			}
 		});
+		/*
 		client.on('presence:error', function(data) 
 		{
 			if(data.to.local != data.from.local) // ignore if the user is itself
 				chatLog("Received 'presence:error' event!", data);
 		});
+		*/
 
 		/*
 		* User receives available/unable presence
@@ -231,6 +262,7 @@
 		****************************************************************************************
 		* NOTE TO SHARIF -- NOTE TO SHARIF -- NOTE TO SHARIF -- NOTE TO SHARIF -- NOTE TO SHARIF
 		*/
+		/*
 		client.on('available', function(data)
 		{
 			if(data.to.local != data.from.local) // ignore if the user is itself
@@ -241,6 +273,7 @@
 			if(data.to.local != data.from.local) // ignore if the user is itself
 				chatLog("Received 'unavailable' event!", data);
 		});
+		*/
 
 		/*
 		* User receives block/unblock
@@ -285,10 +318,12 @@
 		****************************************************************************************
 		* NOTE TO SHARIF -- NOTE TO SHARIF -- NOTE TO SHARIF -- NOTE TO SHARIF -- NOTE TO SHARIF
 		*/
+		/*
 		client.on('chat', function (msg)
 		{
-			receivedMessage(msg);
+			receiveMessage(msg);
 		});
+		*/
 		client.on('chat:state', function(data)
 		{
 			chatLog("Received 'chat:state' event!", data);
@@ -306,16 +341,23 @@
 		*/
 		client.on('message', function(data)
 		{
-			chatLog("Received 'message' event!", data);
+			if(data.type == 'error') {
+				messageError(data);
+			} else {
+				if(data.to.local != data.from.local)
+					receiveMessage(data);
+			}
 		});
 		client.on('message:sent', function (msg)
 		{
-			sentMessage(msg);
+			sendMessage(msg);
 		});
+		/*
 		client.on('message:error', function(data)
 		{
 			chatLog("Received 'message:error' event!", data);
 		});
+		*/
 
 		/*
 		* Attention event
