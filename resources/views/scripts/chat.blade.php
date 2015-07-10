@@ -66,6 +66,16 @@
 	    chatLog('Presence sent!')
 	}
 
+	var subscriptionRequest = function(data)
+	{
+		chatLog("Received subscription request!", data);
+	}
+
+	var subscriptionRemoved = function(data)
+	{
+		chatLog("Subscription removed!", data);
+	}
+
 	var receivedMessage = function(message)
 	{
 		chatLog('Received chat message!', message);
@@ -110,21 +120,37 @@
 		});
 
 		/*
-		* When session has started, get the user's roster and send out a presence update
+		* Session events
 		*/
 		client.on('session:started', function ()
 		{
 			chatLog("Received 'session:started' event!");
 			sessionStarted();
 		});
+		client.on('session:bound', function (data)
+		{
+			chatLog("Received 'session:bound' event!", data);
+		});
+		client.on('session:end', function (data)
+		{
+			chatLog("Received 'session:end' event!", data);
+		});
+		client.on('session:error', function (data)
+		{
+			chatLog("Received 'session:error' event!", data);
+		});
 
 		/*
-		* When user's roster is updated .....
+		* Roster events
 		*/
 		client.on('roster:update', function(data)
 		{
-			chatLog("Received 'roster:update' event!", data);
+			chatLog("Received 'roster:ver' event!", data);
 			getRoster();
+		});
+		client.on('roster:ver', function(data)
+		{
+			chatLog("Received 'roster:ver' event!", data);
 		});
 
 		/*
@@ -136,7 +162,7 @@
 		});
 		client.on('subscribe', function(data)
 		{
-			chatLog("Received 'subscribe' event!", data);
+			subscriptionRequest(data);
 		});
 		client.on('unsubscribed', function(data)
 		{
@@ -144,24 +170,92 @@
 		});
 		client.on('unsubscribe', function(data)
 		{
-			chatLog("Received 'unsubscribe' event!", data);
+			subscriptionRemoved(data);
 		});
 
 		/*
-		* When user receives a message, display it
+		* On presence updates
+		*/
+		client.on('presence', function(data) 
+		{
+			chatLog("Received 'presence' event!", data);
+		});
+		client.on('presence:error', function(data) 
+		{
+			chatLog("Received 'presence:error' event!", data);
+		});
+
+		/*
+		* User receives available/unable
+		*/
+		client.on('available', function(data)
+		{
+			chatLog("Received 'available' event!", data);
+		});
+		client.on('unavailable', function(data)
+		{
+			chatLog("Received 'unavailable' event!", data);
+		});
+
+		/*
+		* User receives block/unblock
+		*/
+		client.on('block', function(data)
+		{
+			chatLog("Received 'block' event!", data);
+		});
+		client.on('unblock', function(data)
+		{
+			chatLog("Received 'unblock' event!", data);
+		});
+
+		/*
+		* User receives/sends a carbon
+		*/
+		client.on('carbon:received', function(data)
+		{
+			chatLog("Received 'carbon:received' event!", data);
+		});
+		client.on('carbon:sent', function(data)
+		{
+			chatLog("Received 'carbon:sent' event!", data);
+		});
+
+		/*
+		* User receives a message/chat state
 		*/
 		client.on('chat', function (msg)
 		{
 			receivedMessage(msg);
 		});
+		client.on('chat:state', function(data)
+		{
+			chatLog("Received 'chat:state' event!", data);
+		});
 
 		/*
 		* When user's message is sent, display it
 		*/
+		client.on('message', function(data)
+		{
+			chatLog("Received 'message' event!", data);
+		});
 		client.on('message:sent', function (msg)
 		{
 			sentMessage(msg);
 		});
+		client.on('message:error', function(data)
+		{
+			chatLog("Received 'message:error' event!", data);
+		});
+
+		/*
+		* Attention event
+		*/
+		client.on('attention', function(data)
+		{
+			chatLog("Received 'attention' event!", data);
+		})
 		
 		/*
 		* Finally, connect the XMPP client
