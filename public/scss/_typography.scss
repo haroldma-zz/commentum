@@ -13,14 +13,6 @@
 	font-weight: 700;
 }
 
-input:focus, textarea:focus {
-	background: white;
-}
-
-input[type="submit"] {
-	@include border-radius($global-radius);
-}
-
 .btn {
 	padding: 0.75em 2em !important;
 	background: $primary-color;
