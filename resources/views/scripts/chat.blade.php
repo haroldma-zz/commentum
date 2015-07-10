@@ -130,7 +130,8 @@
 
 		$('#outgoing_requests').html('');
 		if(outgoing_requests.length > 0) {
-			$('#outgoing_requests').append('<hr>');
+			if(roster.length > 0)
+				$('#outgoing_requests').append('<hr>');
 			$.each(outgoing_requests, function(index, username)
 			{
 				$('#outgoing_requests').append('<li><span class="indicator"><i class="ion-record"></i></span> ' + username + ' (requested)</li>');
@@ -139,7 +140,8 @@
 
 		$('#incoming_requests').html('');
 		if(incoming_requests.length > 0) {
-			$('#incoming_requests').append('<hr>');
+			if(roster.length > 0 || outgoing_requests.length > 0)
+				$('#incoming_requests').append('<hr>');
 			$.each(incoming_requests, function(index, username)
 			{
 				var accept_link = "<a id='acceptSubscription' data-username='" + username + "' href='#'>accept</a>";
