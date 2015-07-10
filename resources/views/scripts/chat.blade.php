@@ -51,6 +51,7 @@
 	    			$('#roster').append('<li><span class="indicator"><i class="ion-record"></i></span> ' + user.jid.local + '</li>');
 	    		} else if(user.subscription == 'none' && user.subscriptionRequested) {			// CURRENT USER HAS REQUESTED OTHER USER
     				$('#roster').append('<li><span class="indicator"><i class="ion-record"></i></span> ' + user.jid.local + ' (requested)</li>');
+/*
     			} else if(user.subscription == 'to') {		// LOOKS LIKE THIS AND FROM ARE IF ONE PERSON IS ALREADY SUBSCRIBED,
     														// THEREFORE UPON RECEIVING A ROSTER ITEM WITH 'from' THAT USER SHOULD
     														// AUTOMATICALLY SUBSCRIBE BACK.
@@ -60,6 +61,7 @@
     														// REQUEST SO THAT IT WILL BE 'both'
     				chatLog("DETECTED 'from' SUBSCRIPTION!", user);
     				$('#roster').append('<li><span class="indicator"><i class="ion-record"></i></span> ' + user.jid.local + ' (accept / deny)</li>');
+*/
 	    		}
 	    	});
 
