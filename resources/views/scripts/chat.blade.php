@@ -4,9 +4,11 @@
 	/**
 	* Nicer logging output for chat-related shit
 	*/
-	var chatLog = function(message)
+	var chatLog = function(message, dump=)
 	{
 		console.log('<<CHAT>> ' + message);
+		if(dump)
+			console.log(dump);
 	}
 
 
@@ -55,7 +57,7 @@
 
 		client.on('chat', function (msg)
 		{
-			chatLog('Received chat message: ' + msg);
+			chatLog('Received chat message!', msg);
 
 			$('#chatMessages').append('<li>' + msg.body + '</li>');
 			var cmb = $("#chatMessagesWindow");
@@ -68,7 +70,7 @@
 			var cmb = $("#chatMessagesWindow");
 			cmb.animate({ scrollTop: cmb.prop("scrollHeight") - cmb.height() }, 1);
 
-			chatLog('Sent chat message: ' + msg);
+			chatLog('Sent chat message!', msg);
 		});
 
 		client.on('auth:failed', function()
@@ -79,12 +81,12 @@
 
 		client.on('subscribed', function(data)
 		{
-			chatLog("Received 'subscribe' event: " + data);
+			chatLog("Received 'subscribe' event!", data);
 		});
 
 		client.on('roster:update', function(data)
 		{
-			chatLog("Received 'roster:update' event: " + data);
+			chatLog("Received 'roster:update' event!", data);
 		});
 
 		client.connect();
