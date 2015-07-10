@@ -4,7 +4,7 @@
 	/**
 	* Nicer logging output for chat-related shit
 	*/
-	var chatLog = function(message, dump=)
+	var chatLog = function(message, dump)
 	{
 		console.log('<<CHAT>> ' + message);
 		if(dump)
