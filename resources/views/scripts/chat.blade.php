@@ -184,11 +184,13 @@
 		*/
 		client.on('presence', function(data) 
 		{
-			chatLog("Received 'presence' event!", data);
+			if(data.to.local != data.from.local) // ignore if the user is itself
+				chatLog("Received 'presence' event!", data);
 		});
 		client.on('presence:error', function(data) 
 		{
-			chatLog("Received 'presence:error' event!", data);
+			if(data.to.local != data.from.local) // ignore if the user is itself
+				chatLog("Received 'presence:error' event!", data);
 		});
 
 		/*
@@ -196,11 +198,13 @@
 		*/
 		client.on('available', function(data)
 		{
-			chatLog("Received 'available' event!", data);
+			if(data.to.local != data.from.local) // ignore if the user is itself
+				chatLog("Received 'available' event!", data);
 		});
 		client.on('unavailable', function(data)
 		{
-			chatLog("Received 'unavailable' event!", data);
+			if(data.to.local != data.from.local) // ignore if the user is itself
+				chatLog("Received 'unavailable' event!", data);
 		});
 
 		/*
