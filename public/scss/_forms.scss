@@ -1,0 +1,7 @@
+input:focus, textarea:focus {
+	background: white;
+}
+
+input[type="submit"] {
+	@include border-radius($global-radius);
+}
