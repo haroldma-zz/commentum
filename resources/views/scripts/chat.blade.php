@@ -1,5 +1,15 @@
 {!! HTML::script('/js/stanzaio.bundle.min.js') !!}
 <script>
+
+	/**
+	* Nicer logging output for chat-related shit
+	*/
+	var chatLog = function(message)
+	{
+		console.log('<<CHAT>> ' + message);
+	}
+
+
 	/**
 	 * Connect with the XMPP server
 	 * using WebSockets.
@@ -20,8 +30,7 @@
 
 		client.on('session:started', function ()
 		{
-		    client.sendPresence();
-		    $('#userStatusIndicator').removeClass('error').addClass('online');
+			chatLog('Session started -- getting roster & sending presence...');
 
 		    client.getRoster().then(function(data)
 		    {
@@ -33,13 +42,21 @@
 		    	{
 		    		$('#roster').append('<li><span class="indicator"><i class="ion-record"></i></span> ' + user.jid.local + '</li>');
 		    	});
+
+		    	chatLog('Roster retrieved...')
 		    });
 
+		    client.sendPresence();
+		    $('#userStatusIndicator').removeClass('error').addClass('online');
+
 		    loggedIn = true;
+		    chatLog('Initial presence sent... logged in!');
 		});
 
 		client.on('chat', function (msg)
 		{
+			chatLog('Received chat message: ' + msg);
+
 			$('#chatMessages').append('<li>' + msg.body + '</li>');
 			var cmb = $("#chatMessagesWindow");
 			cmb.animate({ scrollTop: cmb.prop("scrollHeight") - cmb.height() }, 1);
@@ -50,21 +67,24 @@
 			$('#chatMessages').append('<li class="green">' + msg.body + '</li>');
 			var cmb = $("#chatMessagesWindow");
 			cmb.animate({ scrollTop: cmb.prop("scrollHeight") - cmb.height() }, 1);
+
+			chatLog('Sent chat message: ' + msg);
 		});
 
 		client.on('auth:failed', function()
 		{
+			chatLog('Authentcation failed!')
 			$('#roster').html("<li class='error-li'>Couldn't connect to the chat server.<br><br><a class='btn success medium' id='connectToChat'>Try again</a></li>");
 		});
 
 		client.on('subscribed', function(data)
 		{
-			console.log(data);
+			chatLog("Received 'subscribe' event: " + data);
 		});
 
 		client.on('roster:update', function(data)
 		{
-			console.log(data);
+			chatLog("Received 'roster:update' event: " + data);
 		});
 
 		client.connect();
