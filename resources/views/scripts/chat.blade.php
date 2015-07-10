@@ -93,17 +93,21 @@
 	    	roster = data.roster;
 
 	    	$.each(roster, function(index, user) {
-	    		var username = user.jid.local.trim();
-	    		if(user.subscription == 'both') {																		// USER AND OTHER USER ARE FRIENDS
-	    			if(roster.indexOf(username) < 0)
-	    				roster.push(username);
-	    		} else if((user.subscription == 'none' && user.subscriptionRequested) || user.subscription == 'to') {	// CURRENT USER HAS REQUESTED OTHER USER
-	    			if(outgoing_requests.indexOf(username) < 0)
-	    				outgoing_requests.push(username);
-	    		} else if(user.subscription == 'from') {
-	    			if(incoming_requests.indexOf(username) < 0)
-	    				incoming_requests.push(username);
-	    		}
+	    		if(user.jid && user.jid.local) {
+		    		var username = user.jid.local.trim();
+		    		if(user.subscription == 'both') {																		// USER AND OTHER USER ARE FRIENDS
+		    			if(roster.indexOf(username) < 0)
+		    				roster.push(username);
+		    		} else if((user.subscription == 'none' && user.subscriptionRequested) || user.subscription == 'to') {	// CURRENT USER HAS REQUESTED OTHER USER
+		    			if(outgoing_requests.indexOf(username) < 0)
+		    				outgoing_requests.push(username);
+		    		} else if(user.subscription == 'from') {
+		    			if(incoming_requests.indexOf(username) < 0)
+		    				incoming_requests.push(username);
+		    		}
+		    	} else {
+		    		chatLog("ROSTER ITEM HAS NO 'local' UNDER 'jid'!", user);
+		    	}
 	    	});
 
 	    	updateChatList();
