@@ -20,8 +20,71 @@
 	var roster;
 	var loggedIn = false;
 
+	var authenticationResult = function(success)
+	{
+		if(success) {
+			chatLog('Authentication successful -- logged in!')
+			loggedIn = true;
+		} else {
+			chatLog('Authentcation failed!')
+			$('#roster').html("<li class='error-li'>Couldn't connect to the chat server.<br><br><a class='btn success medium' id='connectToChat'>Try again</a></li>");
+		}
+	}
+
+	var sessionStarted = function()
+	{
+		getRoster();
+		sendPresence();
+	}
+
+	var getRoster = function()
+	{
+		client.getRoster().then(function(data)
+	    {
+	    	roster = data.roster;
+
+	    	$('#roster').html("");
+
+	    	$.each(roster.items, function(index, user)
+	    	{
+	    		$('#roster').append('<li><span class="indicator"><i class="ion-record"></i></span> ' + user.jid.local + '</li>');
+	    	});
+
+	    	chatLog('Roster retrieved!', data);
+	    });
+	}
+
+	var sendPresence = function()
+	{
+		client.sendPresence();
+	    $('#userStatusIndicator').removeClass('error').addClass('online');
+
+	    chatLog('Presence sent!')
+	}
+
+	var receivedMessage = function(message)
+	{
+		chatLog('Received chat message!', message);
+
+		$('#chatMessages').append('<li>' + message.body + '</li>');
+		var cmb = $("#chatMessagesWindow");
+		cmb.animate({ scrollTop: cmb.prop("scrollHeight") - cmb.height() }, 1);
+	}
+
+	var sentMessage = function(message)
+	{
+		$('#chatMessages').append('<li class="green">' + message.body + '</li>');
+		var cmb = $("#chatMessagesWindow");
+		cmb.animate({ scrollTop: cmb.prop("scrollHeight") - cmb.height() }, 1);
+
+		chatLog('Sent chat message!', message);
+	}
+
 	var connectClient = function()
 	{
+		/*
+		* Create the XMPP client
+		*/
 		client = XMPP.createClient(
 		{
 		    jid: '{{ Auth::user()->username }}@commentum.io',
@@ -30,67 +93,67 @@
 		    wsURL: 'wss://chat.commentum.io:8443/websocket'
 		});
 
-		client.on('session:started', function ()
+		/*
+		* Handle authentication result
+		*/
+		client.on('auth:success'), function()
 		{
-			chatLog('Session started -- getting roster & sending presence...');
-
-		    client.getRoster().then(function(data)
-		    {
-		    	roster = data.roster;
-
-		    	$('#roster').html("");
-
-		    	$.each(roster.items, function(index, user)
-		    	{
-		    		$('#roster').append('<li><span class="indicator"><i class="ion-record"></i></span> ' + user.jid.local + '</li>');
-		    	});
-
-		    	chatLog('Roster retrieved...')
-		    });
-
-		    client.sendPresence();
-		    $('#userStatusIndicator').removeClass('error').addClass('online');
-
-		    loggedIn = true;
-		    chatLog('Initial presence sent... logged in!');
+			authenticationResult(true);
 		});
-
-		client.on('chat', function (msg)
-		{
-			chatLog('Received chat message!', msg);
-
-			$('#chatMessages').append('<li>' + msg.body + '</li>');
-			var cmb = $("#chatMessagesWindow");
-			cmb.animate({ scrollTop: cmb.prop("scrollHeight") - cmb.height() }, 1);
-		});
-
-		client.on('message:sent', function (msg)
-		{
-			$('#chatMessages').append('<li class="green">' + msg.body + '</li>');
-			var cmb = $("#chatMessagesWindow");
-			cmb.animate({ scrollTop: cmb.prop("scrollHeight") - cmb.height() }, 1);
-
-			chatLog('Sent chat message!', msg);
-		});
-
 		client.on('auth:failed', function()
 		{
-			chatLog('Authentcation failed!')
-			$('#roster').html("<li class='error-li'>Couldn't connect to the chat server.<br><br><a class='btn success medium' id='connectToChat'>Try again</a></li>");
+			authenticationResult(false);
 		});
 
-		client.on('subscribed', function(data)
+		/*
+		* When session has started, get the user's roster and send out a presence update
+		*/
+		client.on('session:started', function ()
 		{
-			chatLog("Received 'subscribe' event!", data);
+			chatLog("Received 'session:started' event!");
+			sessionStarted();
 		});
 
+		/*
+		* When user's roster is updated .....
+		*/
 		client.on('roster:update', function(data)
 		{
 			chatLog("Received 'roster:update' event!", data);
+			getRoster();
 		});
 
+		/*
+		* When subscribed .....
+		*/
+		client.on('subscribed', function(data)
+		{
+			chatLog("Received 'subscribed' event!", data);
+		});
+
+		/*
+		* When user receives a message, display it
+		*/
+		client.on('chat', function (msg)
+		{
+			receivedMessage(msg);
+		});
+
+		/*
+		* When user's message is sent, display it
+		*/
+		client.on('message:sent', function (msg)
+		{
+			sentMessage(msg);
+		});
+		
+		/*
+		* Finally, connect the XMPP client
+		*/
 		client.connect();
 	}
+
+
 
 	/**
 	 * Disable new line insert
