@@ -18,7 +18,7 @@
 	<div class="row small-collapse">
 		<div class="medium-9 large-10 columns">
 			<div class="panel small">
-				<table class="questions-list">
+				<table class="threads-list">
 					@if (!count($user->threads()) > 0)
 					<tr>
 						<td>

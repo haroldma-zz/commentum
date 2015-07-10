@@ -310,54 +310,8 @@ body.chat-fixed {
 
 /*
 * .questions-list
+* THIS CLASS HAS MOVED TO pages/_thread.scss AND RENAMED TO .threads-list
 */
-.questions-list {
-	width: 100%;
-	border: none;
-	margin: 0;
-	tr {
-		padding: 0.5em 0;
-		border-bottom: 1px solid $silver;
-		background: white !important;
-		&:last-of-type {
-			border-bottom: none;
-		}
-		td {
-			&:first-of-type {
-				width: 85px;
-				border-right: 1px solid $silver;
-				text-align: center;
-				a {
-					color: #999;
-					font-weight: 500;
-					font-size: 1.35em;
-					cursor: default;
-				}
-			}
-			&:nth-child(2) {
-				padding-left: 1.5em;
-				color: #999;
-				a {
-					font-size: 1.35em;
-					font-weight: 500;
-					color: #52B3D9;
-				}
-				span > a {
-					font-size: 0.85em;
-					color: #999;
-					margin: 0 0.5em;
-					@include transition(all .2s ease);
-					&:hover {
-						color: #555;
-					}
-					&:first-of-type {
-						margin-left: 0;
-					}
-				}
-			}
-		}
-	}
-}
 
 /**
  * .sidebar
@@ -523,41 +477,9 @@ body.chat-fixed {
 
 /**
  * .tag-hero
+ * THIS CLASS HAS MOVED TO pages/_commune.scss
  */
-.tag-hero {
-	width: 100%;
-	padding: 3.5em 0;
-	background-color: #f1f1f1;
-	background-size: cover;
-	background-repeat: no-repeat;
-	background-position: center center;
-	background-attachment: fixed;
-	position: relative;
-	&:before {
-		content: " ";
-		position: absolute;
-		top: 0;
-		left: 0;
-		z-index: 0;
-		width: 100%;
-		height: 100%;
-		background: rgba(255, 255, 255, 0.7);
-	}
-	h1,h2,h3,h4,h5,h6 {
-		color: $jet;
-	}
-	h2 {
-		color: $primary-color;
-	}
-	.markdown {
-		font-size: 0.85em;
-	}
-	h4 {
-		span {
-			margin: 0 0.5em;
-		}
-	}
-}
+
 
 /**
  * .tags-nav

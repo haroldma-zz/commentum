@@ -1,3 +1,38 @@
+.tag-hero {
+	width: 100%;
+	padding: 3.5em 0;
+	background-color: #f1f1f1;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-attachment: fixed;
+	position: relative;
+	&:before {
+		content: " ";
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 0;
+		width: 100%;
+		height: 100%;
+		background: rgba(255, 255, 255, 0.7);
+	}
+	h1,h2,h3,h4,h5,h6 {
+		color: $jet;
+	}
+	h2 {
+		color: $primary-color;
+	}
+	.markdown {
+		font-size: 0.85em;
+	}
+	h4 {
+		span {
+			margin: 0 0.5em;
+		}
+	}
+}
+
 #subscribeButton {
 	color: white;
 	background: $success-color;
