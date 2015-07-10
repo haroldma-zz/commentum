@@ -11,10 +11,10 @@
 @import "tags";
 @import "chat";
 
-@import "front_page";
-@import "communes";
-@import "threads";
-@import "inbox";
+@import "pages/front_page";
+@import "pages/commune";
+@import "pages/thread";
+@import "pages/inbox";
 
 @import "static_pages/donate";
 
