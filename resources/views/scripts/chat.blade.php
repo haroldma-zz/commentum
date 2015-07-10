@@ -677,12 +677,14 @@
 		$('#addUserInput').val("");
 	});
 
-	$('.acceptSubscriptionLink').click(function() {
+	$('.acceptSubscriptionLink').click(function(e) {
+		e.preventDefault();
 		chatLog("ACCEPT SUBSCRIPTION LINK CLICKED!", $(this));
 		acceptSubscriptionRequest($(this).attr('data-username'));
 	});
 
-	$('.denySubscriptionLink').click(function() {
+	$('.denySubscriptionLink').click(function(e) {
+		e.preventDefault();
 		chatLog("DENY SUBSCRIPTION LINK CLICKED!", $(this));
 		denySubscriptionRequest($(this).attr('data-username'));
 	});
