@@ -109,36 +109,6 @@ input[type="submit"] {
 	font-weight: 700;
 }
 
-#subscribeButton {
-	color: white;
-	background: $success-color;
-	border: 1px solid darken($success-color, 10);
-	font-weight: 700;
-	padding: 5px 10px;
-	margin-top: 1em;
-	font-size: 0.85em;
-	@include border-radius(3px);
-	&.inactive {
-		background: lighten($success-color, 15);
-		border-color: lighten($success-color, 5);
-	}
-}
-
-#unsubscribeButton {
-	color: white;
-	background: $warning-color;
-	border: 1px solid darken($warning-color, 10);
-	font-weight: 700;
-	padding: 5px 10px;
-	margin-top: 1em;
-	font-size: 0.85em;
-	@include border-radius(3px);
-	&.inactive {
-		background: lighten($warning-color, 15);
-		border-color: lighten($warning-color, 5);
-	}
-}
-
 #hideHero {
 	cursor: pointer;
 	color: white;
