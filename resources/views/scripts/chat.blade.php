@@ -51,10 +51,12 @@
 	    			$('#roster').append('<li><span class="indicator"><i class="ion-record"></i></span> ' + user.jid.local + '</li>');
 	    		} else if(user.subscription == 'none' && user.subscriptionRequested) {			// CURRENT USER HAS REQUESTED OTHER USER
     				$('#roster').append('<li><span class="indicator"><i class="ion-record"></i></span> ' + user.jid.local + ' (requested)</li>');
-    			} else if(user.subscription == 'to') {											// NOT SURE YET
+    			} else if(user.subscription == 'to') {											// NOT SURE YET (maybe same as 'none' + user.subscriptionRequested???)
     				chatLog("DETECTED 'to' SUBSCRIPTION!", user);
-    			} else if(user.subscription == 'from') {										// NOT SURE YET
+    				$('#roster').append('<li><span class="indicator"><i class="ion-record"></i></span> ' + user.jid.local + ' (requested)</li>');
+    			} else if(user.subscription == 'from') {										// SEEMS TO BE THE INCOMING REQUEST
     				chatLog("DETECTED 'from' SUBSCRIPTION!", user);
+    				$('#roster').append('<li><span class="indicator"><i class="ion-record"></i></span> ' + user.jid.local + ' (accept / deny)</li>');
 	    		}
 	    	});
 
