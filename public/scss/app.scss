@@ -32,12 +32,6 @@ html, body {
 	-moz-osx-font-smoothing: grayscale !important;
 }
 
-body.chat-fixed {
-	.row {
-		padding-right: 250px;
-	}
-}
-
 .row {
 	margin: 0;
 	@include transition(all .2s ease);
