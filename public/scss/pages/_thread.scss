@@ -53,3 +53,144 @@
 		margin: 0 5px;
 	}
 }
+
+.markdown {
+	&.thread-description {
+		h1,h2,h3,h4,h5,h6,p,ul,li {
+			color: white;
+		}
+	}
+	h1,h2,h3,h4,h5,h6 {
+		color: #313131;
+		font-weight: 700;
+		font-size: 1.5em;
+	}
+	p, ul, li {
+		color: #212121;
+	}
+	p, ul {
+		font-size: 1.2em !important;
+		&:last-of-type {
+			margin-bottom: 0;
+		}
+	}
+}
+
+.preview {
+	.markdown {
+		font-size: 0.8em;
+		padding: 1em;
+		border: 1px solid $silver;
+		background: white;
+		@include border-radius($global-radius);
+	}
+}
+
+.comments-list {
+	padding-bottom: 12.5em;
+	.comment {
+		&.parent {
+			background: white !important;
+		}
+		&.child {
+			background: $snow !important;
+		}
+		&.saved {
+			padding: 1em !important;
+			.body {
+				padding-left: 0 !important;
+			}
+		}
+	}
+	article {
+		border: 1px solid $silver;
+		border-bottom: none;
+		padding-top: 1em;
+		padding-left: 1em;
+		position: relative;
+		@include border-radius($global-radius);
+		&:last-of-type {
+			border-bottom: 1px solid $silver;
+		}
+		section {
+			font-size: 0.85em;
+			padding-right: 1em;
+		}
+		header, footer {
+			font-size: 0.8em;
+			color: #777;
+			span {
+				margin: 0 0.65em;
+				&:first-of-type {
+					margin-left: 0;
+				}
+				&:last-of-type {
+					margin-right: 0;
+				}
+			}
+			a {
+				color: $primary-color;
+				font-weight: 500;
+				margin: 0 0.5em;
+				&:first-of-type {
+					margin-left: 0;
+				}
+			}
+		}
+		.children {
+			padding-top: 10px;
+			article {
+				border-right: none;
+				border-bottom: none;
+				padding-bottom: 0;
+				padding-right: 0;
+				background: #f3f3f3;
+			}
+		}
+		.reply-box {
+			padding: 10px 0;
+			display: none;
+			p {
+				margin-bottom: 0;
+				font-size: 0.85em !important;
+			}
+			.preview {
+				margin-bottom: 10px;
+			}
+			.markdown {
+				h1,h2,h3,h4,h5,h6 {
+					color: #313131;
+					font-weight: 700;
+					font-size: 1.5em !important;
+				}
+				p, ul, li {
+					color: #212121;
+				}
+				p, ul {
+					font-size: 1.2em !important;
+					&:last-of-type {
+						margin-bottom: 0;
+					}
+				}
+			}
+		}
+		.collapser {
+			font-size: 0.85em;
+			cursor: pointer;
+			margin: 0;
+		}
+		.body {
+			padding-left: 22px;
+		}
+		.comment-editor {
+			.preview {
+				font-size: 115%;
+			}
+		}
+		&.collapsed {
+			overflow: hidden;
+			height: 24px;
+			padding: 0 1em;
+		}
+	}
+}
