@@ -5,3 +5,8 @@ input:focus, textarea:focus {
 input[type="submit"] {
 	@include border-radius($global-radius);
 }
+
+.checkbox-label {
+	font-weight: normal;
+	margin-bottom: -10px;
+}
