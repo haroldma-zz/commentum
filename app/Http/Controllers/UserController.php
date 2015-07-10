@@ -376,7 +376,7 @@ class UserController extends Controller
 
 
 
-
+/*
 ();
 
 		if (!$user)
@@ -387,7 +387,7 @@ class UserController extends Controller
 		return response("test", 500);
 	}
 }
-
+*/
 
 
 
