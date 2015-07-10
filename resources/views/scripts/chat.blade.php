@@ -178,7 +178,7 @@
 	$('.chat-list').on('click', 'li', function()
 	{
 		var item = $(this),
-			user = item.text(),
+			user = item.text().trim(),
 			chbx = $('#chatbox');
 
 		if (item.hasClass('error-li'))
