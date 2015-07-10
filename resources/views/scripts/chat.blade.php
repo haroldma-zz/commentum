@@ -607,7 +607,7 @@
 	 */
 	var currentUser = null;
 
-	$('.chat-list').on('click', 'li.friend', function()
+	$('.chat-list').on('click', 'li.roster-item', function()
 	{
 		var item = $(this),
 			user = item.text().trim(),
