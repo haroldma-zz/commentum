@@ -16,6 +16,8 @@
 @import "threads";
 @import "inbox";
 
+@import "donate";
+
 
 
 
@@ -859,29 +861,6 @@ body.chat-fixed {
 		font-weight: 700;
 		text-decoration: underline;
 	}
-	#stripeAmount {
-		border: none;
-		color: white;
-		background: none;
-		font-size: 5em;
-		font-weight: 100;
-		height: auto;
-		max-height: 1000px;
-		line-height: 1;
-		border-bottom: 2px solid $dark-primary-color;
-		padding-bottom: 0.25em;
-		text-align: center;
-	}
-	#stripeDonate {
-		border: 1px solid white;
-		padding: 0.75em 1.5em;
-		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 1px;
-		font-size: 0.85em;
-		margin-top: 10px;
-		@include border-radius($global-radius);
-	}
 }
 
 .footer {
@@ -899,4 +878,9 @@ body.chat-fixed {
 			color: #333;
 		}
 	}
+}
+
+.fill-width {
+	display: block;
+	width: 100%;
 }
