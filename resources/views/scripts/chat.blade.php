@@ -51,10 +51,13 @@
 	    			$('#roster').append('<li><span class="indicator"><i class="ion-record"></i></span> ' + user.jid.local + '</li>');
 	    		} else if(user.subscription == 'none' && user.subscriptionRequested) {			// CURRENT USER HAS REQUESTED OTHER USER
     				$('#roster').append('<li><span class="indicator"><i class="ion-record"></i></span> ' + user.jid.local + ' (requested)</li>');
-    			} else if(user.subscription == 'to') {											// NOT SURE YET (maybe same as 'none' + user.subscriptionRequested???)
+    			} else if(user.subscription == 'to') {		// LOOKS LIKE THIS AND FROM ARE IF ONE PERSON IS ALREADY SUBSCRIBED,
+    														// THEREFORE UPON RECEIVING A ROSTER ITEM WITH 'from' THAT USER SHOULD
+    														// AUTOMATICALLY SUBSCRIBE BACK.
     				chatLog("DETECTED 'to' SUBSCRIPTION!", user);
     				$('#roster').append('<li><span class="indicator"><i class="ion-record"></i></span> ' + user.jid.local + ' (requested)</li>');
-    			} else if(user.subscription == 'from') {	// SEEMS TO BE THE INCOMING REQUEST
+    			} else if(user.subscription == 'from') {	// IF TO/FROM SUBSCRIPTION IS IDENTIFIED, COMPLETE THE SUBSCRIPTION BY ACCEPTING/SENDING
+    														// REQUEST SO THAT IT WILL BE 'both'
     				chatLog("DETECTED 'from' SUBSCRIPTION!", user);
     				$('#roster').append('<li><span class="indicator"><i class="ion-record"></i></span> ' + user.jid.local + ' (accept / deny)</li>');
 	    		}
