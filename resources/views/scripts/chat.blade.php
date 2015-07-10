@@ -128,14 +128,14 @@
 		/*
 		* Session events
 		*/
+		client.on('session:bound', function (data)
+		{
+			chatLog("Received 'session:bound' event!", data);
+		});
 		client.on('session:started', function ()
 		{
 			chatLog("Received 'session:started' event!");
 			sessionStarted();
-		});
-		client.on('session:bound', function (data)
-		{
-			chatLog("Received 'session:bound' event!", data);
 		});
 		client.on('session:end', function (data)
 		{
@@ -148,10 +148,16 @@
 
 		/*
 		* Roster events
+		***
+		* NOTE TO SHARIF -- NOTE TO SHARIF -- NOTE TO SHARIF -- NOTE TO SHARIF -- NOTE TO SHARIF
+		****************************************************************************************
+		*** Not sure what 'roster:ver' event is for yet
+		****************************************************************************************
+		* NOTE TO SHARIF -- NOTE TO SHARIF -- NOTE TO SHARIF -- NOTE TO SHARIF -- NOTE TO SHARIF
 		*/
 		client.on('roster:update', function(data)
 		{
-			chatLog("Received 'roster:ver' event!", data);
+			chatLog("Received 'roster:update' event!", data);
 			getRoster();
 		});
 		client.on('roster:ver', function(data)
@@ -161,6 +167,14 @@
 
 		/*
 		* Subscription/unsubscription events
+		***
+		* NOTE TO SHARIF -- NOTE TO SHARIF -- NOTE TO SHARIF -- NOTE TO SHARIF -- NOTE TO SHARIF
+		****************************************************************************************
+		*** The 'subscribe'/'unsubscribe' events are when you've RECEIVED a message (user has
+		*** subscribed/unsubscribed to/from you). Not sure what 'subscribed'/'unsubscribed' are
+		*** but I believe they are when you've SENT those messages.
+		****************************************************************************************
+		* NOTE TO SHARIF -- NOTE TO SHARIF -- NOTE TO SHARIF -- NOTE TO SHARIF -- NOTE TO SHARIF
 		*/
 		client.on('subscribed', function(data)
 		{
@@ -194,7 +208,17 @@
 		});
 
 		/*
-		* User receives available/unable
+		* User receives available/unable presence
+		***
+		* NOTE TO SHARIF -- NOTE TO SHARIF -- NOTE TO SHARIF -- NOTE TO SHARIF -- NOTE TO SHARIF
+		****************************************************************************************
+		*** At first glance, this may not be necessary. Everytime the 'available/unavailable'
+		*** event fires, a 'presence' event is also fired with the current status (available/un-
+		*** available, away, etc.) --- so this may be able to be taken out. I left it for now
+		*** because there may be some good reason for it being its own event that I just don't
+		*** know.
+		****************************************************************************************
+		* NOTE TO SHARIF -- NOTE TO SHARIF -- NOTE TO SHARIF -- NOTE TO SHARIF -- NOTE TO SHARIF
 		*/
 		client.on('available', function(data)
 		{
@@ -221,6 +245,14 @@
 
 		/*
 		* User receives/sends a carbon
+		***
+		* NOTE TO SHARIF -- NOTE TO SHARIF -- NOTE TO SHARIF -- NOTE TO SHARIF -- NOTE TO SHARIF
+		****************************************************************************************
+		*** Carbons are previous messages, received while offline/in the past. This will allow
+		*** us to preserve chats while people are offline or until next time they're online,
+		*** once we figure out how to make it work right.
+		****************************************************************************************
+		* NOTE TO SHARIF -- NOTE TO SHARIF -- NOTE TO SHARIF -- NOTE TO SHARIF -- NOTE TO SHARIF
 		*/
 		client.on('carbon:received', function(data)
 		{
@@ -233,6 +265,14 @@
 
 		/*
 		* User receives a message/chat state
+		***
+		* NOTE TO SHARIF -- NOTE TO SHARIF -- NOTE TO SHARIF -- NOTE TO SHARIF -- NOTE TO SHARIF
+		****************************************************************************************
+		*** Chat state is for when/if we want to have a 'User A is typing...' message, and also
+		*** 'User A has entered text...' message. Not sure how to make it work quite yet, but
+		*** looks like the functionality is there.
+		****************************************************************************************
+		* NOTE TO SHARIF -- NOTE TO SHARIF -- NOTE TO SHARIF -- NOTE TO SHARIF -- NOTE TO SHARIF
 		*/
 		client.on('chat', function (msg)
 		{
@@ -245,6 +285,13 @@
 
 		/*
 		* When user's message is sent, display it
+		***
+		* NOTE TO SHARIF -- NOTE TO SHARIF -- NOTE TO SHARIF -- NOTE TO SHARIF -- NOTE TO SHARIF
+		****************************************************************************************
+		*** Not yet sure difference between 'message' and 'message:sent'. My guess is that the
+		*** 'message' event is fired for send AND received messages? We may not need it.
+		****************************************************************************************
+		* NOTE TO SHARIF -- NOTE TO SHARIF -- NOTE TO SHARIF -- NOTE TO SHARIF -- NOTE TO SHARIF
 		*/
 		client.on('message', function(data)
 		{
@@ -261,6 +308,12 @@
 
 		/*
 		* Attention event
+		***
+		* NOTE TO SHARIF -- NOTE TO SHARIF -- NOTE TO SHARIF -- NOTE TO SHARIF -- NOTE TO SHARIF
+		****************************************************************************************
+		*** NO idea what 'attention' event is for yet
+		****************************************************************************************
+		* NOTE TO SHARIF -- NOTE TO SHARIF -- NOTE TO SHARIF -- NOTE TO SHARIF -- NOTE TO SHARIF
 		*/
 		client.on('attention', function(data)
 		{
