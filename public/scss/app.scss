@@ -9,6 +9,7 @@
 @import "common/buttons";
 @import "common/forms";
 @import "common/lists";
+@import "common/notifications";
 @import "common/tags";
 
 @import "pages/front_page";
@@ -116,31 +117,8 @@
 
 /**
  * .notification-box
+ * THIS CLASS MOVED TO common/_notifications.scss
  */
-.notification-box {
-	width: 300px;
-	height: 85px;
-	background: $white;
-	position: absolute;
-	right: 1em;
-	top: 45px;
-	padding: 1em;
-	line-height: 1.2;
-	border: 1px solid $primary-color;
-	color: $primary-color;
-	display: none;
-	font-size: 0.9em;
-	z-index: 100;
-	@include border-radius($global-radius);
-	span {
-		line-height: 55px;
-		text-align: center;
-	}
-	a {
-		color: $dark-primary-color;
-		font-weight: 500;
-	}
-}
 
 /**
  * .user-saved
