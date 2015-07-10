@@ -5,7 +5,7 @@
 <div class="hero">
 	@if (Auth::check())
 	@include('layouts.user-header')
-	@include('layouts.tags-nav')
+	@include('layouts.subscriptions-list')
 	<hr>
 	@endif
 	<div class="row">

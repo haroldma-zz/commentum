@@ -4,7 +4,7 @@
 
 <div class="hero">
 	@include('layouts.user-header')
-	@include('layouts.tags-nav')
+	@include('layouts.subscriptions-list')
 </div>
 <div class="padding">
 	<div class="row small-collapse">

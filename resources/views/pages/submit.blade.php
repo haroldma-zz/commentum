@@ -4,7 +4,7 @@
 {!! Form::open(['url' => '/submit', 'id' => 'submitForm']) !!}
 <div class="hero">
 	@include('layouts.user-header')
-	@include('layouts.tags-nav')
+	@include('layouts.subscriptions-list')
 	<hr>
 	<div class="row">
 		<div class="medium-6 medium-offset-3 large-4 large-offset-4 columns">
