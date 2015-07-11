@@ -148,7 +148,7 @@
 			{
 				//var accept_link = "<a id='acceptSubscription' data-username='" + username + "' href='#'>accept</a>";
 				//var deny_link = "<a id='denySubscription' data-username='" + username + "' href='#'>deny</a>";
-				$('#incoming-requests').append("<li class='chat-list-item'>" + username + " (<a class='acceptSubscription' data-username='" + username + "' href='#'>accept</a> / <a class='denySubscription' data-username='" + username + "' href='#'>deny</a>)</li>");
+				$('#incoming-requests').append("<li class='chat-list-item'>" + username + " (<a class='accept-subscription' data-username='" + username + "' href='#'>accept</a> / <a class='deny-subscription' data-username='" + username + "' href='#'>deny</a>)</li>");
 			});
 		}
 	}
@@ -645,16 +645,14 @@
 		}
 	});
 
-	$(document).ready(function() {
-		$('#incoming-requests').on('click', '> li.chat-list-item > a.acceptSubscriptionLink', function() {
-			chatLog("ACCEPT SUBSCRIPTION LINK CLICKED!", $(this));
-			acceptSubscriptionRequest($(this).attr('data-username'));
-		});
+	$('#incoming-requests li.chat-list-item a.acceptSubscriptionLink').live('click', function() {
+		chatLog("ACCEPT SUBSCRIPTION LINK CLICKED!", $(this));
+		acceptSubscriptionRequest($(this).attr('data-username'));
+	});
 
-		$('#incoming-requests').on('click', '> li.chat-list-item > a.denySubscriptionLink', function() {
-			chatLog("DENY SUBSCRIPTION LINK CLICKED!", $(this));
-			denySubscriptionRequest($(this).attr('data-username'));
-		});
+	$('#incoming-requests li.chat-list-item a.denySubscriptionLink').live('click', function() {
+		chatLog("DENY SUBSCRIPTION LINK CLICKED!", $(this));
+		denySubscriptionRequest($(this).attr('data-username'));
 	});
 
 	/**
