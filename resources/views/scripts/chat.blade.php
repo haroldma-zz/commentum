@@ -653,6 +653,15 @@
 		chatLog("#incoming-requests .chat-list-item clicked!");
 	});
 
+	$('#incoming-requests').on('click', '.accept-subscription-link', function() {
+		chatLog("#incoming-requests .accept-subscription-link clicked!");
+	});
+
+	$('#incoming-requests').on('click', '.deny-subscription-link', function() {
+		chatLog("#incoming-requests .deny-subscription-link clicked!");
+	});
+
+/*
 	$('#incoming-requests li a.accept-subscription-link').on('click', function() {
 		chatLog("ACCEPT SUBSCRIPTION LINK CLICKED!");
 		//chatLog("ACCEPT SUBSCRIPTION LINK CLICKED!", $(this));
@@ -664,6 +673,7 @@
 		//chatLog("DENY SUBSCRIPTION LINK CLICKED!", $(this));
 		//denySubscriptionRequest($(this).attr('data-username'));
 	});
+*/
 
 	/**
 	 * Try to connect to the server
