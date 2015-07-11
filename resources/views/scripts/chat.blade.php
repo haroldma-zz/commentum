@@ -656,11 +656,11 @@
 */
 
 	$('#incoming-requests').on('click', '.accept-subscription-link', function() {
-		chatLog("#incoming-requests .accept-subscription-link clicked!", $(this));
+		chatLog("#incoming-requests .accept-subscription-link clicked (" + $(this).attr('data-username') + ")!", $(this));
 	});
 
 	$('#incoming-requests').on('click', '.deny-subscription-link', function() {
-		chatLog("#incoming-requests .deny-subscription-link clicked!", $(this));
+		chatLog("#incoming-requests .deny-subscription-link clicked (" + $(this).attr('data-username') + ")!", $(this));
 	});
 
 /*
