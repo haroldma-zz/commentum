@@ -645,6 +645,7 @@
 		}
 	});
 
+/*
 	$('#incoming-requests').on('click', function() {
 		chatLog("#incoming-requests clicked!");
 	});
@@ -652,13 +653,14 @@
 	$('#incoming-requests').on('click', '.chat-list-item', function() {
 		chatLog("#incoming-requests .chat-list-item clicked!");
 	});
+*/
 
 	$('#incoming-requests').on('click', '.accept-subscription-link', function() {
-		chatLog("#incoming-requests .accept-subscription-link clicked!");
+		chatLog("#incoming-requests .accept-subscription-link clicked!", $(this));
 	});
 
 	$('#incoming-requests').on('click', '.deny-subscription-link', function() {
-		chatLog("#incoming-requests .deny-subscription-link clicked!");
+		chatLog("#incoming-requests .deny-subscription-link clicked!", $(this));
 	});
 
 /*
