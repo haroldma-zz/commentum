@@ -645,14 +645,14 @@
 		}
 	});
 
-	$('#incoming-requests li a.accept-subscription-link').live('click', function() {
+	$('#incoming-requests li a.accept-subscription-link').on('click', function() {
 		chatLog("ACCEPT SUBSCRIPTION LINK CLICKED!", $(this));
-		acceptSubscriptionRequest($(this).attr('data-username'));
+		//acceptSubscriptionRequest($(this).attr('data-username'));
 	});
 
-	$('#incoming-requests li a.deny-subscription-link').live('click', function() {
+	$('#incoming-requests li a.deny-subscription-link').on('click', function() {
 		chatLog("DENY SUBSCRIPTION LINK CLICKED!", $(this));
-		denySubscriptionRequest($(this).attr('data-username'));
+		//denySubscriptionRequest($(this).attr('data-username'));
 	});
 
 	/**
