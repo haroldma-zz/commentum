@@ -82,6 +82,11 @@
 	}
 */
 
+	var receiveRosterUpdate = function(data)
+	{
+
+	}
+
 	var getChatList = function()
 	{
 		roster = [];
@@ -108,6 +113,21 @@
 		    		chatLog("ROSTER ITEM HAS NO 'local' UNDER 'jid'!", user);
 		    	}
 	    	});
+
+	    	var rerun = false;
+	    	$.each(outgoing_requests, function(index, username_out)
+	    	{
+	    		$.each(incoming_requests, function(index, username_in)
+	    		{
+	    			if(username_out == username_in) {
+	    				acceptSubscriptionRequest(username_in);
+	    				rerun = true;
+	    				break;
+	    			}
+	    		});
+	    	});
+	    	if(rerun)
+	    		getChatList();
 
 	    	updateChatList();
 	    });
@@ -182,17 +202,18 @@
 		if(data.type == 'subscribe' && data.to.local != data.from.local) {
 			var username = data.from.local.trim();
 
-			getChatList();
+			//getChatList();
 
 			chatLog("Subscription requested by user " + username + "!", data);
-			console.log("OUTGOING:");
-			console.log(outgoing_requests);
-			console.log("INCOMING:");
-			console.log(incoming_requests);
+			//console.log("OUTGOING:");
+			//console.log(outgoing_requests);
+			//console.log("INCOMING:");
+			//console.log(incoming_requests);
 
-			if(outgoing_requests.indexOf(username) > -1) {
-				acceptSubscriptionRequest(username);
-			} else if(incoming_requests.indexOf(username) < 0) {
+			//if(outgoing_requests.indexOf(username) > -1) {
+				//acceptSubscriptionRequest(username);
+			//} else if(incoming_requests.indexOf(username) < 0) {
+			if(incoming_requests.indexOf(username) < 0) {
 	    		incoming_requests.push(username);
 			}
 
@@ -209,23 +230,23 @@
 	var sendSubscriptionRequest = function(username)
 	{
 		var username = username.trim();
-		if(outgoing_requests.indexOf(username) < 0) {
+		//if(outgoing_requests.indexOf(username) < 0) {
 			outgoing_requests.push(username);
 
 			client.subscribe(username + "@commentum.io");
 			chatLog("Subscription requested for user " + username + "!");
-		}
+		//}
 	}
 
 	var acceptSubscriptionRequest = function(username)
 	{
 		var username = username.trim();
-		if(incoming_requests.indexOf(username) > -1) {
+		//if(incoming_requests.indexOf(username) > -1) {
 			client.acceptSubscription(username + "@commentum.io");
 			chatLog("Subscription accepted for user " + username.trim() + "!");
 
 			sendSubscriptionRequest(username);
-		}
+		//}
 	}
 
 	var denySubscriptionRequest = function(username)
@@ -351,7 +372,8 @@
 		client.on('roster:update', function(data)
 		{
 			chatLog("Received 'roster:update' event!", data);
-			getChatList();
+			receiveRosterUpdate(data);
+			//getChatList();
 		});
 		client.on('roster:ver', function(data)
 		{
