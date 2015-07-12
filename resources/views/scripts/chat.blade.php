@@ -122,7 +122,7 @@
 	    			if(username_out == username_in) {
 	    				acceptSubscriptionRequest(username_in);
 	    				rerun = true;
-	    				break;
+	    				//break;
 	    			}
 	    		});
 	    	});
