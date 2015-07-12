@@ -183,6 +183,10 @@
 			var username = data.from.local.trim();
 
 			chatLog("Subscription requested by user " + username + "!", data);
+			console.log("OUTGOING:");
+			console.log(outgoing_requests);
+			console.log("INCOMING:");
+			console.log(incoming_requests);
 
 			if(outgoing_requests.indexOf(username) > -1) {
 				acceptSubscriptionRequest(username);
