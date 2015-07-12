@@ -182,6 +182,8 @@
 		if(data.type == 'subscribe' && data.to.local != data.from.local) {
 			var username = data.from.local.trim();
 
+			getChatList();
+
 			chatLog("Subscription requested by user " + username + "!", data);
 			console.log("OUTGOING:");
 			console.log(outgoing_requests);
