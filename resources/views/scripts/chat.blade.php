@@ -184,8 +184,12 @@
 
 			chatLog("Subscription requested by user " + username + "!", data);
 
-			if(incoming_requests.indexOf(username) < 0)
+			if(outgoing_requests.indexOf(username) > -1) {
+				acceptSubscriptionRequest(username);
+			} else if(incoming_requests.indexOf(username) < 0) {
 	    		incoming_requests.push(username);
+			}
+
 	    	updateChatList();
 
 /*
@@ -199,19 +203,23 @@
 	var sendSubscriptionRequest = function(username)
 	{
 		var username = username.trim();
-
-		client.subscribe(username + "@commentum.io");
-		if(outgoing_requests.indexOf(username) < 0)
+		if(outgoing_requests.indexOf(username) < 0) {
 			outgoing_requests.push(username);
 
-		chatLog("Subscription requested for user " + username + "!");
+			client.subscribe(username + "@commentum.io");
+			chatLog("Subscription requested for user " + username + "!");
+		}
 	}
 
 	var acceptSubscriptionRequest = function(username)
 	{
-		client.acceptSubscription(username.trim() + "@commentum.io");
-		sendSubscriptionRequest(username);
-		chatLog("Subscription accepted for user " + username.trim() + "!");
+		var username = username.trim();
+		if(incoming_requests.indexOf(username) > -1) {
+			client.acceptSubscription(username + "@commentum.io");
+			chatLog("Subscription accepted for user " + username.trim() + "!");
+
+			sendSubscriptionRequest(username);
+		}
 	}
 
 	var denySubscriptionRequest = function(username)
