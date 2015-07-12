@@ -276,6 +276,7 @@
 
 			chatLog("Subscription cancelled by user " + username + "!", data);
 		}
+		getChatList();
 	}
 
 	var sendSubscriptionRemoval = function(username)
@@ -378,7 +379,6 @@
 		client.on('roster:update', function(data)
 		{
 			chatLog("Received 'roster:update' event!", data);
-			//receiveRosterUpdate(data);
 			getChatList();
 		});
 		client.on('roster:ver', function(data)
