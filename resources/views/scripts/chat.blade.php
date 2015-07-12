@@ -41,51 +41,11 @@
 	}
 
 /*
-	var updateRoster = function()
-	{
-		$('#roster').html("");
-		$.each(roster, function(index, user)
-	    {
-    		if(user.subscription == 'both') {												// BOTH USERS ARE SUBSCRIBE TO EACH OTHER (they're friends)
-    			$('#roster').append('<li><span class="indicator"><i class="ion-record"></i></span> ' + user.jid.local + '</li>');
-    		} else if(user.subscription == 'none' && user.subscriptionRequested) {			// CURRENT USER HAS REQUESTED OTHER USER
-				$('#roster').append('<li><span class="indicator"><i class="ion-record"></i></span> ' + user.jid.local + ' (requested)</li>');
-/*
-			} else if(user.subscription == 'to') {		// LOOKS LIKE THIS AND FROM ARE IF ONE PERSON IS ALREADY SUBSCRIBED,
-														// THEREFORE UPON RECEIVING A ROSTER ITEM WITH 'from' THAT USER SHOULD
-														// AUTOMATICALLY SUBSCRIBE BACK.
-				chatLog("DETECTED 'to' SUBSCRIPTION!", user);
-				$('#roster').append('<li><span class="indicator"><i class="ion-record"></i></span> ' + user.jid.local + ' (requested)</li>');
-			} else if(user.subscription == 'from') {	// IF TO/FROM SUBSCRIPTION IS IDENTIFIED, COMPLETE THE SUBSCRIPTION BY ACCEPTING/SENDING
-														// REQUEST SO THAT IT WILL BE 'both'
-				chatLog("DETECTED 'from' SUBSCRIPTION!", user);
-				$('#roster').append('<li><span class="indicator"><i class="ion-record"></i></span> ' + user.jid.local + ' (accept / deny)</li>');
-*//*
-    		}
-    	});
-	}
-
-	var updateOutgoingRequests = function()
-	{
-		$.each(outgoing_requests, function(index, user)
-		{
-
-		});
-	}
-
-	var updateIncomingRequests = function()
-	{
-		$.each(outgoing_requests, function(index, user)
-		{
-
-		});
-	}
-*/
-
 	var receiveRosterUpdate = function(data)
 	{
 
 	}
+*/
 
 	var getChatList = function()
 	{
@@ -141,13 +101,8 @@
 
 	var updateChatList = function()
 	{
-		//updateRoster();
-		//updateOutgoingRequests();
-		//updateIncomingRequests();
-
 		$('#roster').html('');
 		if(roster.length > 0) {
-			//$('#roster').append('<li class="section-title"><strong>Friends</strong></li>');
 			$.each(roster, function(index, username)
 			{
 				$('#roster').append('<li class="chat-list-item"><span class="indicator"><i class="ion-record"></i></span> ' + username + '</li>');
@@ -156,9 +111,6 @@
 
 		$('#outgoing-requests').html('');
 		if(outgoing_requests.length > 0) {
-			//if(roster.length > 0)
-				//$('#outgoing-requests').append('<hr>');
-			//$('#outgoing-requests').append('<li class="section-title"><strong>Outgoing requests</strong></li>');
 			$.each(outgoing_requests, function(index, username)
 			{
 				$('#outgoing-requests').append('<li class="chat-list-item">' + username + ' (requested)</li>');
@@ -167,13 +119,8 @@
 
 		$('#incoming-requests').html('');
 		if(incoming_requests.length > 0) {
-			//if(roster.length > 0 || outgoing_requests.length > 0)
-				//$('#incoming-requests').append('<hr>');
-			//$('#incoming-requests').append('<li class="section-title"><strong>Incoming requests</strong></li>');
 			$.each(incoming_requests, function(index, username)
 			{
-				//var accept_link = "<a id='acceptSubscription' data-username='" + username + "' href='#'>accept</a>";
-				//var deny_link = "<a id='denySubscription' data-username='" + username + "' href='#'>deny</a>";
 				$('#incoming-requests').append("<li class='chat-list-item'>" + username + " (<a class='accept-subscription-link' data-username='" + username + "' href='#'>accept</a> / <a class='deny-subscription-link' data-username='" + username + "' href='#'>deny</a>)</li>");
 			});
 		}
@@ -183,8 +130,6 @@
 	{
 		client.sendPresence();
 	    $('#userStatusIndicator').removeClass('error').addClass('online');
-
-	    //chatLog('Presence sent!')
 	}
 
 	var presenceUpdate = function(data)
@@ -208,51 +153,35 @@
 		if(data.type == 'subscribe' && data.to.local != data.from.local) {
 			var username = data.from.local.trim();
 
-			//getChatList();
-
 			chatLog("Subscription requested by user " + username + "!", data);
-			//console.log("OUTGOING:");
-			//console.log(outgoing_requests);
-			//console.log("INCOMING:");
-			//console.log(incoming_requests);
-
-			//if(outgoing_requests.indexOf(username) > -1) {
-				//acceptSubscriptionRequest(username);
-			//} else if(incoming_requests.indexOf(username) < 0) {
 			if(incoming_requests.indexOf(username) < 0) {
 	    		incoming_requests.push(username);
 			}
 
 	    	updateChatList();
-
-/*
-			var accept_link = "<a id='acceptSubscription' data-username='" + data.from.local + "' href='#'>accept</a>";
-			var deny_link = "<a id='denySubscription' data-username='" + data.from.local + "' href='#'>accept</a>";
-			$('#roster').append('<li><span class="indicator"><i class="ion-record"></i></span> ' + data.from.local + ' (' + accept_link + ' / ' + deny_link + ')</li>');
-*/
 		}
 	}
 
 	var sendSubscriptionRequest = function(username)
 	{
 		var username = username.trim();
-		//if(outgoing_requests.indexOf(username) < 0) {
+		if(outgoing_requests.indexOf(username) < 0) {
 			outgoing_requests.push(username);
 
 			client.subscribe(username + "@commentum.io");
 			chatLog("Subscription requested for user " + username + "!");
-		//}
+		}
 	}
 
 	var acceptSubscriptionRequest = function(username)
 	{
 		var username = username.trim();
-		//if(incoming_requests.indexOf(username) > -1) {
+		if(incoming_requests.indexOf(username) > -1) {
 			client.acceptSubscription(username + "@commentum.io");
 			chatLog("Subscription accepted for user " + username.trim() + "!");
 
 			sendSubscriptionRequest(username);
-		//}
+		}
 	}
 
 	var denySubscriptionRequest = function(username)
@@ -276,6 +205,7 @@
 
 			chatLog("Subscription cancelled by user " + username + "!", data);
 		}
+
 		getChatList();
 	}
 
@@ -292,6 +222,8 @@
 		}
 
 		chatLog("Subscription cancelled for user " + username.trim() + "!");
+
+		getChatList();
 	}
 
 	var sendMessage = function(data)
@@ -399,7 +331,7 @@
 		*/
 		client.on('subscribed', function(data)
 		{
-			chatLog("Received 'subscribed' event!", data);
+			//chatLog("Received 'subscribed' event!", data);
 		});
 		client.on('subscribe', function(data)
 		{
@@ -407,7 +339,7 @@
 		});
 		client.on('unsubscribed', function(data)
 		{
-			chatLog("Received 'unsubscribed' event!", data);
+			//chatLog("Received 'unsubscribed' event!", data);
 		});
 		client.on('unsubscribe', function(data)
 		{
@@ -426,13 +358,6 @@
 					presenceUpdate(data);
 			}
 		});
-		/*
-		client.on('presence:error', function(data) 
-		{
-			if(data.to.local != data.from.local) // ignore if the user is itself
-				chatLog("Received 'presence:error' event!", data);
-		});
-		*/
 
 		/*
 		* User receives available/unable presence
@@ -465,11 +390,11 @@
 		*/
 		client.on('block', function(data)
 		{
-			chatLog("Received 'block' event!", data);
+			//chatLog("Received 'block' event!", data);
 		});
 		client.on('unblock', function(data)
 		{
-			chatLog("Received 'unblock' event!", data);
+			//chatLog("Received 'unblock' event!", data);
 		});
 
 		/*
@@ -485,11 +410,11 @@
 		*/
 		client.on('carbon:received', function(data)
 		{
-			chatLog("Received 'carbon:received' event!", data);
+			//chatLog("Received 'carbon:received' event!", data);
 		});
 		client.on('carbon:sent', function(data)
 		{
-			chatLog("Received 'carbon:sent' event!", data);
+			//chatLog("Received 'carbon:sent' event!", data);
 		});
 
 		/*
@@ -537,12 +462,6 @@
 		{
 			sendMessage(msg);
 		});
-		/*
-		client.on('message:error', function(data)
-		{
-			chatLog("Received 'message:error' event!", data);
-		});
-		*/
 
 		/*
 		* Attention event
