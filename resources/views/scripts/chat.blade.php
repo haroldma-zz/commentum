@@ -114,17 +114,23 @@
 		    	}
 	    	});
 
+	    	var dealt_with = [];
 	    	var rerun = false;
 	    	$.each(outgoing_requests, function(index, username_out)
 	    	{
-	    		$.each(incoming_requests, function(index, username_in)
-	    		{
-	    			if(username_out == username_in) {
-	    				acceptSubscriptionRequest(username_in);
-	    				rerun = true;
-	    				//break;
-	    			}
-	    		});
+	    		if(dealt_with.indexOf(username_out) < 0) {
+		    		$.each(incoming_requests, function(index, username_in)
+		    		{
+		    			if(dealt_with.indexOf(username_in) < 0 && username_out == username_in) {
+		    				acceptSubscriptionRequest(username_in);
+		    				dealt_with.push(username_in);
+		    				rerun = true;
+		    				//break;
+		    			}
+		    		});
+		    		if(dealt_with.indexOf(username_out) < 0)
+		    			dealt_with.push(username_out);
+		    	}
 	    	});
 	    	if(rerun)
 	    		getChatList();
@@ -372,8 +378,8 @@
 		client.on('roster:update', function(data)
 		{
 			chatLog("Received 'roster:update' event!", data);
-			receiveRosterUpdate(data);
-			//getChatList();
+			//receiveRosterUpdate(data);
+			getChatList();
 		});
 		client.on('roster:ver', function(data)
 		{
