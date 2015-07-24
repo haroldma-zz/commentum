@@ -14,7 +14,7 @@
 	</footer>
 	<div class="reply-box">
 		{!! Form::open(['url' => '', 'class' => 'panel', 'onsubmit' => 'sendPrivateMessage(event, this)']) !!}
-		<h6 class="super-header">New message</h6>
+		<h6 class="super-header">Reply to private message</h6>
 		{!! Form::label('To:') !!}
 		{!! Form::text('to', $message->from()->username) !!}
 		<?php
