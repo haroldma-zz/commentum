@@ -17,8 +17,16 @@
 		<h6 class="super-header">New message</h6>
 		{!! Form::label('To:') !!}
 		{!! Form::text('to', $message->from()->username) !!}
+		<?php
+			$theMessage = '';
+
+			foreach(explode("\n", $message->message) as $line)
+			{
+				$theMessage .= '> ' . $line;
+			}
+		?>
 		{!! Form::label('Message') !!}
-		{!! Form::textarea('markdown', '', ['class' => 'markdown-input']) !!}
+		{!! Form::textarea('markdown', $theMessage, ['class' => 'markdown-input']) !!}
 		<p class="text-alert" id="error"></p>
 		{!! Form::submit('Send message', ['class' => 'btn blue']) !!}
 		&nbsp;
@@ -28,7 +36,7 @@
 		<div class="preview">
 			<h6 class="super-header">Live Preview</h6>
 			<div class="markdown">
-				Enter a message to view a preview here.
+				{!! $theMessage !!}
 			</div>
 		</div>
 		{!! Form::close() !!}
