@@ -221,8 +221,7 @@ class PageController extends Controller
 	 */
 	public function inboxNew()
 	{
-		// return view('users.new-message');
-		abort(404);
+		return view('users.new-message');
 	}
 
 	/**

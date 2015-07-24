@@ -10,8 +10,9 @@
 	<div class="row small-collapse">
 		<div class="medium-9 large-10 columns inbox">
 			{!! Form::open(['url' => '', 'id' => 'form', 'class' => 'panel']) !!}
+			<h6 class="super-header">New message</h6>
 			{!! Form::label('To:') !!}
-			{!! Form::text('to') !!}
+			{!! Form::text('to', (Input::has('to') ? Input::get('to') : '')) !!}
 			{!! Form::label('Message') !!}
 			{!! Form::textarea('markdown', '', ['id' => 'input']) !!}
 			<p class="text-alert" id="error"></p>

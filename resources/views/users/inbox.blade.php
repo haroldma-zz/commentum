@@ -18,6 +18,8 @@
 				@include('users.inbox.thread-comment', ['message' => $m])
 				@elseif ($m->type == 2) <!-- Received comment on comment -->
 				@include('users.inbox.comment-comment', ['message' => $m])
+				@elseif ($m->type == 3) <!-- Received Private Message -->
+				@include('users.inbox.private-message', ['message' => $m])
 				@elseif ($m->type == 6) <!-- Received tag subscription -->
 				@include('users.inbox.tag-subscription', ['message' => $m])
 				@endif
