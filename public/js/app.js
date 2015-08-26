@@ -25,16 +25,23 @@ $('.ajax-form').submit(function(e)
 		href  		   = form.attr("action"),
 		error 		   = form.find('.text-alert'),
 		errorContainer = form.find('.error-container'),
+		success 	   = form.find('.text-success'),
+		successContainer = form.find('.success-container'),
 		loader 		   = form.find('.loader');
 
 	errorContainer.addClass('hide');
 	error.text("");
+	successContainer.addClass('hide');
+	success.text("");
 	loader.css('opacity', '1');
 
 	$.post(href, data)
-	.done(function(url)
+	.done(function(res)
 	{
-		window.location.href = url;
+		successContainer.removeClass('hide');
+		success.text(res);
+		loader.css('opacity', 0);
+		form.find('input[type="submit"]').attr('disabled', 'disabled').addClass('disabled');
 	})
 	.fail(function(res)
 	{
