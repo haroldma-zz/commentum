@@ -170,6 +170,16 @@ class Comment extends Model
     {
         return url("/t/{$this->thread()->tag()->display_title}/" . Hashids::encode($this->thread()->id) . "/{$this->thread()->slug}/" . Hashids::encode($this->id)) . "?context=true";
     }
+
+    /**
+     * Get votes associated with the commenet.
+     *
+     * @return App\Models\CommentVote
+     */
+    public function votes()
+    {
+        return $this->hasMany('App\Models\CommentVote', 'comment_id', 'id');
+    }
 }
 
 
