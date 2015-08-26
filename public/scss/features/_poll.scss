@@ -1,0 +1,15 @@
+.poll {
+	label {
+		font-weight: 400;
+		line-height: 1.1;
+
+		&:last-of-type {
+			margin-bottom: 1em;
+		}
+
+		input {
+			margin: 0;
+			margin-bottom: 1em;
+		}
+	}
+}
