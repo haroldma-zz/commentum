@@ -217,7 +217,9 @@ class PageController extends Controller
 	 */
 	public function inbox()
 	{
-		return view('users.inbox');
+		$messages = Auth::user()->altMessages()->orderBy('id', 'DESC')->simplePaginate(15);
+
+		return view('users.inbox')->with(['messages' => $messages]);
 	}
 
 	/**
@@ -227,8 +229,7 @@ class PageController extends Controller
 	 */
 	public function inboxNew()
 	{
-		// return view('users.new-message');
-		abort(404);
+		return view('users.new-message');
 	}
 
 	/**

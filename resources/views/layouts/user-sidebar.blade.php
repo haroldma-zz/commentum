@@ -5,8 +5,9 @@
 		<b>{{ floor($user->momentum) }}</b> point{{ (floor($user->momentum) != 1) ? 's' : '' }}
 	</h4>
 	<h4><small>Member since <span data-livestamp="{{ strtotime($user->created_at) }}"></span></small></h4>
-{{-- 	<br>
-	<a href="{{ url('/inbox/new') }}" class="btn blue small">Send message</a> --}}
+	@if (Auth::check() && Auth::id() !== $user->id)
+	<a href="{{ url('/inbox/new') }}?to={{ $user->username }}" class="btn blue small">Send message</a>
+	@endif
 	<hr>
 	<h6 class="super-header">Claimed tags</h6>
 	<ul class="no-bullet">
