@@ -45,12 +45,21 @@ $('.ajax-form').submit(function(e)
 	})
 	.fail(function(res)
 	{
-		$.each(res.responseJSON, function(k, v)
+		if (res.status == 401)
 		{
-			error.append('<li>' + v + '</li>');
-		});
+			error.append('<li>' + res.responseText + '</li>');
+			errorContainer.removeClass('hide');
+			loader.css('opacity', '0');
+		}
+		else
+		{
+			$.each(res.responseJSON, function(k, v)
+			{
+				error.append('<li>' + v + '</li>');
+			});
 
-		errorContainer.removeClass('hide');
-		loader.css('opacity', '0');
+			errorContainer.removeClass('hide');
+			loader.css('opacity', '0');
+		}
 	});
 });
