@@ -339,11 +339,59 @@
 		{
 			$(this).find('i').removeClass('ion-chevron-down').addClass('ion-chevron-up');
 			comment.removeClass('collapsed');
+			comment.find('.comment-voters').removeClass('hide');
 		}
 		else
 		{
 			$(this).find('i').removeClass('ion-chevron-up').addClass('ion-chevron-down');
 			comment.addClass('collapsed');
+			comment.find('.comment-voters').addClass('hide');
 		}
+	});
+
+	$('.upvoter').click(function()
+	{
+		var voter 	   = $(this),
+			parent 	   = voter.parent(),
+			otherVoter = parent.find('.downvoter'),
+			is_up 	   = true,
+			comment_id = voter.data('hash'),
+			csrf 	   = $('#csrfToken').val();
+
+		voter.addClass('active');
+		otherVoter.removeClass('active');
+
+		$.post('{{ url('some url here') }}', {_token: csrf, comment_id: comment_id, is_up: is_up})
+		.done(function(res)
+		{
+			console.log(res);
+		})
+		.fail(function(res)
+		{
+			console.log(res);
+		});
+	});
+
+	$('.downvoter').click(function()
+	{
+		var voter 	   = $(this),
+			parent 	   = voter.parent(),
+			otherVoter = parent.find('.upvoter'),
+			is_up 	   = false,
+			comment_id = voter.data('hash'),
+			csrf 	   = $('#csrfToken').val();
+
+		voter.addClass('active');
+		otherVoter.removeClass('active');
+
+		$.post('{{ url('some url here') }}', {_token: csrf, comment_id: comment_id, is_up: is_up})
+		.done(function(res)
+		{
+			console.log(res);
+		})
+		.fail(function(res)
+		{
+			console.log(res);
+		});
 	});
 </script>

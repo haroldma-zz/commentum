@@ -1,7 +1,11 @@
 <article class="comment wow fadeInUp" data-wow-duration="0.25s" data-wow-delay="0.25s" data-hierarchy="{{ ($indent % 2 == 0 ? 'parent' : 'child') }}">
 	<header>
+		<span class="comment-voters">
+			<i class="ion-arrow-up-a upvoter"></i>
+			<i class="ion-arrow-down-a downvoter"></i>
+		</span>
 		<span class="collapser"><i class="ion-chevron-up"></i></span>
-		<span>
+		<span class="no-margin-left">
 			@if(is_null($c->deleted_at))
 			<a href="{{ $c->author()->permalink() }}">
 				{!! ($c->author()->hasRole('admin') ? '<span class="username-tag admin">ADMIN</span> ' : '') !!}

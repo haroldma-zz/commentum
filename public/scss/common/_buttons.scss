@@ -54,3 +54,30 @@
 		border-color: #ccc;
 	}
 }
+
+.comment-voters {
+	position: relative;
+}
+
+.upvoter, .downvoter {
+	color: #aaa;
+	cursor: pointer;
+	position: absolute;
+	font-size: 1.25em
+}
+
+.upvoter {
+	top: -10px;
+
+	&:hover, &.active {
+		color: #4183D7;
+	}
+}
+
+.downvoter {
+	top: 5px;
+
+	&:hover, &.active {
+		color: #F27935;
+	}
+}
