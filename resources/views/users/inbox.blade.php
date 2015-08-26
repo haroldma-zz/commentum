@@ -8,7 +8,7 @@
 </div>
 <div class="padding">
 	<div class="row small-collapse">
-		<div class="medium-9 large-10 columns inbox">
+		<div class="medium-8 large-9 xlarge-10 columns inbox">
 			@if(count(Auth::user()->messages()) > 0)
 			<div class="panel small">
 			@foreach(Auth::user()->messages() as $m)
@@ -31,7 +31,7 @@
 			</div>
 			@endif
 		</div>
-		<div class="medium-3 large-2 columns">
+		<div class="medium-4 large-3 xlarge-2 columns">
 			@include('layouts.general-sidebar')
 		</div>
 	</div>
