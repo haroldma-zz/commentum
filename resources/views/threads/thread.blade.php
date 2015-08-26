@@ -98,6 +98,7 @@
 		</div>
 	</div>
 </div>
+<input type="hidden" value="{{ csrf_token() }}" id="csrfToken">
 @stop
 
 @section('scripts')

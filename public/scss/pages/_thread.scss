@@ -151,6 +151,9 @@
 				&:last-of-type {
 					margin-right: 0;
 				}
+				&.no-margin-left {
+					margin-left: 0;
+				}
 			}
 			a {
 				color: $primary-color;
@@ -202,6 +205,8 @@
 			font-size: 0.85em;
 			cursor: pointer;
 			margin: 0;
+			margin-right: 5px;
+			padding-left: 15px;
 		}
 		.body {
 			padding-left: 22px;
