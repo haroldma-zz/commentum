@@ -361,33 +361,18 @@ class UserController extends Controller
 		if (!$user)
 			return response("Can't find that user.", 500);
 
-		//
+		$pm          = new Message;
+		$pm->from_id = Auth::id();
+		$pm->to_id   = $user->id;
+		$pm->type    = 3;
+		$pm->message = $message;
 
-		return response("test", 500);
+		if ($pm->save())
+			return response("OK", 200);
+
+		return response("Something went wrong, try again.", 500);
 	}
 }
-
-
-
-
-
-
-
-
-
-
-/*
-();
-
-		if (!$user)
-			return response("Can't find that user.", 500);
-
-		//
-
-		return response("test", 500);
-	}
-}
-*/
 
 
 

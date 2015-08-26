@@ -11,6 +11,15 @@
 .text-alert {
 	color: $alert-color !important;
 	font-weight: 700;
+
+	li {
+		color: inherit
+	}
+}
+
+.text-success {
+	color: $success-color !important;
+	font-weight: 700;
 }
 
 .no-margin {
@@ -53,4 +62,8 @@
 #hideHero {
 	cursor: pointer;
 	color: white;
+}
+
+blockquote {
+	padding: 10px 1em;
 }

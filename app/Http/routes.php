@@ -20,6 +20,9 @@ Route::group(['middleware' => 'auth'], function()
 	Route::post('/t/{tag}/settings', 'TagController@settings');
 	Route::post('/edit/thread', 'ThreadController@submit');
 
+	// Poll related AJAX requests
+	Route::post('/poll/{hashid}', 'PollController@answer');
+
 	// User related AJAX requests
 	Route::get('/me/notifications', 'UserController@checkNotifications');
 

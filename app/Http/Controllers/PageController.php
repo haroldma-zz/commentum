@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Auth;
 use Cache;
 use Session;
+use App\Models\Poll;
 use App\Models\Tag;
 use App\Models\User;
 use App\Models\Thread;
@@ -63,8 +64,8 @@ class PageController extends Controller
 	 */
 	public function index(Request $request, $extension = null)
 	{
-        $offset = max((int)$request->get('offset', 0), 0);
-        $limit = min((int)$request->get('limit', 20), 100);
+		$offset = max((int)$request->get('offset', 0), 0);
+		$limit  = min((int)$request->get('limit', 20), 100);
 
 		if (!Auth::check())
 		    $threads = Tag::getThreadsByHotness(-1, $offset, $limit);
@@ -93,8 +94,13 @@ class PageController extends Controller
             }
             return $markup;
         }
-        else
-            return view('pages.index')->with(['threads' => $threads, 'limit' => $limit]);
+
+		$viewData            = [];
+		$viewData['threads'] = $threads;
+		$viewData['limit']   = $limit;
+		$viewData['poll'] 	 = Poll::first();
+
+        return view('pages.index')->with($viewData);
 	}
 
 	/**
@@ -211,7 +217,9 @@ class PageController extends Controller
 	 */
 	public function inbox()
 	{
-		return view('users.inbox');
+		$messages = Auth::user()->altMessages()->orderBy('id', 'DESC')->simplePaginate(15);
+
+		return view('users.inbox')->with(['messages' => $messages]);
 	}
 
 	/**
@@ -221,8 +229,7 @@ class PageController extends Controller
 	 */
 	public function inboxNew()
 	{
-		// return view('users.new-message');
-		abort(404);
+		return view('users.new-message');
 	}
 
 	/**

@@ -8,7 +8,7 @@
 </div>
 <div class="padding">
 	<div class="row small-collapse">
-		<div class="medium-9 large-10 columns user-saved">
+		<div class="medium-8 large-9 xlarge-10 columns user-saved">
 			<ul class="tabs" data-tab>
 				<li class="tab-title active"><a href="#threads">Saved Threads</a></li>
 				<li class="tab-title"><a href="#comments">Saved Comments</a></li>
@@ -30,7 +30,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="medium-3 large-2 columns" style="margin-top:35px;">
+		<div class="medium-4 large-3 xlarge-2 columns" style="margin-top:35px;">
 			@include('layouts.user-sidebar', ['user' => Auth::user()])
 		</div>
 	</div>

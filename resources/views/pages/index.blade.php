@@ -12,12 +12,12 @@
 <div class="padding">
 	@include('layouts.trending-bar')
 	<div class="row small-collapse">
-		<div class="medium-9 large-10 columns">
+		<div class="medium-8 large-9 xlarge-10 columns">
 			<div class="panel small">
 				@include('layouts.threads', ['threads' => $threads])
 			</div>
 		</div>
-		<div class="medium-3 large-2 columns">
+		<div class="medium-4 large-3 xlarge-2 columns">
 			@include('layouts.general-sidebar')
 		</div>
 	</div>
