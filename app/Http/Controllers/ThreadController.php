@@ -39,8 +39,8 @@ class ThreadController extends Controller
 		if (empty($title))
 			return response('You can\'t leave the title field empty.', 400);
 
-		if (strlen($title) < 10 || strlen($title) > 300)
-			return response('Your title can\'t be longer than 300 characters and must be at least 10 characters long.', 400);
+		if (strlen($title) < 1 || strlen($title) > 300)
+			return response('Your title can\'t be longer than 300 characters and must be at least 1 character long.', 400);
 
 		if (!empty($link) && !filter_var($link, FILTER_VALIDATE_URL))
 			return response('The link you submitted is not a valid URL.', 400);
