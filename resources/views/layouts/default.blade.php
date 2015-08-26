@@ -68,8 +68,6 @@
 	@endif
 	{!! HTML::script('/bower_components/jquery/dist/jquery.min.js') !!}
 	{!! HTML::script('/bower_components/jquery.cookie/jquery.cookie.js') !!}
-	{!! HTML::script('/bower_components/nicescroll/jquery.nicescroll.js') !!}
-	{!! HTML::script('/bower_components/wow/wow.min.js') !!}
 	{!! HTML::script('/js/app.js') !!}
 	@include('scripts.explore-list')
 	@yield('scripts')
