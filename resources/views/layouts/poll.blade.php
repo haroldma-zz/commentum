@@ -1,4 +1,4 @@
-<div class="panel">
+<div class="panel poll">
 	<p>
 		<b>{{ $poll->question }}</b>
 	</p>
